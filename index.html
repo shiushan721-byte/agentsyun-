@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hz-Hermes｜你的 AI 智能体管家</title>
+  <meta name="description" content="Hz-Hermes 是你桌面上的 AI 智能体管家，帮助你完成研究、数据、客服、文档与自动化工作。" />
+  <style>
+:root {
+  --ink: #17171b;
+  --muted: #696972;
+  --soft: #f6f6f8;
+  --line: #e7e7eb;
+  --blue: #5966e8;
+  --blue-deep: #414dc8;
+  --blue-soft: #eef0ff;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #fff;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  width: 100%;
+  height: 72px;
+  padding: 0 max(24px, calc((100vw - 1200px) / 2));
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  border-bottom: 1px solid rgba(231,231,235,.85);
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(18px);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  letter-spacing: -.02em;
+}
+.logo-symbol {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(145deg,#7882f2,#4855d4);
+  box-shadow: 0 8px 20px rgba(67,79,203,.2);
+}
+.topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  color: #595961;
+  font-size: 14px;
+}
+.topbar nav > a:hover,
+.topbar nav .nav-dropdown-trigger:hover,
+footer a:hover {
+  color: var(--blue);
+}
+.nav-dropdown {
+  position: relative;
+}
+.nav-dropdown-trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  line-height: 1.2;
+}
+.nav-dropdown-trigger .chevron {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 1;
+  transform: translateY(1px);
+  transition: transform .2s ease;
+}
+.nav-dropdown.is-open .nav-dropdown-trigger,
+.nav-dropdown:hover .nav-dropdown-trigger {
+  color: var(--blue);
+}
+.nav-dropdown.is-open .nav-dropdown-trigger::after,
+.nav-dropdown:focus-within .nav-dropdown-trigger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--blue);
+}
+.nav-dropdown.is-open .chevron,
+.nav-dropdown:hover .chevron {
+  transform: translateY(1px) rotate(180deg);
+}
+.nav-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  z-index: 40;
+  min-width: 248px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #2c2c30;
+  box-shadow: 0 18px 48px rgba(20, 20, 30, .28);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(6px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+.nav-dropdown-panel::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 0;
+  right: 0;
+  height: 18px;
+}
+.nav-dropdown.is-open .nav-dropdown-panel,
+.nav-dropdown:hover .nav-dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown-panel a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: background .15s ease;
+}
+.nav-dropdown-panel a:hover,
+.nav-dropdown-panel a:focus-visible {
+  background: rgba(255, 255, 255, .08);
+  outline: none;
+}
+.nav-dropdown-panel strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: -.01em;
+}
+.nav-dropdown-panel span {
+  display: block;
+  margin-top: 4px;
+  color: #9a9aa3;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.nav-button {
+  justify-self: end;
+  padding: 10px 18px;
+  border-radius: 10px;
+  color: #fff;
+  background: var(--ink);
+  font-size: 13px;
+  font-weight: 650;
+}
+.hero {
+  position: relative;
+  padding: 118px 24px 0;
+  overflow: hidden;
+  text-align: center;
+  background: linear-gradient(180deg,#f7f8ff 0%,#fff 70%);
+}
+.hero-glow {
+  position: absolute;
+  top: -340px;
+  left: 50%;
+  width: 900px;
+  height: 900px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle,rgba(104,116,238,.16),rgba(255,255,255,0) 66%);
+}
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.pill, .section-title > span, .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--blue-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.pill {
+  padding: 8px 13px;
+  border: 1px solid #dfe2ff;
+  border-radius: 999px;
+  background: rgba(255,255,255,.7);
+}
+.pill i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 4px rgba(89,102,232,.1);
+}
+.hero h1 {
+  margin: 0 0 24px;
+  font-size: clamp(54px,7vw,86px);
+  line-height: 1.05;
+  letter-spacing: -.065em;
+  font-weight: 690;
+}
+.hero h1 em, .download-section h2 em {
+  color: var(--blue);
+  font-style: normal;
+}
+.hero-copy > p {
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.8;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-copy .hero-actions {
+  justify-content: center;
+  margin-top: 34px;
+}
+.primary-button, .secondary-button {
+  min-height: 50px;
+  padding: 0 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 650;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.primary-button {
+  color: #fff;
+  background: var(--blue);
+  box-shadow: 0 12px 28px rgba(69,82,205,.22);
+}
+.secondary-button {
+  border: 1px solid #d9d9df;
+  background: #fff;
+}
+.primary-button:hover, .secondary-button:hover {
+  transform: translateY(-2px);
+}
+.primary-button:hover {
+  background: var(--blue-deep);
+  box-shadow: 0 16px 34px rgba(69,82,205,.28);
+}
+.hero-meta {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  color: #91919a;
+  font-size: 12px;
+}
+.hero-meta span::before {
+  content: "✓";
+  margin-right: 6px;
+  color: var(--blue);
+}
+.hero-showcase {
+  position: relative;
+  z-index: 2;
+  width: min(1100px,100%);
+  margin: 76px auto 0;
+  padding: 0 20px;
+}
+.hero-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 8% -7% -10%;
+  border-radius: 50%;
+  background: radial-gradient(circle,rgba(99,111,235,.14),transparent 65%);
+}
+.app-window {
+  position: relative;
+  display: grid;
+  grid-template-columns: 66px 1fr;
+  min-height: 590px;
+  overflow: hidden;
+  border: 1px solid #dfe0e8;
+  border-radius: 24px 24px 0 0;
+  text-align: left;
+  background: #fff;
+  box-shadow: 0 42px 90px rgba(42,45,76,.15);
+}
+.app-sidebar {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  background: #f7f7fa;
+  border-right: 1px solid #ededf1;
+}
+.side-logo, .agent-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: #fff;
+  background: var(--blue);
+  font-weight: 750;
+}
+.app-sidebar b {
+  flex: 1;
+}
+.app-main {
+  display: flex;
+  flex-direction: column;
+}
+.app-head {
+  height: 72px;
+  padding: 0 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ededf1;
+}
+.app-head strong, .app-head small {
+  display: block;
+}
+.app-head strong {
+  font-size: 14px;
+}
+.app-head small {
+  margin-top: 3px;
+  color: #a0a0aa;
+  font-size: 10px;
+}
+.running {
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: #467653;
+  background: #edf8ef;
+  font-size: 10px;
+}
+.running i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #5eab70;
+}
+.conversation {
+  width: min(660px,calc(100% - 48px));
+  margin: 34px auto 20px;
+  flex: 1;
+}
+.user-message {
+  width: fit-content;
+  max-width: 520px;
+  margin-left: auto;
+  padding: 14px 17px;
+  border-radius: 16px 16px 4px 16px;
+  color: #44444c;
+  background: #f0f0f3;
+  font-size: 12px;
+}
+.agent-line {
+  margin: 25px 0 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.agent-mark {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 10px;
+}
+.agent-line p {
+  margin: 4px 0 0;
+  color: #55555d;
+  font-size: 12px;
+}
+.task-panel {
+  margin-left: 40px;
+  padding: 20px;
+  border: 1px solid #e6e6eb;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 36px rgba(38,38,55,.06);
+}
+.task-title {
+  display: flex;
+  justify-content: space-between;
+}
+.task-title strong, .task-title small {
+  display: block;
+}
+.task-title strong {
+  font-size: 12px;
+}
+.task-title small {
+  margin-top: 4px;
+  color: #9b9ba4;
+  font-size: 9px;
+}
+.task-title b {
+  color: var(--blue);
+  font-size: 12px;
+}
+.progress {
+  height: 5px;
+  margin: 15px 0 11px;
+  border-radius: 10px;
+  background: #ececf1;
+}
+.progress i {
+  display: block;
+  width: 68%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg,#9ca5ff,var(--blue));
+}
+.task {
+  padding: 10px 0;
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  border-bottom: 1px solid #eeeef2;
+  font-size: 10px;
+}
+.task:last-child {
+  border: 0;
+}
+.task > span {
+  color: #8d8d97;
+}
+.task small {
+  display: block;
+  margin-top: 3px;
+  color: #a6a6ae;
+  font-size: 8px;
+}
+.task b {
+  color: #9b9ba5;
+  font-size: 9px;
+  font-weight: 500;
+}
+.task.done > span {
+  color: #4d995e;
+}
+.task.active > span, .task.active b {
+  color: var(--blue);
+}
+.result-files {
+  margin: 12px 0 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.result-files > div {
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #e8e8ed;
+  border-radius: 12px;
+}
+.result-files > div > span {
+  padding: 8px 7px;
+  border-radius: 7px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  font-size: 8px;
+  font-weight: 800;
+}
+.result-files p, .result-files strong, .result-files small {
+  margin: 0;
+  display: block;
+}
+.result-files strong {
+  font-size: 9px;
+}
+.result-files small {
+  margin-top: 3px;
+  color: #9999a2;
+  font-size: 8px;
+}
+.prompt-box {
+  width: min(700px,calc(100% - 48px));
+  height: 56px;
+  margin: 0 auto 20px;
+  padding: 0 8px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #dedee5;
+  border-radius: 14px;
+  color: #aaaab2;
+  font-size: 11px;
+  box-shadow: 0 8px 28px rgba(36,36,50,.06);
+}
+.prompt-box button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  background: var(--blue);
+  font-size: 10px;
+}
+.proof {
+  width: min(1200px,calc(100% - 48px));
+  min-height: 130px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr) 1.4fr;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+.proof > div {
+  padding-left: 34px;
+  border-left: 1px solid var(--line);
+}
+.proof strong, .proof span {
+  display: block;
+}
+.proof strong {
+  font-size: 28px;
+  letter-spacing: -.04em;
+}
+.proof span, .proof p {
+  color: #96969e;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.proof p {
+  margin: 0;
+  text-align: right;
+}
+.section {
+  width: min(1200px,calc(100% - 48px));
+  margin: 0 auto;
+  padding: 142px 0;
+}
+.section-title {
+  max-width: 590px;
+  margin-bottom: 64px;
+}
+.section-title.centered {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+.section-title h2, .desktop-copy h2, .download-section h2 {
+  margin: 14px 0 18px;
+  font-size: clamp(40px,5vw,60px);
+  line-height: 1.12;
+  letter-spacing: -.052em;
+  font-weight: 620;
+}
+.asset-section .section-title {
+  max-width: none;
+}
+.asset-section .section-title h2 {
+  white-space: nowrap;
+}
+.hero-copy > h1 {
+  margin-top: 0;
+}
+.section-title p, .desktop-copy > p, .download-copy > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+.feature-row {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.feature-row article {
+  min-height: 220px;
+  padding: 28px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.feature-row article > span, .cap-number, .case-grid article > span, .enterprise-grid article > span, .asset-track article > span {
+  color: #aaaab3;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+}
+.feature-row h3, .flow-track h3, .capability-list h3, .case-grid h3, .enterprise-grid h3, .asset-track h3 {
+  margin: 56px 0 10px;
+  font-size: 20px;
+  letter-spacing: -.02em;
+}
+.feature-row p, .flow-track p, .capability-list p, .case-grid p, .enterprise-grid p, .asset-track p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+.flow-section {
+  width: 100%;
+  padding-right: max(24px,calc((100vw - 1200px)/2));
+  padding-left: max(24px,calc((100vw - 1200px)/2));
+  background: var(--soft);
+}
+.flow-track {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+}
+.flow-track article {
+  min-height: 190px;
+  padding: 24px 16px;
+  border-right: 1px solid #dfdfe5;
+}
+.flow-track article:first-child {
+  border-left: 1px solid #dfdfe5;
+}
+.flow-track article > span {
+  color: var(--blue);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+}
+.flow-track i {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 30px 0;
+  background: linear-gradient(90deg,var(--blue) 0 22%,#dddde3 22%);
+}
+.flow-track h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+.capabilities-section {
+  display: grid;
+  grid-template-columns: .72fr 1.28fr;
+  gap: 100px;
+  align-items: start;
+}
+.capabilities-section .section-title {
+  position: sticky;
+  top: 120px;
+}
+.capability-list {
+  border-top: 1px solid var(--line);
+}
+.capability-list article {
+  min-height: 160px;
+  padding: 25px 0;
+  display: grid;
+  grid-template-columns: 58px 1fr 34px;
+  gap: 18px;
+  align-items: start;
+  border-bottom: 1px solid var(--line);
+}
+.capability-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  font-size: 10px;
+  font-weight: 750;
+}
+.capability-list h3 {
+  margin: 3px 0 8px;
+}
+.cap-number {
+  padding-top: 7px;
+  text-align: right;
+}
+.featured-capability {
+  background: linear-gradient(90deg,rgba(238,240,255,.7),rgba(255,255,255,0));
+}
+.desktop-section {
+  width: 100%;
+  padding-right: max(24px,calc((100vw - 1200px)/2));
+  padding-left: max(24px,calc((100vw - 1200px)/2));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+  background: #f7f8ff;
+}
+.desktop-copy {
+  max-width: 540px;
+  margin-left: auto;
+}
+.desktop-copy > p + p {
+  margin-top: 16px;
+}
+.check-list {
+  margin-top: 32px;
+  border-top: 1px solid #dedff0;
+}
+.check-list > div {
+  padding: 16px 0;
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  border-bottom: 1px solid #dedff0;
+}
+.check-list > div > span {
+  color: var(--blue);
+  font-weight: 750;
+}
+.check-list p, .check-list strong {
+  margin: 0;
+  display: block;
+}
+.check-list p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.check-list strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+.desktop-visual {
+  position: relative;
+  min-height: 510px;
+}
+.desktop-visual::before {
+  content: "";
+  position: absolute;
+  inset: 6% 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle,rgba(100,112,236,.25),transparent 68%);
+}
+.desktop-card {
+  position: absolute;
+  border: 1px solid #dedfe8;
+  border-radius: 18px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 25px 65px rgba(46,50,93,.13);
+}
+.top-card {
+  top: 0;
+  right: 4%;
+  width: 260px;
+  padding: 20px;
+}
+.top-card span, .top-card strong, .top-card small {
+  display: block;
+}
+.top-card span {
+  color: var(--blue);
+  font-size: 10px;
+}
+.top-card strong {
+  margin-top: 20px;
+  font-size: 18px;
+}
+.top-card small {
+  margin-top: 5px;
+  color: #9999a2;
+  font-size: 10px;
+}
+.report-card {
+  top: 100px;
+  left: 0;
+  width: 400px;
+  padding: 26px;
+}
+.report-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.report-head b {
+  color: #9999a2;
+  font-weight: 500;
+}
+.chart {
+  height: 170px;
+  margin: 32px 0 20px;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  border-bottom: 1px solid #dddde3;
+}
+.chart i {
+  flex: 1;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(180deg,#7580ef,#cad0ff);
+}
+.report-foot strong, .report-foot span {
+  display: block;
+}
+.report-foot strong {
+  color: var(--blue);
+  font-size: 23px;
+}
+.report-foot span {
+  color: #9a9aa2;
+  font-size: 10px;
+}
+.bottom-card {
+  right: 0;
+  bottom: 12px;
+  width: 280px;
+  padding: 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.bottom-card > span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #fff;
+  background: #59a369;
+}
+.bottom-card p, .bottom-card strong, .bottom-card small {
+  margin: 0;
+  display: block;
+}
+.bottom-card strong {
+  font-size: 12px;
+}
+.bottom-card small {
+  margin-top: 3px;
+  color: #9999a2;
+  font-size: 9px;
+}
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.case-grid article {
+  min-height: 320px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.case-grid h3 {
+  margin-top: 42px;
+}
+.case-grid a {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 650;
+}
+.asset-section {
+  width: 100%;
+  padding-right: max(24px,calc((100vw - 1200px)/2));
+  padding-left: max(24px,calc((100vw - 1200px)/2));
+  background: var(--soft);
+}
+.asset-track {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 14px;
+}
+.asset-track article {
+  min-height: 240px;
+  padding: 26px;
+  border: 1px solid #e2e2e7;
+  border-radius: 18px;
+  background: #fff;
+}
+.asset-track h3 {
+  margin-top: 68px;
+}
+.asset-note {
+  margin: 32px 0 0;
+  text-align: center;
+  color: #909099;
+  font-size: 13px;
+}
+.enterprise-section {
+  display: grid;
+  grid-template-columns: .78fr 1.22fr;
+  gap: 100px;
+  align-items: start;
+}
+.enterprise-title {
+  position: sticky;
+  top: 120px;
+}
+.enterprise-title .primary-button {
+  margin-top: 30px;
+}
+.enterprise-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.enterprise-grid article {
+  min-height: 250px;
+  padding: 26px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.enterprise-grid h3 {
+  margin-top: 52px;
+}
+.download-section {
+  width: min(1200px,calc(100% - 48px));
+  margin: 30px auto 110px;
+  padding: 74px;
+  display: grid;
+  grid-template-columns: 1.08fr .92fr;
+  gap: 90px;
+  align-items: end;
+  border: 1px solid #dfe1f5;
+  border-radius: 30px;
+  background: radial-gradient(circle at 100% 0%,rgba(157,165,255,.26),transparent 25rem),#f8f9ff;
+}
+.download-section h2 {
+  margin-bottom: 0;
+}
+.download-copy > small {
+  display: block;
+  margin-top: 18px;
+  color: #96969f;
+  font-size: 11px;
+}
+.download-copy .hero-actions {
+  margin-top: 26px;
+}
+footer {
+  padding: 70px max(24px,calc((100vw - 1200px)/2)) 30px;
+  border-top: 1px solid var(--line);
+  background: #fafafd;
+}
+.footer-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  gap: 30px;
+}
+.footer-main > p {
+  color: #8f8f98;
+  font-size: 12px;
+  text-align: center;
+}
+.footer-main > div {
+  display: flex;
+  gap: 24px;
+  color: #6e6e76;
+  font-size: 12px;
+}
+.footer-bottom {
+  margin-top: 52px;
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  color: #a0a0a8;
+  font-size: 10px;
+}
+@media (max-width: 980px) {
+  .topbar {
+    grid-template-columns: 1fr auto;
+  }
+  .topbar nav {
+    display: none;
+  }
+  .proof {
+    grid-template-columns: repeat(3,1fr);
+  }
+  .proof p {
+    display: none;
+  }
+  .feature-row, .asset-track {
+    grid-template-columns: repeat(2,1fr);
+  }
+  .flow-track {
+    grid-template-columns: repeat(3,1fr);
+  }
+  .flow-track article {
+    border-bottom: 1px solid #dfdfe5;
+  }
+  .capabilities-section, .desktop-section, .enterprise-section, .download-section {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .capabilities-section .section-title, .enterprise-title {
+    position: static;
+  }
+  .desktop-copy {
+    max-width: none;
+    margin-left: 0;
+  }
+  .desktop-visual {
+    max-width: 620px;
+    width: 100%;
+  }
+  .case-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+@media (max-width: 680px) {
+  .topbar {
+    height: 64px;
+    padding: 0 16px;
+  }
+  .nav-button {
+    padding: 9px 13px;
+    font-size: 11px;
+  }
+  .hero {
+    padding: 80px 16px 0;
+  }
+  .hero h1 {
+    font-size: 48px;
+  }
+  .hero-copy > p {
+    font-size: 16px;
+  }
+  .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .hero-actions a {
+    width: 100%;
+  }
+  .hero-meta {
+    gap: 8px 14px;
+    flex-wrap: wrap;
+  }
+  .hero-showcase {
+    margin-top: 50px;
+    padding: 0;
+  }
+  .app-window {
+    grid-template-columns: 46px 1fr;
+    min-height: 530px;
+    border-radius: 18px 18px 0 0;
+  }
+  .app-sidebar {
+    gap: 17px;
+  }
+  .app-sidebar span {
+    width: 18px;
+    height: 18px;
+  }
+  .app-head {
+    padding: 0 14px;
+  }
+  .conversation {
+    width: calc(100% - 24px);
+  }
+  .task-panel, .result-files {
+    margin-left: 0;
+  }
+  .result-files {
+    grid-template-columns: 1fr;
+  }
+  .prompt-box {
+    width: calc(100% - 24px);
+  }
+  .proof {
+    width: calc(100% - 32px);
+    grid-template-columns: repeat(3,1fr);
+  }
+  .proof > div {
+    padding-left: 12px;
+  }
+  .proof strong {
+    font-size: 20px;
+  }
+  .section {
+    width: calc(100% - 32px);
+    padding: 92px 0;
+  }
+  .section-title h2, .desktop-copy h2, .download-section h2 {
+    font-size: 39px;
+  }
+  .feature-row, .flow-track, .case-grid, .asset-track, .enterprise-grid {
+    grid-template-columns: 1fr;
+  }
+  .feature-row article {
+    min-height: 190px;
+  }
+  .flow-section, .desktop-section, .asset-section {
+    width: 100%;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .flow-track article {
+    min-height: 160px;
+    border-left: 1px solid #dfdfe5;
+  }
+  .desktop-visual {
+    min-height: 440px;
+  }
+  .top-card {
+    right: 0;
+    width: 220px;
+  }
+  .report-card {
+    top: 104px;
+    width: 310px;
+    padding: 22px;
+  }
+  .chart {
+    height: 135px;
+  }
+  .bottom-card {
+    width: 240px;
+  }
+  .case-grid article {
+    min-height: 290px;
+  }
+  .download-section {
+    width: calc(100% - 32px);
+    margin-bottom: 70px;
+    padding: 42px 24px;
+    gap: 22px;
+    border-radius: 22px;
+  }
+  .footer-main {
+    grid-template-columns: 1fr;
+  }
+  .footer-main > p {
+    text-align: left;
+  }
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+  }
+}
+
+
+
+/* ===== Interactive enhancements ===== */
+button {
+  cursor: pointer;
+}
+.menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  justify-self: end;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.menu-toggle span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform .2s ease, opacity .2s ease;
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+.mobile-nav {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 20px 24px;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 40px rgba(30,30,50,.08);
+}
+.mobile-nav[hidden] {
+  display: none !important;
+}
+.mobile-nav a {
+  padding: 14px 12px;
+  border-radius: 12px;
+  color: #44444c;
+  font-size: 15px;
+  font-weight: 550;
+}
+.mobile-nav a:hover,
+.mobile-nav a:focus-visible {
+  background: var(--blue-soft);
+  color: var(--blue-deep);
+}
+.mobile-nav .nav-button {
+  margin-top: 8px;
+  text-align: center;
+  color: #fff;
+  background: var(--ink);
+}
+.mobile-nav-group {
+  padding: 8px 4px 4px;
+}
+.mobile-nav-group > strong {
+  display: block;
+  padding: 8px 12px 6px;
+  color: #8a8a93;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .04em;
+}
+.mobile-nav-group a {
+  padding: 10px 12px;
+}
+.mobile-nav-group a strong {
+  display: block;
+  color: var(--ink);
+  font-size: 14px;
+}
+.mobile-nav-group a span {
+  display: block;
+  margin-top: 2px;
+  color: #8f8f98;
+  font-size: 12px;
+  font-weight: 400;
+}
+.topbar nav > a.is-active {
+  color: var(--blue);
+  font-weight: 650;
+}
+.feature-row article,
+.flow-track article,
+.case-grid article,
+.asset-track article,
+.enterprise-grid article,
+.capability-list article {
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.feature-row article:hover,
+.case-grid article:hover,
+.asset-track article:hover,
+.enterprise-grid article:hover {
+  background: #fafaff;
+}
+.feature-row article:focus-visible,
+.flow-track article:focus-visible,
+.case-grid article:focus-visible,
+.asset-track article:focus-visible,
+.enterprise-grid article:focus-visible,
+.capability-list article:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+.capability-list article:hover,
+.capability-list article.is-active {
+  background: linear-gradient(90deg,rgba(238,240,255,.9),rgba(255,255,255,0));
+}
+.capability-list article.is-active .capability-icon {
+  color: #fff;
+  background: var(--blue);
+}
+.flow-track article:hover i,
+.flow-track article.is-active i {
+  background: linear-gradient(90deg,var(--blue) 0 70%,#dddde3 70%);
+}
+.flow-track article.is-active h3 {
+  color: var(--blue-deep);
+}
+.app-sidebar .side-item {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #c9c9d1;
+  border-radius: 7px;
+  background: transparent;
+  padding: 0;
+  transition: border-color .15s ease, background .15s ease, transform .15s ease;
+}
+.app-sidebar .side-item:hover {
+  transform: scale(1.06);
+}
+.app-sidebar .side-item.side-active {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+.prompt-box {
+  color: inherit;
+}
+.prompt-box input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  font-size: 11px;
+}
+.prompt-box input::placeholder {
+  color: #aaaab2;
+}
+.prompt-box button:hover {
+  background: var(--blue-deep);
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 50;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  color: #fff;
+  background: rgba(23,23,27,.92);
+  font-size: 13px;
+  box-shadow: 0 16px 40px rgba(20,20,40,.25);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.case-grid article:hover a {
+  gap: 8px;
+}
+@media (max-width: 980px) {
+  .menu-toggle {
+    display: flex;
+  }
+  .desktop-only {
+    display: none;
+  }
+  .mobile-nav {
+    top: 72px;
+  }
+}
+@media (max-width: 680px) {
+  .mobile-nav {
+    top: 64px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<main>
+<header class="topbar"><a class="logo" href="#top" aria-label="Agentsyun 首页"><span class="logo-symbol">A</span><strong>Agentsyun</strong></a><nav aria-label="主导航"><div class="nav-dropdown" data-nav-dropdown><button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="ai-workstation-menu">AI工作站 <span class="chevron" aria-hidden="true">▾</span></button><div class="nav-dropdown-panel" id="ai-workstation-menu" role="menu"><a role="menuitem" href="https://www.hellome.art/" target="_blank" rel="noopener noreferrer"><strong>Hellome</strong><span>AI智能体平台</span></a><a role="menuitem" href="https://www.agentsyun.com/marketing" target="_blank" rel="noopener noreferrer"><strong>词元(Token)工场</strong><span>AI算力平台</span></a><a role="menuitem" href="https://www.gnomic.cn/workspace" target="_blank" rel="noopener noreferrer"><strong>Gnomic</strong><span>一句话创建工作流</span></a></div></div><a href="#top" class="is-active" data-nav="hermes">Hz-Hermes</a><a href="https://hermes.agentsyun.com" target="_blank" rel="noopener noreferrer">使用手册</a><a href="#" data-coming-soon="企业版">企业版</a></nav><button class="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button><a class="nav-button desktop-only" href="#download">免费下载</a>
+</header><div class="mobile-nav" id="mobile-nav" hidden><div class="mobile-nav-group"><strong>AI工作站</strong><a href="https://www.hellome.art/" target="_blank" rel="noopener noreferrer"><strong>Hellome</strong><span>AI智能体平台</span></a><a href="https://www.agentsyun.com/marketing" target="_blank" rel="noopener noreferrer"><strong>词元(Token)工场</strong><span>AI算力平台</span></a><a href="https://www.gnomic.cn/workspace" target="_blank" rel="noopener noreferrer"><strong>Gnomic</strong><span>一句话创建工作流</span></a></div><a href="#top" class="is-active" data-nav="hermes">Hz-Hermes</a><a href="https://hermes.agentsyun.com" target="_blank" rel="noopener noreferrer">使用手册</a><a href="#" data-coming-soon="企业版">企业版</a><a class="nav-button" href="#download">免费下载</a></div>
+<section class="hero" id="top"><div class="hero-glow"></div><div class="hero-copy"><h1>你的 AI 智能体管家<br/><em>帮你搞定电脑上的事</em></h1><p>Hz-Hermes 是你桌面上的 AI 助手——你告诉它做什么，它帮你完成。写报告、做数据、管客户、自动填表，你不用动手，它替你跑腿。</p><div class="hero-actions"><a class="primary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes Windows 版">Windows 免费下载 <span aria-hidden="true">↗</span></a><a class="secondary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes macOS 版">macOS 免费下载</a></div><div class="hero-meta"><span>支持 Windows / macOS</span><span>本地运行，数据不出域</span><span>一键安装，开箱即用</span></div></div><div class="hero-showcase" aria-label="Hz-Hermes 桌面工作界面示意"><div class="app-window"><aside class="app-sidebar" aria-label="工作站侧栏"><div class="side-logo" title="Hz-Hermes">H</div><button type="button" class="side-item side-active" aria-label="任务" aria-pressed="true"></button><button type="button" class="side-item" aria-label="技能"></button><button type="button" class="side-item" aria-label="记忆"></button><button type="button" class="side-item" aria-label="设置"></button><b></b><button type="button" class="side-item" aria-label="账户"></button></aside><div class="app-main"><div class="app-head"><div><strong>新建任务</strong><small>Hz-Hermes 桌面工作站</small></div><span class="running"><i></i> 正在执行</span></div><div class="conversation"><div class="user-message">帮我处理今天的客户消息，再把这周的销售数据整理成报表。</div><div class="agent-line"><span class="agent-mark">H</span><p>好的。我会同步检查客户消息和销售数据，完成后统一向你汇报。</p></div><div class="task-panel"><div class="task-title"><div><strong>任务执行中</strong><small>2 个子任务并行推进</small></div><b>68%</b></div><div class="progress"><i></i></div><div class="task done"><span>✓</span><div>检查客户消息<small>发现 4 条未读</small></div><b>完成</b></div><div class="task done"><span>✓</span><div>自动回复常见咨询<small>已发送 3 条回复</small></div><b>完成</b></div><div class="task active"><span>↻</span><div>分析本周销售数据<small>正在生成三维度图表</small></div><b>进行中</b></div></div><div class="result-files"><div><span>XLS</span><p><strong>销售周报_第30周</strong><small>Excel · 2.8 MB</small></p></div><div><span>DOC</span><p><strong>客户消息处理摘要</strong><small>文档 · 已完成</small></p></div></div></div><div class="prompt-box" role="group" aria-label="演示输入框"><input type="text" id="demo-prompt" placeholder="向 Hz-Hermes 描述你要完成的工作…" aria-label="任务描述" /><button type="button" id="demo-send" aria-label="发送演示任务">发送</button></div></div></div></div>
+</section>
+<section class="proof"><div><strong>220K+</strong><span>GitHub Stars</span></div><div><strong>15+</strong><span>平台渠道接入</span></div><div><strong>100+</strong><span>预置技能包</span></div><p>越用越聪明<br/>自动积累技能</p>
+</section>
+<section class="section intro-section" id="product"><div class="section-title centered"><h2>不是聊天机器人<br/>是你的数字员工</h2><p>Hz-Hermes 通过深度工程化封装，将配置、部署与技能管理等复杂环节整合优化。你只需要告诉它“做什么”，剩下的交给它。</p></div><div class="feature-row" data-clickable-grid><article><span>01</span><h3>自主学习进化</h3><p>每次执行都自动学习，沉淀为可复用的技能。</p></article><article><span>02</span><h3>跨软件协作</h3><p>在你授权下完成跨越不同桌面应用的多步骤工作。</p></article><article><span>03</span><h3>多智能体协同</h3><p>多个 AI 分工协作，并行处理复杂任务。</p></article><article><span>04</span><h3>长期记忆</h3><p>记住你的偏好、习惯和历史，累积专属知识。</p></article></div>
+</section>
+<section class="section flow-section"><div class="section-title centered"><h2>从一句话到一个结果</h2><p>你给出指令，Hz-Hermes 自主完成全部执行链路。</p></div><div class="flow-track" data-clickable-grid><article><span>01</span><i></i><h3>任务接收</h3><p>理解真实意图</p></article><article><span>02</span><i></i><h3>任务拆解</h3><p>解析执行步骤</p></article><article><span>03</span><i></i><h3>流程调度</h3><p>编排顺序与资源</p></article><article><span>04</span><i></i><h3>工具调用</h3><p>激活专业能力</p></article><article><span>05</span><i></i><h3>协助执行</h3><p>跨应用完成操作</p></article><article><span>06</span><i></i><h3>结果交付</h3><p>输出可用成品</p></article></div>
+</section>
+<section class="section capabilities-section"><div class="section-title"><h2>让 AI 能力<br/>真正融入日常工作</h2><p>从日常办公到专业领域，一个 AI 搞定。</p></div><div class="capability-list" role="list"><article class="featured-capability is-active" role="listitem" tabindex="0" data-capability><div class="capability-icon">研究</div><div><h3>深度研究</h3><p>给一个主题，它会自主搜索、交叉验证、整理输出结构化报告。做完直接生成网页或文档，拿来就能用。</p></div><span class="cap-number">01</span></article><article class="" role="listitem" tabindex="0" data-capability><div class="capability-icon">客服</div><div><h3>AI 智能客服</h3><p>对接微信与公众号，自动识别客户意图并回复。常见问题自动处理，复杂情况升级人工。</p></div><span class="cap-number">02</span></article><article class="" role="listitem" tabindex="0" data-capability><div class="capability-icon">创作</div><div><h3>内容创作</h3><p>写文案、做 PPT、生成宣传图、剪视频脚本、设计网页，从文字到视觉完成高质量交付。</p></div><span class="cap-number">03</span></article><article class="" role="listitem" tabindex="0" data-capability><div class="capability-icon">数据</div><div><h3>数据分析</h3><p>上传 Excel 或 CSV，完成探索性分析、可视化图表与洞察报告，不用写代码也能拿到结论。</p></div><span class="cap-number">04</span></article><article class="" role="listitem" tabindex="0" data-capability><div class="capability-icon">文档</div><div><h3>文档撰写</h3><p>标书、报告、论文、方案，从深度研究、整理框架到撰写排版，一条任务完整推进。</p></div><span class="cap-number">05</span></article><article class="" role="listitem" tabindex="0" data-capability><div class="capability-icon">定时</div><div><h3>定时自动化</h3><p>日报生成、竞品监控、数据巡检。设置一次，每日自动执行并推送到微信或钉钉。</p></div><span class="cap-number">06</span></article></div>
+</section>
+<section class="section desktop-section" id="desktop"><div class="desktop-copy"><h2>你下指令，<br/>它跑腿</h2><p>Hz-Hermes 能理解你的工作场景和需求，在你授权和控制下，协助完成电脑上的各类操作。</p><p>你不需要自己打开软件、点击按钮或填写表格。告诉它要什么结果，它来执行过程；每一步清晰透明，可随时查看、暂停或调整。</p><div class="check-list"><div><span>✓</span><p><strong>全程可控</strong>所有操作经你授权，每一步可查看、可撤回</p></div><div><span>✓</span><p><strong>安全隔离</strong>在独立沙箱中执行，不影响系统安全</p></div><div><span>✓</span><p><strong>后台运行</strong>不打扰当前工作，默默完成任务</p></div><div><span>✓</span><p><strong>跨应用协作</strong>一条指令串起消息、数据与报表</p></div></div></div><div class="desktop-visual"><div class="desktop-card top-card"><span>客户消息</span><strong>3 条咨询已回复</strong><small>1 条需要确认 · 已标记</small></div><div class="desktop-card report-card"><div class="report-head"><span>销售周报</span><b>第 30 周</b></div><div class="chart"><i style="height:42%"></i><i style="height:58%"></i><i style="height:48%"></i><i style="height:78%"></i><i style="height:69%"></i><i style="height:92%"></i><i style="height:83%"></i></div><div class="report-foot"><strong>+18.6%</strong><span>较上周增长</span></div></div><div class="desktop-card bottom-card"><span>✓</span><p><strong>任务已完成</strong><small>销售报表已生成并发送</small></p></div></div>
+</section>
+<section class="section cases-section" id="cases"><div class="section-title centered"><h2>一个 AI 能顶半个团队</h2><p>已经落地的真实场景——招投标、办公软件、数据填报、论文撰写、GEO 优化。</p></div><div class="case-grid" data-clickable-grid><article><span>01</span><h3>招投标文件处理</h3><p>自动下载标书、解析关键条款、提取资质要求并生成应答文档。以前团队干三天的工作，现在一个人加 AI 两小时完成。</p><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article><span>02</span><h3>AI 智能客服</h3><p>7×24 自动巡检客户消息，理解意图后精准回复。常见问题秒回，复杂情况升级人工。</p><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article><span>03</span><h3>自动填表与数据录入</h3><p>从 Excel、PDF、邮件提取数据，自动填入 ERP、OA、CRM 等系统，告别重复复制粘贴。</p><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article><span>04</span><h3>论文与研究撰写</h3><p>深度检索学术资源、梳理文献综述、组织论证结构并输出完整论文，自动处理格式与参考文献。</p><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article><span>05</span><h3>GEO 搜索优化</h3><p>分析品牌在豆包、Kimi、DeepSeek 等 AI 搜索中的可见度，生成优化策略与 AI 友好内容。</p><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article><span>06</span><h3>竞品监控与日报</h3><p>每天自动搜集竞品动态与行业新闻，整理摘要报告并推送到企业群。</p><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article></div>
+</section>
+<section class="section asset-section"><div class="section-title centered"><h2>越用越聪明，越用越值钱</h2><p>Hz-Hermes 不是用完即走的工具，而是能持续成长的数字员工。</p></div><div class="asset-track" data-clickable-grid><article><span>01</span><h3>模板化执行</h3><p>标准化任务流程，同类任务秒级启动</p></article><article><span>02</span><h3>学习偏好</h3><p>逐渐理解你的使用习惯与工作风格</p></article><article><span>03</span><h3>智能预填推荐</h3><p>主动推荐参数，减少重复输入和选择</p></article><article><span>04</span><h3>主动预判需求</h3><p>从“你告诉它”到“它知道你要什么”</p></article></div><p class="asset-note">最终成为你专属的 SOP 专家，团队经验永不流失。</p>
+</section>
+<section class="section enterprise-section" id="enterprise"><div class="section-title enterprise-title"><h2>为团队打造的<br/>AI 生产力平台</h2><p>私有部署、团队协作、权限管理、技能沉淀，让 AI 真正成为组织的数字劳动力。</p><a class="primary-button" href="mailto:contact@agentsyun.com?subject=预约 Hz-Hermes 企业版演示">预约企业演示 <span aria-hidden="true">↗</span></a></div><div class="enterprise-grid" data-clickable-grid><article><span>01</span><h3>私有化部署</h3><p>数据不出域，支持内网部署。任务在自有服务器或工作站执行，并可对接企业 OAuth / AD 统一认证。</p></article><article><span>02</span><h3>团队技能库</h3><p>把财务对账、客户 SOP、质检标准等团队经验沉淀为可复用技能包。</p></article><article><span>03</span><h3>多级权限</h3><p>管理员、操作员、审计员三层权限体系，所有操作可追溯、可审计、可回放。</p></article><article><span>04</span><h3>多系统集成</h3><p>对接企业微信、钉钉、飞书，打通 ERP、CRM、OA，让 AI 在多个系统间协作。</p></article><article><span>05</span><h3>定时自动化</h3><p>内置任务调度，日报、数据巡检与系统健康检查自动执行并推送结果。</p></article><article><span>06</span><h3>安全沙箱</h3><p>所有代码执行在隔离 Docker 沙箱中进行；敏感操作可以设置审批流。</p></article></div>
+</section>
+<section class="download-section" id="download"><div><span class="section-label">现在开始</span><h2>现在就拥有你的<br/><em>AI 智能体管家</em></h2></div><div class="download-copy"><p>免费下载，5 分钟完成安装。你只需告诉它“做什么”，剩下的交给它。</p><div class="hero-actions"><a class="primary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes Windows 版">下载 Windows 版 <span aria-hidden="true">↗</span></a><a class="secondary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes macOS 版">下载 macOS 版</a></div><small>Linux 版即将上线 · 企业版可预约演示</small></div>
+</section>
+<footer><div class="footer-main"><a class="logo" href="#top"><span class="logo-symbol">A</span><strong>Agentsyun</strong></a><p>你的 AI 智能体管家，让电脑替你干活。</p><div><a href="https://hermes.agentsyun.com">技术文档</a><a href="mailto:contact@agentsyun.com">联系我们</a></div></div><div class="footer-bottom"><span>© 2026 汇智智能 · Hz-Hermes 出品</span><span>源于开源，回馈开源</span></div>
+</footer>
+</main>
+
+  <script>
+(() => {
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+  const toastEl = document.createElement("div");
+  toastEl.className = "toast";
+  toastEl.setAttribute("role", "status");
+  toastEl.setAttribute("aria-live", "polite");
+  document.body.appendChild(toastEl);
+  let toastTimer;
+
+  function toast(message) {
+    toastEl.textContent = message;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2400);
+  }
+
+  // Mobile menu
+  const toggle = $(".menu-toggle");
+  const mobileNav = $("#mobile-nav");
+  function closeMenu() {
+    if (!toggle || !mobileNav) return;
+    toggle.setAttribute("aria-expanded", "false");
+    mobileNav.hidden = true;
+  }
+  function openMenu() {
+    toggle.setAttribute("aria-expanded", "true");
+    mobileNav.hidden = false;
+  }
+  if (toggle && mobileNav) {
+    toggle.addEventListener("click", () => {
+      const open = toggle.getAttribute("aria-expanded") === "true";
+      open ? closeMenu() : openMenu();
+    });
+    $$("a", mobileNav).forEach((a) => a.addEventListener("click", closeMenu));
+  }
+
+  // AI工作站 dropdown
+  const dropdowns = $$("[data-nav-dropdown]");
+  function closeDropdowns(except) {
+    dropdowns.forEach((dd) => {
+      if (dd === except) return;
+      dd.classList.remove("is-open");
+      const btn = $(".nav-dropdown-trigger", dd);
+      if (btn) btn.setAttribute("aria-expanded", "false");
+    });
+  }
+  dropdowns.forEach((dd) => {
+    const btn = $(".nav-dropdown-trigger", dd);
+    if (!btn) return;
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = dd.classList.contains("is-open");
+      closeDropdowns();
+      if (!open) {
+        dd.classList.add("is-open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+  document.addEventListener("click", () => closeDropdowns());
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeMenu();
+      closeDropdowns();
+    }
+  });
+
+  // Product menu items
+
+  // Coming soon links
+  $$("[data-coming-soon]").forEach((a) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      toast(`${a.getAttribute("data-coming-soon")} · 敬请期待`);
+      closeMenu();
+      closeDropdowns();
+    });
+  });
+
+  // Active nav: Hz-Hermes is the default page
+  const hermesLink = $('.topbar nav > a[data-nav="hermes"]');
+  function syncActiveNav() {
+    if (hermesLink) hermesLink.classList.add("is-active");
+    $$(".topbar nav > a[href^='#']:not([data-nav='hermes'])").forEach((link) => {
+      link.classList.remove("is-active");
+    });
+  }
+  syncActiveNav();
+
+  // Smooth anchor focus
+  $$('a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const id = a.getAttribute("href")?.slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.replaceState(null, "", `#${id}`);
+      closeMenu();
+      closeDropdowns();
+    });
+  });
+
+  // Capability selection
+  const caps = $$("[data-capability]");
+  caps.forEach((item) => {
+    const activate = () => {
+      caps.forEach((c) => c.classList.remove("is-active"));
+      item.classList.add("is-active");
+      const title = $("h3", item)?.textContent?.trim();
+      if (title) toast(`已选择能力：${title}`);
+    };
+    item.addEventListener("click", activate);
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        activate();
+      }
+    });
+  });
+
+  // Clickable grids → scroll to download / highlight
+  $$("[data-clickable-grid] article").forEach((card) => {
+    card.setAttribute("tabindex", "0");
+    const go = () => {
+      const title = $("h3", card)?.textContent?.trim() || "该功能";
+      const link = $("a[href]", card);
+      if (link) {
+        link.click();
+        return;
+      }
+      toast(`${title} · 前往下载体验`);
+      document.getElementById("download")?.scrollIntoView({ behavior: "smooth" });
+    };
+    card.addEventListener("click", (e) => {
+      if (e.target.closest("a")) return;
+      go();
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        go();
+      }
+    });
+  });
+
+  // Sidebar demo
+  $$(".app-sidebar .side-item").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      $$(".app-sidebar .side-item").forEach((b) => {
+        b.classList.remove("side-active");
+        b.setAttribute("aria-pressed", "false");
+      });
+      btn.classList.add("side-active");
+      btn.setAttribute("aria-pressed", "true");
+      toast(`切换到：${btn.getAttribute("aria-label")}`);
+    });
+  });
+
+  // Demo prompt
+  const input = $("#demo-prompt");
+  const send = $("#demo-send");
+  function sendDemo() {
+    const text = (input?.value || "").trim();
+    if (!text) {
+      toast("先输入你想让 Hz-Hermes 做的事");
+      input?.focus();
+      return;
+    }
+    toast("任务已提交，演示界面开始执行…");
+    input.value = "";
+    const running = $(".running");
+    if (running) {
+      running.innerHTML = "<i></i> 正在执行";
+    }
+  }
+  send?.addEventListener("click", sendDemo);
+  input?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendDemo();
+  });
+
+  // Download / mailto buttons feedback
+  $$('a[href^="mailto:"]').forEach((a) => {
+    a.addEventListener("click", () => {
+      toast("正在打开邮件客户端…");
+    });
+  });
+})();
+
+  </script>
+</body>
+</html>

@@ -5854,7 +5854,7 @@ footer {
   const rememberInput = $("#remember-space");
   const spaceList = $("#space-list");
   const enterpriseCta = $("#enterprise-cta");
-  const otpCells = $(".otp-cell");
+  const otpCells = $$(".otp-cell");
   let codeTimer = null;
   let codeLeft = 0;
   let pendingPhone = "";
@@ -6019,7 +6019,7 @@ footer {
     closeOverlays();
   }
   function closeAccountMenus() {
-    $(".account-menu").forEach((m) => {
+    $$(".account-menu").forEach((m) => {
       m.classList.remove("is-open", "has-switch-open");
       const switchBtn = $("[data-action='switch']", m);
       switchBtn?.classList.remove("is-active");
@@ -6027,11 +6027,11 @@ footer {
       const flyout = $("[data-switch-flyout]", m);
       if (flyout) flyout.hidden = true;
     });
-    $(".account-trigger").forEach((t) => t.setAttribute("aria-expanded", "false"));
+    $$(".account-trigger").forEach((t) => t.setAttribute("aria-expanded", "false"));
   }
 
   function showStep(name) {
-    $(".login-step").forEach((step) => {
+    $$(".login-step").forEach((step) => {
       step.classList.toggle("is-active", step.getAttribute("data-step") === name);
     });
   }
@@ -6117,7 +6117,7 @@ footer {
         </button>`;
     }).join("");
 
-    $("[data-space-id]", spaceList).forEach((btn) => {
+    $$("[data-space-id]", spaceList).forEach((btn) => {
       btn.addEventListener("click", () => {
         const space = availableSpaces.find((s) => s.id === btn.getAttribute("data-space-id"));
         if (!space) return;
@@ -6246,7 +6246,7 @@ footer {
     draftAvatar = src || DEFAULT_AVATAR;
     if (settingsAvatarImg) settingsAvatarImg.src = draftAvatar;
     if (settingsPresets) {
-      $(".settings-preset", settingsPresets).forEach((btn) => {
+      $$(".settings-preset", settingsPresets).forEach((btn) => {
         const id = btn.getAttribute("data-preset-id");
         const preset = AVATAR_PRESETS.find((p) => p.id === id);
         btn.classList.toggle("is-selected", !!preset && preset.src === draftAvatar);
@@ -6260,7 +6260,7 @@ footer {
       <button type="button" class="settings-preset" data-preset-id="${p.id}" title="${p.label}" aria-label="${p.label}">
         <img alt="" />
       </button>`).join("");
-    $(".settings-preset", settingsPresets).forEach((btn) => {
+    $$(".settings-preset", settingsPresets).forEach((btn) => {
       const preset = AVATAR_PRESETS.find((p) => p.id === btn.getAttribute("data-preset-id"));
       const img = $("img", btn);
       if (img && preset) img.src = preset.src;
@@ -6373,7 +6373,7 @@ footer {
       </button>`;
     flyout.hidden = false;
 
-    $("[data-switch-space]", flyout).forEach((btn) => {
+    $$("[data-switch-space]", flyout).forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
         const space = spaces.find((s) => s.id === btn.getAttribute("data-switch-space"));
@@ -6472,7 +6472,7 @@ footer {
   }
 
   function bindAuthButtons() {
-    $("[data-open-login]").forEach((btn) => {
+    $$("[data-open-login]").forEach((btn) => {
       btn.onclick = (e) => {
         e.preventDefault();
         openLogin("default");
@@ -6481,7 +6481,7 @@ footer {
   }
 
   function bindAccountMenus() {
-    $("[data-account-menu]").forEach((menu) => {
+    $$("[data-account-menu]").forEach((menu) => {
       menu.addEventListener("click", (e) => e.stopPropagation());
       const trigger = $(".account-trigger", menu);
       trigger?.addEventListener("click", (e) => {
@@ -6494,7 +6494,7 @@ footer {
         }
       });
     });
-    $("[data-action]").forEach((btn) => {
+    $$("[data-action]").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const action = btn.getAttribute("data-action");
         const menu = btn.closest("[data-account-menu]");
@@ -6597,7 +6597,7 @@ footer {
     afterVerified(pendingPhone);
   });
 
-  $("[data-action-apply]").forEach((btn) => {
+  $$("[data-action-apply]").forEach((btn) => {
     btn.addEventListener("click", () => {
       closeOverlays();
       goEnterpriseIntro(true);
@@ -6605,7 +6605,7 @@ footer {
     });
   });
 
-  $("[data-close-overlays]").forEach((btn) => {
+  $$("[data-close-overlays]").forEach((btn) => {
     btn.addEventListener("click", () => closeOverlays());
   });
   loginOverlay?.addEventListener("click", (e) => {
@@ -6642,7 +6642,7 @@ footer {
   renderEnterpriseCta();
 
   // Download / mailto buttons feedback
-  $('a[href^="mailto:"]').forEach((a) => {
+  $$('a[href^="mailto:"]').forEach((a) => {
     a.addEventListener("click", () => {
       toast("正在打开邮件客户端…");
     });

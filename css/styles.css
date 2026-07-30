@@ -4583,6 +4583,9 @@ footer {
 .capabilities-section {
   --cap-progress: 0;
   --cap-scroll-distance: 1320px;
+  --cap-section-padding: 160px;
+  --cap-pin-title-top: 128px;
+  --cap-pin-offset: 32px;
   position: relative;
   width: 100%;
   max-width: none;
@@ -4593,18 +4596,18 @@ footer {
 .capabilities-sticky {
   position: relative;
   top: 0;
-  min-height: 100vh;
+  min-height: auto;
   width: min(1280px, calc(100% - 64px));
   margin: 0 auto;
-  padding: 128px 0;
+  padding: var(--cap-section-padding) 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: visible;
 }
 .capabilities-section.is-cap-fixed .capabilities-sticky {
   position: fixed;
-  top: 0;
+  top: calc(var(--cap-pin-offset) * -1);
   left: 50%;
   z-index: 1;
   margin: 0;
@@ -4791,7 +4794,7 @@ footer {
 @media (max-width: 980px) {
   .capabilities-sticky {
     width: min(100% - 64px, 760px);
-    padding: 96px 0;
+    padding: var(--cap-section-padding) 0;
   }
   .capability-viewport {
     overflow-x: auto;
@@ -4814,7 +4817,7 @@ footer {
     transform: none;
     width: calc(100% - 40px);
     min-height: auto;
-    padding: 72px 0;
+    padding: var(--cap-section-padding) 0;
   }
   .capabilities-sticky > .section-title,
   .capabilities-section > .section-title {
@@ -5430,4 +5433,17 @@ main > :where(.flow-section, .capabilities-section, .cases-section, .asset-secti
   font-family: Menlo, ui-monospace, SFMono-Regular, Consolas, monospace !important;
   font-size: 14px !important;
   font-weight: 400 !important;
+}
+
+/* Keep the site navigation pinned regardless of section scroll mechanics. */
+body > main {
+  padding-top: 72px;
+}
+
+body > main > .topbar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
 }

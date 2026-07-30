@@ -143,32 +143,47 @@
     const trackList = $(".capability-list", capabilitiesSection);
     let ticking = false;
     const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    const cssPx = (name, fallback) => {
+      const value = parseFloat(getComputedStyle(capabilitiesSection).getPropertyValue(name));
+      return Number.isFinite(value) ? value : fallback;
+    };
 
     const measureCapabilities = () => {
       if (!sticky || !viewport || !trackList) return;
+      const isDesktopRail = window.innerWidth > 680;
+      const sectionPadding = cssPx("--cap-section-padding", 160);
+      const titleTop = cssPx("--cap-pin-title-top", 128);
+      const pinOffset = Math.max(0, sectionPadding - titleTop);
       const distance = Math.max(0, trackList.scrollWidth - viewport.clientWidth);
       capabilitiesSection.style.setProperty("--cap-scroll-distance", `${distance}px`);
-      capabilitiesSection.style.minHeight = window.innerWidth > 680
-        ? `calc(100vh + ${distance}px)`
+      capabilitiesSection.style.setProperty("--cap-pin-offset", `${pinOffset}px`);
+      capabilitiesSection.style.minHeight = isDesktopRail
+        ? `${sticky.offsetHeight + distance}px`
         : "";
+      return { distance, pinOffset };
     };
 
     const updateCapabilities = () => {
-      measureCapabilities();
-      const scrollable = Math.max(1, capabilitiesSection.offsetHeight - window.innerHeight);
+      const metrics = measureCapabilities();
       const rect = capabilitiesSection.getBoundingClientRect();
       const isDesktopRail = window.innerWidth > 680;
+      const distance = metrics?.distance || 0;
+      const pinOffset = metrics?.pinOffset || 0;
+      const sectionTop = window.scrollY + rect.top;
+      const start = sectionTop + pinOffset;
+      const end = start + distance;
+      const scrollPosition = window.scrollY;
       const progress = isDesktopRail
-        ? clamp(-rect.top / scrollable, 0, 1)
+        ? clamp((scrollPosition - start) / Math.max(1, distance), 0, 1)
         : 0;
 
       capabilitiesSection.classList.toggle(
         "is-cap-fixed",
-        isDesktopRail && rect.top <= 0 && rect.bottom > window.innerHeight
+        isDesktopRail && distance > 0 && scrollPosition >= start && scrollPosition < end
       );
       capabilitiesSection.classList.toggle(
         "is-cap-after",
-        isDesktopRail && rect.bottom <= window.innerHeight
+        isDesktopRail && distance > 0 && scrollPosition >= end
       );
       capabilitiesSection.style.setProperty("--cap-progress", progress.toFixed(4));
       ticking = false;

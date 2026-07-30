@@ -767,10 +767,10 @@ footer a:hover {
 }
 .desktop-card {
   position: absolute;
-  border: 1px solid #dedfe8;
+  border: 0;
   border-radius: 0;
   background: rgba(255,255,255,.92);
-  box-shadow: 0 25px 65px rgba(46,50,93,.13);
+  box-shadow: 0 18px 42px rgba(17, 24, 39, .08), 0 44px 120px rgba(17, 24, 39, .10);
 }
 .top-card {
   top: 0;
@@ -4565,6 +4565,1015 @@ footer {
   }
 }
 
+/* ===== Enterprise section: align with capabilities card rhythm ===== */
+.enterprise-section {
+  width: min(1280px, calc(100% - 64px));
+  padding-top: 128px;
+  padding-bottom: 128px;
+  display: block;
+}
+.enterprise-section > .section-title,
+.enterprise-title {
+  position: static;
+  max-width: 720px;
+  margin: 0 0 64px;
+  text-align: left;
+}
+.enterprise-section .section-title h2 {
+  margin: 0;
+  color: #151517;
+  font-size: 44px;
+  line-height: 1.14;
+  letter-spacing: 0;
+  font-weight: 760;
+}
+.enterprise-section .section-title p {
+  display: block;
+  max-width: 560px;
+  margin: 18px 0 0;
+  color: #626874;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.enterprise-title .primary-button {
+  margin-top: 28px;
+}
+.enterprise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  border: 0;
+}
+.enterprise-grid article {
+  min-height: 280px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
+}
+.enterprise-grid article:nth-child(odd) {
+  background: #f5f5f5;
+}
+.enterprise-grid article:nth-child(even) {
+  background: #fafafa;
+}
+.enterprise-grid article:hover,
+.enterprise-grid article:focus,
+.enterprise-grid article:focus-visible {
+  background: inherit;
+  box-shadow: none;
+  outline: none;
+  transform: none;
+}
+.enterprise-grid article > span {
+  color: var(--blue);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+.enterprise-grid h3 {
+  margin: auto 0 10px;
+  color: #151517;
+  font-size: 16px;
+  line-height: 1.32;
+  letter-spacing: 0;
+  font-weight: 720;
+}
+.enterprise-grid p {
+  max-width: 360px;
+  margin: 0;
+  color: #626874;
+  font-size: 14px;
+  line-height: 1.68;
+}
+@media (max-width: 980px) {
+  .enterprise-section {
+    width: min(100% - 64px, 760px);
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+  .enterprise-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 680px) {
+  .enterprise-section {
+    width: calc(100% - 40px);
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+  .enterprise-section > .section-title,
+  .enterprise-title {
+    margin-bottom: 48px;
+  }
+  .enterprise-section .section-title h2 {
+    font-size: 34px;
+  }
+  .enterprise-grid {
+    grid-template-columns: 1fr;
+  }
+  .enterprise-grid article {
+    min-height: 240px;
+    padding: 24px;
+  }
+}
+
+/* ===== Capabilities section: sticky horizontal cards ===== */
+.capabilities-section {
+  --cap-progress: 0;
+  --cap-scroll-distance: 1320px;
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+.capabilities-sticky {
+  position: relative;
+  top: 0;
+  min-height: 100vh;
+  width: min(1280px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 128px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: visible;
+}
+.capabilities-section.is-cap-fixed .capabilities-sticky {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  margin: 0;
+  transform: translateX(-50%);
+}
+.capabilities-section.is-cap-after .capabilities-sticky {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 50%;
+  z-index: 1;
+  margin: 0;
+  transform: translateX(-50%);
+}
+.capabilities-sticky > .section-title,
+.capabilities-section > .section-title {
+  position: static;
+  max-width: 720px;
+  margin: 0 0 64px;
+  text-align: left;
+}
+.capabilities-sticky > .section-title h2,
+.capabilities-section > .section-title h2 {
+  margin: 0;
+  color: #151517;
+  font-size: 44px;
+  line-height: 1.14;
+  letter-spacing: 0;
+  font-weight: 760;
+}
+.capabilities-sticky > .section-title p,
+.capabilities-section > .section-title p {
+  display: block;
+  max-width: 560px;
+  margin: 18px 0 0;
+  color: #626874;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.capability-viewport {
+  width: 100%;
+  overflow: visible;
+}
+.capabilities-section .capability-list,
+.capabilities-section .capability-list[role="list"] {
+  display: flex;
+  grid-template-columns: none;
+  gap: 24px;
+  width: max-content;
+  border: 0;
+  transform: translate3d(calc(var(--cap-progress) * var(--cap-scroll-distance) * -1), 0, 0);
+  transition: transform .08s linear;
+  will-change: transform;
+}
+.capabilities-section .capability-list article,
+.capabilities-section .capability-list article + article,
+.capabilities-section .capability-list article:nth-child(1),
+.capabilities-section .capability-list article:nth-child(6) {
+  flex: 0 0 410px;
+  width: 410px;
+  min-height: 0;
+  padding: 0;
+  grid-column: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+  cursor: default;
+  transform: none;
+}
+.capabilities-section .capability-list article:hover,
+.capabilities-section .capability-list article:focus,
+.capabilities-section .capability-list article:focus-visible,
+.capabilities-section .capability-list article.is-active,
+.capabilities-section .capability-list .featured-capability {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+  transform: none;
+}
+.capabilities-section .capability-visual,
+.capabilities-section .capability-list article:nth-child(1) .capability-visual,
+.capabilities-section .capability-list article:nth-child(6) .capability-visual {
+  order: 1;
+  width: 410px;
+  height: 230px;
+  margin: 0 0 24px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #fff;
+  background: #2f8cff;
+  opacity: 1;
+}
+.capabilities-section .capability-list article:nth-child(2) .capability-visual {
+  background: #1f7fe5;
+}
+.capabilities-section .capability-list article:nth-child(3) .capability-visual {
+  background: #111827;
+}
+.capabilities-section .capability-list article:nth-child(4) .capability-visual {
+  background: #2878d8;
+}
+.capabilities-section .capability-list article:nth-child(5) .capability-visual {
+  background: #0f1f3d;
+}
+.capabilities-section .capability-list article:nth-child(6) .capability-visual {
+  background: #3a8dff;
+}
+.capabilities-section .capability-visual svg {
+  width: 64px;
+  height: 64px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: none;
+}
+.capabilities-section .capability-list article:hover .capability-visual,
+.capabilities-section .capability-list article:hover .capability-visual svg {
+  transform: none;
+}
+.capabilities-section .capability-visual .cap-grid-line,
+.capabilities-section .capability-visual .cap-detail,
+.capabilities-section .capability-visual .cap-accent,
+.capabilities-section .capability-visual .cap-accent-fill,
+.capabilities-section .capability-visual .cap-blue-dot,
+.capabilities-section .capability-visual .cap-dot {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  opacity: 1;
+}
+.capabilities-section .capability-copy {
+  order: 3;
+}
+.capabilities-section .cap-number {
+  display: block;
+  order: 2;
+  margin: 0 0 18px;
+  color: #6f7682;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+}
+.capabilities-section .capability-list h3 {
+  margin: 0 0 10px;
+  color: #151517;
+  font-size: 16px;
+  line-height: 1.32;
+  letter-spacing: 0;
+  font-weight: 720;
+}
+.capabilities-section .capability-list p {
+  max-width: 410px;
+  margin: 0;
+  color: #626874;
+  font-size: 14px;
+  line-height: 1.68;
+}
+.capability-scrollbar {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  margin-top: 72px;
+  background: #e5e5e5;
+  overflow: hidden;
+}
+.capability-scrollbar span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(100% / 6);
+  background: var(--blue);
+  transform: translate3d(calc(var(--cap-progress) * 500%), 0, 0);
+  transition: transform .08s linear;
+}
+@media (max-width: 980px) {
+  .capabilities-sticky {
+    width: min(100% - 64px, 760px);
+    padding: 96px 0;
+  }
+  .capability-viewport {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .capability-viewport::-webkit-scrollbar {
+    display: none;
+  }
+  .capabilities-section .capability-list,
+  .capabilities-section .capability-list[role="list"] {
+    transform: none;
+  }
+}
+@media (max-width: 680px) {
+  .capabilities-section {
+    min-height: auto !important;
+  }
+  .capabilities-sticky {
+    position: static;
+    transform: none;
+    width: calc(100% - 40px);
+    min-height: auto;
+    padding: 72px 0;
+  }
+  .capabilities-sticky > .section-title,
+  .capabilities-section > .section-title {
+    margin-bottom: 48px;
+  }
+  .capabilities-sticky > .section-title h2,
+  .capabilities-section > .section-title h2 {
+    font-size: 34px;
+  }
+  .capabilities-section .capability-list article,
+  .capabilities-section .capability-list article + article {
+    flex-basis: min(410px, calc(100vw - 40px));
+    width: min(410px, calc(100vw - 40px));
+  }
+  .capabilities-section .capability-visual,
+  .capabilities-section .capability-list article:nth-child(1) .capability-visual,
+  .capabilities-section .capability-list article:nth-child(6) .capability-visual {
+    width: min(410px, calc(100vw - 40px));
+    height: auto;
+    aspect-ratio: 410 / 230;
+  }
+  .capability-scrollbar {
+    margin-top: 48px;
+  }
+}
+
+/* ===== Capability cover images ===== */
+.capabilities-section .capability-visual {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.capabilities-section .capability-visual svg {
+  display: none;
+}
+.capabilities-section .capability-list article:nth-child(1) .capability-visual {
+  background-image: url("assets/capabilities/capability-1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.capabilities-section .capability-list article:nth-child(2) .capability-visual {
+  background-image: url("assets/capabilities/capability-2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.capabilities-section .capability-list article:nth-child(3) .capability-visual {
+  background-image: url("assets/capabilities/capability-3.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.capabilities-section .capability-list article:nth-child(4) .capability-visual {
+  background-image: url("assets/capabilities/capability-4.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.capabilities-section .capability-list article:nth-child(5) .capability-visual {
+  background-image: url("assets/capabilities/capability-5.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.capabilities-section .capability-list article:nth-child(6) .capability-visual {
+  background-image: url("assets/capabilities/capability-6.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* ===== Capability cover lucide icons ===== */
+.capabilities-section .capability-visual {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.capabilities-section .capability-visual > svg {
+  display: none !important;
+}
+.capabilities-section .capability-visual::after {
+  content: "";
+  width: 48px;
+  height: 48px;
+  display: block;
+  background: #fff;
+  -webkit-mask: var(--cap-cover-icon) center / contain no-repeat;
+  mask: var(--cap-cover-icon) center / contain no-repeat;
+}
+.capabilities-section .capability-list article:nth-child(1) .capability-visual {
+  background-image: url("assets/capabilities/capability-1.jpg");
+}
+.capabilities-section .capability-list article:nth-child(1) .capability-visual::after {
+  --cap-cover-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m8%2011%202%202%204-4%22%2F%3E%3Ccircle%20cx%3D%2211%22%20cy%3D%2211%22%20r%3D%228%22%2F%3E%3Cpath%20d%3D%22m21%2021-4.3-4.3%22%2F%3E%3C%2Fsvg%3E");
+}
+.capabilities-section .capability-list article:nth-child(2) .capability-visual {
+  background-image: url("assets/capabilities/capability-2.jpg");
+}
+.capabilities-section .capability-list article:nth-child(2) .capability-visual::after {
+  --cap-cover-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M21%2015a2%202%200%200%201-2%202H7l-4%204V5a2%202%200%200%201%202-2h14a2%202%200%200%201%202%202z%22%2F%3E%3Cpath%20d%3D%22M13%208H7%22%2F%3E%3Cpath%20d%3D%22M17%2012H7%22%2F%3E%3C%2Fsvg%3E");
+}
+.capabilities-section .capability-list article:nth-child(3) .capability-visual {
+  background-image: url("assets/capabilities/capability-3.jpg");
+}
+.capabilities-section .capability-list article:nth-child(3) .capability-visual::after {
+  --cap-cover-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9.937%2015.5A2%202%200%200%200%208.5%2014.063l-6.135-1.582a.5.5%200%200%201%200-.962L8.5%209.936A2%202%200%200%200%209.937%208.5l1.582-6.135a.5.5%200%200%201%20.962%200L14.063%208.5A2%202%200%200%200%2015.5%209.937l6.135%201.581a.5.5%200%200%201%200%20.964L15.5%2014.063a2%202%200%200%200-1.437%201.437l-1.582%206.135a.5.5%200%200%201-.962%200z%22%2F%3E%3Cpath%20d%3D%22M20%203v4%22%2F%3E%3Cpath%20d%3D%22M22%205h-4%22%2F%3E%3Cpath%20d%3D%22M4%2017v2%22%2F%3E%3Cpath%20d%3D%22M5%2018H3%22%2F%3E%3C%2Fsvg%3E");
+}
+.capabilities-section .capability-list article:nth-child(4) .capability-visual {
+  background-image: url("assets/capabilities/capability-4.jpg");
+}
+.capabilities-section .capability-list article:nth-child(4) .capability-visual::after {
+  --cap-cover-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%2016v5%22%2F%3E%3Cpath%20d%3D%22M16%2014v7%22%2F%3E%3Cpath%20d%3D%22M20%2010v11%22%2F%3E%3Cpath%20d%3D%22m22%203-8.646%208.646a.5.5%200%200%201-.708%200L9.354%208.354a.5.5%200%200%200-.707%200L2%2015%22%2F%3E%3Cpath%20d%3D%22M4%2018v3%22%2F%3E%3Cpath%20d%3D%22M8%2014v7%22%2F%3E%3C%2Fsvg%3E");
+}
+.capabilities-section .capability-list article:nth-child(5) .capability-visual {
+  background-image: url("assets/capabilities/capability-5.jpg");
+}
+.capabilities-section .capability-list article:nth-child(5) .capability-visual::after {
+  --cap-cover-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M15%202H6a2%202%200%200%200-2%202v16a2%202%200%200%200%202%202h12a2%202%200%200%200%202-2V7z%22%2F%3E%3Cpath%20d%3D%22M14%202v4a2%202%200%200%200%202%202h4%22%2F%3E%3Cpath%20d%3D%22M10%209H8%22%2F%3E%3Cpath%20d%3D%22M16%2013H8%22%2F%3E%3Cpath%20d%3D%22M16%2017H8%22%2F%3E%3C%2Fsvg%3E");
+}
+.capabilities-section .capability-list article:nth-child(6) .capability-visual {
+  background-image: url("assets/capabilities/capability-6.jpg");
+}
+.capabilities-section .capability-list article:nth-child(6) .capability-visual::after {
+  --cap-cover-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2210%22%2F%3E%3Cpolyline%20points%3D%2212%206%2012%2012%2016%2014%22%2F%3E%3C%2Fsvg%3E");
+}
+
+/* Use real lucide strokes for cover icons instead of mask-filled shapes. */
+.capabilities-section .capability-visual::after {
+  display: none;
+}
+.capabilities-section .capability-visual > svg.cap-cover-icon {
+  display: block !important;
+  width: 48px;
+  height: 48px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 1;
+}
+.capabilities-section .capability-visual > svg.cap-cover-icon * {
+  vector-effect: non-scaling-stroke;
+}
+
+/* Keep the horizontal capability rail fixed-width while resizing desktop viewports. */
+.capabilities-section .capabilities-sticky {
+  width: 1280px;
+  max-width: none;
+}
+.capabilities-section .capability-viewport {
+  width: 1280px;
+  max-width: none;
+  overflow: visible;
+}
+.capabilities-section .capability-list,
+.capabilities-section .capability-list[role="list"] {
+  width: max-content;
+  min-width: max-content;
+  overflow: visible;
+}
+.capabilities-section .capability-list article,
+.capabilities-section .capability-list article + article,
+.capabilities-section .capability-list article:nth-child(1),
+.capabilities-section .capability-list article:nth-child(6) {
+  flex: 0 0 410px;
+  width: 410px;
+  min-width: 410px;
+  max-width: 410px;
+}
+.capabilities-section .capability-visual,
+.capabilities-section .capability-list article:nth-child(1) .capability-visual,
+.capabilities-section .capability-list article:nth-child(6) .capability-visual {
+  width: 410px;
+  min-width: 410px;
+  max-width: 410px;
+  height: 230px;
+  aspect-ratio: auto;
+  border-radius: 0 0 64px 0;
+  overflow: hidden;
+}
+.capabilities-section .capability-list,
+.capabilities-section .capability-list[role="list"] {
+  transform: translate3d(calc(var(--cap-progress) * var(--cap-scroll-distance) * -1), 0, 0);
+}
+@media (max-width: 980px) {
+  .capabilities-section .capabilities-sticky,
+  .capabilities-section .capability-viewport {
+    width: 1280px;
+    max-width: none;
+  }
+  .capabilities-section .capability-viewport {
+    overflow: visible;
+  }
+  .capabilities-section .capability-list,
+  .capabilities-section .capability-list[role="list"] {
+    transform: translate3d(calc(var(--cap-progress) * var(--cap-scroll-distance) * -1), 0, 0);
+  }
+}
+
+/* Clip fixed-width horizontal rails at the browser viewport, not at the card group. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ===== Asset section: Figma node 115:1450 ===== */
+.asset-section {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 128px 32px;
+  display: block;
+  box-sizing: border-box;
+  background: #070707;
+}
+.asset-section .asset-layout {
+  width: min(1280px, calc(100vw - 64px));
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 512px minmax(0, 1fr);
+  gap: 48px;
+  align-items: end;
+  box-sizing: border-box;
+}
+.asset-section .asset-left {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  min-width: 0;
+}
+.asset-section > .section-title,
+.asset-section .section-title,
+.asset-section .section-title.centered {
+  max-width: 360px;
+  margin: 0;
+  text-align: left;
+}
+.asset-section .section-title h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 44px;
+  line-height: 1.18;
+  letter-spacing: 0;
+  font-weight: 560;
+}
+.asset-section .section-title p {
+  max-width: 320px;
+  margin: 20px 0 0;
+  color: #fff7ec;
+  font-size: 18px;
+  line-height: 1.55;
+}
+.asset-section .asset-visual {
+  width: 512px;
+  height: 512px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 0 0 128px 0;
+}
+.asset-section .asset-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.asset-section .asset-track {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 151px 24px;
+  margin: 0;
+  border: 0;
+}
+.asset-section .asset-track article {
+  width: auto;
+  min-width: 0;
+  min-height: 180px;
+  padding: 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  transform: none;
+}
+.asset-section .asset-track article:hover,
+.asset-section .asset-track article:focus,
+.asset-section .asset-track article:focus-visible {
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+  transform: none;
+}
+.asset-section .asset-track i {
+  width: 24px;
+  height: 24px;
+  margin: 0 0 24px;
+  display: block;
+  font-style: normal;
+}
+.asset-section .asset-track i img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+.asset-section .asset-track h3 {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+.asset-section .asset-track p {
+  max-width: 348px;
+  margin: 0;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.45;
+  opacity: 1;
+}
+.asset-section .asset-track article > span {
+  display: block;
+  margin: 24px 0 0;
+  color: #fff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 2;
+  font-weight: 400;
+  opacity: .82;
+}
+.asset-section .asset-note {
+  display: none;
+}
+@media (max-width: 1180px) {
+  .asset-section .asset-layout {
+    grid-template-columns: 1fr;
+    gap: 72px;
+  }
+  .asset-section .asset-left {
+    gap: 48px;
+  }
+  .asset-section .asset-track {
+    gap: 80px 24px;
+  }
+}
+@media (max-width: 680px) {
+  .asset-section {
+    padding: 72px 20px;
+  }
+  .asset-section .section-title h2 {
+    font-size: 34px;
+  }
+  .asset-section .section-title p {
+    font-size: 16px;
+  }
+  .asset-section .asset-visual {
+    width: min(512px, 100%);
+    height: auto;
+    aspect-ratio: 1;
+    border-bottom-right-radius: 80px;
+  }
+  .asset-section .asset-track {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+/* ===== Cases section: equal filled cards ===== */
+.cases-section .case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border: 0;
+  outline: 0;
+}
+.cases-section .section-title,
+.cases-section .section-title.centered {
+  max-width: 720px;
+  margin: 0 0 64px;
+  text-align: left;
+}
+.cases-section .case-grid article,
+.cases-section .case-grid article:nth-child(1),
+.cases-section .case-grid article:nth-child(6),
+.cases-section .case-grid .case-card-wide {
+  grid-column: auto;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+  padding: 28px;
+  border: 0;
+  outline: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fafafa;
+  transform: none;
+}
+.cases-section .case-grid article:nth-child(odd) {
+  background: #f5f5f5;
+}
+.cases-section .case-grid article:nth-child(even) {
+  background: #fafafa;
+}
+.cases-section .case-grid article:hover,
+.cases-section .case-grid article:focus,
+.cases-section .case-grid article:focus-visible {
+  border: 0;
+  box-shadow: none;
+  transform: none;
+}
+.cases-section .case-grid article:hover:nth-child(odd),
+.cases-section .case-grid article:focus:nth-child(odd),
+.cases-section .case-grid article:focus-visible:nth-child(odd) {
+  background: #f5f5f5;
+}
+.cases-section .case-grid article:hover:nth-child(even),
+.cases-section .case-grid article:focus:nth-child(even),
+.cases-section .case-grid article:focus-visible:nth-child(even) {
+  background: #fafafa;
+}
+.cases-section .case-visual,
+.cases-section .case-card-wide .case-visual,
+.cases-section .case-visual-docs,
+.cases-section .case-visual-dashboard {
+  width: 100%;
+  max-width: 320px;
+  height: 190px;
+  margin: auto auto 44px;
+}
+.cases-section .case-grid a,
+.cases-section .case-grid article:hover a,
+.cases-section .case-grid article:focus-within a,
+.cases-section .case-grid article:focus-visible a {
+  display: none;
+}
+@media (max-width: 980px) {
+  .cases-section .case-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 680px) {
+  .cases-section .case-grid {
+    grid-template-columns: 1fr;
+  }
+  .cases-section .case-grid article,
+  .cases-section .case-grid article:nth-child(1),
+  .cases-section .case-grid article:nth-child(6),
+  .cases-section .case-grid .case-card-wide {
+    min-height: 0;
+    aspect-ratio: auto;
+    padding: 24px;
+  }
+}
+
+/* Final cases cleanup: remove residual outlines and lower illustrations. */
+.cases-section .case-grid,
+.cases-section .case-grid article,
+.cases-section .case-grid article:nth-child(3),
+.cases-section .case-grid article:nth-child(6),
+.cases-section .case-grid article:nth-child(n + 4),
+.cases-section .case-grid article:nth-child(1),
+.cases-section .case-grid article:nth-child(6),
+.cases-section .case-grid .case-card-wide {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+.cases-section .case-visual,
+.cases-section .case-card-wide .case-visual,
+.cases-section .case-visual-docs,
+.cases-section .case-visual-dashboard,
+.cases-section .case-grid article:hover .case-visual {
+  transform: translateY(32px) !important;
+}
+
+.cases-section .section-title,
+.cases-section .section-title.centered {
+  text-align: left !important;
+  align-items: flex-start !important;
+}
+
+.cases-section .section-title p {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  text-align: left !important;
+}
+
+/* Cases cards: rounded bottom-right corner. */
+.cases-section .case-grid article,
+.cases-section .case-grid article:nth-child(1),
+.cases-section .case-grid article:nth-child(6),
+.cases-section .case-grid .case-card-wide {
+  border-radius: 0 0 128px 0 !important;
+  overflow: hidden;
+}
+
+/* Enterprise cards: two-column media list. */
+.enterprise-section .enterprise-grid {
+  grid-template-columns: repeat(2, minmax(0, 600px)) !important;
+  column-gap: 80px !important;
+  row-gap: 24px !important;
+  justify-content: center !important;
+}
+
+.enterprise-section .enterprise-grid article,
+.enterprise-section .enterprise-grid article:nth-child(odd),
+.enterprise-section .enterprise-grid article:nth-child(even) {
+  width: 600px !important;
+  height: 200px !important;
+  min-height: 200px !important;
+  padding: 0 !important;
+  display: grid !important;
+  grid-template-columns: 200px minmax(0, 1fr) !important;
+  column-gap: 32px !important;
+  align-items: start !important;
+  background: transparent !important;
+}
+
+.enterprise-card-media {
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 0 0 32px 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.enterprise-card-media svg {
+  width:  32px;
+  height:  32px;
+  color: #fff;
+  fill: none;
+  stroke: currentColor;
+}
+
+.enterprise-card-media svg path,
+.enterprise-card-media svg circle,
+.enterprise-card-media svg rect,
+.enterprise-card-media svg polyline,
+.enterprise-card-media svg line {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.enterprise-grid article:nth-child(1) .enterprise-card-media {
+  background-image: url("assets/capabilities/capability-1.jpg");
+}
+.enterprise-grid article:nth-child(2) .enterprise-card-media {
+  background-image: url("assets/capabilities/capability-2.jpg");
+}
+.enterprise-grid article:nth-child(3) .enterprise-card-media {
+  background-image: url("assets/capabilities/capability-3.jpg");
+}
+.enterprise-grid article:nth-child(4) .enterprise-card-media {
+  background-image: url("assets/capabilities/capability-4.jpg");
+}
+.enterprise-grid article:nth-child(5) .enterprise-card-media {
+  background-image: url("assets/capabilities/capability-5.jpg");
+}
+.enterprise-grid article:nth-child(6) .enterprise-card-media {
+  background-image: url("assets/capabilities/capability-6.jpg");
+}
+
+.enterprise-card-copy {
+  min-width: 0;
+  padding-top: 0;
+}
+
+.enterprise-section .enterprise-grid article > span,
+.enterprise-card-copy > span {
+  display: block;
+  margin: 0 0 44px;
+  color: #151517;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.enterprise-section .enterprise-grid h3 {
+  margin: 0 0 10px !important;
+}
+
+.enterprise-section .enterprise-grid p {
+  max-width: 330px !important;
+}
+
+@media (max-width: 1320px) {
+  .enterprise-section .enterprise-grid {
+    grid-template-columns: minmax(0, 600px) !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .enterprise-section .enterprise-grid article,
+  .enterprise-section .enterprise-grid article:nth-child(odd),
+  .enterprise-section .enterprise-grid article:nth-child(even) {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    grid-template-columns: 120px minmax(0, 1fr) !important;
+    column-gap: 20px !important;
+  }
+
+  .enterprise-card-media {
+    width: 120px;
+    height: 120px;
+  }
+
+  .enterprise-card-copy > span {
+    margin-bottom: 20px;
+  }
+}
+
+/* Unified typography for content sections; hero and proof stay untouched. */
+main > :where(.intro-section, .flow-section, .capabilities-section, .desktop-section, .cases-section, .asset-section, .enterprise-section, .download-section)
+  :where(h1, h2, h3, h4, h5, h6, p, span, a, strong, small, em, button, label, li) {
+  font-weight: 400 !important;
+}
+
+main > :where(.intro-section, .flow-section, .capabilities-section, .desktop-section, .cases-section, .asset-section, .enterprise-section, .download-section)
+  :where(.section-title h2, .desktop-copy h2, .download-section h2) {
+  font-weight: 500 !important;
+}
+
+main > :where(.intro-section, .flow-section, .capabilities-section, .desktop-section, .cases-section, .asset-section, .enterprise-section)
+  :where(article h3, .check-list strong, .desktop-card strong) {
+  font-size: 20px !important;
+  font-weight: 400 !important;
+}
+
+main > :where(.intro-section, .flow-section, .capabilities-section, .desktop-section, .cases-section, .asset-section, .enterprise-section)
+  :where(article p, .check-list p, .desktop-card small) {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+main > :where(.flow-section, .capabilities-section, .cases-section, .asset-section, .enterprise-section)
+  :where(.flow-track article > span, .cap-number, .case-copy > span, .asset-track article > span, .enterprise-card-copy > span, .enterprise-grid article > span) {
+  font-family: Menlo, ui-monospace, SFMono-Regular, Consolas, monospace !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
 
 /* ===== Auth / account system merged from main ===== */
 .login-overlay {
@@ -5477,7 +6486,7 @@ footer {
 <main>
 <header class="topbar"><a class="logo" href="#top" aria-label="Agentsyun 首页"><img class="logo-image" src="assets/brand/agentsyun-logo.svg" alt="Agentsyun" /></a><nav aria-label="主导航"><div class="nav-dropdown" data-nav-dropdown><button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="ai-workstation-menu">AI工作站 <span class="chevron" aria-hidden="true">▾</span></button><div class="nav-dropdown-panel" id="ai-workstation-menu" role="menu"><a role="menuitem" href="https://www.hellome.art/" target="_blank" rel="noopener noreferrer"><strong>Hellome</strong><span>AI智能体平台</span></a><a role="menuitem" href="https://www.agentsyun.com/marketing" target="_blank" rel="noopener noreferrer"><strong>词元(Token)工场</strong><span>AI算力平台</span></a><a role="menuitem" href="https://www.gnomic.cn/workspace" target="_blank" rel="noopener noreferrer"><strong>Gnomic</strong><span>一句话创建工作流</span></a></div></div><a href="#top" class="is-active" data-nav="hermes">HzHermes</a><a href="https://hermes.agentsyun.com" target="_blank" rel="noopener noreferrer">使用手册</a><a href="#" data-coming-soon="企业版">企业版</a></nav><div class="topbar-right"><button class="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button><div class="auth-actions" id="auth-actions"><button type="button" class="nav-button-brand" data-open-login>登录注册</button></div></div>
 </header><div class="mobile-nav" id="mobile-nav" hidden><div class="mobile-nav-group"><strong>AI工作站</strong><a href="https://www.hellome.art/" target="_blank" rel="noopener noreferrer"><strong>Hellome</strong><span>AI智能体平台</span></a><a href="https://www.agentsyun.com/marketing" target="_blank" rel="noopener noreferrer"><strong>词元(Token)工场</strong><span>AI算力平台</span></a><a href="https://www.gnomic.cn/workspace" target="_blank" rel="noopener noreferrer"><strong>Gnomic</strong><span>一句话创建工作流</span></a></div><a href="#top" class="is-active" data-nav="hermes">HzHermes</a><a href="https://hermes.agentsyun.com" target="_blank" rel="noopener noreferrer">使用手册</a><a href="#" data-coming-soon="企业版">企业版</a><div class="mobile-auth" id="mobile-auth"><button type="button" class="nav-button-brand" data-open-login>登录注册</button></div></div>
-<section class="hero" id="top"><div class="hero-glow"></div><div class="hero-copy"><h1>你的 AI 智能体管家<br/><em>帮你搞定电脑上的事</em></h1><p>Hz-Hermes 是你桌面上的 AI 助手——你告诉它做什么，它帮你完成。写报告、做数据、管客户、自动填表，你不用动手，它替你跑腿。</p><div class="hero-actions"><a class="primary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes Windows 版">Windows 免费下载 <span aria-hidden="true">↗</span></a><a class="secondary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes macOS 版">macOS 免费下载</a></div><div class="hero-meta"><span><svg class="hero-meta-icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg>支持 Windows / macOS</span><span><svg class="hero-meta-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.8 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>本地运行，数据不出域</span><span><svg class="hero-meta-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m9 12 2 2 4-4"></path></svg>一键安装，开箱即用</span></div></div><div class="hero-showcase hz-figma-showcase" aria-label="HZ HERMES 桌面工作台界面"><div class="app-window hz-figma-shell" inert><div class="hz-window-header hz-window-header-global" aria-hidden="true"><div class="hz-window-left"><div class="hz-traffic"><i></i><i></i><i></i></div><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-left.svg" alt="" /></button></div><div class="hz-window-controls"><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-bottom.svg" alt="" /></button><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-right.svg" alt="" /></button></div></div><aside class="hz-side-nav" aria-label="HZ HERMES 侧边导航"><div class="hz-side-top"><nav class="hz-nav-list" aria-label="主功能"><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-message-circle-plus.svg" alt="" /><span>新对话</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-search.svg" alt="" /><span>搜索对话</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-bot-message-square.svg" alt="" /><span>消息平台</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-layout-grid.svg" alt="" /><span>技能</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-alarm-clock-check.svg" alt="" /><span>定时任务</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-library-big.svg" alt="" /><span>文件库</span></a></nav><section class="hz-nav-group" aria-label="项目"><p>项目</p><span>暂无项目</span></section><section class="hz-nav-group" aria-label="对话"><p>对话</p><span>暂无对话</span></section></div><div class="hz-side-footer"><a class="hz-nav-item hz-credit" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-circle-gauge.svg" alt="" /><span>充值额度</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-settings.svg" alt="" /><span>设置</span></a></div></aside><main class="hz-content"><div class="hz-empty-workspace"><h2>今天想做点什么？</h2><div class="hz-dialog-card"><label class="sr-only" for="demo-prompt">任务描述</label><textarea id="demo-prompt" aria-label="任务描述" tabindex="-1" readonly>用/skill-creator 创建一个技能，你先问我技能应该做什么吧。</textarea><div class="hz-dialog-toolbar"><div class="hz-toolbar-group"><button type="button" class="hz-icon-button" aria-label="添加" tabindex="-1"><img src="assets/figma-hz-hermes/icon-plus.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-hand.svg" alt="" /><span>默认权限</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-layout-grid-1.svg" alt="" /><span>技能</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-circle-user.svg" alt="" /><span>员工</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button></div><div class="hz-toolbar-group hz-toolbar-right"><button type="button" class="hz-pill-button hz-model-button" tabindex="-1"><span>Qwen3.6-Plus</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-icon-button" aria-label="语音输入" tabindex="-1"><img src="assets/figma-hz-hermes/icon-mic.svg" alt="" /></button><button type="button" id="demo-send" class="hz-send-button" aria-label="发送演示任务" tabindex="-1"><img src="assets/figma-hz-hermes/icon-arrow-up.svg" alt="" /></button></div></div></div></div></main></div></div>
+<section class="hero" id="top"><div class="hero-glow"></div><div class="hero-copy"><h1>你的AI智能体管家<br/><em>发号施令，坐等成果</em></h1><p>Hz-Hermes 是你桌面上的 AI 助手——你告诉它做什么，它帮你完成。写报告、做数据、管客户、自动填表，你不用动手，它替你跑腿。</p><div class="hero-actions"><a class="primary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes Windows 版">Windows 免费下载 <span aria-hidden="true">↗</span></a><a class="secondary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes macOS 版">macOS 免费下载</a></div><div class="hero-meta"><span><svg class="hero-meta-icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg>支持 Windows / macOS</span><span><svg class="hero-meta-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.8 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>本地运行，数据不出域</span><span><svg class="hero-meta-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m9 12 2 2 4-4"></path></svg>一键安装，开箱即用</span></div></div><div class="hero-showcase hz-figma-showcase" aria-label="HZ HERMES 桌面工作台界面"><div class="app-window hz-figma-shell" inert><div class="hz-window-header hz-window-header-global" aria-hidden="true"><div class="hz-window-left"><div class="hz-traffic"><i></i><i></i><i></i></div><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-left.svg" alt="" /></button></div><div class="hz-window-controls"><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-bottom.svg" alt="" /></button><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-right.svg" alt="" /></button></div></div><aside class="hz-side-nav" aria-label="HZ HERMES 侧边导航"><div class="hz-side-top"><nav class="hz-nav-list" aria-label="主功能"><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-message-circle-plus.svg" alt="" /><span>新对话</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-search.svg" alt="" /><span>搜索对话</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-bot-message-square.svg" alt="" /><span>消息平台</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-layout-grid.svg" alt="" /><span>技能</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-alarm-clock-check.svg" alt="" /><span>定时任务</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-library-big.svg" alt="" /><span>文件库</span></a></nav><section class="hz-nav-group" aria-label="项目"><p>项目</p><span>暂无项目</span></section><section class="hz-nav-group" aria-label="对话"><p>对话</p><span>暂无对话</span></section></div><div class="hz-side-footer"><a class="hz-nav-item hz-credit" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-circle-gauge.svg" alt="" /><span>充值额度</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-settings.svg" alt="" /><span>设置</span></a></div></aside><main class="hz-content"><div class="hz-empty-workspace"><h2>今天想做点什么？</h2><div class="hz-dialog-card"><label class="sr-only" for="demo-prompt">任务描述</label><textarea id="demo-prompt" aria-label="任务描述" tabindex="-1" readonly>用/skill-creator 创建一个技能，你先问我技能应该做什么吧。</textarea><div class="hz-dialog-toolbar"><div class="hz-toolbar-group"><button type="button" class="hz-icon-button" aria-label="添加" tabindex="-1"><img src="assets/figma-hz-hermes/icon-plus.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-hand.svg" alt="" /><span>默认权限</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-layout-grid-1.svg" alt="" /><span>技能</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-circle-user.svg" alt="" /><span>员工</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button></div><div class="hz-toolbar-group hz-toolbar-right"><button type="button" class="hz-pill-button hz-model-button" tabindex="-1"><span>Qwen3.6-Plus</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-icon-button" aria-label="语音输入" tabindex="-1"><img src="assets/figma-hz-hermes/icon-mic.svg" alt="" /></button><button type="button" id="demo-send" class="hz-send-button" aria-label="发送演示任务" tabindex="-1"><img src="assets/figma-hz-hermes/icon-arrow-up.svg" alt="" /></button></div></div></div></div></main></div></div>
 </section>
 
 <div class="login-overlay" id="login-overlay" hidden>
@@ -5579,15 +6588,58 @@ footer {
 </section>
 <section class="section flow-section"><div class="section-title centered"><h2>从一句话到一个结果</h2><p>你给出指令，Hz-Hermes 自主完成全部执行链路。</p></div><div class="flow-orbit" aria-hidden="true"><div class="flow-tick-layer"></div><svg class="flow-arc" viewBox="0 0 1180 320" preserveAspectRatio="none"><defs><linearGradient id="flowArcGradient" x1="0" y1="0" x2="1180" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f56f22"></stop><stop offset=".32" stop-color="#dfcf2b"></stop><stop offset=".58" stop-color="#7be1cf"></stop><stop offset="1" stop-color="#0088ff"></stop></linearGradient></defs><path class="flow-arc-glow" d="M0 320 C268 52 912 52 1180 320"></path><path class="flow-arc-mask" d="M0 320 C268 52 912 52 1180 320 L1180 320 L0 320 Z"></path><path class="flow-arc-line" d="M0 320 C268 52 912 52 1180 320"></path></svg></div><div class="flow-track"><article><span>01</span><i><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg></i><h3>任务接收</h3><p>理解真实意图</p></article><article><span>02</span><i><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16"></path><path d="M4 12h10"></path><path d="M4 18h7"></path><path d="m15 18 2 2 4-4"></path></svg></i><h3>任务拆解</h3><p>解析执行步骤</p></article><article><span>03</span><i><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"></circle><circle cx="18" cy="5" r="3"></circle><path d="M12 19h3a3 3 0 0 0 3-3V8"></path><path d="M6 16V8a3 3 0 0 1 3-3h3"></path></svg></i><h3>流程调度</h3><p>编排顺序与资源</p></article><article><span>04</span><i><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.1-3.1a6 6 0 0 1-7.9 7.9l-6 6a2.1 2.1 0 0 1-3-3l6-6a6 6 0 0 1 7.9-7.9z"></path></svg></i><h3>工具调用</h3><p>激活专业能力</p></article><article><span>05</span><i><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></i><h3>协助执行</h3><p>跨应用完成操作</p></article><article><span>06</span><i><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path></svg></i><h3>结果交付</h3><p>输出可用成品</p></article></div>
 </section>
-<section class="section capabilities-section"><div class="section-title"><h2>让 AI 能力<br/>真正融入日常工作</h2><p>从日常办公到专业领域，一个 AI 搞定。</p></div><div class="capability-list" role="list"><article role="listitem"><span class="cap-number">01</span><div class="capability-copy"><h3>深度研究</h3><p>给一个主题，它会自主搜索、交叉验证、整理输出结构化报告。做完直接生成网页或文档，拿来就能用。</p></div><div class="capability-visual" aria-hidden="true"><svg viewBox="0 0 360 180"><path class="cap-grid-line" d="M28 42h304M28 88h304M28 134h304M80 24v132M150 24v132M220 24v132M290 24v132"></path><circle cx="132" cy="84" r="46"></circle><path d="m166 118 42 42"></path><path d="M112 76h42M112 94h30"></path><circle class="cap-dot" cx="152" cy="62" r="3"></circle><path class="cap-accent" d="M218 58h70M218 82h48M218 106h76"></path><circle class="cap-blue-dot" cx="292" cy="58" r="3"></circle></svg></div></article><article role="listitem"><span class="cap-number">02</span><div class="capability-copy"><h3>AI 智能客服</h3><p>对接微信与公众号，自动识别客户意图并回复。常见问题自动处理，复杂情况升级人工。</p></div><div class="capability-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="cap-grid-line" d="M26 56h208M26 116h208M72 28v116M188 28v116"></path><rect x="30" y="32" width="150" height="46" rx="8"></rect><rect x="80" y="96" width="150" height="46" rx="8"></rect><path d="M58 54h92M112 118h82"></path><path class="cap-detail" d="M58 64h48M112 128h56"></path><circle class="cap-dot" cx="48" cy="54" r="3"></circle><circle class="cap-blue-dot" cx="210" cy="118" r="3"></circle><path class="cap-accent" d="m190 58 10 10 22-26"></path></svg></div></article><article role="listitem"><span class="cap-number">03</span><div class="capability-copy"><h3>内容创作</h3><p>写文案、做 PPT、生成宣传图、剪视频脚本、设计网页，从文字到视觉完成高质量交付。</p></div><div class="capability-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="cap-grid-line" d="M34 42h192M34 86h192M34 130h192M82 24v124M178 24v124"></path><rect x="42" y="34" width="78" height="104" rx="8"></rect><path d="M60 60h42M60 80h34M60 100h46"></path><rect x="146" y="44" width="70" height="54" rx="8"></rect><path class="cap-accent" d="M154 84l18-22 14 14 10-10 12 18"></path><path class="cap-detail" d="M150 122h58"></path><circle class="cap-blue-dot" cx="110" cy="100" r="3"></circle><path class="cap-accent" d="M190 120c10-18 18-28 30-36"></path></svg></div></article><article role="listitem"><span class="cap-number">04</span><div class="capability-copy"><h3>数据分析</h3><p>上传 Excel 或 CSV，完成探索性分析、可视化图表与洞察报告，不用写代码也能拿到结论。</p></div><div class="capability-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="cap-grid-line" d="M26 140h208M26 104h208M26 68h208M58 34v118M106 34v118M154 34v118M202 34v118"></path><rect class="cap-accent-fill" x="58" y="104" width="24" height="36"></rect><rect class="cap-accent-fill" x="102" y="78" width="24" height="62"></rect><rect class="cap-accent-fill" x="146" y="92" width="24" height="48"></rect><rect class="cap-accent-fill" x="190" y="54" width="24" height="86"></rect><path class="cap-accent" d="M58 92c36 18 78 4 130-42"></path><circle class="cap-blue-dot" cx="114" cy="76" r="3"></circle><circle class="cap-dot" cx="190" cy="50" r="4"></circle></svg></div></article><article role="listitem"><span class="cap-number">05</span><div class="capability-copy"><h3>文档撰写</h3><p>标书、报告、论文、方案，从深度研究、整理框架到撰写排版，一条任务完整推进。</p></div><div class="capability-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="cap-grid-line" d="M34 44h192M34 86h192M34 128h192M82 24v124M178 24v124"></path><rect x="62" y="30" width="96" height="116" rx="8"></rect><path d="M138 30v30h20"></path><path d="M82 72h56M82 94h42M82 116h50"></path><rect x="154" y="72" width="42" height="54" rx="6"></rect><path class="cap-accent" d="M164 92h22M164 108h16"></path><circle class="cap-blue-dot" cx="138" cy="116" r="3"></circle></svg></div></article><article role="listitem"><span class="cap-number">06</span><div class="capability-copy"><h3>定时自动化</h3><p>日报生成、竞品监控、数据巡检。设置一次，每日自动执行并推送到微信或钉钉。</p></div><div class="capability-visual" aria-hidden="true"><svg viewBox="0 0 360 180"><path class="cap-grid-line" d="M34 144h292M34 104h292M34 64h292M86 26v132M156 26v132M226 26v132M296 26v132"></path><circle cx="112" cy="88" r="44"></circle><path d="M112 58v34l24 14"></path><path class="cap-accent" d="M178 116c34-42 74-64 124-76"></path><circle class="cap-dot" cx="184" cy="112" r="4"></circle><circle class="cap-blue-dot" cx="246" cy="72" r="3"></circle><circle class="cap-dot" cx="304" cy="40" r="4"></circle><rect x="196" y="112" width="94" height="34" rx="8"></rect><path class="cap-detail" d="M214 130h58"></path></svg></div></article></div>
+<section class="section capabilities-section"><div class="section-title"><h2>让 AI 能力<br/>真正融入日常工作</h2><p>从日常办公到专业领域，一个 AI 搞定。</p></div><div class="capability-list" role="list"><article role="listitem"><span class="cap-number">01</span><div class="capability-copy"><h3>深度研究</h3><p>给一个主题，它会自主搜索、交叉验证、整理输出结构化报告。做完直接生成网页或文档，拿来就能用。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><path d="m8 11 2 2 4-4"></path><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></div></article><article role="listitem"><span class="cap-number">02</span><div class="capability-copy"><h3>AI 智能客服</h3><p>对接微信与公众号，自动识别客户意图并回复。常见问题自动处理，复杂情况升级人工。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M13 8H7"></path><path d="M17 12H7"></path></svg></div></article><article role="listitem"><span class="cap-number">03</span><div class="capability-copy"><h3>内容创作</h3><p>写文案、做 PPT、生成宣传图、剪视频脚本、设计网页，从文字到视觉完成高质量交付。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg></div></article><article role="listitem"><span class="cap-number">04</span><div class="capability-copy"><h3>数据分析</h3><p>上传 Excel 或 CSV，完成探索性分析、可视化图表与洞察报告，不用写代码也能拿到结论。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><path d="M12 16v5"></path><path d="M16 14v7"></path><path d="M20 10v11"></path><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"></path><path d="M4 18v3"></path><path d="M8 14v7"></path></svg></div></article><article role="listitem"><span class="cap-number">05</span><div class="capability-copy"><h3>文档撰写</h3><p>标书、报告、论文、方案，从深度研究、整理框架到撰写排版，一条任务完整推进。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg></div></article><article role="listitem"><span class="cap-number">06</span><div class="capability-copy"><h3>定时自动化</h3><p>日报生成、竞品监控、数据巡检。设置一次，每日自动执行并推送到微信或钉钉。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div></article></div>
 </section>
 <section class="section desktop-section" id="desktop"><div class="desktop-copy"><h2>你下指令，<br/>它跑腿</h2><p>Hz-Hermes 能理解你的工作场景和需求，在你授权和控制下，协助完成电脑上的各类操作。</p><p>你不需要自己打开软件、点击按钮或填写表格。告诉它要什么结果，它来执行过程；每一步清晰透明，可随时查看、暂停或调整。</p><div class="check-list"><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 4.6-3.2 7.9-8 9-4.8-1.1-8-4.4-8-9V7z"></path><path d="m9 12 2 2 4-5"></path></svg></span><p><strong>全程可控</strong>所有操作经你授权，每一步可查看、可撤回</p></div><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path><path d="M12 15v2"></path></svg></span><p><strong>安全隔离</strong>在独立沙箱中执行，不影响系统安全</p></div><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="9"></circle><path d="M18.4 5.6 20 4"></path><path d="M4 4l1.6 1.6"></path></svg></span><p><strong>后台运行</strong>不打扰当前工作，默默完成任务</p></div><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1.5"></rect><rect x="14" y="14" width="7" height="6" rx="1.5"></rect><path d="M10 7h2a3 3 0 0 1 3 3v4"></path><path d="m13 12 2 2 2-2"></path></svg></span><p><strong>跨应用协作</strong>一条指令串起消息、数据与报表</p></div></div></div><div class="desktop-visual"><div class="desktop-card top-card"><span>客户消息</span><strong>3 条咨询已回复</strong><small>1 条需要确认 · 已标记</small></div><div class="desktop-card report-card"><div class="report-head"><span>销售周报</span><b>第 30 周</b></div><div class="chart"><i style="height:42%"></i><i style="height:58%"></i><i style="height:48%"></i><i style="height:78%"></i><i style="height:69%"></i><i style="height:92%"></i><i style="height:83%"></i></div><div class="report-foot"><strong>+18.6%</strong><span>较上周增长</span></div></div><div class="desktop-card bottom-card"><span>✓</span><p><strong>任务已完成</strong><small>销售报表已生成并发送</small></p></div></div>
 </section>
-<section class="section cases-section" id="cases"><div class="section-title centered"><h2>一个 AI 能顶半个团队</h2><p>已经落地的真实场景——招投标、办公软件、数据填报、论文撰写、GEO 优化。</p></div><div class="case-grid" data-clickable-grid><article class="case-card case-card-wide"><div class="case-copy"><span>01</span><h3>招投标文件处理</h3><p>自动下载标书、解析关键条款、提取资质要求并生成应答文档。以前团队干三天的工作，现在一个人加 AI 两小时完成。</p></div><div class="case-visual case-visual-docs" aria-hidden="true"><svg viewBox="0 0 360 190"><path class="grid-line" d="M24 40h312M24 80h312M24 120h312M72 20v150M144 20v150M216 20v150M288 20v150"></path><path class="detail" d="M46 154h112M190 144h122M98 34v136M250 28v136"></path><rect x="46" y="34" width="112" height="136" rx="8"></rect><rect x="72" y="58" width="60" height="8" rx="4"></rect><path d="M72 84h56M72 104h72M72 124h44"></path><circle class="dot" cx="140" cy="84" r="2.8"></circle><circle class="blue-dot" cx="144" cy="124" r="3"></circle><rect x="190" y="28" width="122" height="136" rx="8"></rect><path d="M216 58h70M216 84h48M216 110h76"></path><path class="detail" d="M216 132h28M254 132h36"></path><circle class="dot" cx="298" cy="58" r="2.8"></circle><path class="accent" d="m222 140 18 18 44-54"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>02</span><h3>AI 智能客服</h3><p>7×24 自动巡检客户消息，理解意图后精准回复。常见问题秒回，复杂情况升级人工。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M24 52h212M24 118h212M70 24v122M188 24v122"></path><rect x="24" y="30" width="152" height="44" rx="8"></rect><rect x="84" y="96" width="152" height="44" rx="8"></rect><path d="M54 52h92M116 118h88"></path><path class="detail" d="M54 62h48M116 128h62"></path><circle class="dot" cx="42" cy="52" r="3"></circle><circle class="blue-dot" cx="218" cy="118" r="3"></circle><circle class="accent-fill" cx="198" cy="56" r="14"></circle><path class="accent-stroke" d="M192 56h12M198 50v12"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>03</span><h3>自动填表与数据录入</h3><p>从 Excel、PDF、邮件提取数据，自动填入 ERP、OA、CRM 等系统，告别重复复制粘贴。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M32 52h196M32 82h196M32 112h196M70 28v110M188 28v110"></path><rect x="32" y="28" width="78" height="110" rx="8"></rect><rect x="150" y="28" width="78" height="110" rx="8"></rect><path d="M52 58h38M52 82h38M52 106h30M170 58h38M170 82h38M170 106h30"></path><circle class="dot" cx="96" cy="58" r="2.8"></circle><circle class="blue-dot" cx="210" cy="106" r="3"></circle><path class="detail" d="M52 128h20M170 128h22"></path><path class="accent" d="M110 82h40"></path><path class="accent" d="m138 70 12 12-12 12"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>04</span><h3>论文与研究撰写</h3><p>深度检索学术资源、梳理文献综述、组织论证结构并输出完整论文，自动处理格式与参考文献。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M48 48h178M48 108h178M88 22v126M178 22v126"></path><circle cx="88" cy="78" r="42"></circle><circle class="detail" cx="88" cy="78" r="28"></circle><path d="m118 108 38 38"></path><path d="M72 72h32M72 90h24"></path><circle class="blue-dot" cx="104" cy="58" r="3"></circle><rect x="146" y="34" width="70" height="92" rx="8"></rect><path class="accent" d="M162 60h38M162 82h32M162 104h24"></path><path class="detail" d="M162 118h18"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>05</span><h3>GEO 搜索优化</h3><p>分析品牌在豆包、Kimi、DeepSeek 等 AI 搜索中的可见度，生成优化策略与 AI 友好内容。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M36 136C62 62 116 30 224 34M36 136C96 112 150 84 224 34M36 136C92 142 154 118 224 34M36 136C106 150 176 116 224 34"></path><path class="detail" d="M36 136h188M58 126v-58M124 88v-54M204 44v92"></path><circle class="dot" cx="58" cy="126" r="5"></circle><circle class="dot" cx="124" cy="88" r="5"></circle><circle class="dot" cx="204" cy="44" r="5"></circle><circle class="blue-dot" cx="164" cy="64" r="3"></circle><circle class="blue-dot" cx="94" cy="108" r="3"></circle><path class="accent" d="M58 126C104 88 152 56 204 44"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card case-card-wide"><div class="case-copy"><span>06</span><h3>竞品监控与日报</h3><p>每天自动搜集竞品动态与行业新闻，整理摘要报告并推送到企业群。</p></div><div class="case-visual case-visual-dashboard" aria-hidden="true"><svg viewBox="0 0 360 190"><path class="grid-line" d="M26 154h308M26 118h308M26 82h308M26 46h308M68 28v136M134 28v136M200 28v136M266 28v136"></path><rect x="48" y="34" width="86" height="120" rx="8"></rect><path d="M68 62h44M68 86h34M68 110h50"></path><path class="detail" d="M68 132h26M104 132h18"></path><circle class="dot" cx="120" cy="62" r="2.8"></circle><path class="accent-fill" d="M172 130h26v24h-26zM212 98h26v56h-26zM252 70h26v84h-26zM292 46h26v108h-26z"></path><circle class="blue-dot" cx="185" cy="118" r="3"></circle><circle class="blue-dot" cx="225" cy="88" r="3"></circle><circle class="blue-dot" cx="305" cy="38" r="3"></circle><path class="accent" d="M174 86c34 16 70 8 116-36"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article></div>
+<section class="section cases-section" id="cases"><div class="section-title centered"><h2>一个 AI<br/>能顶半个团队</h2><p>已经落地的真实场景——招投标、办公软件、数据填报、论文撰写、GEO 优化。</p></div><div class="case-grid" data-clickable-grid><article class="case-card case-card-wide"><div class="case-copy"><span>01</span><h3>招投标文件处理</h3><p>自动下载标书、解析关键条款、提取资质要求并生成应答文档。以前团队干三天的工作，现在一个人加 AI 两小时完成。</p></div><div class="case-visual case-visual-docs" aria-hidden="true"><svg viewBox="0 0 360 190"><path class="grid-line" d="M24 40h312M24 80h312M24 120h312M72 20v150M144 20v150M216 20v150M288 20v150"></path><path class="detail" d="M46 154h112M190 144h122M98 34v136M250 28v136"></path><rect x="46" y="34" width="112" height="136" rx="8"></rect><rect x="72" y="58" width="60" height="8" rx="4"></rect><path d="M72 84h56M72 104h72M72 124h44"></path><circle class="dot" cx="140" cy="84" r="2.8"></circle><circle class="blue-dot" cx="144" cy="124" r="3"></circle><rect x="190" y="28" width="122" height="136" rx="8"></rect><path d="M216 58h70M216 84h48M216 110h76"></path><path class="detail" d="M216 132h28M254 132h36"></path><circle class="dot" cx="298" cy="58" r="2.8"></circle><path class="accent" d="m222 140 18 18 44-54"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>02</span><h3>AI 智能客服</h3><p>7×24 自动巡检客户消息，理解意图后精准回复。常见问题秒回，复杂情况升级人工。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M24 52h212M24 118h212M70 24v122M188 24v122"></path><rect x="24" y="30" width="152" height="44" rx="8"></rect><rect x="84" y="96" width="152" height="44" rx="8"></rect><path d="M54 52h92M116 118h88"></path><path class="detail" d="M54 62h48M116 128h62"></path><circle class="dot" cx="42" cy="52" r="3"></circle><circle class="blue-dot" cx="218" cy="118" r="3"></circle><circle class="accent-fill" cx="198" cy="56" r="14"></circle><path class="accent-stroke" d="M192 56h12M198 50v12"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>03</span><h3>自动填表与数据录入</h3><p>从 Excel、PDF、邮件提取数据，自动填入 ERP、OA、CRM 等系统，告别重复复制粘贴。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M32 52h196M32 82h196M32 112h196M70 28v110M188 28v110"></path><rect x="32" y="28" width="78" height="110" rx="8"></rect><rect x="150" y="28" width="78" height="110" rx="8"></rect><path d="M52 58h38M52 82h38M52 106h30M170 58h38M170 82h38M170 106h30"></path><circle class="dot" cx="96" cy="58" r="2.8"></circle><circle class="blue-dot" cx="210" cy="106" r="3"></circle><path class="detail" d="M52 128h20M170 128h22"></path><path class="accent" d="M110 82h40"></path><path class="accent" d="m138 70 12 12-12 12"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>04</span><h3>论文与研究撰写</h3><p>深度检索学术资源、梳理文献综述、组织论证结构并输出完整论文，自动处理格式与参考文献。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M48 48h178M48 108h178M88 22v126M178 22v126"></path><circle cx="88" cy="78" r="42"></circle><circle class="detail" cx="88" cy="78" r="28"></circle><path d="m118 108 38 38"></path><path d="M72 72h32M72 90h24"></path><circle class="blue-dot" cx="104" cy="58" r="3"></circle><rect x="146" y="34" width="70" height="92" rx="8"></rect><path class="accent" d="M162 60h38M162 82h32M162 104h24"></path><path class="detail" d="M162 118h18"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>05</span><h3>GEO 搜索优化</h3><p>分析品牌在豆包、Kimi、DeepSeek 等 AI 搜索中的可见度，生成优化策略与 AI 友好内容。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M36 136C62 62 116 30 224 34M36 136C96 112 150 84 224 34M36 136C92 142 154 118 224 34M36 136C106 150 176 116 224 34"></path><path class="detail" d="M36 136h188M58 126v-58M124 88v-54M204 44v92"></path><circle class="dot" cx="58" cy="126" r="5"></circle><circle class="dot" cx="124" cy="88" r="5"></circle><circle class="dot" cx="204" cy="44" r="5"></circle><circle class="blue-dot" cx="164" cy="64" r="3"></circle><circle class="blue-dot" cx="94" cy="108" r="3"></circle><path class="accent" d="M58 126C104 88 152 56 204 44"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card case-card-wide"><div class="case-copy"><span>06</span><h3>竞品监控与日报</h3><p>每天自动搜集竞品动态与行业新闻，整理摘要报告并推送到企业群。</p></div><div class="case-visual case-visual-dashboard" aria-hidden="true"><svg viewBox="0 0 360 190"><path class="grid-line" d="M26 154h308M26 118h308M26 82h308M26 46h308M68 28v136M134 28v136M200 28v136M266 28v136"></path><rect x="48" y="34" width="86" height="120" rx="8"></rect><path d="M68 62h44M68 86h34M68 110h50"></path><path class="detail" d="M68 132h26M104 132h18"></path><circle class="dot" cx="120" cy="62" r="2.8"></circle><path class="accent-fill" d="M172 130h26v24h-26zM212 98h26v56h-26zM252 70h26v84h-26zM292 46h26v108h-26z"></path><circle class="blue-dot" cx="185" cy="118" r="3"></circle><circle class="blue-dot" cx="225" cy="88" r="3"></circle><circle class="blue-dot" cx="305" cy="38" r="3"></circle><path class="accent" d="M174 86c34 16 70 8 116-36"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article></div>
 </section>
-<section class="section asset-section"><div class="section-title centered"><h2>越用越聪明，<br/>越用越值钱</h2><p>Hz-Hermes 不是用完即走的工具，而是能持续成长的数字员工。</p></div><div class="asset-track" aria-label="Hz-Hermes 能力资产"><article><span>01</span><h3>模板化执行</h3><p>标准化任务流程，同类任务秒级启动</p></article><article><span>02</span><h3>学习偏好</h3><p>逐渐理解你的使用习惯与工作风格</p></article><article><span>03</span><h3>智能预填推荐</h3><p>主动推荐参数，减少重复输入和选择</p></article><article><span>04</span><h3>主动预判需求</h3><p>从“你告诉它”到“它知道你要什么”</p></article></div><p class="asset-note">最终成为你专属的 SOP 专家，团队经验永不流失。</p>
+<section class="section asset-section"><div class="asset-layout"><div class="asset-left"><div class="section-title centered"><h2>越用越聪明，<br/>越用越值钱</h2><p>Hz-Hermes 不是用完即走的工具，而是能持续成长的数字员工。</p></div><figure class="asset-visual" aria-hidden="true"><img src="assets/asset-section/growth-panel.png" alt="" /></figure></div><div class="asset-track" aria-label="Hz-Hermes 能力资产"><article><i><img src="assets/asset-section/icon-badge-check.svg" alt="" /></i><h3>模板化执行</h3><p>标准化任务流程，同类任务秒级启动</p><span>01</span></article><article><i><img src="assets/asset-section/icon-drafting-compass.svg" alt="" /></i><h3>学习偏好</h3><p>逐渐理解你的使用习惯与工作风格</p><span>02</span></article><article><i><img src="assets/asset-section/icon-user-star.svg" alt="" /></i><h3>智能预填推荐</h3><p>主动推荐参数，减少重复输入和选择</p><span>03</span></article><article><i><img src="assets/asset-section/icon-chart-spline.svg" alt="" /></i><h3>主动预判需求</h3><p>从“你告诉它”到“它知道你要什么”</p><span>04</span></article></div></div><p class="asset-note">最终成为你专属的 SOP 专家，团队经验永不流失。</p>
 </section>
-<section class="section enterprise-section" id="enterprise"><div class="section-title enterprise-title"><h2>为团队打造的<br/>AI 生产力平台</h2><p>私有部署、团队协作、权限管理、技能沉淀，让 AI 真正成为组织的数字劳动力。</p><a class="primary-button" href="mailto:contact@agentsyun.com?subject=预约 Hz-Hermes 企业版演示">预约企业演示 <span aria-hidden="true">↗</span></a></div><div class="enterprise-grid" data-clickable-grid><article><span>01</span><h3>私有化部署</h3><p>数据不出域，支持内网部署。任务在自有服务器或工作站执行，并可对接企业 OAuth / AD 统一认证。</p></article><article><span>02</span><h3>团队技能库</h3><p>把财务对账、客户 SOP、质检标准等团队经验沉淀为可复用技能包。</p></article><article><span>03</span><h3>多级权限</h3><p>管理员、操作员、审计员三层权限体系，所有操作可追溯、可审计、可回放。</p></article><article><span>04</span><h3>多系统集成</h3><p>对接企业微信、钉钉、飞书，打通 ERP、CRM、OA，让 AI 在多个系统间协作。</p></article><article><span>05</span><h3>定时自动化</h3><p>内置任务调度，日报、数据巡检与系统健康检查自动执行并推送结果。</p></article><article><span>06</span><h3>安全沙箱</h3><p>所有代码执行在隔离 Docker 沙箱中进行；敏感操作可以设置审批流。</p></article></div>
+<section class="section enterprise-section" id="enterprise">
+  <div class="section-title enterprise-title">
+    <h2>为团队打造的<br/>AI 生产力平台</h2>
+    <p>私有部署、团队协作、权限管理、技能沉淀，让 AI 真正成为组织的数字劳动力。</p>
+    <a class="primary-button" href="mailto:contact@agentsyun.com?subject=预约 Hz-Hermes 企业版演示">预约企业演示 <span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="enterprise-grid" data-clickable-grid>
+    <article>
+      <figure class="enterprise-card-media" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 4.6-3.2 7.9-8 9-4.8-1.1-8-4.4-8-9V7z"></path><path d="m9 12 2 2 4-5"></path></svg>
+      </figure>
+      <div class="enterprise-card-copy"><span>01</span><h3>私有化部署</h3><p>数据不出域，支持内网部署。任务在自有服务器或工作站执行，并可对接企业 OAuth / AD 统一认证。</p></div>
+    </article>
+    <article>
+      <figure class="enterprise-card-media" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="2"></rect><rect x="14" y="4" width="7" height="7" rx="2"></rect><rect x="8.5" y="15" width="7" height="7" rx="2"></rect><path d="M10 7.5h4"></path><path d="m8.5 15-2-4"></path><path d="m15.5 15 2-4"></path></svg>
+      </figure>
+      <div class="enterprise-card-copy"><span>02</span><h3>团队技能库</h3><p>把财务对账、客户 SOP、质检标准等团队经验沉淀为可复用技能包。</p></div>
+    </article>
+    <article>
+      <figure class="enterprise-card-media" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M19 8v6"></path><path d="M22 11h-6"></path></svg>
+      </figure>
+      <div class="enterprise-card-copy"><span>03</span><h3>多级权限</h3><p>管理员、操作员、审计员三层权限体系，所有操作可追溯、可审计、可回放。</p></div>
+    </article>
+    <article>
+      <figure class="enterprise-card-media" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"></circle><circle cx="18" cy="5" r="3"></circle><path d="M12 19h3a3 3 0 0 0 3-3V8"></path><path d="M6 16V8a3 3 0 0 1 3-3h3"></path></svg>
+      </figure>
+      <div class="enterprise-card-copy"><span>04</span><h3>多系统集成</h3><p>对接企业微信、钉钉、飞书，打通 ERP、CRM、OA，让 AI 在多个系统间协作。</p></div>
+    </article>
+    <article>
+      <figure class="enterprise-card-media" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="9"></circle><path d="M18.4 5.6 20 4"></path><path d="M4 4l1.6 1.6"></path></svg>
+      </figure>
+      <div class="enterprise-card-copy"><span>05</span><h3>定时自动化</h3><p>内置任务调度，日报、数据巡检与系统健康检查自动执行并推送结果。</p></div>
+    </article>
+    <article>
+      <figure class="enterprise-card-media" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+      </figure>
+      <div class="enterprise-card-copy"><span>06</span><h3>安全沙箱</h3><p>所有代码执行在隔离 Docker 沙箱中进行；敏感操作可以设置审批流。</p></div>
+    </article>
+  </div>
 </section>
 <section class="download-section" id="download"><div><span class="section-label">现在开始</span><h2>现在就拥有你的<br/><em>AI 智能体管家</em></h2></div><div class="download-copy"><p>免费下载，5 分钟完成安装。你只需告诉它“做什么”，剩下的交给它。</p><div class="hero-actions"><a class="primary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes Windows 版">下载 Windows 版 <span aria-hidden="true">↗</span></a><a class="secondary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes macOS 版">下载 macOS 版</a></div><small>Linux 版即将上线 · 企业版可预约演示</small></div>
 </section>
@@ -5781,6 +6833,75 @@ footer {
     updateFlowProgress();
     window.addEventListener("scroll", requestFlowProgress, { passive: true });
     window.addEventListener("resize", requestFlowProgress);
+  }
+
+  // Scroll-pinned horizontal capability cards
+  const capabilitiesSection = $(".capabilities-section");
+  if (capabilitiesSection) {
+    const title = $(".section-title", capabilitiesSection);
+    const sourceList = $(".capability-list", capabilitiesSection);
+    if (title && sourceList && !$(".capabilities-sticky", capabilitiesSection)) {
+      const sticky = document.createElement("div");
+      sticky.className = "capabilities-sticky";
+      const viewport = document.createElement("div");
+      viewport.className = "capability-viewport";
+      const scrollbar = document.createElement("div");
+      scrollbar.className = "capability-scrollbar";
+      scrollbar.setAttribute("aria-hidden", "true");
+      scrollbar.appendChild(document.createElement("span"));
+
+      capabilitiesSection.appendChild(sticky);
+      sticky.appendChild(title);
+      sticky.appendChild(viewport);
+      viewport.appendChild(sourceList);
+      sticky.appendChild(scrollbar);
+    }
+
+    const sticky = $(".capabilities-sticky", capabilitiesSection);
+    const viewport = $(".capability-viewport", capabilitiesSection);
+    const trackList = $(".capability-list", capabilitiesSection);
+    let ticking = false;
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+    const measureCapabilities = () => {
+      if (!sticky || !viewport || !trackList) return;
+      const distance = Math.max(0, trackList.scrollWidth - viewport.clientWidth);
+      capabilitiesSection.style.setProperty("--cap-scroll-distance", `${distance}px`);
+      capabilitiesSection.style.minHeight = window.innerWidth > 680
+        ? `calc(100vh + ${distance}px)`
+        : "";
+    };
+
+    const updateCapabilities = () => {
+      measureCapabilities();
+      const scrollable = Math.max(1, capabilitiesSection.offsetHeight - window.innerHeight);
+      const rect = capabilitiesSection.getBoundingClientRect();
+      const isDesktopRail = window.innerWidth > 680;
+      const progress = isDesktopRail
+        ? clamp(-rect.top / scrollable, 0, 1)
+        : 0;
+
+      capabilitiesSection.classList.toggle(
+        "is-cap-fixed",
+        isDesktopRail && rect.top <= 0 && rect.bottom > window.innerHeight
+      );
+      capabilitiesSection.classList.toggle(
+        "is-cap-after",
+        isDesktopRail && rect.bottom <= window.innerHeight
+      );
+      capabilitiesSection.style.setProperty("--cap-progress", progress.toFixed(4));
+      ticking = false;
+    };
+
+    const requestCapabilities = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(updateCapabilities);
+    };
+
+    updateCapabilities();
+    window.addEventListener("scroll", requestCapabilities, { passive: true });
+    window.addEventListener("resize", requestCapabilities);
   }
 
   // Sidebar demo

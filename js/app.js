@@ -116,6 +116,75 @@
     });
   });
 
+  // Scroll-pinned horizontal capability cards
+  const capabilitiesSection = $(".capabilities-section");
+  if (capabilitiesSection) {
+    const title = $(".section-title", capabilitiesSection);
+    const sourceList = $(".capability-list", capabilitiesSection);
+    if (title && sourceList && !$(".capabilities-sticky", capabilitiesSection)) {
+      const sticky = document.createElement("div");
+      sticky.className = "capabilities-sticky";
+      const viewport = document.createElement("div");
+      viewport.className = "capability-viewport";
+      const scrollbar = document.createElement("div");
+      scrollbar.className = "capability-scrollbar";
+      scrollbar.setAttribute("aria-hidden", "true");
+      scrollbar.appendChild(document.createElement("span"));
+
+      capabilitiesSection.appendChild(sticky);
+      sticky.appendChild(title);
+      sticky.appendChild(viewport);
+      viewport.appendChild(sourceList);
+      sticky.appendChild(scrollbar);
+    }
+
+    const sticky = $(".capabilities-sticky", capabilitiesSection);
+    const viewport = $(".capability-viewport", capabilitiesSection);
+    const trackList = $(".capability-list", capabilitiesSection);
+    let ticking = false;
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+    const measureCapabilities = () => {
+      if (!sticky || !viewport || !trackList) return;
+      const distance = Math.max(0, trackList.scrollWidth - viewport.clientWidth);
+      capabilitiesSection.style.setProperty("--cap-scroll-distance", `${distance}px`);
+      capabilitiesSection.style.minHeight = window.innerWidth > 680
+        ? `calc(100vh + ${distance}px)`
+        : "";
+    };
+
+    const updateCapabilities = () => {
+      measureCapabilities();
+      const scrollable = Math.max(1, capabilitiesSection.offsetHeight - window.innerHeight);
+      const rect = capabilitiesSection.getBoundingClientRect();
+      const isDesktopRail = window.innerWidth > 680;
+      const progress = isDesktopRail
+        ? clamp(-rect.top / scrollable, 0, 1)
+        : 0;
+
+      capabilitiesSection.classList.toggle(
+        "is-cap-fixed",
+        isDesktopRail && rect.top <= 0 && rect.bottom > window.innerHeight
+      );
+      capabilitiesSection.classList.toggle(
+        "is-cap-after",
+        isDesktopRail && rect.bottom <= window.innerHeight
+      );
+      capabilitiesSection.style.setProperty("--cap-progress", progress.toFixed(4));
+      ticking = false;
+    };
+
+    const requestCapabilities = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(updateCapabilities);
+    };
+
+    updateCapabilities();
+    window.addEventListener("scroll", requestCapabilities, { passive: true });
+    window.addEventListener("resize", requestCapabilities);
+  }
+
   // Sidebar demo
   $$(".app-sidebar .side-item").forEach((btn) => {
     btn.addEventListener("click", () => {

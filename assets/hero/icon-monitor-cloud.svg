@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="lucide/monitor-cloud">
+<path id="Vector" d="M7.33294 8.66675C6.96632 8.66656 6.6068 8.5656 6.29368 8.3749C5.98056 8.1842 5.72588 7.9111 5.55748 7.58545C5.38907 7.2598 5.31341 6.89412 5.33878 6.52838C5.36414 6.16264 5.48955 5.81091 5.70129 5.51162C5.91304 5.21233 6.20298 4.977 6.53942 4.83135C6.87587 4.6857 7.24588 4.63533 7.60902 4.68575C7.97215 4.73617 8.31444 4.88543 8.59849 5.11722C8.88253 5.34902 9.0974 5.65443 9.2196 6.00008H9.33294C9.68656 6.00008 10.0257 6.14056 10.2757 6.39061C10.5258 6.64066 10.6663 6.97979 10.6663 7.33342C10.6663 7.68704 10.5258 8.02618 10.2757 8.27622C10.0257 8.52627 9.68656 8.66675 9.33294 8.66675H7.33294Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M8 11.3333V14" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M5.33301 14H10.6663" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M13.333 2H2.66634C1.92996 2 1.33301 2.59695 1.33301 3.33333V10C1.33301 10.7364 1.92996 11.3333 2.66634 11.3333H13.333C14.0694 11.3333 14.6663 10.7364 14.6663 10V3.33333C14.6663 2.59695 14.0694 2 13.333 2Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

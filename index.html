@@ -250,7 +250,7 @@ footer a:hover {
   gap: 12px;
 }
 .hero-copy .hero-actions {
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: 34px;
 }
 .primary-button, .secondary-button {
@@ -3614,8 +3614,9 @@ footer {
   position: relative;
   isolation: isolate;
   width: min(1280px, calc(100% - 64px));
+  min-height: 492px;
   margin: 0 auto;
-  padding-top: 96px;
+  padding-top: 128px;
   padding-right: 0;
   padding-bottom: 128px;
   padding-left: 0;
@@ -3635,7 +3636,7 @@ footer {
   background: #fafafa;
 }
 .proof::after {
-  content: "";
+  content: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -3646,18 +3647,18 @@ footer {
 }
 .proof > .proof-inner {
   display: grid;
-  gap: 72px;
+  gap: 64px;
   padding: 0;
   border: 0;
 }
 .proof h2 {
   max-width: 560px;
   margin: 0;
-  color: #190822;
-  font-size: 44px;
-  line-height: 1.14;
+  color: #000;
+  font-size: 36px;
+  line-height: 1.18;
   letter-spacing: 0;
-  font-weight: 500;
+  font-weight: 760;
 }
 .proof-metrics {
   display: grid;
@@ -3668,64 +3669,67 @@ footer {
   display: flex;
   min-width: 0;
   flex-direction: column;
-  gap: 18px;
+  gap: 8px;
   padding: 0;
   border: 0;
 }
 .proof strong {
   display: block;
-  color: #050505;
-  font-size: 72px;
-  line-height: .96;
-  letter-spacing: 0;
-  font-weight: 760;
-}
-.proof span {
-  display: block;
-  color: #190822;
-  font-size: 16px;
-  line-height: 1.25;
+  color: #000;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 36px;
+  line-height: 48px;
   letter-spacing: 0;
   font-weight: 500;
 }
+.proof span {
+  display: block;
+  margin: 0;
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  font-weight: 400;
+}
 
-/* ===== Intro section: three-column value layout ===== */
+/* ===== Intro section: Figma media card row ===== */
 .intro-section {
   width: min(1280px, calc(100% - 64px));
-  padding-top: 128px;
-  padding-bottom: 128px;
+  min-height: 876px;
+  padding-top: 160px;
+  padding-bottom: 160px;
 }
 .intro-section > .section-title {
   max-width: 640px;
-  margin: 0 0 76px;
+  margin: 0 0 64px;
   text-align: left;
 }
 .intro-section .section-title h2 {
   margin: 0;
-  color: #151517;
-  font-size: 44px;
-  line-height: 1.14;
+  color: #000;
+  font-size: 36px;
+  line-height: 1.18;
   letter-spacing: 0;
   font-weight: 760;
 }
 .intro-section .section-title p {
   max-width: 620px;
-  margin: 22px 0 0;
-  color: #626874;
-  font-size: 16px;
-  line-height: 1.7;
+  margin: 16px 0 0;
+  color: #555;
+  font-size: 14px;
+  line-height: 20px;
 }
 .intro-section .intro-feature-row {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid #e8e8e8;
-  border-right: 0;
-  border-bottom: 0;
-  border-left: 0;
+  grid-template-columns: repeat(4, 302px);
+  gap: 16px;
+  align-items: start;
+  border: 0;
 }
 .intro-section .intro-feature-row article {
-  min-height: 292px;
-  padding: 52px 30px 0 0;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -3734,51 +3738,80 @@ footer {
   transform: none;
 }
 .intro-section .intro-feature-row article + article {
-  padding-left: 30px;
-  border-left: 1px solid #e8e8e8;
+  padding-left: 0;
+  border-left: 0;
 }
 .intro-section .intro-feature-row article:hover,
 .intro-section .intro-feature-row article:focus,
 .intro-section .intro-feature-row article:focus-visible,
 .intro-section .intro-feature-row article.is-active {
-  border-color: #e8e8e8;
+  border-color: transparent;
   background: transparent;
   box-shadow: none;
   outline: none;
   transform: none;
 }
+.intro-section .intro-card-media {
+  position: relative;
+  width: 302px;
+  height: 200px;
+  margin: 0 0 20px;
+  overflow: hidden;
+  border-radius: 0 0 24px 0;
+  background: #f5f5f5;
+}
+.intro-section .intro-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .intro-section .intro-feature-row i {
-  display: block;
-  width: 34px;
-  height: 34px;
-  margin: 0 0 54px;
-  color: #190822;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  place-items: center;
+  color: #fff;
   background: none;
+  transform: translate(-50%, -50%);
 }
 .intro-section .intro-feature-row i svg {
   display: block;
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.6;
+  stroke-width: 1.7;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.intro-section .intro-feature-row h3 {
-  margin: 0 0 14px;
-  color: #190822;
-  font-size: 20px;
-  line-height: 1.25;
+.intro-section .intro-card-number {
+  display: block;
+  margin: 0 0 16px;
+  color: #000;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 12px;
+  line-height: 16px;
   letter-spacing: 0;
-  font-weight: 600;
+  font-weight: 400;
+}
+.intro-section .intro-feature-row h3 {
+  margin: 0 0 8px;
+  color: #000;
+  font-size: 15px !important;
+  line-height: 20px !important;
+  letter-spacing: 0;
+  font-weight: 760;
 }
 .intro-section .intro-feature-row p {
-  max-width: 240px;
+  max-width: 286px;
   margin: 0;
-  color: #77737f;
-  font-size: 16px;
-  line-height: 1.7;
+  color: #333;
+  font-size: 13px !important;
+  line-height: 20px !important;
 }
 
 /* ===== Capabilities section: Rogo-inspired split list ===== */
@@ -3892,37 +3925,43 @@ footer {
 @media (max-width: 980px) {
   .proof {
     width: min(100% - 64px, 760px);
-    padding: 88px 0 60px;
+    min-height: auto;
+    padding: 96px 0;
   }
   .proof > .proof-inner {
     gap: 56px;
   }
   .proof h2 {
-    font-size: 40px;
+    font-size: 34px;
   }
   .proof-metrics {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
   .proof strong {
-    font-size: 64px;
+    font-size: 36px;
+    line-height: 48px;
   }
   .intro-section {
-    padding-top: 96px;
-    padding-bottom: 96px;
+    min-height: auto;
+    padding-top: 120px;
+    padding-bottom: 120px;
   }
   .intro-section .intro-feature-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 16px;
   }
   .intro-section .intro-feature-row article,
   .intro-section .intro-feature-row article + article {
     min-height: auto;
-    padding: 36px 0;
+    padding: 0;
     border-left: 0;
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 0;
   }
-  .intro-section .intro-feature-row i {
-    margin-bottom: 28px;
+  .intro-section .intro-card-media {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 302 / 200;
   }
   .capabilities-section {
     grid-template-columns: 1fr;
@@ -3949,34 +3988,40 @@ footer {
 @media (max-width: 680px) {
   .proof {
     width: calc(100% - 40px);
-    padding: 72px 0 48px;
+    padding: 80px 0;
   }
   .proof > .proof-inner {
     gap: 44px;
   }
   .proof h2 {
-    font-size: 34px;
+    font-size: 30px;
   }
   .proof strong {
-    font-size: 54px;
+    font-size: 36px;
+    line-height: 48px;
   }
   .proof span {
-    font-size: 15px;
+    font-size: 14px;
   }
   .intro-section {
     width: calc(100% - 40px);
-    padding-top: 72px;
-    padding-bottom: 72px;
+    padding-top: 96px;
+    padding-bottom: 96px;
   }
   .intro-section > .section-title {
-    margin-bottom: 52px;
+    margin-bottom: 48px;
   }
   .intro-section .section-title h2 {
-    font-size: 34px;
+    font-size: 30px;
   }
-  .intro-section .section-title p,
+  .intro-section .intro-feature-row {
+    grid-template-columns: 1fr;
+  }
+  .intro-section .section-title p {
+    font-size: 14px;
+  }
   .intro-section .intro-feature-row p {
-    font-size: 15px;
+    font-size: 13px !important;
   }
   .capabilities-section {
     width: calc(100% - 40px);
@@ -7170,7 +7215,7 @@ html[lang="en"] .lang-toggle [data-lang-en] {
 </div>
 <section class="proof" aria-label="产品数据"><div class="proof-inner"><h2>越用越聪明。<br/>越跑越高效。</h2><div class="proof-metrics"><div><strong>220K+</strong><span>GitHub Stars</span></div><div><strong>15+</strong><span>平台渠道接入</span></div><div><strong>100+</strong><span>预置技能包</span></div></div></div>
 </section>
-<section class="section intro-section" id="product"><div class="section-title"><h2>不是聊天机器人<br/>是你的数字员工</h2><p>Hz-Hermes 通过深度工程化封装，将配置、部署与技能管理等复杂环节整合优化。你只需要告诉它“做什么”，剩下的交给它。</p></div><div class="feature-row intro-feature-row"><article><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v4"></path><path d="M12 17v4"></path><path d="M3 12h4"></path><path d="M17 12h4"></path><path d="m5.6 5.6 2.8 2.8"></path><path d="m15.6 15.6 2.8 2.8"></path><path d="m18.4 5.6-2.8 2.8"></path><path d="m8.4 15.6-2.8 2.8"></path></svg></i><h3>自主学习进化</h3><p>每次执行都自动学习，沉淀为可复用的技能，让团队经验持续变成可调用能力。</p></article><article><i aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="2"></rect><rect x="14" y="4" width="7" height="7" rx="2"></rect><rect x="8.5" y="15" width="7" height="7" rx="2"></rect><path d="M10 7.5h4"></path><path d="m8.5 15-2-4"></path><path d="m15.5 15 2-4"></path></svg></i><h3>跨软件协作</h3><p>在你授权下完成跨越不同桌面应用的多步骤工作，把消息、文档、表格与系统连接起来。</p></article><article><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-6 6v2.5a3.5 3.5 0 0 0 7 0V9"></path><path d="M12 3a6 6 0 0 1 6 6v2.5a3.5 3.5 0 0 1-7 0V9"></path><path d="M12 17v4"></path><path d="M8 21h8"></path></svg></i><h3>多智能体协同</h3><p>多个 AI 分工协作，并行处理复杂任务，适合复杂任务的并行推进。</p></article><article><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5a7 7 0 1 0 7 7"></path><path d="M12 5V2"></path><path d="m9 2 3 3 3-3"></path><path d="M12 9v4l3 2"></path></svg></i><h3>长期记忆</h3><p>记住你的偏好、习惯和历史知识，累积成团队专属上下文。</p></article></div>
+<section class="section intro-section" id="product"><div class="section-title"><h2>不是聊天机器人<br/>是你的数字员工</h2><p>Hz-Hermes 通过深度工程化封装，将配置、部署与技能管理等复杂环节整合优化。你只需要告诉它“做什么”，剩下的交给它。</p></div><div class="feature-row intro-feature-row"><article><figure class="intro-card-media"><img src="assets/intro-section/intro-1.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 4.6-3.2 7.9-8 9-4.8-1.1-8-4.4-8-9V7z"></path><path d="m9 12 2 2 4-5"></path></svg></i></figure><span class="intro-card-number">01</span><h3>自主学习进化</h3><p>每次执行都自动学习，沉淀为可复用的技能，让团队经验持续变成可调用能力。</p></article><article><figure class="intro-card-media"><img src="assets/intro-section/intro-2.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="2"></rect><rect x="14" y="4" width="7" height="7" rx="2"></rect><rect x="8.5" y="15" width="7" height="7" rx="2"></rect><path d="M10 7.5h4"></path><path d="m8.5 15-2-4"></path><path d="m15.5 15 2-4"></path></svg></i></figure><span class="intro-card-number">02</span><h3>跨软件协作</h3><p>在你授权下完成跨越不同桌面应用的多步骤工作，把消息、文档、表格与系统连接起来。</p></article><article><figure class="intro-card-media"><img src="assets/intro-section/intro-3.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="10" cy="7" r="4"></circle><path d="M18 8v6"></path><path d="M21 11h-6"></path></svg></i></figure><span class="intro-card-number">03</span><h3>多智能体协同</h3><p>多个 AI 分工协作，并行处理复杂任务，适合复杂任务的并行推进。</p></article><article><figure class="intro-card-media"><img src="assets/intro-section/intro-4.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="9"></circle><path d="M18.4 5.6 20 4"></path><path d="M4 4l1.6 1.6"></path></svg></i></figure><span class="intro-card-number">04</span><h3>长期记忆</h3><p>记住你的偏好、习惯和历史知识，累积成团队专属上下文。</p></article></div>
 </section>
 <section class="section flow-section"><div class="flow-noise" aria-hidden="true"></div><div class="flow-sticky"><div class="flow-multi-stage"><div class="flow-track flow-multi-cards" aria-label="Hz-Hermes 执行链路"><article style="--x:-442.4px;--y:-238px;--w:317.2px;--h:63.7px;--from-x:-1100;--from-y:-700;--start:.1;--start-scale:.4"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>01</span><h3>任务接收</h3></div><p>理解真实意图</p></div></div></article><article style="--x:218.6px;--y:-257px;--w:317.2px;--h:65px;--from-x:700;--from-y:-800;--start:.55;--start-scale:.5"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>02</span><h3>任务拆解</h3></div><p>解析执行步骤</p></div></div></article><article style="--x:511px;--y:-57px;--w:226px;--h:45.385px;--from-x:1300;--from-y:-200;--start:.3;--start-scale:.55"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>03</span><h3>流程调度</h3></div><p>编排顺序与资源</p></div></div></article><article style="--x:-546.4px;--y:128px;--w:317.2px;--h:65px;--from-x:-1300;--from-y:250;--start:.65;--start-scale:.45"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>04</span><h3>工具调用</h3></div><p>激活专业能力</p></div></div></article><article style="--x:229px;--y:155px;--w:218px;--h:44.672px;--from-x:700;--from-y:500;--start:.8;--start-scale:.5"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span>05</span><h3>协助执行</h3></div><p>跨应用完成操作</p></div></div></article><article style="--x:715.5px;--y:165px;--w:409px;--h:83.811px;--from-x:1500;--from-y:350;--start:.2;--start-scale:.35"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>06</span><h3>结果交付</h3></div><p>输出可用成品</p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:-800px;--y:-137px;--w:200px;--h:42px;--from-x:-1800;--from-y:-400;--start:0;--start-scale:.55"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:620px;--y:-177px;--w:200px;--h:40px;--from-x:1300;--from-y:-700;--start:.5;--start-scale:.6"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:850px;--y:3px;--w:200px;--h:42px;--from-x:1900;--from-y:-100;--start:.15;--start-scale:.45"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:320px;--y:303px;--w:240px;--h:46px;--from-x:1100;--from-y:900;--start:.7;--start-scale:.4"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:-450px;--y:333px;--w:220px;--h:42px;--from-x:-1500;--from-y:800;--start:.85;--start-scale:.5"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:-98.4px;--y:267px;--w:317.2px;--h:65px;--from-x:0;--from-y:900;--start:.4;--start-scale:.45"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article></div><div class="section-title centered flow-multi-title"><h2><span class="flow-word flow-word-1"><span>从一句话</span></span> <span class="flow-word flow-word-2"><span>到一个结果</span></span></h2><p>你给出指令，Hz-Hermes 自主完成全部执行链路。</p></div></div></div>
 </section>

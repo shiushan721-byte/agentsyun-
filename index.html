@@ -6370,12 +6370,20 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
 }
 
 .topbar .lang-toggle [data-lang-zh] {
-  color: #000 !important;
+  color: #999 !important;
+  font-weight: 400 !important;
 }
 
 .topbar .lang-toggle .lang-divider,
 .topbar .lang-toggle [data-lang-en] {
   color: #999 !important;
+  font-weight: 400 !important;
+}
+
+.topbar .lang-toggle.is-zh [data-lang-zh],
+.topbar .lang-toggle.is-en [data-lang-en] {
+  color: #000 !important;
+  font-weight: 500 !important;
 }
 
 .topbar .auth-actions {
@@ -6414,6 +6422,240 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   color: #fff !important;
   box-shadow: none !important;
   transform: none !important;
+}
+
+.topbar .account-menu {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  overflow: visible;
+}
+
+.topbar .account-trigger {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, .04);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: none;
+  cursor: pointer;
+  transition: border-color 160ms ease;
+}
+
+.topbar .account-trigger:hover {
+  border-color: rgba(0, 0, 0, .12);
+}
+
+.topbar .account-trigger-avatar {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.topbar .account-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 120;
+  width: max-content;
+  min-width: 160px;
+  max-width: 320px;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: visible;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-2px) scale(.98);
+  transform-origin: top right;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 0 24px rgba(0, 0, 0, .05);
+  transition:
+    transform 180ms cubic-bezier(.22, 1, .36, 1),
+    opacity 180ms cubic-bezier(.22, 1, .36, 1),
+    visibility 180ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.topbar .account-menu.is-open .account-panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.topbar .account-menu-item {
+  width: 100%;
+  padding: 0 8px;
+}
+
+.topbar .account-switch-wrap {
+  position: relative;
+}
+
+.topbar .account-menu-item > button {
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  box-shadow: none;
+  cursor: pointer;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.topbar .account-menu-item > button:hover {
+  background: #f9f9f9;
+}
+
+.topbar .account-menu-item > button:active,
+.topbar .account-menu-item > button.is-active {
+  background: #f3f3f3;
+}
+
+.topbar .account-item-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex: 0 0 16px;
+}
+
+.topbar .account-item-label {
+  min-width: 0;
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar .menu-chevron {
+  display: none;
+}
+
+.topbar .account-panel .sep {
+  display: none;
+}
+
+.topbar .account-switch-flyout {
+  position: absolute;
+  top: -8px;
+  right: calc(100% + 4px);
+  width: max-content;
+  min-width: 160px;
+  max-width: 320px;
+  padding: 8px 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 0 24px rgba(0, 0, 0, .05);
+}
+
+.topbar .account-switch-flyout[hidden] {
+  display: none;
+}
+
+.topbar .account-switch-flyout .switch-item,
+.topbar .account-switch-flyout .switch-flyout-action {
+  width: calc(100% - 16px);
+  min-width: 0;
+  max-width: 304px;
+  height: 36px;
+  margin: 0 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  box-shadow: none;
+  cursor: pointer;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.topbar .account-switch-flyout .switch-item:hover,
+.topbar .account-switch-flyout .switch-flyout-action:hover {
+  background: #f9f9f9;
+}
+
+.topbar .account-switch-flyout .switch-item:active,
+.topbar .account-switch-flyout .switch-flyout-action:active {
+  background: #f3f3f3;
+}
+
+.topbar .account-switch-flyout .switch-item.is-current {
+  background: transparent;
+}
+
+.topbar .account-switch-flyout .switch-item:disabled {
+  cursor: default;
+  opacity: .45;
+}
+
+.topbar .account-switch-flyout .switch-avatar,
+.topbar .account-switch-flyout .plus {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: #f3f3f3;
+  color: #000;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.topbar .account-switch-flyout .switch-name {
+  min-width: 0;
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar .account-switch-flyout .switch-mark,
+.topbar .account-switch-flyout .switch-hint {
+  flex: 0 0 auto;
+  color: #999;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.topbar .account-switch-flyout .switch-flyout-sep {
+  display: none;
 }
 
 .hero {
@@ -6711,10 +6953,10 @@ body > main > .topbar {
   --flow-card-inv: calc(1 - var(--flow-card-raw));
   --flow-card-eased-inv: calc(var(--flow-card-inv) * var(--flow-card-inv) * var(--flow-card-inv));
   --flow-card-eased: calc(1 - var(--flow-card-eased-inv));
-  --flow-title-size: calc(48px - 12px * var(--flow-card-eased));
-  --flow-title-line: calc(56px - 8px * var(--flow-card-eased));
-  --flow-subtitle-size: calc(24px - 8px * var(--flow-card-eased));
-  --flow-subtitle-line: calc(32px - 8px * var(--flow-card-eased));
+  --flow-title-size: 48px;
+  --flow-title-line: 56px;
+  --flow-subtitle-size: 24px;
+  --flow-subtitle-line: 32px;
   --flow-w1-raw: max(0, min(1, calc((var(--flow-pre) - .5) / .5)));
   --flow-w2-raw: max(0, min(1, calc((var(--flow-p) - 0) / .06)));
   --flow-w3-raw: max(0, min(1, calc((var(--flow-p) - .06) / .06)));
@@ -6723,6 +6965,13 @@ body > main > .topbar {
   --flow-w3: calc(1 - (1 - var(--flow-w3-raw)) * (1 - var(--flow-w3-raw)) * (1 - var(--flow-w3-raw)));
   --flow-art-x: 0px;
   --flow-art-y: 0px;
+  --flow-row-0: -532px;
+  --flow-row-1: -396px;
+  --flow-row-2: -260px;
+  --flow-row-3: -118px;
+  --flow-row-4: 24px;
+  --flow-row-5: 160px;
+  --flow-row-6: 296px;
   --flow-skeleton-x: 0px;
   position: relative;
   width: 100%;
@@ -6789,6 +7038,13 @@ body > main > .topbar {
   height: 100%;
   overflow: hidden;
 }
+.flow-section .flow-sticky,
+.flow-section .flow-multi-stage,
+.flow-section .flow-track,
+.flow-section .flow-track[aria-label] {
+  width: 100vw;
+  max-width: none;
+}
 .flow-multi-cards,
 .flow-section .flow-track,
 .flow-section .flow-track[aria-label] {
@@ -6830,75 +7086,87 @@ body > main > .topbar {
 .flow-section .flow-track article:not(.flow-card-skeleton) {
   height: var(--flow-card-h, 56px);
 }
+.flow-section .flow-track article:not(.flow-card-skeleton) {
+  width: max-content;
+  min-width: var(--flow-card-w, var(--w));
+}
+.flow-section .flow-track article:not(.flow-card-skeleton) .flow-card-anim,
+.flow-section .flow-track article:not(.flow-card-skeleton) .flow-card-inner {
+  width: max-content;
+  min-width: var(--flow-card-w, var(--w));
+}
+.flow-section .flow-track article:not(.flow-card-skeleton) .flow-card-inner {
+  overflow: visible;
+}
 .flow-section .flow-track article:nth-child(1) {
   --x: 0px !important;
-  --y: -532px !important;
+  --y: var(--flow-row-0) !important;
   --flow-card-w: 294px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(2) {
   --x: 491px !important;
-  --y: -260px !important;
+  --y: var(--flow-row-2) !important;
   --flow-card-w: 294px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(3) {
   --x: 541px !important;
-  --y: 24px !important;
+  --y: var(--flow-row-4) !important;
   --flow-card-w: 310px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(4) {
   --x: 0px !important;
-  --y: 296px !important;
+  --y: var(--flow-row-6) !important;
   --flow-card-w: 294px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(5) {
   --x: -541px !important;
-  --y: 24px !important;
+  --y: var(--flow-row-4) !important;
   --flow-card-w: 310px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(6) {
   --x: -491px !important;
-  --y: -260px !important;
+  --y: var(--flow-row-2) !important;
   --flow-card-w: 294px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(7) {
   --x: -275px !important;
-  --y: 160px !important;
+  --y: var(--flow-row-5) !important;
   --flow-card-w: 294px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(8) {
-  --x: -394px !important;
-  --y: -112px !important;
+  --x: -435px !important;
+  --y: var(--flow-row-3) !important;
   --flow-card-w: 294px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(9) {
   --x: 275px !important;
-  --y: 160px !important;
+  --y: var(--flow-row-5) !important;
   --flow-card-w: 294px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(10) {
-  --x: 475px !important;
-  --y: -112px !important;
+  --x: 435px !important;
+  --y: var(--flow-row-3) !important;
   --flow-card-w: 294px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(11) {
   --x: -221px !important;
-  --y: -396px !important;
+  --y: var(--flow-row-1) !important;
   --flow-card-w: 294px;
   --flow-card-h: 56px;
 }
 .flow-section .flow-track article:nth-child(12) {
   --x: 221px !important;
-  --y: -396px !important;
+  --y: var(--flow-row-1) !important;
   --flow-card-w: 294px;
   --flow-card-h: 56px;
 }
@@ -7019,14 +7287,33 @@ body > main > .topbar {
 }
 .flow-card-inner p {
   width: auto;
+  max-width: none;
   height: auto;
   margin: 0 0 0 -8px;
+  flex: 0 0 auto;
   color: #ffebd1;
   font-size: 16px !important;
   line-height: 24px;
   letter-spacing: -.4px;
   white-space: nowrap;
   font-weight: 300 !important;
+}
+.flow-section .flow-track article:not(.flow-card-skeleton),
+.flow-section .flow-track article:not(.flow-card-skeleton) .flow-card-anim,
+.flow-section .flow-track article:not(.flow-card-skeleton) .flow-card-inner {
+  width: fit-content !important;
+  min-width: var(--flow-card-w, var(--w));
+}
+.flow-section .flow-track article:not(.flow-card-skeleton),
+.flow-section .flow-track article:not(.flow-card-skeleton) .flow-card-anim {
+  display: inline-block;
+}
+.flow-section .flow-track article:not(.flow-card-skeleton) .flow-card-inner {
+  display: inline-flex;
+  max-width: none !important;
+}
+.flow-section .flow-track article:not(.flow-card-skeleton) .flow-card-inner {
+  overflow: visible !important;
 }
 .flow-card-skeleton .flow-card-main h3,
 .flow-card-skeleton .flow-card-inner p {
@@ -7057,7 +7344,7 @@ body > main > .topbar {
   left: 50%;
   top: 50%;
   z-index: 2;
-  width: min(710px, calc(100vw - 40px));
+  width: max-content;
   max-width: none;
   margin: 0;
   text-align: center;
@@ -7067,11 +7354,12 @@ body > main > .topbar {
 }
 .flow-multi-title h2 {
   margin: 0;
-  color: #fff;
+  color: #ffffff;
   font-size: var(--flow-title-size) !important;
   line-height: var(--flow-title-line);
   letter-spacing: 0;
   font-weight: 500 !important;
+  white-space: nowrap;
 }
 .flow-word {
   display: inline-block;
@@ -7091,13 +7379,15 @@ body > main > .topbar {
   transform: translateY(calc((1 - var(--flow-w2)) * 100%));
 }
 .flow-multi-title p {
-  max-width: 560px;
+  width: max-content;
+  max-width: none;
   margin: 16px auto 0;
-  color: #fff;
+  color: #ffffff !important;
   font-size: var(--flow-subtitle-size) !important;
   line-height: var(--flow-subtitle-line);
   letter-spacing: 0;
   font-weight: 400 !important;
+  white-space: nowrap;
   opacity: var(--flow-w3);
   transform: translateY(calc((1 - var(--flow-w3)) * 16px));
   will-change: transform, opacity;
@@ -7613,11 +7903,12 @@ body > main > .topbar {
 
 .login-modal {
   position: relative;
-  width: min(520px, calc(100vw - 48px));
-  max-height: min(720px, calc(100svh - 64px));
-  padding: 32px;
-  overflow: auto;
-  border-radius: 16px;
+  width: min(640px, calc(100vw - 48px));
+  height: 440px;
+  max-height: calc(100svh - 64px);
+  padding: 0;
+  overflow: hidden;
+  border-radius: 12px;
   background: #fff;
   box-shadow: 0 24px 80px rgba(0, 0, 0, .18);
   color: #000;
@@ -7632,26 +7923,38 @@ body > main > .topbar {
 .login-close {
   border: 0;
   background: transparent;
-  color: #999;
+  color: #000;
   cursor: pointer;
 }
 
 .login-close-abs {
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: 16px;
+  right: 16px;
   width: 32px;
   height: 32px;
   display: grid;
   place-items: center;
-  border-radius: 50%;
-  font-size: 22px;
+  border-radius: 8px;
+  font-size: 0;
   line-height: 1;
+  z-index: 4;
 }
 
 .login-close-abs:hover {
-  background: #f5f5f5;
+  background: #f9f9f9;
   color: #000;
+}
+
+.login-close-abs:active {
+  background: #f3f3f3;
+  color: #000;
+}
+
+.login-close-abs svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2px;
 }
 
 .login-step {
@@ -7659,15 +7962,98 @@ body > main > .topbar {
 }
 
 .login-step.is-active {
+  display: flex;
+}
+
+.login-step[data-step="phone"] {
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+}
+
+.login-cover {
+  position: relative;
+  width: 220px;
+  min-width: 220px;
+  height: 100%;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #f3f3f3;
+  overflow: hidden;
+}
+
+.login-cover::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 248px;
+  height: 440px;
+  transform: translate(-50%, -50%);
+  background: url("assets/login/login-cover.png") center / cover no-repeat;
+}
+
+.login-cover > * {
+  position: relative;
+  z-index: 1;
+}
+
+.login-cover-logo {
+  width: 128px;
+  height: 26.597px;
+  object-fit: contain;
   display: block;
+}
+
+.login-cover-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-cover-copy strong {
+  color: #fff;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.login-cover-copy span {
+  color: rgba(255, 255, 255, .6);
+  font-size: 10px;
+  line-height: 13px;
+  font-weight: 400;
+}
+
+.login-panel {
+  position: relative;
+  width: 420px;
+  height: 100%;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+}
+
+.login-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  min-height: 0;
 }
 
 .login-modal h2 {
   margin: 0;
   color: #000;
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 500;
+  text-align: center;
 }
 
 .login-sub,
@@ -7684,7 +8070,11 @@ body > main > .topbar {
 }
 
 .login-field {
-  margin-top: 24px;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .login-field label {
@@ -7696,37 +8086,114 @@ body > main > .topbar {
   font-weight: 400;
 }
 
-.phone-row,
-.login-field input,
-.login-field textarea {
+.login-input {
   width: 100%;
-  min-height: 44px;
+  height: 40px;
   border: 1px solid #e5e5e5;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #fff;
   color: #000;
   font-size: 14px;
   line-height: 20px;
   box-sizing: border-box;
+  transition: border-color .16s ease;
 }
 
-.phone-row {
+.login-input {
   display: flex;
   align-items: center;
-  overflow: hidden;
+  gap: 8px;
+  padding: 10px 16px;
 }
 
-.phone-prefix {
-  padding: 0 12px;
-  color: #666;
-  border-right: 1px solid #e5e5e5;
+.login-input:not(.is-disabled):hover {
+  border-color: #b3b3b3;
 }
 
-.phone-row input {
+.login-input:focus-within {
+  border-color: #000;
+}
+
+.login-input.is-error {
+  border-color: #ff5c4d;
+}
+
+.login-input.is-disabled {
+  color: #ccc;
+}
+
+.login-input.is-disabled:hover {
+  border-color: #e5e5e5;
+}
+
+.login-input-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: #999;
+}
+
+.login-input input {
+  flex: 1 1 auto;
   min-width: 0;
   border: 0;
   outline: 0;
-  padding: 0 12px;
+  padding: 0;
+  color: #000;
+  background: transparent;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.login-input input::placeholder {
+  color: #b3b3b3;
+}
+
+.login-input input:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.login-code-send {
+  flex: 0 0 auto;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #ccc;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  cursor: default;
+}
+
+.login-code-send.is-enabled {
+  color: #000;
+  cursor: pointer;
+}
+
+.login-error {
+  display: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 4px;
+  color: #d94e41;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.login-error.is-visible {
+  display: flex;
+}
+
+.login-error svg {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 12px;
+  stroke-width: 2px;
 }
 
 .login-agree {
@@ -7741,16 +8208,393 @@ body > main > .topbar {
 
 .login-submit {
   width: 100%;
-  height: 44px;
-  margin-top: 20px;
+  height: 36px;
+  margin-top: 0;
   border: 0;
-  border-radius: 999px;
+  border-radius: 8px;
   background: #000;
   color: #fff;
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
   cursor: pointer;
+  transition: background-color .16s ease;
+}
+
+.login-submit:hover {
+  background: #333;
+}
+
+.login-submit:active {
+  background: #000;
+}
+
+.login-footer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.login-legal {
+  width: 320px;
+  margin: 0;
+  color: #666;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.login-legal a {
+  color: #666;
+  text-decoration: none;
+  transition: color .16s ease;
+}
+
+.login-legal a:hover,
+.login-legal a:active {
+  color: #000;
+}
+
+.login-step[data-step="spaces"] {
+  width: 100%;
+  height: 100%;
+  padding: 40px 48px;
+  flex-direction: column;
+  overflow: auto;
+}
+
+#settings-overlay .login-modal {
+  width: min(480px, calc(100vw - 48px));
+  height: auto;
+  max-height: min(464px, calc(100svh - 48px));
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .05), 0 0 24px rgba(0, 0, 0, .05);
+}
+
+#settings-overlay .settings-heading {
+  width: 100%;
+  height: 56px;
+  min-height: 56px;
+  padding: 16px 16px 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+#settings-overlay .settings-heading h2 {
+  margin: 0;
+  flex: 1 1 auto;
+  color: #000;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+#settings-overlay .settings-close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#settings-overlay .settings-close:hover {
+  background: #f9f9f9;
+}
+
+#settings-overlay .settings-close:active {
+  background: #f3f3f3;
+}
+
+#settings-overlay .settings-close svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+#settings-overlay .settings-content {
+  width: 100%;
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+}
+
+#settings-overlay .settings-avatar-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#settings-overlay .settings-avatar-preview {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex: 0 0 96px;
+  cursor: pointer;
+}
+
+#settings-overlay .settings-avatar-preview > img {
+  width: 96px;
+  height: 96px;
+  display: block;
+  object-fit: cover;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, .04);
+  border-radius: 999px;
+}
+
+#settings-overlay .settings-avatar-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, .2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, background-color 160ms ease;
+}
+
+#settings-overlay .settings-avatar-preview:hover::after {
+  opacity: 1;
+}
+
+#settings-overlay .settings-avatar-preview:active::after {
+  background: rgba(0, 0, 0, .4);
+  opacity: 1;
+}
+
+#settings-overlay .settings-upload-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e5e5;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+#settings-overlay .settings-upload-btn svg {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2;
+}
+
+#settings-overlay .settings-avatar-note {
+  margin: 0;
+  color: #999;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#settings-overlay .settings-presets {
+  width: 100%;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+#settings-overlay .settings-preset {
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 40px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#settings-overlay .settings-preset:hover {
+  border-color: #e5e5e5;
+}
+
+#settings-overlay .settings-preset.is-selected {
+  border-color: #000;
+}
+
+#settings-overlay .settings-preset img {
+  width: 32px;
+  height: 32px;
+  display: block;
+  object-fit: cover;
+  border-radius: 999px;
+}
+
+#settings-overlay .settings-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+#settings-overlay .settings-field label {
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+#settings-overlay .settings-input-wrap {
+  width: 100%;
+  height: 42px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color .16s ease;
+}
+
+#settings-overlay .settings-input-wrap:hover {
+  border-color: #b3b3b3;
+}
+
+#settings-overlay .settings-input-wrap:focus-within {
+  border-color: #000;
+}
+
+#settings-overlay .settings-input-wrap.is-error {
+  border-color: #ff5c4d;
+}
+
+#settings-overlay #settings-nickname {
+  min-width: 0;
+  height: 20px;
+  padding: 0;
+  flex: 1 1 auto;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #000;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+#settings-overlay .settings-count {
+  flex: 0 0 auto;
+  color: #999;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+#settings-overlay .settings-hint {
+  margin: 0;
+  color: #999;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+#settings-overlay .settings-hint.is-error {
+  color: #d94e41;
+}
+
+#settings-overlay .settings-actions {
+  width: 100%;
+  padding: 16px 24px 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+#settings-overlay .settings-cancel,
+#settings-overlay .settings-save {
+  height: 36px;
+  min-width: 64px;
+  padding: 8px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+#settings-overlay .settings-cancel {
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #000;
+}
+
+#settings-overlay .settings-cancel:hover {
+  background: #f9f9f9;
+}
+
+#settings-overlay .settings-cancel:active {
+  background: #f3f3f3;
+}
+
+#settings-overlay .settings-save {
+  border: 1px solid #000;
+  background: #000;
+  color: #fff;
+}
+
+#settings-overlay .settings-save:hover {
+  background: #333;
+  border-color: #333;
+}
+
+#settings-overlay .settings-save:active {
+  background: #000;
+  border-color: #000;
 }
 
 .otp-row {
@@ -7758,6 +8602,22 @@ body > main > .topbar {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 8px;
+}
+
+@media (max-width: 720px) {
+  .login-modal {
+    width: min(420px, calc(100vw - 32px));
+    height: auto;
+    min-height: 440px;
+  }
+
+  .login-cover {
+    display: none;
+  }
+
+  .login-panel {
+    width: 100%;
+  }
 }
 
 .otp-cell {
@@ -7818,6 +8678,63 @@ body > main > .topbar {
 .download-section .download-heading h2 {
   font-size: 36px !important;
   line-height: 48px !important;
+}
+
+/* Desktop section final spacing and list alignment. */
+.desktop-section {
+  padding-top: 160px !important;
+  padding-bottom: 160px !important;
+}
+
+.desktop-section .check-list > div {
+  align-items: start !important;
+  grid-template-columns: 24px minmax(0, 1fr) !important;
+  column-gap: 16px !important;
+}
+
+.desktop-section .check-list .check-icon {
+  align-self: start !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin-top: 0 !important;
+}
+
+.desktop-section .check-list strong {
+  margin: 0 0 8px !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  font-weight: 500 !important;
+}
+
+.desktop-section .check-list p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+  font-weight: 400 !important;
+}
+
+.desktop-section .report-card {
+  z-index: 1 !important;
+}
+
+.desktop-section .top-card,
+.desktop-section .bottom-card {
+  z-index: 3 !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .08), 0 42px 96px rgba(0, 0, 0, .08) !important;
+}
+
+.desktop-section .top-card strong,
+.desktop-section .bottom-card strong {
+  font-size: 16px !important;
+  line-height: 24px !important;
+  font-weight: 500 !important;
+}
+
+.desktop-section .top-card small,
+.desktop-section .bottom-card small {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  font-weight: 400 !important;
 }
 
 /* Final icon stroke lock: render card icons as true 2px strokes. */
@@ -7940,6 +8857,12 @@ body > main > .topbar {
   background-image: url("../assets/cases/case-6.png");
 }
 
+.capabilities-section .capability-list article,
+.cases-section .case-grid article,
+.enterprise-section .enterprise-grid article {
+  cursor: default;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .intro-section .intro-card-media img,
   .enterprise-section .enterprise-card-media::before,
@@ -7960,42 +8883,48 @@ body > main > .topbar {
 
 <div class="login-overlay" id="login-overlay" hidden>
   <div class="login-modal login-modal-lg" role="dialog" aria-modal="true" aria-labelledby="login-title">
-    <button type="button" class="login-close login-close-abs" data-close-overlays aria-label="关闭">×</button>
+    <button type="button" class="login-close login-close-abs" data-close-overlays aria-label="关闭">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+    </button>
 
     <div class="login-step is-active" data-step="phone">
-      <h2 id="login-title">登录 Agentsyun</h2>
-      <p class="login-sub">输入手机号，登录或注册 Agentsyun</p>
-      <div class="login-field">
-        <label for="login-phone">手机号</label>
-        <div class="phone-row">
-          <span class="phone-prefix">+86</span>
-          <input id="login-phone" type="tel" inputmode="numeric" maxlength="11" placeholder="请输入手机号" autocomplete="tel" />
+      <aside class="login-cover" aria-hidden="true">
+        <img class="login-cover-logo" src="assets/login/agentsyun-logo-white.svg" alt="" />
+        <div class="login-cover-copy">
+          <strong>让AI能力<br />成为每个人的天赋</strong>
+          <span>江苏汇智智能数字科技有限公司</span>
+        </div>
+      </aside>
+      <div class="login-panel">
+        <div class="login-content">
+          <h2 id="login-title">登录</h2>
+          <div class="login-field">
+            <div class="login-input" data-field="phone">
+              <svg class="login-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+              <input id="login-phone" type="tel" inputmode="numeric" maxlength="11" placeholder="输入手机号" autocomplete="tel" />
+            </div>
+            <p class="login-error" id="login-phone-error">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
+              <span></span>
+            </p>
+            <div class="login-input is-disabled" data-field="code">
+              <svg class="login-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+              <input id="login-code" type="text" inputmode="numeric" maxlength="6" placeholder="输入验证码" autocomplete="one-time-code" disabled />
+              <button type="button" class="login-code-send" id="login-send-code" disabled>发送验证码</button>
+            </div>
+            <p class="login-error" id="login-code-error">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
+              <span></span>
+            </p>
+          </div>
+        </div>
+        <div class="login-footer">
+          <button type="button" class="login-submit" id="login-next-phone">登 录</button>
+          <p class="login-legal">
+            登录即代表同意 <a href="#" data-legal-link="privacy">《隐私政策》</a> 和 <a href="#" data-legal-link="terms">《服务条款》</a>，未注册绑定的手机号验证成功后将自动注册
+          </p>
         </div>
       </div>
-      <label class="login-agree">
-        <input type="checkbox" id="login-agree" />
-        <span>我已阅读并同意《服务协议》和《隐私政策》</span>
-      </label>
-      <button type="button" class="login-submit" id="login-next-phone">下一步</button>
-      <p class="login-tip">演示账号尾号：0/1 仅个人 · 2 个人+1企业 · 3 审核中 · 4 未通过 · 5 待加入邀请 · 6–9 多企业</p>
-    </div>
-
-    <div class="login-step" data-step="code">
-      <h2>输入手机验证码</h2>
-      <p class="login-sub">验证码已发送至 <strong id="login-masked-phone">+86 ****</strong></p>
-      <div class="otp-row" id="otp-row">
-        <input class="otp-cell" inputmode="numeric" maxlength="1" aria-label="验证码第1位" />
-        <input class="otp-cell" inputmode="numeric" maxlength="1" aria-label="验证码第2位" />
-        <input class="otp-cell" inputmode="numeric" maxlength="1" aria-label="验证码第3位" />
-        <input class="otp-cell" inputmode="numeric" maxlength="1" aria-label="验证码第4位" />
-        <input class="otp-cell" inputmode="numeric" maxlength="1" aria-label="验证码第5位" />
-        <input class="otp-cell" inputmode="numeric" maxlength="1" aria-label="验证码第6位" />
-      </div>
-      <div class="login-links login-links-row">
-        <button type="button" class="text-btn" id="login-resend" disabled>重新获取验证码</button>
-        <button type="button" class="text-btn" id="login-change-phone">使用其他手机号</button>
-      </div>
-      <button type="button" class="login-submit" id="login-next-code">下一步</button>
     </div>
 
     <div class="login-step" data-step="spaces">
@@ -8015,39 +8944,38 @@ body > main > .topbar {
 
 <div class="login-overlay" id="settings-overlay" hidden>
   <div class="login-modal login-modal-lg" role="dialog" aria-modal="true" aria-labelledby="settings-title">
-    <button type="button" class="login-close login-close-abs" data-close-overlays aria-label="关闭">×</button>
-    <h2 id="settings-title">账号设置</h2>
-    <p class="login-sub">管理你的头像与昵称，手机号仅用于登录不可修改</p>
+    <div class="settings-heading">
+      <h2 id="settings-title">个人资料</h2>
+      <button type="button" class="settings-close" data-close-overlays aria-label="关闭">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+    </div>
 
-    <div class="login-field">
-      <label>头像</label>
-      <div class="settings-avatar-row">
-        <div class="settings-avatar-preview">
+    <div class="settings-content">
+      <div class="settings-avatar-block">
+        <div class="settings-avatar-preview" id="settings-avatar-preview" role="button" tabindex="0" aria-label="点击自定义头像">
           <img id="settings-avatar-img" src="./assets/default-avatar.png" alt="" />
-        </div>
-        <div class="settings-avatar-actions">
-          <button type="button" class="text-btn" id="settings-upload-btn">上传图片</button>
+          <span class="settings-upload-btn" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 5h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3"></path><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path><circle cx="9" cy="9" r="2"></circle><path d="M12 5V2"></path><path d="M10.5 3.5h3"></path></svg>
+          </span>
           <input id="settings-upload-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
-          <span class="settings-hint" style="margin:0">支持 JPG / PNG，将自动压缩</span>
         </div>
+        <p class="settings-avatar-note">点击自定义头像</p>
       </div>
       <div class="settings-presets" id="settings-presets" aria-label="预设头像"></div>
-    </div>
 
-    <div class="login-field">
-      <label for="settings-phone">手机号</label>
-      <input id="settings-phone" type="text" readonly disabled />
+      <div class="settings-field">
+        <label for="settings-nickname">用户昵称</label>
+        <div class="settings-input-wrap">
+          <input id="settings-nickname" type="text" maxlength="15" placeholder="请输入昵称" autocomplete="nickname" />
+          <span class="settings-count" id="settings-nickname-count">0/15</span>
+        </div>
+        <p class="settings-hint" id="settings-nickname-hint">长度1-15个字符，支持中文、英文、数字、“_”</p>
+      </div>
     </div>
-    <p class="settings-hint">手机号不可修改</p>
-
-    <div class="login-field">
-      <label for="settings-nickname">昵称</label>
-      <input id="settings-nickname" type="text" maxlength="20" placeholder="请输入昵称" autocomplete="nickname" />
-    </div>
-
     <div class="settings-actions">
       <button type="button" class="settings-cancel" data-close-overlays>取消</button>
-      <button type="button" class="login-submit" id="settings-save">保存</button>
+      <button type="button" class="settings-save" id="settings-save">确定</button>
     </div>
   </div>
 </div>
@@ -8055,15 +8983,15 @@ body > main > .topbar {
 </section>
 <section class="section intro-section" id="product"><div class="section-title"><h2>不是聊天机器人<br/>是你的数字员工</h2><p>Hz-Hermes 通过深度工程化封装，将配置、部署与技能管理等复杂环节整合优化。你只需要告诉它“做什么”，剩下的交给它。</p></div><div class="feature-row intro-feature-row"><article><figure class="intro-card-media"><img src="assets/intro-section/intro-1.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 4.6-3.2 7.9-8 9-4.8-1.1-8-4.4-8-9V7z"></path><path d="m9 12 2 2 4-5"></path></svg></i></figure><span class="intro-card-number">01</span><h3>自主学习进化</h3><p>每次执行都自动学习，沉淀为可复用的技能，让团队经验持续变成可调用能力。</p></article><article><figure class="intro-card-media"><img src="assets/intro-section/intro-2.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="2"></rect><rect x="14" y="4" width="7" height="7" rx="2"></rect><rect x="8.5" y="15" width="7" height="7" rx="2"></rect><path d="M10 7.5h4"></path><path d="m8.5 15-2-4"></path><path d="m15.5 15 2-4"></path></svg></i></figure><span class="intro-card-number">02</span><h3>跨软件协作</h3><p>在你授权下完成跨越不同桌面应用的多步骤工作，把消息、文档、表格与系统连接起来。</p></article><article><figure class="intro-card-media"><img src="assets/intro-section/intro-3.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="10" cy="7" r="4"></circle><path d="M18 8v6"></path><path d="M21 11h-6"></path></svg></i></figure><span class="intro-card-number">03</span><h3>多智能体协同</h3><p>多个 AI 分工协作，并行处理复杂任务，适合复杂任务的并行推进。</p></article><article><figure class="intro-card-media"><img src="assets/intro-section/intro-4.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="9"></circle><path d="M18.4 5.6 20 4"></path><path d="M4 4l1.6 1.6"></path></svg></i></figure><span class="intro-card-number">04</span><h3>长期记忆</h3><p>记住你的偏好、习惯和历史知识，累积成团队专属上下文。</p></article></div>
 </section>
-<section class="section flow-section"><div class="flow-noise" aria-hidden="true"></div><div class="flow-sticky"><div class="flow-multi-stage"><div class="flow-track flow-multi-cards" aria-label="Hz-Hermes 执行链路"><article style="--x:-442.4px;--y:-238px;--w:317.2px;--h:63.7px;--from-x:-1100;--from-y:-700;--start:.1;--start-scale:.4"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>01</span><h3>任务接收</h3></div><p>理解真实意图</p></div></div></article><article style="--x:218.6px;--y:-257px;--w:317.2px;--h:65px;--from-x:700;--from-y:-800;--start:.55;--start-scale:.5"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>02</span><h3>任务拆解</h3></div><p>解析执行步骤</p></div></div></article><article style="--x:511px;--y:-57px;--w:226px;--h:45.385px;--from-x:1300;--from-y:-200;--start:.3;--start-scale:.55"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>03</span><h3>流程调度</h3></div><p>编排顺序与资源</p></div></div></article><article style="--x:-546.4px;--y:128px;--w:317.2px;--h:65px;--from-x:-1300;--from-y:250;--start:.65;--start-scale:.45"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>04</span><h3>工具调用</h3></div><p>激活专业能力</p></div></div></article><article style="--x:229px;--y:155px;--w:218px;--h:44.672px;--from-x:700;--from-y:500;--start:.8;--start-scale:.5"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span>05</span><h3>协助执行</h3></div><p>跨应用完成操作</p></div></div></article><article style="--x:715.5px;--y:165px;--w:409px;--h:83.811px;--from-x:1500;--from-y:350;--start:.2;--start-scale:.35"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>06</span><h3>结果交付</h3></div><p>输出可用成品</p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:-800px;--y:-137px;--w:200px;--h:42px;--from-x:-1800;--from-y:-400;--start:0;--start-scale:.55"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:620px;--y:-177px;--w:200px;--h:40px;--from-x:1300;--from-y:-700;--start:.5;--start-scale:.6"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:850px;--y:3px;--w:200px;--h:42px;--from-x:1900;--from-y:-100;--start:.15;--start-scale:.45"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:320px;--y:303px;--w:240px;--h:46px;--from-x:1100;--from-y:900;--start:.7;--start-scale:.4"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:-450px;--y:333px;--w:220px;--h:42px;--from-x:-1500;--from-y:800;--start:.85;--start-scale:.5"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:-98.4px;--y:267px;--w:317.2px;--h:65px;--from-x:0;--from-y:900;--start:.4;--start-scale:.45"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article></div><div class="section-title centered flow-multi-title"><h2><span class="flow-word flow-word-1"><span>从一句话</span></span> <span class="flow-word flow-word-2"><span>到一个结果</span></span></h2><p>你给出指令，Hz-Hermes 自主完成全部执行链路。</p></div></div></div>
+<section class="section flow-section"><div class="flow-noise" aria-hidden="true"></div><div class="flow-sticky"><div class="flow-multi-stage"><div class="flow-track flow-multi-cards" aria-label="Hz-Hermes 执行链路"><article style="--x:-442.4px;--y:-238px;--w:317.2px;--h:63.7px;--from-x:-1100;--from-y:-700;--start:.1;--start-scale:.4"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>01</span><h3>任务接收</h3></div><p>理解真实意图</p></div></div></article><article style="--x:218.6px;--y:-257px;--w:317.2px;--h:65px;--from-x:700;--from-y:-800;--start:.55;--start-scale:.5"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>02</span><h3>任务拆解</h3></div><p>解析执行步骤</p></div></div></article><article style="--x:511px;--y:-57px;--w:226px;--h:45.385px;--from-x:1300;--from-y:-200;--start:.3;--start-scale:.55"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>03</span><h3>流程调度</h3></div><p>编排顺序与资源</p></div></div></article><article style="--x:-546.4px;--y:128px;--w:317.2px;--h:65px;--from-x:-1300;--from-y:250;--start:.65;--start-scale:.45"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>04</span><h3>工具调用</h3></div><p>激活专业能力</p></div></div></article><article style="--x:229px;--y:155px;--w:218px;--h:44.672px;--from-x:700;--from-y:500;--start:.8;--start-scale:.5"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span>05</span><h3>协助执行</h3></div><p>跨应用完成操作</p></div></div></article><article style="--x:715.5px;--y:165px;--w:409px;--h:83.811px;--from-x:1500;--from-y:350;--start:.2;--start-scale:.35"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span>06</span><h3>结果交付</h3></div><p>输出可用成品</p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:-800px;--y:-137px;--w:200px;--h:42px;--from-x:-1800;--from-y:-400;--start:0;--start-scale:.55"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:620px;--y:-177px;--w:200px;--h:40px;--from-x:1300;--from-y:-700;--start:.5;--start-scale:.6"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:850px;--y:3px;--w:200px;--h:42px;--from-x:1900;--from-y:-100;--start:.15;--start-scale:.45"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:320px;--y:303px;--w:240px;--h:46px;--from-x:1100;--from-y:900;--start:.7;--start-scale:.4"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:-450px;--y:333px;--w:220px;--h:42px;--from-x:-1500;--from-y:800;--start:.85;--start-scale:.5"><div class="flow-card-anim"><div class="flow-card-inner is-muted"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article><article aria-hidden="true" class="flow-card-skeleton" style="--x:-98.4px;--y:267px;--w:317.2px;--h:65px;--from-x:0;--from-y:900;--start:.4;--start-scale:.45"><div class="flow-card-anim"><div class="flow-card-inner"><div class="flow-card-main"><span></span><h3></h3></div><p></p></div></div></article></div><div class="section-title centered flow-multi-title"><h2><span class="flow-word flow-word-1"><span>从一句话</span></span> <span class="flow-word flow-word-2"><span>到一个结果</span></span></h2><p>你给出指令，Hz-Hermes 自主完成全部执行链路</p></div></div></div>
 </section>
 <section class="section capabilities-section"><div class="section-title"><h2>让 AI 能力<br/>真正融入日常工作</h2><p>从日常办公到专业领域，一个 AI 搞定。</p></div><div class="capability-list" role="list"><article role="listitem"><span class="cap-number">01</span><div class="capability-copy"><h3>深度研究</h3><p>给一个主题，它会自主搜索、交叉验证、整理输出结构化报告。做完直接生成网页或文档，拿来就能用。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><path d="m8 11 2 2 4-4"></path><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></div></article><article role="listitem"><span class="cap-number">02</span><div class="capability-copy"><h3>AI 智能客服</h3><p>对接微信与公众号，自动识别客户意图并回复。常见问题自动处理，复杂情况升级人工。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M13 8H7"></path><path d="M17 12H7"></path></svg></div></article><article role="listitem"><span class="cap-number">03</span><div class="capability-copy"><h3>内容创作</h3><p>写文案、做 PPT、生成宣传图、剪视频脚本、设计网页，从文字到视觉完成高质量交付。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .962 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.962 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg></div></article><article role="listitem"><span class="cap-number">04</span><div class="capability-copy"><h3>数据分析</h3><p>上传 Excel 或 CSV，完成探索性分析、可视化图表与洞察报告，不用写代码也能拿到结论。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><path d="M12 16v5"></path><path d="M16 14v7"></path><path d="M20 10v11"></path><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"></path><path d="M4 18v3"></path><path d="M8 14v7"></path></svg></div></article><article role="listitem"><span class="cap-number">05</span><div class="capability-copy"><h3>文档撰写</h3><p>标书、报告、论文、方案，从深度研究、整理框架到撰写排版，一条任务完整推进。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg></div></article><article role="listitem"><span class="cap-number">06</span><div class="capability-copy"><h3>定时自动化</h3><p>日报生成、竞品监控、数据巡检。设置一次，每日自动执行并推送到微信或钉钉。</p></div><div class="capability-visual" aria-hidden="true"><svg class="cap-cover-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div></article></div>
 </section>
-<section class="section desktop-section" id="desktop"><div class="desktop-copy"><h2>你下指令，<br/>它跑腿</h2><p>Hz-Hermes 能理解你的工作场景和需求，在你授权和控制下，协助完成电脑上的各类操作。</p><p>你不需要自己打开软件、点击按钮或填写表格。告诉它要什么结果，它来执行过程；每一步清晰透明，可随时查看、暂停或调整。</p><div class="check-list"><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 4.6-3.2 7.9-8 9-4.8-1.1-8-4.4-8-9V7z"></path><path d="m9 12 2 2 4-5"></path></svg></span><p><strong>全程可控</strong>所有操作经你授权，每一步可查看、可撤回</p></div><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path><path d="M12 15v2"></path></svg></span><p><strong>安全隔离</strong>在独立沙箱中执行，不影响系统安全</p></div><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="9"></circle><path d="M18.4 5.6 20 4"></path><path d="M4 4l1.6 1.6"></path></svg></span><p><strong>后台运行</strong>不打扰当前工作，默默完成任务</p></div><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1.5"></rect><rect x="14" y="14" width="7" height="6" rx="1.5"></rect><path d="M10 7h2a3 3 0 0 1 3 3v4"></path><path d="m13 12 2 2 2-2"></path></svg></span><p><strong>跨应用协作</strong>一条指令串起消息、数据与报表</p></div></div></div><div class="desktop-visual"><div class="desktop-card top-card"><span>客户消息</span><strong>3 条咨询已回复</strong><small>1 条需要确认 · 已标记</small></div><div class="desktop-card report-card"><div class="report-head"><span>销售周报</span><b>第 30 周</b></div><div class="chart"><i style="height:42%"></i><i style="height:58%"></i><i style="height:48%"></i><i style="height:78%"></i><i style="height:69%"></i><i style="height:92%"></i><i style="height:83%"></i></div><div class="report-foot"><strong>+18.6%</strong><span>较上周增长</span></div></div><div class="desktop-card bottom-card"><span>✓</span><p><strong>任务已完成</strong><small>销售报表已生成并发送</small></p></div></div>
+<section class="section desktop-section" id="desktop"><div class="desktop-copy"><h2>你下指令<br/>它跑腿</h2><p>Hz-Hermes 能理解你的工作场景和需求，在你授权和控制下，协助完成电脑上的各类操作。</p><p>你不需要自己打开软件、点击按钮或填写表格。告诉它要什么结果，它来执行过程；每一步清晰透明，可随时查看、暂停或调整。</p><div class="check-list"><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 4.6-3.2 7.9-8 9-4.8-1.1-8-4.4-8-9V7z"></path><path d="m9 12 2 2 4-5"></path></svg></span><p><strong>全程可控</strong>所有操作经你授权，每一步可查看、可撤回</p></div><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path><path d="M12 15v2"></path></svg></span><p><strong>安全隔离</strong>在独立沙箱中执行，不影响系统安全</p></div><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="9"></circle><path d="M18.4 5.6 20 4"></path><path d="M4 4l1.6 1.6"></path></svg></span><p><strong>后台运行</strong>不打扰当前工作，默默完成任务</p></div><div><span class="check-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1.5"></rect><rect x="14" y="14" width="7" height="6" rx="1.5"></rect><path d="M10 7h2a3 3 0 0 1 3 3v4"></path><path d="m13 12 2 2 2-2"></path></svg></span><p><strong>跨应用协作</strong>一条指令串起消息、数据与报表</p></div></div></div><div class="desktop-visual"><div class="desktop-card top-card"><span>客户消息</span><strong>3 条咨询已回复</strong><small>1 条需要确认 · 已标记</small></div><div class="desktop-card report-card"><div class="report-head"><span>销售周报</span><b>第 30 周</b></div><div class="chart"><i style="height:42%"></i><i style="height:58%"></i><i style="height:48%"></i><i style="height:78%"></i><i style="height:69%"></i><i style="height:92%"></i><i style="height:83%"></i></div><div class="report-foot"><strong>+18.6%</strong><span>较上周增长</span></div></div><div class="desktop-card bottom-card"><span>✓</span><p><strong>任务已完成</strong><small>销售报表已生成并发送</small></p></div></div>
 </section>
-<section class="section cases-section" id="cases"><div class="section-title centered"><h2>一个 AI<br/>能顶半个团队</h2><p>已经落地的真实场景——招投标、办公软件、数据填报、论文撰写、GEO 优化。</p></div><div class="case-grid" data-clickable-grid><article class="case-card case-card-wide"><div class="case-copy"><span>01</span><h3>招投标文件处理</h3><p>自动下载标书、解析条款、提取资质并生成应答文档，投标流程更快完成。</p></div><div class="case-visual case-visual-docs" aria-hidden="true"><svg viewBox="0 0 360 190"><path class="grid-line" d="M24 40h312M24 80h312M24 120h312M72 20v150M144 20v150M216 20v150M288 20v150"></path><path class="detail" d="M46 154h112M190 144h122M98 34v136M250 28v136"></path><rect x="46" y="34" width="112" height="136" rx="8"></rect><rect x="72" y="58" width="60" height="8" rx="4"></rect><path d="M72 84h56M72 104h72M72 124h44"></path><circle class="dot" cx="140" cy="84" r="2.8"></circle><circle class="blue-dot" cx="144" cy="124" r="3"></circle><rect x="190" y="28" width="122" height="136" rx="8"></rect><path d="M216 58h70M216 84h48M216 110h76"></path><path class="detail" d="M216 132h28M254 132h36"></path><circle class="dot" cx="298" cy="58" r="2.8"></circle><path class="accent" d="m222 140 18 18 44-54"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>02</span><h3>AI 智能客服</h3><p>7×24 自动巡检客户消息，理解意图后精准回复。常见问题秒回，复杂情况升级人工。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M24 52h212M24 118h212M70 24v122M188 24v122"></path><rect x="24" y="30" width="152" height="44" rx="8"></rect><rect x="84" y="96" width="152" height="44" rx="8"></rect><path d="M54 52h92M116 118h88"></path><path class="detail" d="M54 62h48M116 128h62"></path><circle class="dot" cx="42" cy="52" r="3"></circle><circle class="blue-dot" cx="218" cy="118" r="3"></circle><circle class="accent-fill" cx="198" cy="56" r="14"></circle><path class="accent-stroke" d="M192 56h12M198 50v12"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>03</span><h3>自动填表与数据录入</h3><p>从 Excel、PDF、邮件提取数据，自动填入 ERP、OA、CRM 等系统，告别重复复制粘贴。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M32 52h196M32 82h196M32 112h196M70 28v110M188 28v110"></path><rect x="32" y="28" width="78" height="110" rx="8"></rect><rect x="150" y="28" width="78" height="110" rx="8"></rect><path d="M52 58h38M52 82h38M52 106h30M170 58h38M170 82h38M170 106h30"></path><circle class="dot" cx="96" cy="58" r="2.8"></circle><circle class="blue-dot" cx="210" cy="106" r="3"></circle><path class="detail" d="M52 128h20M170 128h22"></path><path class="accent" d="M110 82h40"></path><path class="accent" d="m138 70 12 12-12 12"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>04</span><h3>论文与研究撰写</h3><p>深度检索学术资源、梳理文献综述、组织论证结构并输出完整论文，自动处理格式与参考文献。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M48 48h178M48 108h178M88 22v126M178 22v126"></path><circle cx="88" cy="78" r="42"></circle><circle class="detail" cx="88" cy="78" r="28"></circle><path d="m118 108 38 38"></path><path d="M72 72h32M72 90h24"></path><circle class="blue-dot" cx="104" cy="58" r="3"></circle><rect x="146" y="34" width="70" height="92" rx="8"></rect><path class="accent" d="M162 60h38M162 82h32M162 104h24"></path><path class="detail" d="M162 118h18"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>05</span><h3>GEO 搜索优化</h3><p>分析品牌在豆包、Kimi、DeepSeek 等 AI 搜索中的可见度，生成优化策略与 AI 友好内容。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M36 136C62 62 116 30 224 34M36 136C96 112 150 84 224 34M36 136C92 142 154 118 224 34M36 136C106 150 176 116 224 34"></path><path class="detail" d="M36 136h188M58 126v-58M124 88v-54M204 44v92"></path><circle class="dot" cx="58" cy="126" r="5"></circle><circle class="dot" cx="124" cy="88" r="5"></circle><circle class="dot" cx="204" cy="44" r="5"></circle><circle class="blue-dot" cx="164" cy="64" r="3"></circle><circle class="blue-dot" cx="94" cy="108" r="3"></circle><path class="accent" d="M58 126C104 88 152 56 204 44"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card case-card-wide"><div class="case-copy"><span>06</span><h3>竞品监控与日报</h3><p>每天自动搜集竞品动态与行业新闻，整理摘要报告并推送到企业群。</p></div><div class="case-visual case-visual-dashboard" aria-hidden="true"><svg viewBox="0 0 360 190"><path class="grid-line" d="M26 154h308M26 118h308M26 82h308M26 46h308M68 28v136M134 28v136M200 28v136M266 28v136"></path><rect x="48" y="34" width="86" height="120" rx="8"></rect><path d="M68 62h44M68 86h34M68 110h50"></path><path class="detail" d="M68 132h26M104 132h18"></path><circle class="dot" cx="120" cy="62" r="2.8"></circle><path class="accent-fill" d="M172 130h26v24h-26zM212 98h26v56h-26zM252 70h26v84h-26zM292 46h26v108h-26z"></path><circle class="blue-dot" cx="185" cy="118" r="3"></circle><circle class="blue-dot" cx="225" cy="88" r="3"></circle><circle class="blue-dot" cx="305" cy="38" r="3"></circle><path class="accent" d="M174 86c34 16 70 8 116-36"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article></div>
+<section class="section cases-section" id="cases"><div class="section-title centered"><h2>一个 AI<br/>能顶半个团队</h2><p>已经落地的真实场景——招投标、办公软件、数据填报、论文撰写、GEO 优化。</p></div><div class="case-grid"><article class="case-card case-card-wide"><div class="case-copy"><span>01</span><h3>招投标文件处理</h3><p>自动下载标书、解析条款、提取资质并生成应答文档，投标流程更快完成。</p></div><div class="case-visual case-visual-docs" aria-hidden="true"><svg viewBox="0 0 360 190"><path class="grid-line" d="M24 40h312M24 80h312M24 120h312M72 20v150M144 20v150M216 20v150M288 20v150"></path><path class="detail" d="M46 154h112M190 144h122M98 34v136M250 28v136"></path><rect x="46" y="34" width="112" height="136" rx="8"></rect><rect x="72" y="58" width="60" height="8" rx="4"></rect><path d="M72 84h56M72 104h72M72 124h44"></path><circle class="dot" cx="140" cy="84" r="2.8"></circle><circle class="blue-dot" cx="144" cy="124" r="3"></circle><rect x="190" y="28" width="122" height="136" rx="8"></rect><path d="M216 58h70M216 84h48M216 110h76"></path><path class="detail" d="M216 132h28M254 132h36"></path><circle class="dot" cx="298" cy="58" r="2.8"></circle><path class="accent" d="m222 140 18 18 44-54"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>02</span><h3>AI 智能客服</h3><p>7×24 自动巡检客户消息，理解意图后精准回复。常见问题秒回，复杂情况升级人工。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M24 52h212M24 118h212M70 24v122M188 24v122"></path><rect x="24" y="30" width="152" height="44" rx="8"></rect><rect x="84" y="96" width="152" height="44" rx="8"></rect><path d="M54 52h92M116 118h88"></path><path class="detail" d="M54 62h48M116 128h62"></path><circle class="dot" cx="42" cy="52" r="3"></circle><circle class="blue-dot" cx="218" cy="118" r="3"></circle><circle class="accent-fill" cx="198" cy="56" r="14"></circle><path class="accent-stroke" d="M192 56h12M198 50v12"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>03</span><h3>自动填表与数据录入</h3><p>从 Excel、PDF、邮件提取数据，自动填入 ERP、OA、CRM 等系统，告别重复复制粘贴。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M32 52h196M32 82h196M32 112h196M70 28v110M188 28v110"></path><rect x="32" y="28" width="78" height="110" rx="8"></rect><rect x="150" y="28" width="78" height="110" rx="8"></rect><path d="M52 58h38M52 82h38M52 106h30M170 58h38M170 82h38M170 106h30"></path><circle class="dot" cx="96" cy="58" r="2.8"></circle><circle class="blue-dot" cx="210" cy="106" r="3"></circle><path class="detail" d="M52 128h20M170 128h22"></path><path class="accent" d="M110 82h40"></path><path class="accent" d="m138 70 12 12-12 12"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>04</span><h3>论文与研究撰写</h3><p>深度检索学术资源、梳理文献综述、组织论证结构并输出完整论文，自动处理格式与参考文献。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M48 48h178M48 108h178M88 22v126M178 22v126"></path><circle cx="88" cy="78" r="42"></circle><circle class="detail" cx="88" cy="78" r="28"></circle><path d="m118 108 38 38"></path><path d="M72 72h32M72 90h24"></path><circle class="blue-dot" cx="104" cy="58" r="3"></circle><rect x="146" y="34" width="70" height="92" rx="8"></rect><path class="accent" d="M162 60h38M162 82h32M162 104h24"></path><path class="detail" d="M162 118h18"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card"><div class="case-copy"><span>05</span><h3>GEO 搜索优化</h3><p>分析品牌在豆包、Kimi、DeepSeek 等 AI 搜索中的可见度，生成优化策略与 AI 友好内容。</p></div><div class="case-visual" aria-hidden="true"><svg viewBox="0 0 260 170"><path class="grid-line" d="M36 136C62 62 116 30 224 34M36 136C96 112 150 84 224 34M36 136C92 142 154 118 224 34M36 136C106 150 176 116 224 34"></path><path class="detail" d="M36 136h188M58 126v-58M124 88v-54M204 44v92"></path><circle class="dot" cx="58" cy="126" r="5"></circle><circle class="dot" cx="124" cy="88" r="5"></circle><circle class="dot" cx="204" cy="44" r="5"></circle><circle class="blue-dot" cx="164" cy="64" r="3"></circle><circle class="blue-dot" cx="94" cy="108" r="3"></circle><path class="accent" d="M58 126C104 88 152 56 204 44"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article><article class="case-card case-card-wide"><div class="case-copy"><span>06</span><h3>竞品监控与日报</h3><p>每天自动搜集竞品动态与行业新闻，整理摘要报告并推送到企业群。</p></div><div class="case-visual case-visual-dashboard" aria-hidden="true"><svg viewBox="0 0 360 190"><path class="grid-line" d="M26 154h308M26 118h308M26 82h308M26 46h308M68 28v136M134 28v136M200 28v136M266 28v136"></path><rect x="48" y="34" width="86" height="120" rx="8"></rect><path d="M68 62h44M68 86h34M68 110h50"></path><path class="detail" d="M68 132h26M104 132h18"></path><circle class="dot" cx="120" cy="62" r="2.8"></circle><path class="accent-fill" d="M172 130h26v24h-26zM212 98h26v56h-26zM252 70h26v84h-26zM292 46h26v108h-26z"></path><circle class="blue-dot" cx="185" cy="118" r="3"></circle><circle class="blue-dot" cx="225" cy="88" r="3"></circle><circle class="blue-dot" cx="305" cy="38" r="3"></circle><path class="accent" d="M174 86c34 16 70 8 116-36"></path></svg></div><a href="#download">了解更多 <span aria-hidden="true">↗</span></a></article></div>
 </section>
-<section class="section asset-section"><div class="asset-layout"><div class="asset-left"><div class="section-title centered"><h2>越用越聪明，<br/>越用越值钱</h2><p>Hz-Hermes 不是用完即走的工具，而是能持续成长的数字员工。</p></div><figure class="asset-visual" aria-hidden="true"><img src="assets/asset-section/asset-panel.gif" alt="" /></figure></div><div class="asset-track" aria-label="Hz-Hermes 能力资产"><article><i><img src="assets/asset-section/icon-badge-check.svg" alt="" /></i><h3>模板化执行</h3><p>标准化任务流程，同类任务秒级启动</p><span>01</span></article><article><i><img src="assets/asset-section/icon-drafting-compass.svg" alt="" /></i><h3>学习偏好</h3><p>逐渐理解你的使用习惯与工作风格</p><span>02</span></article><article><i><img src="assets/asset-section/icon-user-star.svg" alt="" /></i><h3>智能预填推荐</h3><p>主动推荐参数，减少重复输入和选择</p><span>03</span></article><article><i><img src="assets/asset-section/icon-chart-spline.svg" alt="" /></i><h3>主动预判需求</h3><p>从“你告诉它”到“它知道你要什么”</p><span>04</span></article></div></div><p class="asset-note">最终成为你专属的 SOP 专家，团队经验永不流失。</p>
+<section class="section asset-section"><div class="asset-layout"><div class="asset-left"><div class="section-title centered"><h2>越用越聪明<br/>越用越值钱</h2><p>Hz-Hermes 不是用完即走的工具，而是能持续成长的数字员工。</p></div><figure class="asset-visual" aria-hidden="true"><img src="assets/asset-section/asset-panel.gif" alt="" /></figure></div><div class="asset-track" aria-label="Hz-Hermes 能力资产"><article><i><img src="assets/asset-section/icon-badge-check.svg" alt="" /></i><h3>模板化执行</h3><p>标准化任务流程，同类任务秒级启动</p><span>01</span></article><article><i><img src="assets/asset-section/icon-drafting-compass.svg" alt="" /></i><h3>学习偏好</h3><p>逐渐理解你的使用习惯与工作风格</p><span>02</span></article><article><i><img src="assets/asset-section/icon-user-star.svg" alt="" /></i><h3>智能预填推荐</h3><p>主动推荐参数，减少重复输入和选择</p><span>03</span></article><article><i><img src="assets/asset-section/icon-chart-spline.svg" alt="" /></i><h3>主动预判需求</h3><p>从“你告诉它”到“它知道你要什么”</p><span>04</span></article></div></div><p class="asset-note">最终成为你专属的 SOP 专家，团队经验永不流失。</p>
 </section>
 <section class="section enterprise-section" id="enterprise">
   <div class="section-title enterprise-title">
@@ -8071,7 +8999,7 @@ body > main > .topbar {
     <p>私有部署、团队协作、权限管理、技能沉淀，让 AI 真正成为组织的数字劳动力。</p>
     <a class="primary-button" href="mailto:contact@agentsyun.com?subject=预约 Hz-Hermes 企业版演示">预约企业演示 <span aria-hidden="true">↗</span></a>
   </div>
-  <div class="enterprise-grid" data-clickable-grid>
+  <div class="enterprise-grid">
     <article>
       <figure class="enterprise-card-media" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 4.6-3.2 7.9-8 9-4.8-1.1-8-4.4-8-9V7z"></path><path d="m9 12 2 2 4-5"></path></svg>
@@ -8146,7 +9074,23 @@ body > main > .topbar {
     "打开菜单": "Open menu",
     "切换语言": "Switch language",
     "关闭": "Close",
+    "登录": "Log in",
+    "登 录": "Log in",
+    "输入手机号": "Enter phone number",
+    "输入验证码": "Enter verification code",
+    "发送验证码": "Send code",
+    "后获取": "s later",
     "请输入手机号": "Enter phone number",
+    "请输入正确的手机号": "Enter a valid phone number",
+    "请输入验证码": "Enter verification code",
+    "登录即代表同意": "By logging in, you agree to",
+    "《隐私政策》": "Privacy Policy",
+    "《服务条款》": "Terms of Service",
+    "和": "and",
+    "，未注册绑定的手机号验证成功后将自动注册": ". Unregistered phone numbers will be registered automatically after verification.",
+    "让AI能力": "Make AI capability",
+    "成为每个人的天赋": "everyone's native talent",
+    "江苏汇智智能数字科技有限公司": "Jiangsu Huizhi Intelligent Digital Technology Co., Ltd.",
     "请输入昵称": "Enter nickname",
     "验证码第1位": "Verification code digit 1",
     "验证码第2位": "Verification code digit 2",
@@ -8212,7 +9156,7 @@ body > main > .topbar {
     "从一句话到一个结果": "From one sentence to one result",
     "从一句话": "From one sentence",
     "到一个结果": "to one result",
-    "你给出指令，Hz-Hermes 自主完成全部执行链路。": "Give an instruction. Hz-Hermes completes the execution chain.",
+    "你给出指令，Hz-Hermes 自主完成全部执行链路": "Give an instruction. Hz-Hermes completes the execution chain.",
     "任务接收": "Task intake",
     "理解真实意图": "Understand intent",
     "任务拆解": "Task breakdown",
@@ -8241,7 +9185,7 @@ body > main > .topbar {
     "定时自动化": "Scheduled automation",
     "日报生成、竞品监控、数据巡检。设置一次，每日自动执行并推送到微信或钉钉。": "Generate daily reports, monitor competitors, and inspect data on schedule, then push updates to WeChat or DingTalk.",
     "跨应用协作": "Cross-app collaboration",
-    "你下指令，": "You give the command,",
+    "你下指令": "You give the command",
     "它跑腿": "it does the legwork",
     "Hz-Hermes 能理解你的工作场景和需求，在你授权和控制下，协助完成电脑上的各类操作。": "Hz-Hermes understands your work context and helps complete desktop tasks under your authorization and control.",
     "你不需要自己打开软件、点击按钮或填写表格。告诉它要什么结果，它来执行过程；每一步清晰透明，可随时查看、暂停或调整。": "You no longer need to open apps, click buttons, or fill forms manually. Tell it the result you want; every step stays visible and adjustable.",
@@ -8276,7 +9220,7 @@ body > main > .topbar {
     "分析品牌在豆包、Kimi、DeepSeek 等 AI 搜索中的可见度，生成优化策略与 AI 友好内容。": "Analyze brand visibility in AI search and generate optimization strategies and AI-friendly content.",
     "竞品监控与日报": "Competitor monitoring and daily reports",
     "每天自动搜集竞品动态与行业新闻，整理摘要报告并推送到企业群。": "Collect competitor and industry updates daily, summarize them, and push reports to company groups.",
-    "越用越聪明，": "Smarter with use,",
+    "越用越聪明": "Smarter with use",
     "越用越值钱": "more valuable over time",
     "Hz-Hermes 不是用完即走的工具，而是能持续成长的数字员工。": "Hz-Hermes is not a one-off tool. It is a digital employee that keeps improving.",
     "模板化执行": "Templated execution",
@@ -8340,13 +9284,18 @@ body > main > .topbar {
     "申请企业认证": "Apply for enterprise verification",
     "下次默认进入该工作台": "Use this workspace by default next time",
     "账号设置": "Account settings",
+    "个人资料": "Profile",
     "管理你的头像与昵称，手机号仅用于登录不可修改": "Manage your avatar and nickname. Phone number is only used for login and cannot be changed.",
     "头像": "Avatar",
+    "点击自定义头像": "Click to customize avatar",
     "上传图片": "Upload image",
     "支持 JPG / PNG，将自动压缩": "Supports JPG / PNG, compressed automatically",
     "手机号不可修改": "Phone number cannot be changed",
     "昵称": "Nickname",
+    "用户昵称": "Nickname",
+    "长度1-15个字符，支持中文、英文、数字、“_”": "1-15 characters. Chinese, English, numbers, and “_” are supported.",
     "取消": "Cancel",
+    "确定": "Confirm",
     "保存": "Save",
     "默认": "Default",
     "蓝色": "Blue",
@@ -8390,6 +9339,9 @@ body > main > .topbar {
     "企业认证申请（演示） · 后续可替换为正式表单": "Enterprise verification request demo. Replace later with the official form.",
     "请填写昵称": "Please enter a nickname",
     "昵称最多 20 个字": "Nickname can be up to 20 characters",
+    "请输入用户昵称": "Enter a nickname",
+    "昵称长度不能超过15个字符": "Nickname can be up to 15 characters",
+    "仅支持中文、英文、数字、“_”": "Only Chinese, English, numbers, and “_” are supported",
     "账号设置已保存": "Account settings saved",
     "已退出登录": "Logged out",
     "客服通道（演示）": "Support channel demo",
@@ -8437,6 +9389,8 @@ body > main > .topbar {
     $$("[data-lang-toggle]").forEach((btn) => {
       btn.setAttribute("aria-label", currentLang === "en" ? "Switch to Chinese" : "切换到英文");
       btn.setAttribute("aria-pressed", String(currentLang === "en"));
+      btn.classList.toggle("is-zh", currentLang === "zh");
+      btn.classList.toggle("is-en", currentLang === "en");
     });
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
       acceptNode(node) {
@@ -8624,6 +9578,7 @@ body > main > .topbar {
   // Clickable grids → scroll to download / highlight
   $$("[data-clickable-grid] article").forEach((card) => {
     if (card.closest(".flow-track")) return;
+    if (card.closest(".capabilities-section, .cases-section, .enterprise-section")) return;
     card.setAttribute("tabindex", "0");
     const go = () => {
       const title = $("h3", card)?.textContent?.trim() || "该功能";
@@ -8668,8 +9623,46 @@ body > main > .topbar {
       const scrollable = flowSection.offsetHeight - viewportHeight;
       const progress = clamp((-sectionTop) / Math.max(1, scrollable), 0, 1);
       const pre = clamp((viewportHeight * .5 - sectionTop) / Math.max(1, viewportHeight * .5), 0, 1);
+      const cardRaw = clamp((progress - .22) / .7, 0, 1);
+      const cardInv = 1 - cardRaw;
+      const cardEased = 1 - (cardInv * cardInv * cardInv);
+      const rowCount = 7;
+      const flowCardHeight = 56;
+      const desiredOuterGap = 160;
+      const desiredInnerGap = 80;
+      const minOuterGap = 64;
+      const minInnerGap = 16;
+      const contentHeight = rowCount * flowCardHeight;
+      const desiredInnerSpace = contentHeight + (rowCount - 1) * desiredInnerGap;
+      let innerGap = desiredInnerGap;
+      let outerGap = (viewportHeight - desiredInnerSpace) / 2;
+      if (outerGap >= desiredOuterGap) {
+        outerGap = desiredOuterGap;
+        innerGap = (viewportHeight - contentHeight - desiredOuterGap * 2) / (rowCount - 1);
+      } else if (outerGap < minOuterGap) {
+        outerGap = minOuterGap;
+        innerGap = Math.max(
+          minInnerGap,
+          (viewportHeight - contentHeight - minOuterGap * 2) / (rowCount - 1)
+        );
+      }
+      for (let index = 0; index < rowCount; index += 1) {
+        const rowY = outerGap + flowCardHeight / 2 + index * (flowCardHeight + innerGap) - viewportHeight / 2;
+        const value = `${rowY.toFixed(2)}px`;
+        flowSection.style.setProperty(`--flow-row-${index}`, value);
+        flowStage.style.setProperty(`--flow-row-${index}`, value);
+      }
+      const setMetric = (name, start, end) => {
+        const value = start + (end - start) * cardEased;
+        flowSection.style.setProperty(name, `${value.toFixed(2)}px`);
+        flowStage.style.setProperty(name, `${value.toFixed(2)}px`);
+      };
       const nextProgress = progress.toFixed(4);
       const nextPre = pre.toFixed(4);
+      setMetric("--flow-title-size", 48, 36);
+      setMetric("--flow-title-line", 56, 48);
+      setMetric("--flow-subtitle-size", 24, 16);
+      setMetric("--flow-subtitle-line", 32, 24);
       flowSection.style.setProperty("--flow-p", nextProgress);
       flowSection.style.setProperty("--flow-pre", nextPre);
       flowStage.style.setProperty("--flow-p", nextProgress);
@@ -8929,30 +9922,47 @@ body > main > .topbar {
   const authActions = $("#auth-actions");
   const mobileAuth = $("#mobile-auth");
   const loginOverlay = $("#login-overlay");
+  const loginModal = $("#login-overlay .login-modal");
   const settingsOverlay = $("#settings-overlay");
   const settingsPhone = $("#settings-phone");
   const settingsNickname = $("#settings-nickname");
+  const settingsNicknameCount = $("#settings-nickname-count");
+  const settingsNicknameHint = $("#settings-nickname-hint");
+  const settingsNicknameWrap = $("#settings-overlay .settings-input-wrap");
   const settingsAvatarImg = $("#settings-avatar-img");
+  const settingsAvatarPreview = $("#settings-avatar-preview");
   const settingsPresets = $("#settings-presets");
   const settingsUploadInput = $("#settings-upload-input");
-  const DEFAULT_AVATAR = "./assets/default-avatar.png";
-  function makePresetAvatar(c1, c2) {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient></defs><circle cx="40" cy="40" r="40" fill="url(#g)"/><circle cx="40" cy="32" r="14" fill="#fff" opacity=".95"/><ellipse cx="40" cy="62" rx="22" ry="16" fill="#fff" opacity=".95"/></svg>`;
-    return `data:image/svg+xml,${encodeURIComponent(svg)}`;
-  }
-  const AVATAR_PRESETS = [
-    { id: "default", src: DEFAULT_AVATAR, label: "默认" },
-    { id: "blue", src: makePresetAvatar("#5B6CFF", "#3140D8"), label: "蓝色" },
-    { id: "teal", src: makePresetAvatar("#2BB6A8", "#16887D"), label: "青色" },
-    { id: "amber", src: makePresetAvatar("#F0B429", "#D8900C"), label: "暖黄" },
-    { id: "rose", src: makePresetAvatar("#F0738A", "#D24B66"), label: "玫红" },
+  const AVATAR_POOL = [
+    "./assets/avatars/avatar-female-1.png",
+    "./assets/avatars/avatar-female-2.png",
+    "./assets/avatars/avatar-female-3.png",
+    "./assets/avatars/avatar-female-4.png",
+    "./assets/avatars/avatar-male-1.png",
+    "./assets/avatars/avatar-male-2.png",
+    "./assets/avatars/avatar-male-3.png",
+    "./assets/avatars/avatar-male-4.png",
   ];
+  const LEGACY_DEFAULT_AVATAR = "./assets/default-avatar.png";
+  const DEFAULT_AVATAR = AVATAR_POOL[0];
+  const AVATAR_PRESETS = AVATAR_POOL.map((src, index) => ({
+    id: `avatar-${index + 1}`,
+    src,
+    label: `默认头像 ${index + 1}`,
+  }));
+  const SETTINGS_NICKNAME_HINT = "长度1-15个字符，支持中文、英文、数字、“_”";
   let draftAvatar = DEFAULT_AVATAR;
   const phoneInput = $("#login-phone");
   const agreeInput = $("#login-agree");
   const rememberInput = $("#remember-space");
   const spaceList = $("#space-list");
   const enterpriseCta = $("#enterprise-cta");
+  const codeInput = $("#login-code");
+  const phoneField = $("[data-field='phone']");
+  const codeField = $("[data-field='code']");
+  const phoneError = $("#login-phone-error");
+  const codeError = $("#login-code-error");
+  const sendCodeBtn = $("#login-send-code");
   const otpCells = $$(".otp-cell");
   let codeTimer = null;
   let codeLeft = 0;
@@ -8960,6 +9970,8 @@ body > main > .topbar {
   let loginIntent = "default"; // default | enterprise
   let availableSpaces = [];
   let session = loadSession();
+  let loginOverlayPointerStartedOnBackdrop = false;
+  let settingsOverlayPointerStartedOnBackdrop = false;
 
   function loadSession() {
     try {
@@ -8980,13 +9992,22 @@ body > main > .topbar {
     return p.replace(/(\d{3})\d{4}(\d{4})/, "$1****$2");
   }
   function phoneOk(v) {
-    return /^1\d{10}$/.test(String(v || "").trim());
+    return /^1[3-9]\d{9}$/.test(String(v || "").trim());
   }
   function userDisplayName(phone) {
     return "丸子";
   }
+  function avatarForPhone(phone) {
+    const seed = String(phone || Date.now());
+    let hash = 0;
+    for (let i = 0; i < seed.length; i += 1) {
+      hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+    }
+    return AVATAR_POOL[hash % AVATAR_POOL.length];
+  }
   function getAvatarSrc(s = session) {
-    return (s && s.avatar) || DEFAULT_AVATAR;
+    if (s?.avatar && s.avatar !== LEGACY_DEFAULT_AVATAR) return s.avatar;
+    return avatarForPhone(s?.phone);
   }
   function getDisplayName(s = session) {
     return (s && s.displayName) || userDisplayName(s?.phone) || "丸子";
@@ -9113,6 +10134,7 @@ body > main > .topbar {
   function closeOverlays() {
     closeOverlay(loginOverlay);
     closeOverlay(settingsOverlay);
+    resetLoginCountdown();
   }
   function closeLogin() {
     closeOverlays();
@@ -9135,32 +10157,102 @@ body > main > .topbar {
     });
   }
 
+  function setLoginError(target, message) {
+    const isPhone = target === "phone";
+    const errorEl = isPhone ? phoneError : codeError;
+    const fieldEl = isPhone ? phoneField : codeField;
+    const otherError = isPhone ? codeError : phoneError;
+    const otherField = isPhone ? codeField : phoneField;
+    if (otherError) {
+      otherError.classList.remove("is-visible");
+      const text = $("span", otherError);
+      if (text) text.textContent = "";
+    }
+    otherField?.classList.remove("is-error");
+    if (!errorEl || !fieldEl) return;
+    const text = $("span", errorEl);
+    if (text) text.textContent = translatePhrase(message);
+    errorEl.classList.add("is-visible");
+    fieldEl.classList.add("is-error");
+  }
+
+  function clearLoginError(target) {
+    const errorEl = target === "phone" ? phoneError : codeError;
+    const fieldEl = target === "phone" ? phoneField : codeField;
+    if (errorEl) {
+      errorEl.classList.remove("is-visible");
+      const text = $("span", errorEl);
+      if (text) text.textContent = "";
+    }
+    fieldEl?.classList.remove("is-error");
+  }
+
+  function updateLoginInputs() {
+    const phone = (phoneInput?.value || "").trim();
+    const code = (codeInput?.value || "").trim();
+    phoneField?.classList.toggle("has-value", phone.length > 0);
+    codeField?.classList.toggle("has-value", code.length > 0);
+    const enableCode = phoneOk(phone);
+    if (codeInput) codeInput.disabled = !enableCode;
+    if (sendCodeBtn) {
+      const canSend = enableCode && codeLeft <= 0;
+      sendCodeBtn.disabled = !canSend;
+      sendCodeBtn.classList.toggle("is-enabled", canSend);
+    }
+    codeField?.classList.toggle("is-disabled", !enableCode);
+    if (!enableCode && codeInput) {
+      codeInput.value = "";
+      codeField?.classList.remove("has-value");
+      clearLoginError("code");
+    }
+  }
+
+  function resetLoginCountdown() {
+    clearInterval(codeTimer);
+    codeTimer = null;
+    codeLeft = 0;
+    if (sendCodeBtn) {
+      sendCodeBtn.textContent = translatePhrase("发送验证码");
+    }
+  }
+
+  function codeCountdownText(seconds) {
+    return currentLang === "en" ? `Get in ${seconds}s` : `${seconds}s后获取`;
+  }
+
   function getOtp() {
+    if (codeInput) return codeInput.value;
     return otpCells.map((c) => c.value).join("");
   }
   function clearOtp() {
     otpCells.forEach((c) => { c.value = ""; });
+    if (codeInput) codeInput.value = "";
+    updateLoginInputs();
   }
   function focusOtp() {
+    codeInput?.focus();
     otpCells[0]?.focus();
   }
 
   function startResendCountdown() {
     codeLeft = 60;
-    const btn = $("#login-resend");
+    const btn = $("#login-resend") || sendCodeBtn;
     if (!btn) return;
     btn.disabled = true;
-    btn.textContent = `${translatePhrase("重新获取验证码")} (${codeLeft}s)`;
+    btn.textContent = codeCountdownText(codeLeft);
+    btn.classList.remove("is-enabled");
     clearInterval(codeTimer);
     codeTimer = setInterval(() => {
       codeLeft -= 1;
       if (codeLeft <= 0) {
         clearInterval(codeTimer);
-        btn.disabled = false;
-        btn.textContent = translatePhrase("重新获取验证码");
+        const canSend = phoneOk(phoneInput?.value || "");
+        btn.disabled = !canSend;
+        btn.textContent = translatePhrase("发送验证码");
+        btn.classList.toggle("is-enabled", canSend);
         return;
       }
-      btn.textContent = `${translatePhrase("重新获取验证码")} (${codeLeft}s)`;
+      btn.textContent = codeCountdownText(codeLeft);
     }, 1000);
   }
 
@@ -9168,11 +10260,13 @@ body > main > .topbar {
     loginIntent = intent;
     pendingPhone = session?.phone || "";
     if (phoneInput && pendingPhone) phoneInput.value = pendingPhone;
-    agreeInput && (agreeInput.checked = false);
+    resetLoginCountdown();
     clearOtp();
+    clearLoginError("phone");
+    clearLoginError("code");
+    updateLoginInputs();
     showStep("phone");
     openOverlay(loginOverlay);
-    setTimeout(() => phoneInput?.focus(), 40);
   }
 
   function openSpacePicker(phone, spaces, preferEnterprise) {
@@ -9243,7 +10337,7 @@ body > main > .topbar {
     const next = {
       phone,
       displayName: (session?.phone === phone && session?.displayName) ? session.displayName : userDisplayName(phone),
-      avatar: (session?.phone === phone && session?.avatar) ? session.avatar : DEFAULT_AVATAR,
+      avatar: (session?.phone === phone && session?.avatar && session.avatar !== LEGACY_DEFAULT_AVATAR) ? session.avatar : avatarForPhone(phone),
       space,
       spaces: availableSpaces.length ? availableSpaces : session?.spaces || [space],
       rememberSpaceId: remember ? space.id : (session?.rememberSpaceId || null),
@@ -9354,12 +10448,40 @@ body > main > .topbar {
     }
   }
 
+  function updateSettingsCount() {
+    if (!settingsNicknameCount || !settingsNickname) return;
+    settingsNicknameCount.textContent = `${settingsNickname.value.length}/15`;
+  }
+
+  function setSettingsNicknameError(message) {
+    settingsNicknameWrap?.classList.add("is-error");
+    if (settingsNicknameHint) {
+      settingsNicknameHint.textContent = translatePhrase(message);
+      settingsNicknameHint.classList.add("is-error");
+    }
+  }
+
+  function clearSettingsNicknameError() {
+    settingsNicknameWrap?.classList.remove("is-error");
+    if (settingsNicknameHint) {
+      settingsNicknameHint.textContent = translatePhrase(SETTINGS_NICKNAME_HINT);
+      settingsNicknameHint.classList.remove("is-error");
+    }
+  }
+
+  function avatarPresetLabel(index) {
+    return currentLang === "en" ? `Default avatar ${index + 1}` : `默认头像 ${index + 1}`;
+  }
+
   function renderAvatarPresets() {
     if (!settingsPresets) return;
-    settingsPresets.innerHTML = AVATAR_PRESETS.map((p) => `
-      <button type="button" class="settings-preset" data-preset-id="${p.id}" title="${p.label}" aria-label="${p.label}">
+    settingsPresets.innerHTML = AVATAR_PRESETS.map((p, index) => {
+      const label = avatarPresetLabel(index);
+      return `
+      <button type="button" class="settings-preset" data-preset-id="${p.id}" title="${label}" aria-label="${label}">
         <img alt="" />
-      </button>`).join("");
+      </button>`;
+    }).join("");
     $$(".settings-preset", settingsPresets).forEach((btn) => {
       const preset = AVATAR_PRESETS.find((p) => p.id === btn.getAttribute("data-preset-id"));
       const img = $("img", btn);
@@ -9410,22 +10532,30 @@ body > main > .topbar {
     }
     if (settingsPhone) settingsPhone.value = session.phone;
     if (settingsNickname) settingsNickname.value = getDisplayName();
+    clearSettingsNicknameError();
+    updateSettingsCount();
     renderAvatarPresets();
     setDraftAvatar(getAvatarSrc());
     openOverlay(settingsOverlay);
-    setTimeout(() => settingsNickname?.focus(), 40);
+    requestAnimationFrame(() => document.activeElement?.blur?.());
   }
 
   function saveSettings() {
     if (!session?.phone) return;
     const nickname = (settingsNickname?.value || "").trim();
     if (!nickname) {
-      toast("请填写昵称");
+      setSettingsNicknameError("请输入用户昵称");
       settingsNickname?.focus();
       return;
     }
-    if (nickname.length > 20) {
-      toast("昵称最多 20 个字");
+    if (nickname.length > 15) {
+      setSettingsNicknameError("昵称长度不能超过15个字符");
+      settingsNickname?.focus();
+      return;
+    }
+    if (!/^[\u4e00-\u9fa5A-Za-z0-9_]+$/.test(nickname)) {
+      setSettingsNicknameError("仅支持中文、英文、数字、“_”");
+      settingsNickname?.focus();
       return;
     }
     saveSession({
@@ -9540,25 +10670,33 @@ body > main > .topbar {
           <img class="account-trigger-avatar" src="${avatar}" alt="" />
         </button>
         <div class="account-panel" role="menu">
-          <div class="account-panel-head">
-            <span class="avatar-dot"><img src="${avatar}" alt="" /></span>
-            <div>
-              <strong>${name}</strong>
-              <span>${headOrg}</span>
-              ${isEnt && space.certified ? '<span class="space-tag ok" style="margin-top:6px;width:fit-content">已认证</span>' : ""}
-            </div>
-          </div>
-          <div class="account-switch-wrap">
+          <div class="account-menu-item account-switch-wrap">
             <button type="button" data-action="switch" aria-haspopup="true" aria-expanded="false">
-              <span>切换工作台</span>
+              <img class="account-item-icon" src="./assets/account-menu/icon-switch.svg" alt="" />
+              <span class="account-item-label">切换工作台</span>
               <span class="menu-chevron" aria-hidden="true">›</span>
             </button>
             <div class="account-switch-flyout" data-switch-flyout hidden></div>
           </div>
-          <button type="button" data-action="settings">账号设置</button>
+          <div class="account-menu-item">
+            <button type="button" data-action="settings">
+              <img class="account-item-icon" src="./assets/account-menu/icon-user-pen.svg" alt="" />
+              <span class="account-item-label">账号设置</span>
+            </button>
+          </div>
           <div class="sep"></div>
-          <button type="button" data-action="support">联系客服</button>
-          <button type="button" class="danger" data-action="logout">退出登录</button>
+          <div class="account-menu-item">
+            <button type="button" data-action="support">
+              <img class="account-item-icon" src="./assets/account-menu/icon-headset.svg" alt="" />
+              <span class="account-item-label">联系客服</span>
+            </button>
+          </div>
+          <div class="account-menu-item">
+            <button type="button" class="danger" data-action="logout">
+              <img class="account-item-icon" src="./assets/account-menu/icon-logout.svg" alt="" />
+              <span class="account-item-label">退出登录</span>
+            </button>
+          </div>
         </div>
       </div>`;
     if (authActions) authActions.innerHTML = menu;
@@ -9639,64 +10777,48 @@ body > main > .topbar {
     });
   }
 
-  // OTP UX
-  otpCells.forEach((cell, idx) => {
-    cell.addEventListener("input", () => {
-      cell.value = cell.value.replace(/\D/g, "").slice(0, 1);
-      if (cell.value && idx < otpCells.length - 1) otpCells[idx + 1].focus();
-    });
-    cell.addEventListener("keydown", (e) => {
-      if (e.key === "Backspace" && !cell.value && idx > 0) otpCells[idx - 1].focus();
-    });
-    cell.addEventListener("paste", (e) => {
-      const text = (e.clipboardData?.getData("text") || "").replace(/\D/g, "").slice(0, 6);
-      if (!text) return;
-      e.preventDefault();
-      text.split("").forEach((ch, i) => {
-        if (otpCells[i]) otpCells[i].value = ch;
-      });
-      otpCells[Math.min(text.length, 5)]?.focus();
-    });
+  // Login form UX
+  phoneInput?.addEventListener("input", () => {
+    phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 11);
+    clearLoginError("phone");
+    updateLoginInputs();
+  });
+  codeInput?.addEventListener("input", () => {
+    codeInput.value = codeInput.value.replace(/\D/g, "").slice(0, 6);
+    clearLoginError("code");
+    updateLoginInputs();
+  });
+  sendCodeBtn?.addEventListener("click", () => {
+    if (sendCodeBtn.disabled || codeLeft > 0) return;
+    startResendCountdown();
+    toast("验证码已发送（演示）");
+    setTimeout(() => codeInput?.focus(), 40);
   });
 
   $("#login-next-phone")?.addEventListener("click", () => {
     const phone = (phoneInput?.value || "").trim();
-    if (!phoneOk(phone)) {
-      toast("请输入正确的 11 位手机号");
+    const code = (codeInput?.value || "").trim();
+    if (!phone) {
+      setLoginError("phone", "请输入手机号");
       phoneInput?.focus();
       return;
     }
-    if (!agreeInput?.checked) {
-      toast("请先勾选服务协议与隐私政策");
+    if (!phoneOk(phone)) {
+      setLoginError("phone", "请输入正确的手机号");
+      phoneInput?.focus();
+      return;
+    }
+    if (!code) {
+      setLoginError("code", "请输入验证码");
+      codeInput?.focus();
+      return;
+    }
+    if (!/^\d{6}$/.test(code)) {
+      setLoginError("code", "请输入 6 位验证码");
+      codeInput?.focus();
       return;
     }
     pendingPhone = phone;
-    $("#login-masked-phone").textContent = `+86 ${maskPhone(phone)}`;
-    clearOtp();
-    showStep("code");
-    startResendCountdown();
-    toast("验证码已发送（演示）");
-    setTimeout(focusOtp, 40);
-  });
-
-  $("#login-resend")?.addEventListener("click", () => {
-    if (codeLeft > 0) return;
-    toast("验证码已重新发送（演示）");
-    startResendCountdown();
-  });
-
-  $("#login-change-phone")?.addEventListener("click", () => {
-    showStep("phone");
-    phoneInput?.focus();
-  });
-
-  $("#login-next-code")?.addEventListener("click", () => {
-    const code = getOtp();
-    if (!/^\d{6}$/.test(code)) {
-      toast("请输入 6 位验证码");
-      focusOtp();
-      return;
-    }
     afterVerified(pendingPhone);
   });
 
@@ -9711,14 +10833,32 @@ body > main > .topbar {
   $$("[data-close-overlays]").forEach((btn) => {
     btn.addEventListener("click", () => closeOverlays());
   });
+  loginOverlay?.addEventListener("pointerdown", (e) => {
+    loginOverlayPointerStartedOnBackdrop = e.target === loginOverlay;
+  });
   loginOverlay?.addEventListener("click", (e) => {
-    if (e.target === loginOverlay) closeOverlays();
+    if (e.target === loginOverlay && loginOverlayPointerStartedOnBackdrop) closeOverlays();
+    loginOverlayPointerStartedOnBackdrop = false;
+  });
+  loginModal?.addEventListener("pointerdown", (e) => {
+    if (e.target.closest("input, textarea")) return;
+    phoneInput?.blur();
+    codeInput?.blur();
+  });
+  settingsOverlay?.addEventListener("pointerdown", (e) => {
+    settingsOverlayPointerStartedOnBackdrop = e.target === settingsOverlay;
   });
   settingsOverlay?.addEventListener("click", (e) => {
-    if (e.target === settingsOverlay) closeOverlays();
+    if (e.target === settingsOverlay && settingsOverlayPointerStartedOnBackdrop) closeOverlays();
+    settingsOverlayPointerStartedOnBackdrop = false;
   });
   $("#settings-save")?.addEventListener("click", saveSettings);
-  $("#settings-upload-btn")?.addEventListener("click", () => settingsUploadInput?.click());
+  settingsAvatarPreview?.addEventListener("click", () => settingsUploadInput?.click());
+  settingsAvatarPreview?.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    settingsUploadInput?.click();
+  });
   settingsUploadInput?.addEventListener("change", async () => {
     const file = settingsUploadInput.files?.[0];
     settingsUploadInput.value = "";
@@ -9735,11 +10875,24 @@ body > main > .topbar {
   settingsNickname?.addEventListener("keydown", (e) => {
     if (e.key === "Enter") saveSettings();
   });
+  settingsNickname?.addEventListener("input", () => {
+    clearSettingsNicknameError();
+    updateSettingsCount();
+  });
 
   document.addEventListener("click", () => closeAccountMenus());
   phoneInput?.addEventListener("keydown", (e) => {
     if (e.key === "Enter") $("#login-next-phone")?.click();
   });
+  codeInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") $("#login-next-phone")?.click();
+  });
+  $$("[data-legal-link]").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+    });
+  });
+  updateLoginInputs();
 
   bindLanguageToggle();
   renderAuth();

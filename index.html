@@ -305,7 +305,7 @@ a {
   flex: 0 0 auto;
   width: 28px;
   height: 28px;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 10px;
 }
 .agent-line p {
@@ -2617,7 +2617,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 12px;
-  border-radius: 8px;
+  border-radius: 12px;
   color: #000;
   font-family: "PingFang SC", "MiSans", "Microsoft YaHei", sans-serif;
   font-size: 14px;
@@ -3523,7 +3523,7 @@ footer {
   font-size: 36px;
   line-height: 1.18;
   letter-spacing: 0;
-  font-weight: 760;
+  font-weight: 500;
 }
 .proof-metrics {
   display: grid;
@@ -5261,7 +5261,7 @@ body {
 }
 .asset-section .section-title p {
   max-width: 320px;
-  margin: 20px 0 0;
+  margin: 16px 0 0;
   color: #fff7ec;
   font-size: 18px;
   line-height: 1.55;
@@ -5824,13 +5824,13 @@ body {
 }
 
 .download-section .download-button-windows {
-  width: 216px !important;
+  width: auto !important;
   background: #000 !important;
   color: #fff !important;
 }
 
 .download-section .download-button-mac {
-  width: 204px !important;
+  width: auto !important;
   background: #fff !important;
   color: #000 !important;
 }
@@ -6095,6 +6095,236 @@ body > main > .topbar.is-scrolled {
   text-align: center;
 }
 
+.topbar .nav-dropdown {
+  position: relative;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.topbar .nav-dropdown::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 36px;
+  height: 4px;
+}
+
+.topbar .nav-dropdown-bridge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 36px;
+  z-index: 1;
+  height: 4px;
+  display: block;
+}
+
+.topbar .nav-dropdown-trigger {
+  width: auto;
+  height: 36px;
+  margin: 0;
+  padding: 8px 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 100px;
+  background: transparent;
+  color: #666;
+  appearance: none;
+  cursor: default;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.topbar .nav-dropdown:hover .nav-dropdown-trigger,
+.topbar .nav-dropdown:focus-within .nav-dropdown-trigger {
+  background: #f3f3f3;
+  color: #000;
+}
+
+body > main > .topbar.is-scrolled .nav-dropdown:hover .nav-dropdown-trigger,
+body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigger {
+  background: #f9f9f9;
+}
+
+.topbar .nav-dropdown-menu {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  z-index: 100;
+  width: 320px;
+  min-width: 320px;
+  margin-left: -160px;
+  padding: 8px 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  visibility: hidden;
+  border: 1px solid #e5e5e5;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, .05),
+    0 0 24px rgba(0, 0, 0, .05);
+}
+
+.topbar .nav-dropdown-menu.is-open,
+.topbar .nav-dropdown-menu.is-closing {
+  visibility: visible;
+}
+
+.topbar .nav-dropdown-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.topbar .nav-dropdown-item {
+  width: 100%;
+  min-width: 0;
+  height: 62px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  color: #000;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.topbar .nav-dropdown-item > .nav-dropdown-icon,
+.topbar .nav-dropdown-item > .nav-dropdown-text,
+.topbar .nav-dropdown-item > .nav-dropdown-arrow {
+  position: relative;
+  z-index: 1;
+}
+
+.topbar .nav-dropdown-item {
+  position: relative;
+  gap: 16px;
+}
+
+.topbar .nav-dropdown-item::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  border-radius: 12px;
+  background: transparent;
+  transition: background .12s ease;
+}
+
+.topbar .nav-dropdown-item:hover::after {
+  background: #f9f9f9;
+}
+
+.topbar .nav-dropdown-item:active::after {
+  background: #f3f3f3;
+}
+
+.topbar .nav-dropdown-icon {
+  width: 28px;
+  height: 28px;
+  margin-left: 16px;
+  display: block;
+  flex: 0 0 28px;
+}
+
+.topbar .nav-dropdown-icon img {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.topbar .nav-dropdown-text {
+  min-width: 0;
+  padding-right: 24px;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.topbar .nav-dropdown-title,
+.topbar .nav-dropdown-desc {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.topbar .nav-dropdown-title {
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.topbar .nav-dropdown-desc {
+  color: #999;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.topbar .nav-dropdown-arrow {
+  position: absolute !important;
+  right: 24px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  color: #000;
+  opacity: 0;
+  transform: translate(-2px, -50%);
+  transition: opacity .14s ease, transform .14s ease;
+  pointer-events: none;
+}
+
+.topbar .nav-dropdown-arrow path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.topbar .nav-dropdown-item:hover .nav-dropdown-arrow {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.topbar .nav-dropdown-divider {
+  width: 100%;
+  height: 16px;
+  position: relative;
+  flex: 0 0 16px;
+}
+
+.topbar .nav-dropdown-divider img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .topbar nav > a.is-active,
 .topbar nav > a[data-nav="hermes"] {
   color: #000 !important;
@@ -6149,15 +6379,16 @@ body > main > .topbar.is-scrolled {
 }
 
 .topbar .auth-actions {
-  width: 99px !important;
+  width: auto !important;
   height: 36px !important;
-  display: block !important;
+  display: inline-flex !important;
   flex: 0 0 auto;
 }
 
 .topbar .nav-button-brand,
 .topbar .auth-actions .nav-button-brand {
-  width: 99px !important;
+  width: auto !important;
+  min-width: 0 !important;
   height: 36px !important;
   min-height: 36px !important;
   padding: 6px 18px !important;
@@ -6457,7 +6688,7 @@ main > :where(.intro-section, .flow-section, .capabilities-section, .cases-secti
 
 /* Keep the site navigation pinned regardless of section scroll mechanics. */
 body > main {
-  padding-top: 0 !important;
+  padding-top: 68px !important;
 }
 
 body > main > .topbar {
@@ -6778,9 +7009,9 @@ body > main > .topbar {
 .hero {
   position: relative !important;
   width: 100% !important;
-  min-height: 100svh !important;
-  height: 100svh !important;
-  padding: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 128px 0 0 !important;
   overflow: hidden !important;
   background: #f9f9f9 !important;
   text-align: center;
@@ -6794,10 +7025,10 @@ body > main > .topbar {
 }
 
 .hero-copy {
-  position: absolute !important;
-  top: 196px !important;
-  left: 0 !important;
-  right: 0 !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
   z-index: 3;
   width: 100% !important;
   max-width: none !important;
@@ -6851,7 +7082,7 @@ body > main > .topbar {
 .hero-copy .secondary-button {
   height: 40px !important;
   min-height: 40px !important;
-  padding: 0 16px !important;
+  padding: 0 24px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -6859,21 +7090,21 @@ body > main > .topbar {
   border-radius: 999px !important;
   font-size: 14px !important;
   line-height: 20px !important;
-  font-weight: 600 !important;
+  font-weight: 400 !important;
   letter-spacing: 0 !important;
   box-shadow: none !important;
   transform: none !important;
 }
 
 .hero-copy .primary-button {
-  width: 216px !important;
+  width: auto !important;
   color: #fff !important;
   background: #000 !important;
   border: 0 !important;
 }
 
 .hero-copy .secondary-button {
-  width: 204px !important;
+  width: auto !important;
   color: #000 !important;
   background: #fff !important;
   border: 1px solid #e5e5e5 !important;
@@ -6885,6 +7116,214 @@ body > main > .topbar {
   box-shadow: none !important;
 }
 
+.hero-copy .download-button,
+.download-section .download-button {
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease !important;
+}
+
+.hero-copy .download-button:hover,
+.download-section .download-button:hover,
+.download-menu-wrap:hover > .download-button-mac,
+.download-menu-wrap:focus-within > .download-button-mac {
+  transform: translateY(-2px) !important;
+}
+
+.download-button-windows .download-arrow-icon {
+  transition: transform .18s ease;
+}
+
+.download-button-windows:hover .download-arrow-icon {
+  transform: translateX(2px);
+}
+
+.download-button-mac img:last-child {
+  transition: transform .18s ease;
+}
+
+.download-menu-wrap:hover > .download-button-mac img:last-child {
+  transform: rotate(180deg);
+}
+
+.download-menu-wrap {
+  position: relative;
+  display: inline-grid;
+  align-items: flex-start;
+  height: 40px;
+  flex: 0 0 auto;
+  width: max-content;
+}
+
+.download-menu-bridge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 38px;
+  z-index: 1;
+  height: 4px;
+  display: block;
+}
+
+:root {
+  --dropdown-open-dur: 250ms;
+  --dropdown-close-dur: 150ms;
+  --dropdown-pre-scale: 0.97;
+  --dropdown-closing-scale: 0.99;
+  --dropdown-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.t-dropdown {
+  transform-origin: top left;
+  transform: scale(var(--dropdown-pre-scale));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--dropdown-open-dur) var(--dropdown-ease),
+    opacity var(--dropdown-open-dur) var(--dropdown-ease);
+  will-change: transform, opacity;
+}
+
+.t-dropdown[data-origin="top-right"] {
+  transform-origin: top right;
+}
+
+.t-dropdown[data-origin="top-center"] {
+  transform-origin: top center;
+}
+
+.t-dropdown[data-origin="bottom-left"] {
+  transform-origin: bottom left;
+}
+
+.t-dropdown[data-origin="bottom-center"] {
+  transform-origin: bottom center;
+}
+
+.t-dropdown[data-origin="bottom-right"] {
+  transform-origin: bottom right;
+}
+
+.t-dropdown.is-open {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.t-dropdown.is-closing {
+  transform: scale(var(--dropdown-closing-scale));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--dropdown-close-dur) var(--dropdown-ease),
+    opacity var(--dropdown-close-dur) var(--dropdown-ease);
+}
+
+.download-dropdown-menu {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  z-index: 80;
+  width: 100%;
+  height: 104px;
+  padding: 8px 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  visibility: hidden;
+  border: 1px solid #e5e5e5;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, .05),
+    0 0 24px rgba(0, 0, 0, .05);
+}
+
+.download-dropdown-menu.is-open,
+.download-dropdown-menu.is-closing {
+  visibility: visible;
+}
+
+.download-dropdown-panel {
+  width: 100%;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.download-menu-item {
+  position: relative;
+  width: 100%;
+  height: 36px;
+  margin: 0;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #000;
+  cursor: pointer;
+  appearance: none;
+  text-decoration: none;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.download-menu-item span {
+  width: 100%;
+  height: 36px;
+  min-width: 0;
+  padding: 8px 38px 8px 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  box-sizing: border-box;
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.download-menu-item img {
+  position: absolute;
+  right: 24px;
+  top: 11px;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.download-menu-item:hover span {
+  background: #f9f9f9;
+}
+
+.download-menu-item:active span {
+  background: #f3f3f3;
+}
+
+.download-menu-divider {
+  width: 100%;
+  height: 16px;
+  position: relative;
+}
+
+.download-menu-divider img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-dropdown {
+    transition: none !important;
+  }
+}
+
 .hero-action-icon {
   width: 16px;
   height: 16px;
@@ -6894,10 +7333,11 @@ body > main > .topbar {
 
 .hero-meta {
   width: 560px !important;
-  min-height: 48px !important;
+  min-height: 0 !important;
   height: auto !important;
   margin: 0 auto !important;
   padding-top: 32px !important;
+  padding-bottom: 0 !important;
   overflow: visible !important;
   display: flex !important;
   align-items: flex-start !important;
@@ -6915,6 +7355,8 @@ body > main > .topbar {
   display: inline-flex !important;
   align-items: center !important;
   gap: 8px !important;
+  height: 16px !important;
+  min-height: 16px !important;
   color: #000 !important;
   white-space: nowrap;
 }
@@ -6932,17 +7374,17 @@ body > main > .topbar {
 }
 
 .hz-figma-showcase {
-  position: absolute !important;
-  top: 572px !important;
-  left: 50% !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
   z-index: 2;
   width: 1280px !important;
   max-width: none !important;
   height: 720px !important;
-  margin: 0 !important;
+  margin: 80px auto -80px !important;
   padding: 0 !important;
   overflow: visible !important;
-  transform: translateX(-50%) !important;
+  transform: none !important;
 }
 
 .hz-figma-shell.app-window {
@@ -6983,7 +7425,6 @@ body > main > .topbar {
 
 @media (max-width: 767px) {
   .hero-copy {
-    top: 112px !important;
     width: min(560px, calc(100vw - 48px)) !important;
     max-width: calc(100vw - 48px) !important;
   }
@@ -7225,14 +7666,161 @@ body > main > .topbar {
   margin-top: 16px;
 }
 
+/* Final page-heading lock: 36px size with fixed 48px line height. */
+.proof h2,
+.intro-section .section-title h2,
+.capabilities-section .section-title h2,
+.capabilities-section .capabilities-sticky > .section-title h2,
+.desktop-section .desktop-copy h2,
+.desktop-copy h2,
+.cases-section .section-title h2,
+.cases-section .section-title > h2,
+.asset-section .section-title h2,
+.asset-section .section-title > h2,
+.enterprise-section .section-title h2,
+.enterprise-section .section-title > h2,
+.download-section h2,
+.download-section .download-heading h2 {
+  font-size: 36px !important;
+  line-height: 48px !important;
+}
+
+/* Final icon stroke lock: render card icons as true 2px strokes. */
+.intro-section .intro-feature-row i svg,
+.enterprise-section .enterprise-card-media svg {
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2px !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+.intro-section .intro-feature-row i svg :where(path, circle, rect, polyline, line),
+.enterprise-section .enterprise-card-media svg :where(path, circle, rect, polyline, line) {
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2px !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  vector-effect: non-scaling-stroke !important;
+}
+
+/* Cover hover motion: scale only the cover artwork, not the card layout. */
+.intro-section .intro-card-media img {
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform .32s cubic-bezier(.22, 1, .36, 1);
+  will-change: transform;
+}
+
+.intro-section .intro-feature-row article:hover .intro-card-media img {
+  transform: scale(1.1);
+}
+
+.enterprise-section .enterprise-card-media,
+.cases-section .case-grid article {
+  position: relative;
+  overflow: hidden;
+}
+
+.enterprise-section .enterprise-card-media {
+  background-image: none !important;
+}
+
+.enterprise-section .enterprise-card-media::before,
+.cases-section .case-grid article::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform .32s cubic-bezier(.22, 1, .36, 1);
+  will-change: transform;
+}
+
+.enterprise-section .enterprise-grid article:hover .enterprise-card-media::before,
+.cases-section .case-grid article:hover::before {
+  transform: scale(1.1);
+}
+
+.enterprise-section .enterprise-card-media svg,
+.cases-section .case-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.enterprise-section .enterprise-grid article:nth-child(1) .enterprise-card-media::before {
+  background-image: url("../assets/enterprise/enterprise-1.png");
+}
+
+.enterprise-section .enterprise-grid article:nth-child(2) .enterprise-card-media::before {
+  background-image: url("../assets/enterprise/enterprise-2.png");
+}
+
+.enterprise-section .enterprise-grid article:nth-child(3) .enterprise-card-media::before {
+  background-image: url("../assets/enterprise/enterprise-3.png");
+}
+
+.enterprise-section .enterprise-grid article:nth-child(4) .enterprise-card-media::before {
+  background-image: url("../assets/enterprise/enterprise-4.png");
+}
+
+.enterprise-section .enterprise-grid article:nth-child(5) .enterprise-card-media::before {
+  background-image: url("../assets/enterprise/enterprise-5.png");
+}
+
+.enterprise-section .enterprise-grid article:nth-child(6) .enterprise-card-media::before {
+  background-image: url("../assets/enterprise/enterprise-6.png");
+}
+
+.cases-section .case-grid article {
+  background-image: none !important;
+}
+
+.cases-section .case-grid article:nth-child(1)::before {
+  background-image: url("../assets/cases/case-1.png");
+}
+
+.cases-section .case-grid article:nth-child(2)::before {
+  background-image: url("../assets/cases/case-2.png");
+}
+
+.cases-section .case-grid article:nth-child(3)::before {
+  background-image: url("../assets/cases/case-3.png");
+}
+
+.cases-section .case-grid article:nth-child(4)::before {
+  background-image: url("../assets/cases/case-4.png");
+}
+
+.cases-section .case-grid article:nth-child(5)::before {
+  background-image: url("../assets/cases/case-5.png");
+}
+
+.cases-section .case-grid article:nth-child(6)::before {
+  background-image: url("../assets/cases/case-6.png");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-section .intro-card-media img,
+  .enterprise-section .enterprise-card-media::before,
+  .cases-section .case-grid article::before {
+    transition: none !important;
+  }
+}
+
 </style>
 </head>
 <body>
 
 <main>
-<header class="topbar"><a class="logo" href="#top" aria-label="Agentsyun 首页"><img class="logo-image" src="assets/header/agentsyun-logo.svg" alt="Agentsyun" /></a><nav aria-label="主导航"><a href="#top">AI工作站</a><a href="#top" class="is-active" data-nav="hermes">Hz-Hermes</a><a href="https://hermes.agentsyun.com" target="_blank" rel="noopener noreferrer">使用手册</a><a href="#" data-coming-soon="企业版">企业版</a></nav><div class="topbar-right"><button class="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button><button type="button" class="lang-toggle" data-lang-toggle aria-label="切换语言"><span data-lang-zh>中</span><span class="lang-divider">/</span><span data-lang-en>En</span></button><div class="auth-actions" id="auth-actions"><button type="button" class="nav-button-brand" data-open-login>登录/注册</button></div></div>
+<header class="topbar"><a class="logo" href="#top" aria-label="Agentsyun 首页"><img class="logo-image" src="assets/header/agentsyun-logo.svg" alt="Agentsyun" /></a><nav aria-label="主导航"><div class="nav-dropdown" data-nav-dropdown><button type="button" class="nav-dropdown-trigger" aria-haspopup="menu" aria-expanded="false">AI工作站</button><span class="nav-dropdown-bridge" aria-hidden="true"></span><div class="nav-dropdown-menu t-dropdown" data-origin="top-center" role="menu" aria-label="AI工作站"><div class="nav-dropdown-panel"><a class="nav-dropdown-item" role="menuitem" href="https://www.hellome.art" target="_blank" rel="noopener noreferrer"><span class="nav-dropdown-icon"><img src="assets/nav-workstation/icon-hellome.svg" alt="" /></span><span class="nav-dropdown-text"><span class="nav-dropdown-title">Hellome</span><span class="nav-dropdown-desc">AI智能体平台</span></span><svg class="nav-dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><div class="nav-dropdown-divider" aria-hidden="true"><img src="assets/nav-workstation/divider.svg" alt="" /></div><a class="nav-dropdown-item" role="menuitem" href="https://www.agentsyun.com/marketing" target="_blank" rel="noopener noreferrer"><span class="nav-dropdown-icon"><img src="assets/nav-workstation/icon-token.svg" alt="" /></span><span class="nav-dropdown-text"><span class="nav-dropdown-title">词元(Token)工场</span><span class="nav-dropdown-desc">AI算力调度平台</span></span><svg class="nav-dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><div class="nav-dropdown-divider" aria-hidden="true"><img src="assets/nav-workstation/divider.svg" alt="" /></div><a class="nav-dropdown-item" role="menuitem" href="https://www.gnomic.cn" target="_blank" rel="noopener noreferrer"><span class="nav-dropdown-icon"><img src="assets/nav-workstation/icon-gnomic.svg" alt="" /></span><span class="nav-dropdown-text"><span class="nav-dropdown-title">Gnomic</span><span class="nav-dropdown-desc">一句话创建工作流</span></span><svg class="nav-dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a><div class="nav-dropdown-divider" aria-hidden="true"><img src="assets/nav-workstation/divider.svg" alt="" /></div><a class="nav-dropdown-item" role="menuitem" href="#" data-coming-soon="培训中心"><span class="nav-dropdown-icon"><img src="assets/nav-workstation/icon-training.svg" alt="" /></span><span class="nav-dropdown-text"><span class="nav-dropdown-title">培训中心</span><span class="nav-dropdown-desc">AI培训，从入门到实践</span></span><svg class="nav-dropdown-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div></div></div><a href="#top" class="is-active" data-nav="hermes">Hz-Hermes</a><a href="https://hermes.agentsyun.com" target="_blank" rel="noopener noreferrer">使用手册</a><a href="#" data-coming-soon="企业版">企业版</a></nav><div class="topbar-right"><button class="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button><button type="button" class="lang-toggle" data-lang-toggle aria-label="切换语言"><span data-lang-zh>中</span><span class="lang-divider">/</span><span data-lang-en>En</span></button><div class="auth-actions" id="auth-actions"><button type="button" class="nav-button-brand" data-open-login>登录/注册</button></div></div>
 </header><div class="mobile-nav" id="mobile-nav" hidden><div class="mobile-nav-group"><strong>AI工作站</strong><a href="https://www.hellome.art/" target="_blank" rel="noopener noreferrer"><strong>Hellome</strong><span>AI智能体平台</span></a><a href="https://www.agentsyun.com/marketing" target="_blank" rel="noopener noreferrer"><strong>词元(Token)工场</strong><span>AI算力平台</span></a><a href="https://www.gnomic.cn/workspace" target="_blank" rel="noopener noreferrer"><strong>Gnomic</strong><span>一句话创建工作流</span></a></div><a href="#top" class="is-active" data-nav="hermes">HzHermes</a><a href="https://hermes.agentsyun.com" target="_blank" rel="noopener noreferrer">使用手册</a><a href="#" data-coming-soon="企业版">企业版</a><div class="mobile-auth" id="mobile-auth"><button type="button" class="nav-button-brand" data-open-login>登录注册</button></div></div>
-<section class="hero" id="top"><div class="hero-glow"></div><div class="hero-copy"><h1>你的 AI 智能体管家，帮你<br/><em>搞定电脑上的事</em></h1><p>Hz-Hermes 是你桌面上的 AI 助手——你告诉它做什么，它帮你完成。写报告、做数据、管客户、自动填表，你不用动手，它替你跑腿。</p><div class="hero-actions"><a class="primary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes Windows 版"><img class="hero-action-icon" src="assets/hero/icon-windows.svg" alt="" /><span>Windows 免费下载</span><img class="hero-action-icon" src="assets/hero/icon-arrow-right.svg" alt="" /></a><a class="secondary-button" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes macOS 版"><img class="hero-action-icon" src="assets/hero/icon-mac.svg" alt="" /><span>macOS 免费下载</span><img class="hero-action-icon" src="assets/hero/icon-chevron-down.svg" alt="" /></a></div><div class="hero-meta"><span><img class="hero-meta-icon-img" src="assets/hero/icon-monitor-cloud.svg" alt="" />支持 Windows / macOS</span><span><img class="hero-meta-icon-img" src="assets/hero/icon-shield-check.svg" alt="" />本地运行，数据不出域</span><span><img class="hero-meta-icon-img" src="assets/hero/icon-cloud-download.svg" alt="" />一键安装，开箱即用</span></div></div><div class="hero-showcase hz-figma-showcase" aria-label="HZ HERMES 桌面工作台界面"><div class="app-window hz-figma-shell" inert><div class="hz-window-header hz-window-header-global" aria-hidden="true"><div class="hz-window-left"><div class="hz-traffic"><i></i><i></i><i></i></div><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-left.svg" alt="" /></button></div><div class="hz-window-controls"><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-bottom.svg" alt="" /></button><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-right.svg" alt="" /></button></div></div><aside class="hz-side-nav" aria-label="HZ HERMES 侧边导航"><div class="hz-side-top"><nav class="hz-nav-list" aria-label="主功能"><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-message-circle-plus.svg" alt="" /><span>新对话</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-search.svg" alt="" /><span>搜索对话</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-bot-message-square.svg" alt="" /><span>消息平台</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-layout-grid.svg" alt="" /><span>技能</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-alarm-clock-check.svg" alt="" /><span>定时任务</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-library-big.svg" alt="" /><span>文件库</span></a></nav><section class="hz-nav-group" aria-label="项目"><p>项目</p><span>暂无项目</span></section><section class="hz-nav-group" aria-label="对话"><p>对话</p><span>暂无对话</span></section></div><div class="hz-side-footer"><a class="hz-nav-item hz-credit" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-circle-gauge.svg" alt="" /><span>充值额度</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-settings.svg" alt="" /><span>设置</span></a></div></aside><main class="hz-content"><div class="hz-empty-workspace"><h2>今天想做点什么？</h2><div class="hz-dialog-card"><label class="sr-only" for="demo-prompt">任务描述</label><textarea id="demo-prompt" aria-label="任务描述" tabindex="-1" readonly>用/skill-creator 创建一个技能，你先问我技能应该做什么吧。</textarea><div class="hz-dialog-toolbar"><div class="hz-toolbar-group"><button type="button" class="hz-icon-button" aria-label="添加" tabindex="-1"><img src="assets/figma-hz-hermes/icon-plus.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-hand.svg" alt="" /><span>默认权限</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-layout-grid-1.svg" alt="" /><span>技能</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-circle-user.svg" alt="" /><span>员工</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button></div><div class="hz-toolbar-group hz-toolbar-right"><button type="button" class="hz-pill-button hz-model-button" tabindex="-1"><span>Qwen3.6-Plus</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-icon-button" aria-label="语音输入" tabindex="-1"><img src="assets/figma-hz-hermes/icon-mic.svg" alt="" /></button><button type="button" id="demo-send" class="hz-send-button" aria-label="发送演示任务" tabindex="-1"><img src="assets/figma-hz-hermes/icon-arrow-up.svg" alt="" /></button></div></div></div></div></main></div></div><div class="hero-bottom-blur hero-bottom-blur-back" aria-hidden="true"><img src="assets/hero/ellipse-2.svg" alt="" /></div><div class="hero-bottom-blur hero-bottom-blur-front" aria-hidden="true"><img src="assets/hero/ellipse-1.svg" alt="" /></div>
+<section class="hero" id="top"><div class="hero-glow"></div><div class="hero-copy"><h1>你的 AI 智能体管家，帮你<br/><em>搞定电脑上的事</em></h1><p>Hz-Hermes 是你桌面上的 AI 助手——你告诉它做什么，它帮你完成。写报告、做数据、管客户、自动填表，你不用动手，它替你跑腿。</p><div class="hero-actions download-actions"><a class="primary-button download-button download-button-windows" href="https://filefront.oss-cn-hangzhou.aliyuncs.com/20260731/1785491431630-gwgt42-Hermes-0.2.10-win-x64.exe"><img class="hero-action-icon" src="assets/hero/icon-windows.svg" alt="" /><span>Windows 下载</span><img class="hero-action-icon download-arrow-icon" src="assets/hero/icon-arrow-right.svg" alt="" /></a><div class="download-menu-wrap"><button type="button" class="secondary-button download-button download-button-mac" aria-haspopup="menu" aria-expanded="false"><img class="hero-action-icon" src="assets/hero/icon-mac.svg" alt="" /><span>macOS 下载</span><img class="hero-action-icon" src="assets/hero/icon-chevron-down.svg" alt="" /></button><span class="download-menu-bridge" aria-hidden="true"></span><div class="download-dropdown-menu t-dropdown" data-origin="top-center" role="menu" aria-label="macOS 下载版本"><div class="download-dropdown-panel"><a class="download-menu-item" role="menuitem" href="https://filefront.oss-cn-hangzhou.aliyuncs.com/20260731/1785509005736-9zpma9-Hermes-0.2.10-mac-arm64.dmg"><span>Apple 芯片</span><img src="assets/download-menu/icon-download.svg" alt="" /></a><div class="download-menu-divider" aria-hidden="true"><img src="assets/download-menu/divider.svg" alt="" /></div><a class="download-menu-item" role="menuitem" href="https://filefront.oss-cn-hangzhou.aliyuncs.com/20260731/1785510511831-ighyi1-Hermes-0.2.10-mac-x64.dmg"><span>Intel芯片</span><img src="assets/download-menu/icon-download.svg" alt="" /></a></div></div></div></div><div class="hero-meta"><span><img class="hero-meta-icon-img" src="assets/hero/icon-monitor-cloud.svg" alt="" />支持 Windows / macOS</span><span><img class="hero-meta-icon-img" src="assets/hero/icon-shield-check.svg" alt="" />本地运行，数据不出域</span><span><img class="hero-meta-icon-img" src="assets/hero/icon-cloud-download.svg" alt="" />一键安装，开箱即用</span></div></div><div class="hero-showcase hz-figma-showcase" aria-label="HZ HERMES 桌面工作台界面"><div class="app-window hz-figma-shell" inert><div class="hz-window-header hz-window-header-global" aria-hidden="true"><div class="hz-window-left"><div class="hz-traffic"><i></i><i></i><i></i></div><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-left.svg" alt="" /></button></div><div class="hz-window-controls"><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-bottom.svg" alt="" /></button><button type="button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-panel-right.svg" alt="" /></button></div></div><aside class="hz-side-nav" aria-label="HZ HERMES 侧边导航"><div class="hz-side-top"><nav class="hz-nav-list" aria-label="主功能"><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-message-circle-plus.svg" alt="" /><span>新对话</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-search.svg" alt="" /><span>搜索对话</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-bot-message-square.svg" alt="" /><span>消息平台</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-layout-grid.svg" alt="" /><span>技能</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-alarm-clock-check.svg" alt="" /><span>定时任务</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-library-big.svg" alt="" /><span>文件库</span></a></nav><section class="hz-nav-group" aria-label="项目"><p>项目</p><span>暂无项目</span></section><section class="hz-nav-group" aria-label="对话"><p>对话</p><span>暂无对话</span></section></div><div class="hz-side-footer"><a class="hz-nav-item hz-credit" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-circle-gauge.svg" alt="" /><span>充值额度</span></a><a class="hz-nav-item" href="#download" tabindex="-1"><img src="assets/figma-hz-hermes/icon-settings.svg" alt="" /><span>设置</span></a></div></aside><main class="hz-content"><div class="hz-empty-workspace"><h2>今天想做点什么？</h2><div class="hz-dialog-card"><label class="sr-only" for="demo-prompt">任务描述</label><textarea id="demo-prompt" aria-label="任务描述" tabindex="-1" readonly>用/skill-creator 创建一个技能，你先问我技能应该做什么吧。</textarea><div class="hz-dialog-toolbar"><div class="hz-toolbar-group"><button type="button" class="hz-icon-button" aria-label="添加" tabindex="-1"><img src="assets/figma-hz-hermes/icon-plus.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-hand.svg" alt="" /><span>默认权限</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-layout-grid-1.svg" alt="" /><span>技能</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-pill-button" tabindex="-1"><img src="assets/figma-hz-hermes/icon-circle-user.svg" alt="" /><span>员工</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button></div><div class="hz-toolbar-group hz-toolbar-right"><button type="button" class="hz-pill-button hz-model-button" tabindex="-1"><span>Qwen3.6-Plus</span><img src="assets/figma-hz-hermes/icon-chevron-down.svg" alt="" /></button><button type="button" class="hz-icon-button" aria-label="语音输入" tabindex="-1"><img src="assets/figma-hz-hermes/icon-mic.svg" alt="" /></button><button type="button" id="demo-send" class="hz-send-button" aria-label="发送演示任务" tabindex="-1"><img src="assets/figma-hz-hermes/icon-arrow-up.svg" alt="" /></button></div></div></div></div></main></div></div><div class="hero-bottom-blur hero-bottom-blur-back" aria-hidden="true"><img src="assets/hero/ellipse-2.svg" alt="" /></div><div class="hero-bottom-blur hero-bottom-blur-front" aria-hidden="true"><img src="assets/hero/ellipse-1.svg" alt="" /></div>
 </section>
 
 <div class="login-overlay" id="login-overlay" hidden>
@@ -7328,7 +7916,7 @@ body > main > .topbar {
     </div>
   </div>
 </div>
-<section class="proof" aria-label="产品数据"><div class="proof-inner"><h2>越用越聪明。<br/>越跑越高效。</h2><div class="proof-metrics"><div><strong>220K+</strong><span>GitHub Stars</span></div><div><strong>15+</strong><span>平台渠道接入</span></div><div><strong>100+</strong><span>预置技能包</span></div></div></div>
+<section class="proof" aria-label="产品数据"><div class="proof-inner"><h2>越用越聪明<br/>越跑越高效</h2><div class="proof-metrics"><div><strong>220K+</strong><span>GitHub Stars</span></div><div><strong>15+</strong><span>平台渠道接入</span></div><div><strong>100+</strong><span>预置技能包</span></div></div></div>
 </section>
 <section class="section intro-section" id="product"><div class="section-title"><h2>不是聊天机器人<br/>是你的数字员工</h2><p>Hz-Hermes 通过深度工程化封装，将配置、部署与技能管理等复杂环节整合优化。你只需要告诉它“做什么”，剩下的交给它。</p></div><div class="feature-row intro-feature-row"><article><figure class="intro-card-media"><img src="assets/intro-section/intro-1.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 20 7v5c0 4.6-3.2 7.9-8 9-4.8-1.1-8-4.4-8-9V7z"></path><path d="m9 12 2 2 4-5"></path></svg></i></figure><span class="intro-card-number">01</span><h3>自主学习进化</h3><p>每次执行都自动学习，沉淀为可复用的技能，让团队经验持续变成可调用能力。</p></article><article><figure class="intro-card-media"><img src="assets/intro-section/intro-2.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="2"></rect><rect x="14" y="4" width="7" height="7" rx="2"></rect><rect x="8.5" y="15" width="7" height="7" rx="2"></rect><path d="M10 7.5h4"></path><path d="m8.5 15-2-4"></path><path d="m15.5 15 2-4"></path></svg></i></figure><span class="intro-card-number">02</span><h3>跨软件协作</h3><p>在你授权下完成跨越不同桌面应用的多步骤工作，把消息、文档、表格与系统连接起来。</p></article><article><figure class="intro-card-media"><img src="assets/intro-section/intro-3.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="10" cy="7" r="4"></circle><path d="M18 8v6"></path><path d="M21 11h-6"></path></svg></i></figure><span class="intro-card-number">03</span><h3>多智能体协同</h3><p>多个 AI 分工协作，并行处理复杂任务，适合复杂任务的并行推进。</p></article><article><figure class="intro-card-media"><img src="assets/intro-section/intro-4.png" alt="" /><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="9"></circle><path d="M18.4 5.6 20 4"></path><path d="M4 4l1.6 1.6"></path></svg></i></figure><span class="intro-card-number">04</span><h3>长期记忆</h3><p>记住你的偏好、习惯和历史知识，累积成团队专属上下文。</p></article></div>
 </section>
@@ -7387,7 +7975,7 @@ body > main > .topbar {
     </article>
   </div>
 </section>
-<section class="download-section" id="download"><div class="download-bg" aria-hidden="true"><img src="assets/download-section/3-1.jpg" alt="" /></div><div class="download-content"><div class="download-heading"><h2>现在，就拥有你的<br />AI 智能体管家</h2><p>免费下载，5分钟完成安装。你只需告诉它“做什么”，剩下的交给它。</p></div><div class="hero-actions"><a class="primary-button download-button download-button-windows" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes Windows 版"><img src="assets/download-section/icon-windows.svg" alt="" /><span>Windows 免费下载</span><img src="assets/download-section/icon-arrow-right.svg" alt="" /></a><a class="secondary-button download-button download-button-mac" href="mailto:contact@agentsyun.com?subject=获取 Hz-Hermes macOS 版"><img src="assets/download-section/icon-mac.svg" alt="" /><span>macOS 免费下载</span><img src="assets/download-section/icon-chevron-down.svg" alt="" /></a></div><small><img src="assets/download-section/icon-linux.svg" alt="" />Linux版即将上线·企业版可预约演示</small></div>
+<section class="download-section" id="download"><div class="download-bg" aria-hidden="true"><img src="assets/download-section/3-1.jpg" alt="" /></div><div class="download-content"><div class="download-heading"><h2>现在，就拥有你的<br />AI 智能体管家</h2><p>免费下载，5分钟完成安装。你只需告诉它“做什么”，剩下的交给它。</p></div><div class="hero-actions download-actions"><a class="primary-button download-button download-button-windows" href="https://filefront.oss-cn-hangzhou.aliyuncs.com/20260731/1785491431630-gwgt42-Hermes-0.2.10-win-x64.exe"><img src="assets/download-section/icon-windows.svg" alt="" /><span>Windows 下载</span><img class="download-arrow-icon" src="assets/download-section/icon-arrow-right.svg" alt="" /></a><div class="download-menu-wrap"><button type="button" class="secondary-button download-button download-button-mac" aria-haspopup="menu" aria-expanded="false"><img src="assets/download-section/icon-mac.svg" alt="" /><span>macOS 下载</span><img src="assets/download-section/icon-chevron-down.svg" alt="" /></button><span class="download-menu-bridge" aria-hidden="true"></span><div class="download-dropdown-menu t-dropdown" data-origin="top-center" role="menu" aria-label="macOS 下载版本"><div class="download-dropdown-panel"><a class="download-menu-item" role="menuitem" href="https://filefront.oss-cn-hangzhou.aliyuncs.com/20260731/1785509005736-9zpma9-Hermes-0.2.10-mac-arm64.dmg"><span>Apple 芯片</span><img src="assets/download-menu/icon-download.svg" alt="" /></a><div class="download-menu-divider" aria-hidden="true"><img src="assets/download-menu/divider.svg" alt="" /></div><a class="download-menu-item" role="menuitem" href="https://filefront.oss-cn-hangzhou.aliyuncs.com/20260731/1785510511831-ighyi1-Hermes-0.2.10-mac-x64.dmg"><span>Intel芯片</span><img src="assets/download-menu/icon-download.svg" alt="" /></a></div></div></div></div><small><img src="assets/download-section/icon-linux.svg" alt="" />Linux版即将上线·企业版可预约演示</small></div>
 </section>
 <footer class="site-footer"><div class="footer-inner"><div class="footer-links"><div class="footer-column"><p class="footer-heading">导航</p><div><a href="#">Hellome</a><a href="#">词元（Token）工厂</a><a href="#">Gnomic</a><a href="#top">Hz-Hermes</a><a href="#">企业版</a></div></div><div class="footer-column"><p class="footer-heading">资源</p><div><a href="#">使用手册</a><a href="mailto:yangping@huizhihuyu.com">联系</a></div></div><div class="footer-contact"><p class="footer-heading">联系我们</p><div class="footer-contact-list"><p><img src="assets/footer/icon-phone.svg" alt="" />400-998-5285</p><p><img src="assets/footer/icon-mail.svg" alt="" />yangping@huizhihuyu.com</p><p><img src="assets/footer/icon-map-pin.svg" alt="" />南京市雨花台区软件大道178号软件谷产业基地C座3F</p></div></div></div><div class="footer-bottom"><p>Copyright 2023 江苏汇智智能数字科技有限公司 </p><p>苏ICP备2023021414号-14</p><p>苏公网安备32011402012641号</p><p>算法备案号:Jiangsu-CarrotAI-202407030002</p></div></div>
 </footer>
@@ -7410,7 +7998,10 @@ body > main > .topbar {
     "AI工作站": "AI Workstations",
     "AI智能体平台": "AI agent platform",
     "AI算力平台": "AI compute platform",
+    "AI算力调度平台": "AI compute orchestration platform",
     "一句话创建工作流": "Create workflows from one sentence",
+    "培训中心": "Training Center",
+    "AI培训，从入门到实践": "AI training, from basics to practice",
     "使用手册": "Guide",
     "企业版": "Enterprise",
     "登录注册": "Log in / Sign up",
@@ -7438,10 +8029,17 @@ body > main > .topbar {
     "添加": "Add",
     "语音输入": "Voice input",
     "你的AI智能体管家": "Your AI Agent Butler",
+    "你的 AI 智能体管家，帮你": "Your AI agent butler",
+    "搞定电脑上的事": "gets desktop work done",
     "发号施令，坐等成果": "Give the command. Get the result.",
     "Hz-Hermes 是你桌面上的 AI 助手——你告诉它做什么，它帮你完成。写报告、做数据、管客户、自动填表，你不用动手，它替你跑腿。": "Hz-Hermes is the AI assistant on your desktop. Tell it what to do and it gets the work done: reports, data, customer follow-up, forms, and everyday tasks.",
     "Windows 免费下载": "Free Windows Download",
     "macOS 免费下载": "Free macOS Download",
+    "Windows 下载": "Windows Download",
+    "macOS 下载": "macOS Download",
+    "macOS 下载版本": "macOS download options",
+    "Apple 芯片": "Apple silicon",
+    "Intel芯片": "Intel chip",
     "支持 Windows / macOS": "Windows / macOS supported",
     "本地运行，数据不出域": "Runs locally, data stays in your domain",
     "一键安装，开箱即用": "One-click install, ready to use",
@@ -7461,8 +8059,8 @@ body > main > .topbar {
     "任务描述": "Task description",
     "默认权限": "Default permissions",
     "员工": "Staff",
-    "越用越聪明。": "Smarter with use.",
-    "越跑越高效。": "Faster with every run.",
+    "越用越聪明": "Smarter with use",
+    "越跑越高效": "Faster with every run",
     "平台渠道接入": "Platform integrations",
     "预置技能包": "Built-in skill packs",
     "不是聊天机器人": "Not a chatbot",
@@ -7477,6 +8075,8 @@ body > main > .topbar {
     "长期记忆": "Long-term memory",
     "记住你的偏好、习惯和历史知识，累积成团队专属上下文。": "It remembers preferences, habits, and history to build team-specific context.",
     "从一句话到一个结果": "From one sentence to one result",
+    "从一句话": "From one sentence",
+    "到一个结果": "to one result",
     "你给出指令，Hz-Hermes 自主完成全部执行链路。": "Give an instruction. Hz-Hermes completes the execution chain.",
     "任务接收": "Task intake",
     "理解真实意图": "Understand intent",
@@ -7503,7 +8103,9 @@ body > main > .topbar {
     "上传 Excel 或 CSV，完成探索性分析、可视化图表与洞察报告，不用写代码也能拿到结论。": "Upload Excel or CSV files to get exploratory analysis, charts, and insight reports without coding.",
     "文档撰写": "Document writing",
     "标书、报告、论文、方案，从深度研究、整理框架到撰写排版，一条任务完整推进。": "For bids, reports, papers, and proposals, it handles research, structure, writing, and formatting.",
+    "定时自动化": "Scheduled automation",
     "日报生成、竞品监控、数据巡检。设置一次，每日自动执行并推送到微信或钉钉。": "Generate daily reports, monitor competitors, and inspect data on schedule, then push updates to WeChat or DingTalk.",
+    "跨应用协作": "Cross-app collaboration",
     "你下指令，": "You give the command,",
     "它跑腿": "it does the legwork",
     "Hz-Hermes 能理解你的工作场景和需求，在你授权和控制下，协助完成电脑上的各类操作。": "Hz-Hermes understands your work context and helps complete desktop tasks under your authorization and control.",
@@ -7567,13 +8169,27 @@ body > main > .topbar {
     "安全沙箱": "Secure sandbox",
     "所有代码执行在隔离 Docker 沙箱中进行；敏感操作可以设置审批流。": "Code runs in isolated Docker sandboxes, with approval flows for sensitive operations.",
     "现在就拥有你的": "Get your",
+    "现在，就拥有你的": "Get your",
+    "AI 智能体管家": "AI agent butler",
     "免费下载，5 分钟完成安装。你只需告诉它“做什么”，剩下的交给它。": "Download for free and install in 5 minutes. Tell it what to do, then hand off the rest.",
+    "免费下载，5分钟完成安装。你只需告诉它“做什么”，剩下的交给它。": "Download for free and install in 5 minutes. Tell it what to do, then hand off the rest.",
     "下载 Windows 版": "Download for Windows",
     "下载 macOS 版": "Download for macOS",
     "Linux 版即将上线 · 企业版可预约演示": "Linux coming soon · Enterprise demos available",
+    "Linux版即将上线·企业版可预约演示": "Linux coming soon · Enterprise demos available",
     "© 2026 汇智智能 · Hz-Hermes 出品": "© 2026 Huizhi Intelligence · Hz-Hermes",
     "技术文档": "Docs",
+    "导航": "Navigation",
+    "词元(Token)工场": "Token Factory",
+    "词元（Token）工厂": "Token Factory",
+    "资源": "Resources",
+    "联系": "Contact",
     "联系我们": "Contact",
+    "南京市雨花台区软件大道178号软件谷产业基地C座3F": "3F, Building C, Software Valley Industrial Base, No. 178 Software Avenue, Yuhuatai District, Nanjing",
+    "Copyright 2023 江苏汇智智能数字科技有限公司": "Copyright 2023 Jiangsu Huizhi Intelligent Digital Technology Co., Ltd.",
+    "苏ICP备2023021414号-14": "Jiangsu ICP No. 2023021414-14",
+    "苏公网安备32011402012641号": "Jiangsu public security registration No. 32011402012641",
+    "算法备案号:Jiangsu-CarrotAI-202407030002": "Algorithm filing No. Jiangsu-CarrotAI-202407030002",
     "登录 Agentsyun": "Log in to Agentsyun",
     "输入手机号，登录或注册 Agentsyun": "Enter your phone number to log in or sign up",
     "手机号": "Phone number",
@@ -7603,13 +8219,23 @@ body > main > .topbar {
     "暖黄": "Amber",
     "玫红": "Rose",
     "我": "Me",
+    "丸子": "Wanzi",
     "成员": "Member",
+    "管理员": "Admin",
+    "申请人": "Applicant",
     "审核中": "Pending review",
+    "未通过": "Rejected",
     "认证未通过": "Verification rejected",
+    "待加入": "Pending invite",
     "待确认加入": "Invitation pending",
     "企业已认证": "Enterprise verified",
     "确认": "Confirm",
     "个人工作台": "Personal workspace",
+    "我的个人工作台": "My personal workspace",
+    "待认证企业申请": "Enterprise verification application",
+    "汇智数字（认证未通过）": "Huizhi Digital (verification rejected)",
+    "汇智互娱网络科技有限公司": "Huizhi Interactive Entertainment Network Technology Co., Ltd.",
+    "江苏汇智智能数字科技有限公司": "Jiangsu Huizhi Intelligent Digital Technology Co., Ltd.",
     "已认证": "Verified",
     "切换工作台": "Switch workspace",
     "联系客服": "Contact support",
@@ -7644,7 +8270,9 @@ body > main > .topbar {
     "登录并申请": "Log in and apply",
     "认证审核中": "Verification pending",
     "进入企业版": "Enter enterprise",
-    "用/skill-creator 创建一个技能，你先问我技能应该做什么吧。": "Use /skill-creator to create a skill. Ask me what the skill should do first."
+    "用/skill-creator 创建一个技能，你先问我技能应该做什么吧。": "Use /skill-creator to create a skill. Ask me what the skill should do first.",
+    "HZ HERMES 侧边导航": "HZ HERMES sidebar navigation",
+    "Hz-Hermes 执行链路": "Hz-Hermes execution chain"
   };
   const enToZh = Object.fromEntries(Object.entries(zhToEn).map(([zh, en]) => [en, zh]));
   const currentLangFromStorage = () => {
@@ -7747,30 +8375,73 @@ body > main > .topbar {
   syncTopbarLine();
   window.addEventListener("scroll", syncTopbarLine, { passive: true });
 
-  // AI工作站 dropdown
+  // AI工作站 dropdown uses the same hover/focus motion pattern as the macOS menu.
   const dropdowns = $$("[data-nav-dropdown]");
+  const navDropdownClosers = new WeakMap();
+  function closeDropdown(dropdown) {
+    const menu = $(".nav-dropdown-menu", dropdown);
+    const btn = $(".nav-dropdown-trigger", dropdown);
+    if (!menu || !menu.classList.contains("is-open")) return;
+    const previousTimer = navDropdownClosers.get(dropdown);
+    if (previousTimer) window.clearTimeout(previousTimer);
+    menu.classList.remove("is-open");
+    menu.classList.add("is-closing");
+    dropdown.classList.remove("is-open");
+    if (btn) btn.setAttribute("aria-expanded", "false");
+    const timer = window.setTimeout(() => {
+      menu.classList.remove("is-closing");
+      navDropdownClosers.delete(dropdown);
+    }, 150);
+    navDropdownClosers.set(dropdown, timer);
+  }
+  function openDropdown(dropdown) {
+    const menu = $(".nav-dropdown-menu", dropdown);
+    const btn = $(".nav-dropdown-trigger", dropdown);
+    if (!menu) return;
+    const previousTimer = navDropdownClosers.get(dropdown);
+    if (previousTimer) {
+      window.clearTimeout(previousTimer);
+      navDropdownClosers.delete(dropdown);
+    }
+    menu.classList.remove("is-closing");
+    menu.classList.add("is-open");
+    dropdown.classList.add("is-open");
+    if (btn) btn.setAttribute("aria-expanded", "true");
+  }
   function closeDropdowns(except) {
     dropdowns.forEach((dd) => {
       if (dd === except) return;
-      dd.classList.remove("is-open");
-      const btn = $(".nav-dropdown-trigger", dd);
-      if (btn) btn.setAttribute("aria-expanded", "false");
+      closeDropdown(dd);
     });
   }
   dropdowns.forEach((dd) => {
     const btn = $(".nav-dropdown-trigger", dd);
     if (!btn) return;
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const open = dd.classList.contains("is-open");
-      closeDropdowns();
-      if (!open) {
-        dd.classList.add("is-open");
-        btn.setAttribute("aria-expanded", "true");
-      }
+    dd.addEventListener("pointerenter", () => {
+      closeDropdowns(dd);
+      openDropdown(dd);
+    });
+    dd.addEventListener("pointerleave", () => closeDropdown(dd));
+    dd.addEventListener("focusin", () => {
+      closeDropdowns(dd);
+      openDropdown(dd);
+    });
+    dd.addEventListener("focusout", (event) => {
+      if (!dd.contains(event.relatedTarget)) closeDropdown(dd);
+    });
+    btn.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+    });
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+      btn.blur();
+    });
+    $$(".nav-dropdown-item", dd).forEach((item) => {
+      item.addEventListener("click", () => {
+        closeDropdown(dd);
+      });
     });
   });
-  document.addEventListener("click", () => closeDropdowns());
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closeMenu();
@@ -8066,6 +8737,50 @@ body > main > .topbar {
     });
   });
 
+  // macOS download dropdown uses hover/focus only; the button itself has no download action.
+  $$(".download-menu-wrap").forEach((wrap) => {
+    const trigger = $(".download-button-mac", wrap);
+    const menu = $(".download-dropdown-menu", wrap);
+    if (!trigger || !menu) return;
+    let closeTimer = null;
+
+    const openMenu = () => {
+      if (closeTimer) {
+        window.clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      menu.classList.remove("is-closing");
+      menu.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
+    };
+
+    const closeMenu = () => {
+      if (!menu.classList.contains("is-open")) return;
+      menu.classList.remove("is-open");
+      menu.classList.add("is-closing");
+      trigger.setAttribute("aria-expanded", "false");
+      closeTimer = window.setTimeout(() => {
+        menu.classList.remove("is-closing");
+        closeTimer = null;
+      }, 150);
+    };
+
+    wrap.addEventListener("pointerenter", openMenu);
+    wrap.addEventListener("pointerleave", closeMenu);
+    trigger.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+    });
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      trigger.blur();
+    });
+    $$(".download-menu-item", menu).forEach((item) => {
+      item.addEventListener("click", () => {
+        closeMenu();
+      });
+    });
+  });
+
   // Unified Feishu-style auth: one login → choose space
   const SESSION_KEY = "agentsyun_auth_v2";
   const authActions = $("#auth-actions");
@@ -8292,17 +9007,17 @@ body > main > .topbar {
     const btn = $("#login-resend");
     if (!btn) return;
     btn.disabled = true;
-    btn.textContent = `重新获取验证码 (${codeLeft}s)`;
+    btn.textContent = `${translatePhrase("重新获取验证码")} (${codeLeft}s)`;
     clearInterval(codeTimer);
     codeTimer = setInterval(() => {
       codeLeft -= 1;
       if (codeLeft <= 0) {
         clearInterval(codeTimer);
         btn.disabled = false;
-        btn.textContent = "重新获取验证码";
+        btn.textContent = translatePhrase("重新获取验证码");
         return;
       }
-      btn.textContent = `重新获取验证码 (${codeLeft}s)`;
+      btn.textContent = `${translatePhrase("重新获取验证码")} (${codeLeft}s)`;
     }, 1000);
   }
 
@@ -8357,6 +9072,7 @@ body > main > .topbar {
           <span class="space-arrow" aria-hidden="true">${space.status === "invite" ? "确认" : "›"}</span>
         </button>`;
     }).join("");
+    applyLanguage(currentLang);
 
     $$("[data-space-id]", spaceList).forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -8395,7 +9111,7 @@ body > main > .topbar {
       toast("已进入个人工作台");
       document.getElementById("top")?.scrollIntoView({ behavior: "smooth" });
     } else {
-      toast(`已进入「${space.title}」企业工作台（演示）`);
+      toast(currentLang === "en" ? `Entered “${translatePhrase(space.title)}” enterprise workspace demo` : `已进入「${space.title}」企业工作台（演示）`);
       document.getElementById("enterprise")?.scrollIntoView({ behavior: "smooth" });
     }
   }
@@ -8456,28 +9172,28 @@ body > main > .topbar {
 
     enterpriseCta.onclick = null;
     if (!session?.phone) {
-      enterpriseCta.innerHTML = '登录并申请 <span aria-hidden="true">↗</span>';
+      enterpriseCta.innerHTML = `${translatePhrase("登录并申请")} <span aria-hidden="true">↗</span>`;
       enterpriseCta.onclick = () => openLogin("enterprise");
       return;
     }
     if (pending && !okOrgs.length) {
-      enterpriseCta.innerHTML = '认证审核中';
+      enterpriseCta.innerHTML = translatePhrase("认证审核中");
       enterpriseCta.onclick = () => {
         openSpacePicker(session.phone, session.spaces || resolveAccount(session.phone).spaces, true);
       };
       return;
     }
     if (okOrgs.length === 1) {
-      enterpriseCta.innerHTML = '进入企业版 <span aria-hidden="true">↗</span>';
+      enterpriseCta.innerHTML = `${translatePhrase("进入企业版")} <span aria-hidden="true">↗</span>`;
       enterpriseCta.onclick = () => enterSpace(okOrgs[0], false);
       return;
     }
     if (okOrgs.length > 1) {
-      enterpriseCta.innerHTML = '进入企业版 <span aria-hidden="true">↗</span>';
+      enterpriseCta.innerHTML = `${translatePhrase("进入企业版")} <span aria-hidden="true">↗</span>`;
       enterpriseCta.onclick = () => openSpacePicker(session.phone, session.spaces, true);
       return;
     }
-    enterpriseCta.innerHTML = '申请企业认证 <span aria-hidden="true">↗</span>';
+    enterpriseCta.innerHTML = `${translatePhrase("申请企业认证")} <span aria-hidden="true">↗</span>`;
     enterpriseCta.onclick = () => {
       toast("企业认证申请（演示） · 后续可替换为正式表单");
     };
@@ -8613,6 +9329,7 @@ body > main > .topbar {
         <span>申请企业认证</span>
       </button>`;
     flyout.hidden = false;
+    applyLanguage(currentLang);
 
     $$("[data-switch-space]", flyout).forEach((btn) => {
       btn.addEventListener("click", (e) => {

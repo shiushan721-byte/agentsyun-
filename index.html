@@ -6703,6 +6703,7 @@ body > main > .topbar {
 .flow-section {
   --flow-p: 0;
   --flow-pre: 0;
+  --flow-nav-height: 0px;
   --flow-card-band-start: .22;
   --flow-card-band-len: .7;
   --flow-card-each-len: .45;
@@ -6710,7 +6711,10 @@ body > main > .topbar {
   --flow-card-inv: calc(1 - var(--flow-card-raw));
   --flow-card-eased-inv: calc(var(--flow-card-inv) * var(--flow-card-inv) * var(--flow-card-inv));
   --flow-card-eased: calc(1 - var(--flow-card-eased-inv));
-  --flow-title-scale: calc(1 - .25 * var(--flow-card-eased));
+  --flow-title-size: calc(48px - 12px * var(--flow-card-eased));
+  --flow-title-line: calc(56px - 8px * var(--flow-card-eased));
+  --flow-subtitle-size: calc(24px - 8px * var(--flow-card-eased));
+  --flow-subtitle-line: calc(32px - 8px * var(--flow-card-eased));
   --flow-w1-raw: max(0, min(1, calc((var(--flow-pre) - .5) / .5)));
   --flow-w2-raw: max(0, min(1, calc((var(--flow-p) - 0) / .06)));
   --flow-w3-raw: max(0, min(1, calc((var(--flow-p) - .06) / .06)));
@@ -6718,7 +6722,7 @@ body > main > .topbar {
   --flow-w2: calc(1 - (1 - var(--flow-w2-raw)) * (1 - var(--flow-w2-raw)) * (1 - var(--flow-w2-raw)));
   --flow-w3: calc(1 - (1 - var(--flow-w3-raw)) * (1 - var(--flow-w3-raw)) * (1 - var(--flow-w3-raw)));
   --flow-art-x: -56px;
-  --flow-art-y: 76px;
+  --flow-art-y: 0px;
   --flow-skeleton-x: -56px;
   position: relative;
   width: 100%;
@@ -6757,7 +6761,7 @@ body > main > .topbar {
 }
 .flow-section.is-flow-fixed .flow-sticky {
   position: fixed;
-  top: 0;
+  top: var(--flow-nav-height, 0px);
   left: 0;
   right: 0;
   z-index: 1;
@@ -6774,7 +6778,6 @@ body > main > .topbar {
   --flow-card-inv: calc(1 - var(--flow-card-raw));
   --flow-card-eased-inv: calc(var(--flow-card-inv) * var(--flow-card-inv) * var(--flow-card-inv));
   --flow-card-eased: calc(1 - var(--flow-card-eased-inv));
-  --flow-title-scale: calc(1 - .25 * var(--flow-card-eased));
   --flow-w1-raw: max(0, min(1, calc((var(--flow-pre) - .5) / .5)));
   --flow-w2-raw: max(0, min(1, calc((var(--flow-p) - 0) / .06)));
   --flow-w3-raw: max(0, min(1, calc((var(--flow-p) - .06) / .06)));
@@ -7058,15 +7061,15 @@ body > main > .topbar {
   max-width: none;
   margin: 0;
   text-align: center;
-  transform: translate(-50%, -50%) scale(var(--flow-title-scale));
+  transform: translate(-50%, -50%);
   transform-origin: center;
   will-change: transform;
 }
 .flow-multi-title h2 {
   margin: 0;
   color: #fff;
-  font-size: 36px !important;
-  line-height: 48px;
+  font-size: var(--flow-title-size) !important;
+  line-height: var(--flow-title-line);
   letter-spacing: 0;
   font-weight: 500 !important;
 }
@@ -7091,8 +7094,8 @@ body > main > .topbar {
   max-width: 560px;
   margin: 16px auto 0;
   color: #fff;
-  font-size: 16px !important;
-  line-height: 24px;
+  font-size: var(--flow-subtitle-size) !important;
+  line-height: var(--flow-subtitle-line);
   letter-spacing: 0;
   font-weight: 400 !important;
   opacity: var(--flow-w3);
@@ -7107,8 +7110,8 @@ body > main > .topbar {
 }
 @media (max-width: 1023px) {
   .flow-multi-title h2 {
-    font-size: 36px !important;
-    line-height: 48px;
+    font-size: var(--flow-title-size) !important;
+    line-height: var(--flow-title-line);
   }
   .flow-word,
   .flow-word > span {
@@ -7117,8 +7120,8 @@ body > main > .topbar {
 }
 @media (max-width: 680px) {
   .flow-multi-title h2 {
-    font-size: 36px !important;
-    line-height: 48px;
+    font-size: var(--flow-title-size) !important;
+    line-height: var(--flow-title-line);
   }
   .flow-word,
   .flow-word > span {
@@ -7126,8 +7129,8 @@ body > main > .topbar {
   }
   .flow-multi-title p {
     max-width: 300px;
-    font-size: 14px !important;
-    line-height: 21px;
+    font-size: var(--flow-subtitle-size) !important;
+    line-height: var(--flow-subtitle-line);
   }
 }
 @media (max-width: 639px) {
@@ -8650,21 +8653,29 @@ body > main > .topbar {
     const flowStage = $(".flow-multi-stage", flowSection) || flowSection;
     let ticking = false;
     const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    const getTopbarHeight = () => {
+      const header = $(".topbar");
+      return header ? Math.round(header.getBoundingClientRect().height) : 0;
+    };
     const updateFlowProgress = () => {
       const rect = flowSection.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 1;
+      const fullViewportHeight = window.innerHeight || document.documentElement.clientHeight || 1;
+      const navHeight = getTopbarHeight();
+      const viewportHeight = Math.max(1, fullViewportHeight - navHeight);
+      const sectionTop = rect.top - navHeight;
+      flowSection.style.setProperty("--flow-nav-height", `${navHeight}px`);
       flowSection.style.setProperty("--flow-vh", `${viewportHeight / 100}px`);
       const scrollable = flowSection.offsetHeight - viewportHeight;
-      const progress = clamp((-rect.top) / Math.max(1, scrollable), 0, 1);
-      const pre = clamp((viewportHeight * .5 - rect.top) / Math.max(1, viewportHeight * .5), 0, 1);
+      const progress = clamp((-sectionTop) / Math.max(1, scrollable), 0, 1);
+      const pre = clamp((viewportHeight * .5 - sectionTop) / Math.max(1, viewportHeight * .5), 0, 1);
       const nextProgress = progress.toFixed(4);
       const nextPre = pre.toFixed(4);
       flowSection.style.setProperty("--flow-p", nextProgress);
       flowSection.style.setProperty("--flow-pre", nextPre);
       flowStage.style.setProperty("--flow-p", nextProgress);
       flowStage.style.setProperty("--flow-pre", nextPre);
-      flowSection.classList.toggle("is-flow-fixed", rect.top <= 0 && rect.bottom > viewportHeight);
-      flowSection.classList.toggle("is-flow-after", rect.bottom <= viewportHeight);
+      flowSection.classList.toggle("is-flow-fixed", rect.top <= navHeight && rect.bottom > fullViewportHeight);
+      flowSection.classList.toggle("is-flow-after", rect.bottom <= fullViewportHeight);
       ticking = false;
     };
     const requestFlowProgress = () => {

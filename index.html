@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hz-Hermes｜你的 AI 智能体管家</title>
   <meta name="description" content="Hz-Hermes 是你桌面上的 AI 智能体管家，帮助你完成研究、数据、客服、文档与自动化工作。" />
+  <script>
+    (() => {
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      if (!window.location.hash) {
+        const resetScroll = () => {
+          const root = document.documentElement;
+          const previousBehavior = root.style.scrollBehavior;
+          root.style.scrollBehavior = "auto";
+          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+          root.style.scrollBehavior = previousBehavior;
+        };
+
+        resetScroll();
+        window.addEventListener("pageshow", resetScroll);
+      }
+    })();
+  </script>
   <style>
 :root {
   --ink: #17171b;
@@ -7459,7 +7479,20 @@ body > main > .topbar {
   max-width: none !important;
   margin: 0 auto !important;
   text-align: center !important;
-  transform: none !important;
+  animation: heroCopyEnter 1100ms cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
+  will-change: transform, opacity;
+}
+
+@keyframes heroCopyEnter {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero h1 {
@@ -7809,7 +7842,20 @@ body > main > .topbar {
   margin: 80px auto -80px !important;
   padding: 0 !important;
   overflow: visible !important;
-  transform: none !important;
+  animation: hermesPanelEnter 1400ms cubic-bezier(0.16, 1, 0.3, 1) 260ms both;
+  will-change: transform, opacity;
+}
+
+@keyframes hermesPanelEnter {
+  from {
+    opacity: 0;
+    transform: translateY(96px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hz-figma-shell.app-window {
@@ -7874,6 +7920,15 @@ body > main > .topbar {
   .hero-meta {
     height: auto !important;
     flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy,
+  .hz-figma-showcase {
+    animation: none !important;
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -9040,7 +9095,7 @@ body > main > .topbar {
 </section>
 <section class="download-section" id="download"><div class="download-bg" aria-hidden="true"><img src="assets/download-section/3-1.jpg" alt="" /></div><div class="download-content"><div class="download-heading"><h2>现在，就拥有你的<br />AI 智能体管家</h2><p>免费下载，5分钟完成安装。你只需告诉它“做什么”，剩下的交给它。</p></div><div class="hero-actions download-actions"><a class="primary-button download-button download-button-windows" href="https://filefront.oss-cn-hangzhou.aliyuncs.com/20260731/1785491431630-gwgt42-Hermes-0.2.10-win-x64.exe"><img src="assets/download-section/icon-windows.svg" alt="" /><span>Windows 下载</span><img class="download-arrow-icon" src="assets/download-section/icon-arrow-right.svg" alt="" /></a><div class="download-menu-wrap"><button type="button" class="secondary-button download-button download-button-mac" aria-haspopup="menu" aria-expanded="false"><img src="assets/download-section/icon-mac.svg" alt="" /><span>macOS 下载</span><img src="assets/download-section/icon-chevron-down.svg" alt="" /></button><span class="download-menu-bridge" aria-hidden="true"></span><div class="download-dropdown-menu t-dropdown" data-origin="top-center" role="menu" aria-label="macOS 下载版本"><div class="download-dropdown-panel"><a class="download-menu-item" role="menuitem" href="https://filefront.oss-cn-hangzhou.aliyuncs.com/20260731/1785509005736-9zpma9-Hermes-0.2.10-mac-arm64.dmg"><span>Apple 芯片</span><img src="assets/download-menu/icon-download.svg" alt="" /></a><div class="download-menu-divider" aria-hidden="true"><img src="assets/download-menu/divider.svg" alt="" /></div><a class="download-menu-item" role="menuitem" href="https://filefront.oss-cn-hangzhou.aliyuncs.com/20260731/1785510511831-ighyi1-Hermes-0.2.10-mac-x64.dmg"><span>Intel芯片</span><img src="assets/download-menu/icon-download.svg" alt="" /></a></div></div></div></div><small><img src="assets/download-section/icon-linux.svg" alt="" />Linux版即将上线·企业版可预约演示</small></div>
 </section>
-<footer class="site-footer"><div class="footer-inner"><div class="footer-links"><div class="footer-column"><p class="footer-heading">导航</p><div><a href="#">Hellome</a><a href="#">词元（Token）工厂</a><a href="#">Gnomic</a><a href="#top">Hz-Hermes</a><a href="#">企业版</a></div></div><div class="footer-column"><p class="footer-heading">资源</p><div><a href="#">使用手册</a><a href="mailto:yangping@huizhihuyu.com">联系</a></div></div><div class="footer-contact"><p class="footer-heading">联系我们</p><div class="footer-contact-list"><p><img src="assets/footer/icon-phone.svg" alt="" />400-998-5285</p><p><img src="assets/footer/icon-mail.svg" alt="" />yangping@huizhihuyu.com</p><p><img src="assets/footer/icon-map-pin.svg" alt="" />南京市雨花台区软件大道178号软件谷产业基地C座3F</p></div></div></div><div class="footer-bottom"><p>Copyright 2023 江苏汇智智能数字科技有限公司 </p><p>苏ICP备2023021414号-14</p><p>苏公网安备32011402012641号</p><p>算法备案号:Jiangsu-CarrotAI-202407030002</p></div></div>
+<footer class="site-footer"><div class="footer-inner"><div class="footer-links"><div class="footer-column"><p class="footer-heading">导航</p><div><a href="https://www.hellome.art" target="_blank" rel="noopener noreferrer">Hellome</a><a href="https://www.agentsyun.com/marketing" target="_blank" rel="noopener noreferrer">词元（Token）工厂</a><a href="https://www.gnomic.cn" target="_blank" rel="noopener noreferrer">Gnomic</a><a href="#top">Hz-Hermes</a><a href="#" data-coming-soon="企业版">企业版</a></div></div><div class="footer-column"><p class="footer-heading">资源</p><div><a href="#">使用手册</a><a href="mailto:yangping@huizhihuyu.com">联系</a></div></div><div class="footer-contact"><p class="footer-heading">联系我们</p><div class="footer-contact-list"><p><img src="assets/footer/icon-phone.svg" alt="" />400-998-5285</p><p><img src="assets/footer/icon-mail.svg" alt="" />yangping@huizhihuyu.com</p><p><img src="assets/footer/icon-map-pin.svg" alt="" />南京市雨花台区软件大道178号软件谷产业基地C座3F</p></div></div></div><div class="footer-bottom"><p>Copyright 2023 江苏汇智智能数字科技有限公司 </p><p>苏ICP备2023021414号-14</p><p>苏公网安备32011402012641号</p><p>算法备案号:Jiangsu-CarrotAI-202407030002</p></div></div>
 </footer>
 </main>
 

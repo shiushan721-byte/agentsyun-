@@ -154,7 +154,9 @@
       const sectionPadding = cssPx("--cap-section-padding", 160);
       const titleTop = cssPx("--cap-pin-title-top", 128);
       const pinOffset = Math.max(0, sectionPadding - titleTop);
-      const distance = Math.max(0, trackList.scrollWidth - viewport.clientWidth);
+      const desktopSide = cssPx("--desktop-side", 64);
+      const containerWidth = Math.min(1280, Math.max(0, window.innerWidth - desktopSide * 2));
+      const distance = Math.max(0, trackList.scrollWidth - containerWidth);
       capabilitiesSection.style.setProperty("--cap-scroll-distance", `${distance}px`);
       capabilitiesSection.style.setProperty("--cap-pin-offset", `${pinOffset}px`);
       capabilitiesSection.style.minHeight = isDesktopRail

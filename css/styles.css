@@ -5577,6 +5577,16 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   position: relative;
 }
 
+.topbar .account-menu.has-switch-open .account-switch-wrap::before {
+  content: "";
+  position: absolute;
+  z-index: 131;
+  top: -8px;
+  right: 100%;
+  width: 4px;
+  height: 240px;
+}
+
 .topbar .account-menu-item > button {
   width: 100%;
   min-width: 0;
@@ -5637,14 +5647,20 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   position: absolute;
   top: -8px;
   right: calc(100% + 4px);
+  z-index: 130;
   width: max-content;
   min-width: 160px;
   max-width: 320px;
   padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   border: 1px solid #e5e5e5;
   border-radius: 12px;
   background: #fff;
-  box-shadow: 0 0 24px rgba(0, 0, 0, .05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .05), 0 0 24px rgba(0, 0, 0, .05);
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .topbar .account-switch-flyout[hidden] {
@@ -5653,9 +5669,9 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
 
 .topbar .account-switch-flyout .switch-item,
 .topbar .account-switch-flyout .switch-flyout-action {
-  width: calc(100% - 16px);
+  width: auto;
   min-width: 0;
-  max-width: 304px;
+  max-width: 100%;
   height: 36px;
   margin: 0 8px;
   padding: 8px;
@@ -5663,6 +5679,7 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
+  align-self: stretch;
   border: 0;
   border-radius: 8px;
   background: transparent;
@@ -5676,6 +5693,7 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   letter-spacing: 0;
   text-align: left;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .topbar .account-switch-flyout .switch-item:hover,
@@ -5697,31 +5715,102 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   opacity: .45;
 }
 
-.topbar .account-switch-flyout .switch-avatar,
-.topbar .account-switch-flyout .plus {
+.topbar .account-switch-flyout .switch-avatar {
   width: 16px;
   height: 16px;
   flex: 0 0 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  background: #f3f3f3;
-  color: #000;
-  font-size: 10px;
-  line-height: 16px;
-  font-weight: 400;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.topbar .account-switch-flyout .switch-avatar.is-personal {
+  background: transparent;
+}
+
+.topbar .account-switch-flyout .switch-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.topbar .account-switch-flyout .switch-action-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: block;
+}
+
+.topbar .account-switch-flyout .switch-text {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .topbar .account-switch-flyout .switch-name {
   min-width: 0;
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.topbar .account-switch-flyout .switch-mark,
+.topbar .account-switch-flyout .switch-text .switch-name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.topbar .account-switch-flyout .switch-flyout-action > span {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar .account-switch-flyout .switch-certified {
+  flex: 0 0 auto;
+  height: 18px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 999px;
+  background: rgba(33, 155, 90, .08);
+  color: #219b5a;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 10px;
+  line-height: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.topbar .account-switch-flyout .switch-certified img {
+  width: 12px;
+  height: 12px;
+  display: block;
+  flex: 0 0 12px;
+}
+
+.topbar .account-switch-flyout .switch-mark {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: block;
+}
+
 .topbar .account-switch-flyout .switch-hint {
   flex: 0 0 auto;
   color: #999;
@@ -5731,7 +5820,22 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
 }
 
 .topbar .account-switch-flyout .switch-flyout-sep {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 12px;
+  width: 100%;
+  height: 12px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.topbar .account-switch-flyout .switch-flyout-sep::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #f3f3f3;
 }
 
 .hero {

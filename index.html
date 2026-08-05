@@ -5605,6 +5605,16 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   position: relative;
 }
 
+.topbar .account-menu.has-switch-open .account-switch-wrap::before {
+  content: "";
+  position: absolute;
+  z-index: 131;
+  top: -8px;
+  right: 100%;
+  width: 4px;
+  height: 240px;
+}
+
 .topbar .account-menu-item > button {
   width: 100%;
   min-width: 0;
@@ -5665,14 +5675,20 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   position: absolute;
   top: -8px;
   right: calc(100% + 4px);
+  z-index: 130;
   width: max-content;
   min-width: 160px;
   max-width: 320px;
   padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   border: 1px solid #e5e5e5;
   border-radius: 12px;
   background: #fff;
-  box-shadow: 0 0 24px rgba(0, 0, 0, .05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .05), 0 0 24px rgba(0, 0, 0, .05);
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .topbar .account-switch-flyout[hidden] {
@@ -5681,9 +5697,9 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
 
 .topbar .account-switch-flyout .switch-item,
 .topbar .account-switch-flyout .switch-flyout-action {
-  width: calc(100% - 16px);
+  width: auto;
   min-width: 0;
-  max-width: 304px;
+  max-width: 100%;
   height: 36px;
   margin: 0 8px;
   padding: 8px;
@@ -5691,6 +5707,7 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
+  align-self: stretch;
   border: 0;
   border-radius: 8px;
   background: transparent;
@@ -5704,6 +5721,7 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   letter-spacing: 0;
   text-align: left;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .topbar .account-switch-flyout .switch-item:hover,
@@ -5725,31 +5743,102 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   opacity: .45;
 }
 
-.topbar .account-switch-flyout .switch-avatar,
-.topbar .account-switch-flyout .plus {
+.topbar .account-switch-flyout .switch-avatar {
   width: 16px;
   height: 16px;
   flex: 0 0 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  background: #f3f3f3;
-  color: #000;
-  font-size: 10px;
-  line-height: 16px;
-  font-weight: 400;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.topbar .account-switch-flyout .switch-avatar.is-personal {
+  background: transparent;
+}
+
+.topbar .account-switch-flyout .switch-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.topbar .account-switch-flyout .switch-action-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: block;
+}
+
+.topbar .account-switch-flyout .switch-text {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .topbar .account-switch-flyout .switch-name {
   min-width: 0;
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.topbar .account-switch-flyout .switch-mark,
+.topbar .account-switch-flyout .switch-text .switch-name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.topbar .account-switch-flyout .switch-flyout-action > span {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar .account-switch-flyout .switch-certified {
+  flex: 0 0 auto;
+  height: 18px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 999px;
+  background: rgba(33, 155, 90, .08);
+  color: #219b5a;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 10px;
+  line-height: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.topbar .account-switch-flyout .switch-certified img {
+  width: 12px;
+  height: 12px;
+  display: block;
+  flex: 0 0 12px;
+}
+
+.topbar .account-switch-flyout .switch-mark {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: block;
+}
+
 .topbar .account-switch-flyout .switch-hint {
   flex: 0 0 auto;
   color: #999;
@@ -5759,7 +5848,22 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
 }
 
 .topbar .account-switch-flyout .switch-flyout-sep {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 12px;
+  width: 100%;
+  height: 12px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.topbar .account-switch-flyout .switch-flyout-sep::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #f3f3f3;
 }
 
 .hero {
@@ -8504,6 +8608,7 @@ body > main > .topbar {
     "选择要进入的工作台": "Choose a workspace",
     "可以进入以下个人或企业工作台": "can enter these personal or enterprise workspaces",
     "申请企业认证": "Apply for enterprise verification",
+    "登录更多账号": "Sign in to more accounts",
     "下次默认进入该工作台": "Use this workspace by default next time",
     "账号设置": "Account settings",
     "个人资料": "Profile",
@@ -8541,6 +8646,7 @@ body > main > .topbar {
     "待认证企业申请": "Enterprise verification application",
     "汇智数字（认证未通过）": "Huizhi Digital (verification rejected)",
     "汇智互娱网络科技有限公司": "Huizhi Interactive Entertainment Network Technology Co., Ltd.",
+    "南京汇智互娱有限公司": "Nanjing Huizhi Interactive Entertainment Co., Ltd.",
     "江苏汇智智能数字科技有限公司": "Jiangsu Huizhi Intelligent Digital Technology Co., Ltd.",
     "已认证": "Verified",
     "切换工作台": "Switch workspace",
@@ -9250,25 +9356,24 @@ body > main > .topbar {
       role: "",
       status: "ok",
     };
-    if (last === "0" || last === "1") {
-      return { spaces: [personal] };
-    }
-    if (last === "2") {
-      return {
-        spaces: [
-          personal,
-          {
-            id: "org-hz",
-            type: "enterprise",
-            title: "江苏汇智智能数字科技有限公司",
-            name: userDisplayName(phone),
-            role: "成员",
-            status: "ok",
-            certified: true,
-          },
-        ],
-      };
-    }
+    const orgHz = {
+      id: "org-hz",
+      type: "enterprise",
+      title: "江苏汇智智能数字科技有限公司",
+      name: userDisplayName(phone),
+      role: "成员",
+      status: "ok",
+      certified: true,
+    };
+    const orgNj = {
+      id: "org-game",
+      type: "enterprise",
+      title: "南京汇智互娱有限公司",
+      name: userDisplayName(phone),
+      role: "管理员",
+      status: "ok",
+      certified: false,
+    };
     if (last === "3") {
       return {
         spaces: [
@@ -9317,29 +9422,7 @@ body > main > .topbar {
         ],
       };
     }
-    return {
-      spaces: [
-        personal,
-        {
-          id: "org-hz",
-          type: "enterprise",
-          title: "江苏汇智智能数字科技有限公司",
-          name: userDisplayName(phone),
-          role: "成员",
-          status: "ok",
-          certified: true,
-        },
-        {
-          id: "org-game",
-          type: "enterprise",
-          title: "汇智互娱网络科技有限公司",
-          name: userDisplayName(phone),
-          role: "管理员",
-          status: "ok",
-          certified: true,
-        },
-      ],
-    };
+    return { spaces: [personal, orgHz, orgNj] };
   }
 
   function openOverlay(el) {
@@ -9563,8 +9646,9 @@ body > main > .topbar {
     });
   }
 
-  function enterSpace(space, remember) {
+  function enterSpace(space, remember, options = {}) {
     const phone = pendingPhone || session?.phone;
+    const shouldScroll = options.scroll !== false;
     const next = {
       phone,
       displayName: (session?.phone === phone && session?.displayName) ? session.displayName : userDisplayName(phone),
@@ -9577,10 +9661,10 @@ body > main > .topbar {
     closeOverlays();
     if (space.type === "personal") {
       toast("已进入个人工作台");
-      document.getElementById("top")?.scrollIntoView({ behavior: "smooth" });
+      if (shouldScroll) document.getElementById("top")?.scrollIntoView({ behavior: "smooth" });
     } else {
       toast(currentLang === "en" ? `Entered “${translatePhrase(space.title)}” enterprise workspace demo` : `已进入「${space.title}」企业工作台（演示）`);
-      document.getElementById("enterprise")?.scrollIntoView({ behavior: "smooth" });
+      if (shouldScroll) document.getElementById("enterprise")?.scrollIntoView({ behavior: "smooth" });
     }
   }
 
@@ -9805,32 +9889,48 @@ body > main > .topbar {
 
   function renderSwitchFlyout(flyout, menu) {
     if (!flyout || !session) return;
-    const spaces = session.spaces || resolveAccount(session.phone).spaces || [];
+    const spaces = resolveAccount(session.phone).spaces || session.spaces || [];
     availableSpaces = spaces;
+    session.spaces = spaces;
+    try {
+      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    } catch (_) {}
     const currentId = session.space?.id;
     const items = spaces.map((space) => {
       const disabled = space.status === "pending" || space.status === "rejected";
       const isCurrent = space.id === currentId;
-      const avatarClass = space.type === "personal" ? "switch-avatar is-personal" : "switch-avatar";
-      const avatarText = space.type === "personal" ? (space.name || "我").slice(0, 1) : orgAvatar(space.title);
+      const isPersonal = space.type === "personal";
+      const displayTitle = isPersonal ? (session.phone || space.title) : space.title;
+      const showCertified = !!space.certified && (space.status === "ok" || space.status === "invite");
+      const avatarChar = orgAvatar(space.title);
+      const avatarHtml = isPersonal
+        ? `<span class="switch-avatar is-personal"><img src="${getAvatarSrc()}" alt="" /></span>`
+        : `<span class="switch-avatar" aria-hidden="true">${avatarChar}</span>`;
+      const nameHtml = showCertified
+        ? `<span class="switch-text"><span class="switch-name" title="${displayTitle}">${displayTitle}</span><span class="switch-certified"><img src="./assets/account-switch/icon-badge-check.svg" alt="" /><span>已认证</span></span></span>`
+        : `<span class="switch-name" title="${displayTitle}">${displayTitle}</span>`;
       let right = "";
-      if (isCurrent) right = '<span class="switch-mark" aria-hidden="true">✓</span>';
+      if (isCurrent) right = '<img class="switch-mark" src="./assets/account-switch/icon-check.svg" alt="" aria-hidden="true" />';
       else if (space.status === "pending") right = '<span class="switch-hint">审核中</span>';
       else if (space.status === "rejected") right = '<span class="switch-hint">未通过</span>';
       else if (space.status === "invite") right = '<span class="switch-hint">待加入</span>';
       return `
         <button type="button" class="switch-item${isCurrent ? " is-current" : ""}" data-switch-space="${space.id}" ${disabled ? "disabled" : ""}>
-          <span class="${avatarClass}">${avatarText}</span>
-          <span class="switch-name" title="${space.title}">${truncTitle(space.title, 18)}</span>
+          ${avatarHtml}
+          ${nameHtml}
           ${right}
         </button>`;
     }).join("");
     flyout.innerHTML = `
       ${items}
-      <div class="switch-flyout-sep"></div>
+      <div class="switch-flyout-sep" aria-hidden="true"></div>
       <button type="button" class="switch-flyout-action" data-switch-apply>
-        <span class="plus" aria-hidden="true">+</span>
+        <img class="switch-action-icon" src="./assets/account-switch/icon-building.svg" alt="" />
         <span>申请企业认证</span>
+      </button>
+      <button type="button" class="switch-flyout-action" data-switch-more-account>
+        <img class="switch-action-icon" src="./assets/account-switch/icon-plus.svg" alt="" />
+        <span>登录更多账号</span>
       </button>`;
     flyout.hidden = false;
     applyLanguage(currentLang);
@@ -9852,7 +9952,7 @@ body > main > .topbar {
         pendingPhone = session.phone;
         availableSpaces = spaces;
         closeAccountMenus();
-        enterSpace(space, !!session.rememberSpaceId);
+        enterSpace(space, !!session.rememberSpaceId, { scroll: false });
       });
     });
     $("[data-switch-apply]", flyout)?.addEventListener("click", (e) => {
@@ -9861,22 +9961,32 @@ body > main > .topbar {
       goEnterpriseIntro(true);
       toast("企业认证申请（演示）");
     });
+    $("[data-switch-more-account]", flyout)?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeAccountMenus();
+      openLogin("default");
+    });
   }
 
-  function toggleSwitchFlyout(menu, switchBtn) {
+  function openSwitchFlyout(menu) {
+    if (!menu) return;
+    const switchBtn = $("[data-action='switch']", menu);
     const flyout = $("[data-switch-flyout]", menu);
-    const open = menu.classList.contains("has-switch-open");
-    if (open) {
-      menu.classList.remove("has-switch-open");
-      switchBtn.classList.remove("is-active");
-      switchBtn.setAttribute("aria-expanded", "false");
-      if (flyout) flyout.hidden = true;
-      return;
-    }
+    clearAccountMenuCloseTimer();
     menu.classList.add("has-switch-open");
-    switchBtn.classList.add("is-active");
-    switchBtn.setAttribute("aria-expanded", "true");
+    switchBtn?.classList.add("is-active");
+    switchBtn?.setAttribute("aria-expanded", "true");
     renderSwitchFlyout(flyout, menu);
+  }
+
+  function closeSwitchFlyout(menu) {
+    if (!menu) return;
+    const switchBtn = $("[data-action='switch']", menu);
+    const flyout = $("[data-switch-flyout]", menu);
+    menu.classList.remove("has-switch-open");
+    switchBtn?.classList.remove("is-active");
+    switchBtn?.setAttribute("aria-expanded", "false");
+    if (flyout) flyout.hidden = true;
   }
 
   function renderAuth() {
@@ -9956,6 +10066,7 @@ body > main > .topbar {
     $$("[data-account-menu]").forEach((menu) => {
       menu.addEventListener("click", (e) => e.stopPropagation());
       const trigger = $(".account-trigger", menu);
+      const switchWrap = $(".account-switch-wrap", menu);
       const openAccountMenu = () => {
         clearAccountMenuCloseTimer();
         closeAccountMenus();
@@ -9974,12 +10085,24 @@ body > main > .topbar {
       });
       menu.addEventListener("mouseenter", openAccountMenu);
       menu.addEventListener("mouseleave", scheduleAccountMenuClose);
+      switchWrap?.addEventListener("mouseenter", () => openSwitchFlyout(menu));
+      switchWrap?.addEventListener("mouseleave", () => {
+        setTimeout(() => {
+          if (!switchWrap.matches(":hover")) closeSwitchFlyout(menu);
+        }, 60);
+      });
+      const switchBtn = $("[data-action='switch']", menu);
+      switchBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
     });
     $$("[data-action]").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const action = btn.getAttribute("data-action");
         const menu = btn.closest("[data-account-menu]");
         if (action === "switch") {
+          e.preventDefault();
           e.stopPropagation();
           if (!menu) {
             availableSpaces = session?.spaces || resolveAccount(session.phone).spaces;
@@ -9996,9 +10119,7 @@ body > main > .topbar {
             fly.style.cssText = "display:block;opacity:1;visibility:visible;position:static;width:100%;transform:none;box-shadow:none;margin-top:4px;";
             btn.insertAdjacentElement("afterend", fly);
             renderSwitchFlyout(fly, null);
-            return;
           }
-          toggleSwitchFlyout(menu, btn);
           return;
         }
         closeAccountMenus();

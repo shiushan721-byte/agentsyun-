@@ -2527,8 +2527,11 @@ footer {
     width: 18.75%;
     flex-basis: 18.75%;
   }
-  .hz-window-header {
+  .hz-window-header:not(.hz-window-header-global) {
     left: -18.75%;
+  }
+  .hz-window-header-global {
+    left: 0;
   }
   .hz-empty-workspace {
     padding-right: 10%;
@@ -5567,7 +5570,7 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   right: 0;
   z-index: 120;
   width: max-content;
-  min-width: 160px;
+  min-width: 220px;
   max-width: 320px;
   padding: 8px 0;
   display: flex;
@@ -5601,6 +5604,129 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   padding: 0 8px;
 }
 
+.topbar .account-user {
+  width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.topbar .account-user-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.topbar .account-user-avatar {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.topbar img.account-user-avatar {
+  display: block;
+  object-fit: cover;
+}
+
+.topbar .account-user-avatar.is-org {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.topbar .account-trigger-letter {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.topbar .account-user-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.topbar .account-user-name-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  width: 100%;
+}
+
+.topbar .account-user-name,
+.topbar .account-user-phone {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.topbar .account-user-name {
+  min-width: 0;
+  flex: 0 1 auto;
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.topbar .account-user-badge {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  display: block;
+}
+
+.topbar .account-user-phone {
+  width: 100%;
+  color: #666;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.topbar .account-panel-sep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 12px;
+  width: 100%;
+  height: 12px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.topbar .account-panel-sep::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #f3f3f3;
+}
+
 .topbar .account-switch-wrap {
   position: relative;
 }
@@ -5609,10 +5735,10 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   content: "";
   position: absolute;
   z-index: 131;
-  top: -8px;
+  top: -9px;
   right: 100%;
   width: 4px;
-  height: 240px;
+  height: 360px;
 }
 
 .topbar .account-menu-item > button {
@@ -5673,11 +5799,11 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
 
 .topbar .account-switch-flyout {
   position: absolute;
-  top: -8px;
+  top: -9px;
   right: calc(100% + 4px);
   z-index: 130;
   width: max-content;
-  min-width: 160px;
+  min-width: 220px;
   max-width: 320px;
   padding: 8px 0;
   display: flex;
@@ -5689,13 +5815,57 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   box-shadow: 0 8px 24px rgba(0, 0, 0, .05), 0 0 24px rgba(0, 0, 0, .05);
   overflow: hidden;
   box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-2px) scale(.98);
+  transform-origin: top right;
+  transition:
+    transform 180ms cubic-bezier(.22, 1, .36, 1),
+    opacity 180ms cubic-bezier(.22, 1, .36, 1),
+    visibility 180ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.topbar .account-menu.has-switch-open .account-switch-flyout {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
 }
 
 .topbar .account-switch-flyout[hidden] {
-  display: none;
+  display: flex !important;
 }
 
-.topbar .account-switch-flyout .switch-item,
+.topbar .account-switch-flyout .switch-item {
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+  min-height: 52px;
+  margin: 0 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  align-self: stretch;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  box-shadow: none;
+  cursor: pointer;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: left;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
 .topbar .account-switch-flyout .switch-flyout-action {
   width: auto;
   min-width: 0;
@@ -5734,19 +5904,15 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   background: #f3f3f3;
 }
 
-.topbar .account-switch-flyout .switch-item.is-current {
-  background: transparent;
-}
-
 .topbar .account-switch-flyout .switch-item:disabled {
   cursor: default;
   opacity: .45;
 }
 
 .topbar .account-switch-flyout .switch-avatar {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 16px;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -5755,8 +5921,8 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   background: #000;
   color: #fff;
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 9px;
-  line-height: 1;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 600;
 }
 
@@ -5771,32 +5937,91 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   object-fit: cover;
 }
 
+.topbar .account-switch-flyout .switch-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+}
+
+.topbar .account-switch-flyout .switch-title-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+  width: 100%;
+}
+
+.topbar .account-switch-flyout .switch-name,
+.topbar .account-switch-flyout .switch-phone {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: 400;
+}
+
+.topbar .account-switch-flyout .switch-name {
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.topbar .account-switch-flyout .switch-phone {
+  color: #666;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.topbar .account-switch-flyout .switch-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.topbar .account-switch-flyout .switch-tag {
+  height: 16px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #f3f3f3;
+  color: #666;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 10px;
+  line-height: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.topbar .account-switch-flyout .switch-tag.is-certified {
+  gap: 2px;
+  background: rgba(33, 155, 90, .08);
+  color: #219b5a;
+  font-weight: 500;
+}
+
+.topbar .account-switch-flyout .switch-tag.is-certified img {
+  width: 12px;
+  height: 12px;
+  display: block;
+  flex: 0 0 12px;
+}
+
 .topbar .account-switch-flyout .switch-action-icon {
   width: 16px;
   height: 16px;
   flex: 0 0 16px;
   display: block;
-}
-
-.topbar .account-switch-flyout .switch-text {
-  min-width: 0;
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.topbar .account-switch-flyout .switch-name {
-  min-width: 0;
-  flex: 1 1 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.topbar .account-switch-flyout .switch-text .switch-name {
-  flex: 1 1 auto;
-  min-width: 0;
 }
 
 .topbar .account-switch-flyout .switch-flyout-action > span {
@@ -5807,35 +6032,16 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   white-space: nowrap;
 }
 
-.topbar .account-switch-flyout .switch-certified {
+.topbar .account-switch-flyout .switch-mark-wrap {
   flex: 0 0 auto;
-  height: 18px;
-  padding: 0 6px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  border-radius: 999px;
-  background: rgba(33, 155, 90, .08);
-  color: #219b5a;
-  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 10px;
-  line-height: 13px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.topbar .account-switch-flyout .switch-certified img {
-  width: 12px;
-  height: 12px;
-  display: block;
-  flex: 0 0 12px;
 }
 
 .topbar .account-switch-flyout .switch-mark {
   width: 16px;
   height: 16px;
-  flex: 0 0 16px;
   display: block;
 }
 
@@ -7428,10 +7634,437 @@ body > main > .topbar {
 
 .login-step[data-step="spaces"] {
   width: 100%;
-  height: 100%;
-  padding: 40px 48px;
+  height: auto;
+  max-height: 100%;
+  min-height: 0;
+  padding: 0;
+  flex: 1 1 auto;
   flex-direction: column;
-  overflow: auto;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+#login-overlay .login-modal.is-spaces {
+  width: min(480px, calc(100vw - 48px));
+  height: auto;
+  max-height: calc(100svh - 160px);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, .05),
+    0 0 24px rgba(0, 0, 0, .05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@keyframes loginSpacesEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+#login-overlay .login-modal.is-spaces.is-entering {
+  animation: loginSpacesEnter .18s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #login-overlay .login-modal.is-spaces.is-entering {
+    animation: none;
+  }
+}
+
+#login-overlay .login-modal.is-spaces .login-close-abs {
+  display: none;
+}
+
+.spaces-heading {
+  width: 100%;
+  height: 56px;
+  min-height: 56px;
+  padding: 16px 16px 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+
+.spaces-heading h2 {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  color: #000;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.spaces-close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.spaces-close:hover {
+  background: #f9f9f9;
+}
+
+.spaces-close:active {
+  background: #f3f3f3;
+}
+
+.spaces-close svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.space-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.space-item-wrap {
+  width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.space-item {
+  width: 100%;
+  min-height: 80px;
+  margin: 0;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.space-item:hover:not(:disabled) {
+  background: #f9f9f9;
+}
+
+.space-item:active:not(:disabled) {
+  background: #f3f3f3;
+}
+
+.space-item:disabled {
+  cursor: default;
+  opacity: .45;
+}
+
+.space-item-avatar {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 999px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #000;
+  color: #fff;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.space-item-avatar.is-personal {
+  background: transparent;
+}
+
+.space-item-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.space-item-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+}
+
+.space-item-title-block {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.space-item-name,
+.space-item-phone {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.space-item-name {
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.space-item-phone {
+  color: #666;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.space-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.space-item-tag {
+  height: 16px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #f3f3f3;
+  color: #666;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 10px;
+  line-height: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.space-item-tag.is-certified {
+  gap: 2px;
+  background: rgba(33, 155, 90, .08);
+  color: #219b5a;
+  font-weight: 500;
+}
+
+.space-item-tag.is-certified img {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+.space-item-mark {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: block;
+  align-self: center;
+}
+
+.space-item-sep {
+  width: 100%;
+  height: 12px;
+  padding: 6px 24px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.space-item-sep::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #f3f3f3;
+}
+
+.spaces-actions {
+  width: 100%;
+  padding: 16px 24px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 0 0 auto;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.spaces-apply {
+  height: 36px;
+  max-width: 42%;
+  min-width: 0;
+  padding: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 0 1 auto;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.spaces-apply:hover {
+  background: #f9f9f9;
+}
+
+.spaces-apply:active {
+  background: #f3f3f3;
+}
+
+.spaces-apply img {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex: 0 0 16px;
+}
+
+.spaces-apply > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spaces-actions-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.spaces-enter,
+.spaces-login {
+  height: 36px;
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+  border-radius: 8px;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.spaces-enter > span,
+.spaces-login > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spaces-enter {
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #000;
+}
+
+.spaces-enter:hover {
+  background: #f9f9f9;
+}
+
+.spaces-enter:active {
+  background: #f3f3f3;
+}
+
+.spaces-login {
+  border: 1px solid #000;
+  background: #000;
+  color: #fff;
+}
+
+.spaces-login:hover {
+  background: #333;
+  border-color: #333;
+}
+
+.spaces-login:active {
+  background: #000;
+  border-color: #000;
+}
+
+.spaces-enter:disabled,
+.spaces-login:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.text-btn {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #2b88ff;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.text-btn:disabled {
+  color: #aaa;
+  cursor: default;
 }
 
 #settings-overlay .login-modal {
@@ -7766,6 +8399,270 @@ body > main > .topbar {
   border-color: #000;
 }
 
+/* Logout confirm dialog — Figma 152:2050 */
+#logout-overlay .logout-dialog {
+  position: relative;
+  width: 480px;
+  max-width: calc(100vw - 48px);
+  height: 184px;
+  max-height: calc(100svh - 64px);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  border: 0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, .05),
+    0 0 24px rgba(0, 0, 0, .05);
+  color: #000;
+  transform: translateY(10px) scale(.98);
+  transition: transform .18s ease;
+  box-sizing: border-box;
+}
+
+#logout-overlay.is-open .logout-dialog {
+  transform: translateY(0) scale(1);
+}
+
+#logout-overlay .logout-dialog-heading {
+  width: 100%;
+  height: 56px;
+  padding: 16px 16px 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+#logout-overlay .logout-dialog-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  color: #000;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+#logout-overlay .logout-dialog-close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#logout-overlay .logout-dialog-close:hover {
+  background: #f9f9f9;
+}
+
+#logout-overlay .logout-dialog-close:active {
+  background: #f3f3f3;
+}
+
+#logout-overlay .logout-dialog-close svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+#logout-overlay .logout-dialog-body {
+  width: 100%;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+#logout-overlay .logout-dialog-body p {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  color: #000;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+#logout-overlay .logout-dialog-actions-wrap {
+  width: 100%;
+  padding: 16px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+
+#logout-overlay .logout-dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+#logout-overlay .logout-dialog-cancel,
+#logout-overlay .logout-dialog-confirm {
+  height: 36px;
+  min-width: 64px;
+  padding: 8px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+#logout-overlay .logout-dialog-cancel {
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  color: #000;
+}
+
+#logout-overlay .logout-dialog-cancel:hover {
+  background: #f9f9f9;
+}
+
+#logout-overlay .logout-dialog-cancel:active {
+  background: #f3f3f3;
+}
+
+#logout-overlay .logout-dialog-confirm {
+  border: 1px solid #d94e41;
+  background: #d94e41;
+  color: #fff;
+}
+
+#logout-overlay .logout-dialog-confirm:hover {
+  background: #c9463a;
+  border-color: #c9463a;
+}
+
+#logout-overlay .logout-dialog-confirm:active {
+  background: #d94e41;
+  border-color: #d94e41;
+}
+
+/* Support QR dialog — Figma 187:1456 */
+#support-overlay .support-dialog {
+  position: relative;
+  width: 360px;
+  max-width: calc(100vw - 48px);
+  height: 364px;
+  max-height: calc(100svh - 64px);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .05);
+  color: #000;
+  transform: translateY(10px) scale(.98);
+  transition: transform .18s ease;
+  box-sizing: border-box;
+}
+
+#support-overlay.is-open .support-dialog {
+  transform: translateY(0) scale(1);
+}
+
+#support-overlay .support-dialog-title {
+  width: 100%;
+  margin: 0;
+  color: #000;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+#support-overlay .support-dialog-qr {
+  width: 224px;
+  height: 224px;
+  flex: 0 0 224px;
+  overflow: hidden;
+}
+
+#support-overlay .support-dialog-qr img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+#support-overlay .support-dialog-hint {
+  width: 100%;
+  margin: 0;
+  color: #999;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+#support-overlay .support-dialog-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#support-overlay .support-dialog-close:hover {
+  background: #f9f9f9;
+}
+
+#support-overlay .support-dialog-close:active {
+  background: #f3f3f3;
+}
+
+#support-overlay .support-dialog-close svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
 .otp-row {
   margin-top: 24px;
   display: grid;
@@ -7803,16 +8700,6 @@ body > main > .topbar {
 .text-btn:disabled {
   color: #aaa;
   cursor: default;
-}
-
-.space-list {
-  margin-top: 24px;
-  display: grid;
-  gap: 12px;
-}
-
-.space-footer {
-  margin-top: 16px;
 }
 
 /* Final page-heading lock: 36px size with fixed 48px line height. */
@@ -8164,6 +9051,31 @@ body > main > .topbar {
     --desktop-hero-top: 96px;
     --desktop-title-gap: 64px;
   }
+
+  .hz-figma-showcase {
+    width: min(1280px, calc(100vw - (var(--desktop-side) * 2))) !important;
+    max-width: calc(100vw - (var(--desktop-side) * 2)) !important;
+  }
+
+  .hz-figma-shell.app-window {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .hz-side-nav {
+    width: 240px !important;
+    flex: 0 0 240px !important;
+  }
+
+  .hz-content {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: auto !important;
+  }
+
+  .hz-window-header-global {
+    left: 0 !important;
+  }
 }
 
 @media (min-width: 1024px) and (max-width: 1279px) {
@@ -8177,6 +9089,40 @@ body > main > .topbar {
 
   .capabilities-section {
     --cap-copy-width: clamp(288px, calc((100vw - 144px) / 3), 350px);
+  }
+
+  .hz-figma-showcase {
+    width: min(1280px, calc(100vw - (var(--desktop-side) * 2))) !important;
+    max-width: calc(100vw - (var(--desktop-side) * 2)) !important;
+    height: 640px !important;
+  }
+
+  .hz-figma-shell.app-window {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 640px !important;
+    min-height: 640px !important;
+    aspect-ratio: auto !important;
+  }
+
+  .hz-side-nav {
+    width: 240px !important;
+    flex: 0 0 240px !important;
+  }
+
+  .hz-content {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: auto !important;
+  }
+
+  .hz-window-header-global {
+    left: 0 !important;
+  }
+
+  .hz-empty-workspace {
+    padding-left: 64px !important;
+    padding-right: 64px !important;
   }
 }
 
@@ -8237,16 +9183,23 @@ body > main > .topbar {
     </div>
 
     <div class="login-step" data-step="spaces">
-      <h2>选择要进入的工作台</h2>
-      <p class="login-sub"><span id="spaces-phone-label">****</span> 可以进入以下个人或企业工作台</p>
-      <div class="space-list" id="space-list"></div>
-      <div class="space-footer">
-        <button type="button" class="text-btn" data-action-apply>申请企业认证</button>
+      <div class="spaces-heading">
+        <h2 id="spaces-title">选择要登录的账号</h2>
+        <button type="button" class="spaces-close" data-close-overlays aria-label="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
       </div>
-      <label class="login-agree login-remember">
-        <input type="checkbox" id="remember-space" />
-        <span>下次默认进入该工作台</span>
-      </label>
+      <div class="space-list" id="space-list"></div>
+      <div class="spaces-actions">
+        <button type="button" class="spaces-apply" data-action-apply>
+          <img src="./assets/space-picker/icon-building.svg" alt="" />
+          <span>申请企业认证</span>
+        </button>
+        <div class="spaces-actions-right">
+          <button type="button" class="spaces-enter" id="spaces-enter"><span>进入工作台</span></button>
+          <button type="button" class="spaces-login" id="spaces-login"><span>确认登录</span></button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -8286,6 +9239,39 @@ body > main > .topbar {
       <button type="button" class="settings-cancel" data-close-overlays>取消</button>
       <button type="button" class="settings-save" id="settings-save">确定</button>
     </div>
+  </div>
+</div>
+
+<div class="login-overlay" id="logout-overlay" hidden>
+  <div class="logout-dialog" role="dialog" aria-modal="true" aria-labelledby="logout-title">
+    <div class="logout-dialog-heading">
+      <h2 class="logout-dialog-title" id="logout-title">退出登录？</h2>
+      <button type="button" class="logout-dialog-close" data-close-overlays aria-label="关闭">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+    </div>
+    <div class="logout-dialog-body">
+      <p>退出后账号数据不会清空！</p>
+    </div>
+    <div class="logout-dialog-actions-wrap">
+      <div class="logout-dialog-actions">
+        <button type="button" class="logout-dialog-cancel" data-close-overlays>取消</button>
+        <button type="button" class="logout-dialog-confirm" id="logout-confirm">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="login-overlay" id="support-overlay" hidden>
+  <div class="support-dialog" role="dialog" aria-modal="true" aria-labelledby="support-title">
+    <button type="button" class="support-dialog-close" data-close-overlays aria-label="关闭">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+    </button>
+    <h2 class="support-dialog-title" id="support-title">联系客服</h2>
+    <div class="support-dialog-qr">
+      <img src="./assets/support-dialog/qr.png" alt="" />
+    </div>
+    <p class="support-dialog-hint">使用微信扫码，联系客服</p>
   </div>
 </div>
 <section class="proof-section" aria-label="产品数据">
@@ -8606,8 +9592,11 @@ body > main > .topbar {
     "重新获取验证码": "Resend code",
     "使用其他手机号": "Use another phone number",
     "选择要进入的工作台": "Choose a workspace",
+    "选择要登录的账号": "Select an account to sign in",
     "可以进入以下个人或企业工作台": "can enter these personal or enterprise workspaces",
     "申请企业认证": "Apply for enterprise verification",
+    "进入工作台": "Workspace",
+    "确认登录": "Log in",
     "登录更多账号": "Sign in to more accounts",
     "下次默认进入该工作台": "Use this workspace by default next time",
     "账号设置": "Account settings",
@@ -8630,6 +9619,7 @@ body > main > .topbar {
     "暖黄": "Amber",
     "玫红": "Rose",
     "我": "Me",
+    "用户": "User",
     "丸子": "Wanzi",
     "成员": "Member",
     "管理员": "Admin",
@@ -8649,9 +9639,16 @@ body > main > .topbar {
     "南京汇智互娱有限公司": "Nanjing Huizhi Interactive Entertainment Co., Ltd.",
     "江苏汇智智能数字科技有限公司": "Jiangsu Huizhi Intelligent Digital Technology Co., Ltd.",
     "已认证": "Verified",
+    "个人": "Personal",
+    "企业": "Enterprise",
+    "拥有": "Owner",
     "切换工作台": "Switch workspace",
+    "切换账号": "Switch account",
     "联系客服": "Contact support",
+    "使用微信扫码，联系客服": "Scan with WeChat to contact support",
     "退出登录": "Log out",
+    "退出登录？": "Log out?",
+    "退出后账号数据不会清空！": "Your account data will not be cleared after logging out!",
     "敬请期待": "Coming soon",
     "该功能": "This feature",
     "前往下载体验": "Go to download",
@@ -9254,6 +10251,8 @@ body > main > .topbar {
   const loginOverlay = $("#login-overlay");
   const loginModal = $("#login-overlay .login-modal");
   const settingsOverlay = $("#settings-overlay");
+  const logoutOverlay = $("#logout-overlay");
+  const supportOverlay = $("#support-overlay");
   const settingsPhone = $("#settings-phone");
   const settingsNickname = $("#settings-nickname");
   const settingsNicknameCount = $("#settings-nickname-count");
@@ -9286,6 +10285,9 @@ body > main > .topbar {
   const agreeInput = $("#login-agree");
   const rememberInput = $("#remember-space");
   const spaceList = $("#space-list");
+  const spacesEnterBtn = $("#spaces-enter");
+  const spacesLoginBtn = $("#spaces-login");
+  let selectedSpaceId = null;
   const enterpriseCta = $("#enterprise-cta");
   const codeInput = $("#login-code");
   const phoneField = $("[data-field='phone']");
@@ -9302,6 +10304,8 @@ body > main > .topbar {
   let session = loadSession();
   let loginOverlayPointerStartedOnBackdrop = false;
   let settingsOverlayPointerStartedOnBackdrop = false;
+  let logoutOverlayPointerStartedOnBackdrop = false;
+  let supportOverlayPointerStartedOnBackdrop = false;
 
   function loadSession() {
     try {
@@ -9325,7 +10329,8 @@ body > main > .topbar {
     return /^1[3-9]\d{9}$/.test(String(v || "").trim());
   }
   function userDisplayName(phone) {
-    return "丸子";
+    const p = String(phone || "").trim();
+    return p.length >= 4 ? `用户${p.slice(-4)}` : "用户";
   }
   function avatarForPhone(phone) {
     const seed = String(phone || Date.now());
@@ -9340,10 +10345,48 @@ body > main > .topbar {
     return avatarForPhone(s?.phone);
   }
   function getDisplayName(s = session) {
-    return (s && s.displayName) || userDisplayName(s?.phone) || "丸子";
+    const raw = s && s.displayName;
+    if (raw && raw !== "丸子") return raw;
+    return userDisplayName(s?.phone) || "用户";
   }
   function orgAvatar(name) {
     return (name || "企").trim().slice(0, 1);
+  }
+  function letterAvatarDataUrl(letter) {
+    const canvas = document.createElement("canvas");
+    canvas.width = 160;
+    canvas.height = 160;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, 160, 160);
+    ctx.fillStyle = "#fff";
+    ctx.font = '600 72px "PingFang SC", "Microsoft YaHei", sans-serif';
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(String(letter || "企").slice(0, 1), 80, 84);
+    return canvas.toDataURL("image/png");
+  }
+  function defaultNameForSpace(space, s = session) {
+    if (!space) return getDisplayName(s);
+    if (space.type === "personal") return getDisplayName(s);
+    const title = String(space.title || "").replace(/[^\u4e00-\u9fa5A-Za-z0-9_]/g, "").trim();
+    return (title.slice(0, 15) || getDisplayName(s));
+  }
+  function defaultAvatarForSpace(space, s = session) {
+    if (!space || space.type === "personal") return getAvatarSrc(s);
+    return letterAvatarDataUrl(orgAvatar(space.title));
+  }
+  function getSpaceProfile(space = session?.space, s = session) {
+    if (!s?.phone) return { displayName: "", avatar: DEFAULT_AVATAR };
+    const target = space || s.space;
+    const saved = target?.id ? s.profiles?.[target.id] : null;
+    return {
+      displayName: (saved?.displayName && String(saved.displayName).trim()) || defaultNameForSpace(target, s),
+      avatar: (saved?.avatar && saved.avatar !== LEGACY_DEFAULT_AVATAR) ? saved.avatar : defaultAvatarForSpace(target, s),
+    };
+  }
+  function getActiveSpaceProfile(s = session) {
+    return getSpaceProfile(s?.space, s);
   }
 
   function resolveAccount(phone) {
@@ -9361,7 +10404,7 @@ body > main > .topbar {
       type: "enterprise",
       title: "江苏汇智智能数字科技有限公司",
       name: userDisplayName(phone),
-      role: "成员",
+      role: "拥有",
       status: "ok",
       certified: true,
     };
@@ -9370,7 +10413,7 @@ body > main > .topbar {
       type: "enterprise",
       title: "南京汇智互娱有限公司",
       name: userDisplayName(phone),
-      role: "管理员",
+      role: "",
       status: "ok",
       certified: false,
     };
@@ -9441,6 +10484,8 @@ body > main > .topbar {
   function closeOverlays() {
     closeOverlay(loginOverlay);
     closeOverlay(settingsOverlay);
+    closeOverlay(logoutOverlay);
+    closeOverlay(supportOverlay);
     resetLoginCountdown();
   }
   function closeLogin() {
@@ -9460,7 +10505,10 @@ body > main > .topbar {
       switchBtn?.classList.remove("is-active");
       switchBtn?.setAttribute("aria-expanded", "false");
       const flyout = $("[data-switch-flyout]", m);
-      if (flyout) flyout.hidden = true;
+      if (flyout) {
+        flyout.setAttribute("aria-hidden", "true");
+        flyout.hidden = true;
+      }
     });
     $$(".account-trigger").forEach((t) => t.setAttribute("aria-expanded", "false"));
   }
@@ -9469,6 +10517,21 @@ body > main > .topbar {
     $$(".login-step").forEach((step) => {
       step.classList.toggle("is-active", step.getAttribute("data-step") === name);
     });
+    loginModal?.classList.toggle("is-spaces", name === "spaces");
+    if (name !== "spaces") loginModal?.classList.remove("is-entering");
+  }
+
+  function playSpacesModalEnter() {
+    if (!loginModal) return;
+    loginModal.classList.remove("is-entering");
+    void loginModal.offsetWidth;
+    loginModal.classList.add("is-entering");
+    const onEnd = (e) => {
+      if (e.target !== loginModal) return;
+      loginModal.classList.remove("is-entering");
+      loginModal.removeEventListener("animationend", onEnd);
+    };
+    loginModal.addEventListener("animationend", onEnd);
   }
 
   function setLoginError(target, message) {
@@ -9586,19 +10649,76 @@ body > main > .topbar {
   function openSpacePicker(phone, spaces, preferEnterprise) {
     availableSpaces = spaces;
     pendingPhone = phone;
-    $("#spaces-phone-label").textContent = maskPhone(phone);
     renderSpaceCards(spaces, preferEnterprise);
     showStep("spaces");
     openOverlay(loginOverlay);
+    playSpacesModalEnter();
   }
 
-  function statusTag(space) {
-    if (space.type === "personal") return "";
-    if (space.status === "pending") return '<span class="space-tag warn">审核中</span>';
-    if (space.status === "rejected") return '<span class="space-tag bad">认证未通过</span>';
-    if (space.status === "invite") return '<span class="space-tag invite">待确认加入</span>';
-    if (space.certified) return '<span class="space-tag ok">企业已认证</span>';
-    return "";
+  function spaceItemTags(space) {
+    const tags = [];
+    if (space.type === "personal") {
+      tags.push('<span class="space-item-tag">个人</span>');
+      return tags.join("");
+    }
+    if (space.certified && (space.status === "ok" || space.status === "invite")) {
+      tags.push(`
+        <span class="space-item-tag is-certified">
+          <img src="./assets/space-picker/icon-badge-check.svg" alt="" />
+          <span>已认证</span>
+        </span>
+      `);
+    }
+    tags.push('<span class="space-item-tag">企业</span>');
+    if (space.role === "拥有" || space.role === "拥有者") {
+      tags.push(`<span class="space-item-tag">${space.role === "拥有者" ? "拥有" : space.role}</span>`);
+    } else if (space.status === "pending") {
+      tags.push('<span class="space-item-tag">审核中</span>');
+    } else if (space.status === "rejected") {
+      tags.push('<span class="space-item-tag">未通过</span>');
+    } else if (space.status === "invite") {
+      tags.push('<span class="space-item-tag">待加入</span>');
+    }
+    return tags.join("");
+  }
+
+  function updateSpaceSelectionUI() {
+    if (!spaceList) return;
+    $$("[data-space-id]", spaceList).forEach((btn) => {
+      const id = btn.getAttribute("data-space-id");
+      const selected = id === selectedSpaceId;
+      btn.classList.toggle("is-selected", selected);
+      const mark = $("[data-space-mark]", btn);
+      if (mark) {
+        mark.src = selected
+          ? "./assets/space-picker/icon-circle-check.svg"
+          : "./assets/space-picker/icon-circle.svg";
+        mark.alt = selected ? "已选中" : "";
+      }
+    });
+    const selected = availableSpaces.find((s) => s.id === selectedSpaceId);
+    const canConfirm = !!selected && selected.status !== "pending" && selected.status !== "rejected";
+    if (spacesEnterBtn) spacesEnterBtn.disabled = !canConfirm;
+    if (spacesLoginBtn) spacesLoginBtn.disabled = !canConfirm;
+  }
+
+  function confirmSelectedSpace() {
+    const space = availableSpaces.find((s) => s.id === selectedSpaceId);
+    if (!space) return;
+    if (space.status === "invite") {
+      space.status = "ok";
+      space.role = "成员";
+      toast("已加入企业工作台");
+      enterSpace(space, true);
+      return;
+    }
+    if (space.status === "rejected") {
+      toast("认证未通过，请重新提交资料");
+      goEnterpriseIntro(true);
+      return;
+    }
+    if (space.status === "pending") return;
+    enterSpace(space, !!rememberInput?.checked);
   }
 
   function renderSpaceCards(spaces, preferEnterprise) {
@@ -9606,42 +10726,51 @@ body > main > .topbar {
     if (preferEnterprise) {
       ordered.sort((a, b) => Number(b.type === "enterprise") - Number(a.type === "enterprise"));
     }
-    spaceList.innerHTML = ordered.map((space) => {
+    const phone = String(pendingPhone || "");
+    const firstSelectable = ordered.find((s) => s.status !== "pending" && s.status !== "rejected") || ordered[0];
+    selectedSpaceId = firstSelectable?.id || null;
+
+    spaceList.innerHTML = ordered.map((space, index) => {
       const disabled = space.status === "pending" || space.status === "rejected";
-      const avatarClass = space.type === "personal" ? "space-avatar is-personal" : "space-avatar";
-      const avatarText = space.type === "personal" ? (space.name || "我").slice(0, 1) : orgAvatar(space.title);
-      const meta = space.type === "personal"
-        ? `<span>${space.name}</span>`
-        : `<span>${space.name || space.role}</span>${space.role && space.name ? `<span>· ${space.role}</span>` : ""}${statusTag(space)}`;
+      const isPersonal = space.type === "personal";
+      const phoneSuffix = phone.length >= 4 ? phone.slice(-4) : "";
+      const personalNameHtml = `<span>用户</span>${phoneSuffix}`;
+      const displayTitle = isPersonal
+        ? `用户${phoneSuffix}`
+        : space.title;
+      const nameHtml = isPersonal
+        ? `<span class="space-item-name" title="${displayTitle}">${personalNameHtml}</span>`
+        : `<span class="space-item-name" title="${displayTitle}">${displayTitle}</span>`;
+      const avatarHtml = isPersonal
+        ? `<span class="space-item-avatar is-personal"><img src="${avatarForPhone(phone)}" alt="" /></span>`
+        : `<span class="space-item-avatar" aria-hidden="true">${orgAvatar(space.title)}</span>`;
+      const sep = index < ordered.length - 1
+        ? '<div class="space-item-sep" aria-hidden="true"></div>'
+        : "";
       return `
-        <button type="button" class="space-card" data-space-id="${space.id}" ${disabled ? "disabled" : ""}>
-          <span class="${avatarClass}">${avatarText}</span>
-          <span>
-            <strong>${space.title}</strong>
-            <span class="meta">${meta}</span>
-          </span>
-          <span class="space-arrow" aria-hidden="true">${space.status === "invite" ? "确认" : "›"}</span>
-        </button>`;
+        <div class="space-item-wrap">
+          <button type="button" class="space-item" data-space-id="${space.id}" ${disabled ? "disabled" : ""}>
+            ${avatarHtml}
+            <span class="space-item-info">
+              <span class="space-item-title-block">
+                ${nameHtml}
+                <span class="space-item-phone">${phone}</span>
+              </span>
+              <span class="space-item-tags">${spaceItemTags(space)}</span>
+            </span>
+            <img class="space-item-mark" data-space-mark src="./assets/space-picker/icon-circle.svg" alt="" />
+          </button>
+        </div>
+        ${sep}`;
     }).join("");
     applyLanguage(currentLang);
+    updateSpaceSelectionUI();
 
     $$("[data-space-id]", spaceList).forEach((btn) => {
       btn.addEventListener("click", () => {
-        const space = availableSpaces.find((s) => s.id === btn.getAttribute("data-space-id"));
-        if (!space) return;
-        if (space.status === "invite") {
-          space.status = "ok";
-          space.role = "成员";
-          toast("已加入企业工作台");
-          enterSpace(space, true);
-          return;
-        }
-        if (space.status === "rejected") {
-          toast("认证未通过，请重新提交资料");
-          goEnterpriseIntro(true);
-          return;
-        }
-        enterSpace(space, rememberInput?.checked);
+        if (btn.disabled) return;
+        selectedSpaceId = btn.getAttribute("data-space-id");
+        updateSpaceSelectionUI();
       });
     });
   }
@@ -9845,12 +10974,13 @@ body > main > .topbar {
       openLogin("default");
       return;
     }
+    const profile = getActiveSpaceProfile();
     if (settingsPhone) settingsPhone.value = session.phone;
-    if (settingsNickname) settingsNickname.value = getDisplayName();
+    if (settingsNickname) settingsNickname.value = profile.displayName || "";
     clearSettingsNicknameError();
     updateSettingsCount();
     renderAvatarPresets();
-    setDraftAvatar(getAvatarSrc());
+    setDraftAvatar(profile.avatar || DEFAULT_AVATAR);
     openOverlay(settingsOverlay);
     requestAnimationFrame(() => document.activeElement?.blur?.());
   }
@@ -9873,11 +11003,24 @@ body > main > .topbar {
       settingsNickname?.focus();
       return;
     }
-    saveSession({
+    const spaceId = session.space?.id || "personal";
+    const nextAvatar = draftAvatar || DEFAULT_AVATAR;
+    const profiles = {
+      ...(session.profiles || {}),
+      [spaceId]: {
+        displayName: nickname,
+        avatar: nextAvatar,
+      },
+    };
+    const next = {
       ...session,
-      displayName: nickname,
-      avatar: draftAvatar || DEFAULT_AVATAR,
-    });
+      profiles,
+    };
+    if (!session.space || session.space.type === "personal") {
+      next.displayName = nickname;
+      next.avatar = nextAvatar;
+    }
+    saveSession(next);
     closeOverlays();
     toast("账号设置已保存");
   }
@@ -9896,34 +11039,60 @@ body > main > .topbar {
       localStorage.setItem(SESSION_KEY, JSON.stringify(session));
     } catch (_) {}
     const currentId = session.space?.id;
+    const phone = String(session.phone || "");
+    const sep = '<div class="switch-flyout-sep" aria-hidden="true"></div>';
     const items = spaces.map((space) => {
       const disabled = space.status === "pending" || space.status === "rejected";
       const isCurrent = space.id === currentId;
       const isPersonal = space.type === "personal";
-      const displayTitle = isPersonal ? (session.phone || space.title) : space.title;
       const showCertified = !!space.certified && (space.status === "ok" || space.status === "invite");
-      const avatarChar = orgAvatar(space.title);
-      const avatarHtml = isPersonal
-        ? `<span class="switch-avatar is-personal"><img src="${getAvatarSrc()}" alt="" /></span>`
-        : `<span class="switch-avatar" aria-hidden="true">${avatarChar}</span>`;
-      const nameHtml = showCertified
-        ? `<span class="switch-text"><span class="switch-name" title="${displayTitle}">${displayTitle}</span><span class="switch-certified"><img src="./assets/account-switch/icon-badge-check.svg" alt="" /><span>已认证</span></span></span>`
-        : `<span class="switch-name" title="${displayTitle}">${displayTitle}</span>`;
+      const spaceProfile = getSpaceProfile(space);
+      const savedSpaceProfile = session.profiles?.[space.id];
+      const displayTitle = isPersonal
+        ? (savedSpaceProfile?.displayName || getDisplayName() || (phone ? `用户${phone.slice(-4)}` : "用户"))
+        : (savedSpaceProfile?.displayName || space.title);
+      const hasCustomEntAvatar = !isPersonal && !!savedSpaceProfile?.avatar;
+      const avatarHtml = isPersonal || hasCustomEntAvatar
+        ? `<span class="switch-avatar is-personal"><img src="${spaceProfile.avatar}" alt="" /></span>`
+        : `<span class="switch-avatar" aria-hidden="true">${orgAvatar(space.title)}</span>`;
+      const tags = [];
+      if (showCertified) {
+        tags.push(`<span class="switch-tag is-certified"><img src="./assets/account-switch/icon-badge-check.svg" alt="" /><span>已认证</span></span>`);
+      }
+      if (isPersonal) {
+        tags.push('<span class="switch-tag">个人</span>');
+      } else {
+        tags.push('<span class="switch-tag">企业</span>');
+        if (space.role === "拥有" || space.role === "拥有者") {
+          tags.push(`<span class="switch-tag">${space.role === "拥有者" ? "拥有" : space.role}</span>`);
+        }
+      }
       let right = "";
-      if (isCurrent) right = '<img class="switch-mark" src="./assets/account-switch/icon-check.svg" alt="" aria-hidden="true" />';
-      else if (space.status === "pending") right = '<span class="switch-hint">审核中</span>';
-      else if (space.status === "rejected") right = '<span class="switch-hint">未通过</span>';
-      else if (space.status === "invite") right = '<span class="switch-hint">待加入</span>';
+      if (isCurrent) {
+        right = '<span class="switch-mark-wrap"><img class="switch-mark" src="./assets/account-switch/icon-check.svg" alt="" aria-hidden="true" /></span>';
+      } else if (space.status === "pending") {
+        right = '<span class="switch-hint">审核中</span>';
+      } else if (space.status === "rejected") {
+        right = '<span class="switch-hint">未通过</span>';
+      } else if (space.status === "invite") {
+        right = '<span class="switch-hint">待加入</span>';
+      }
       return `
         <button type="button" class="switch-item${isCurrent ? " is-current" : ""}" data-switch-space="${space.id}" ${disabled ? "disabled" : ""}>
           ${avatarHtml}
-          ${nameHtml}
+          <span class="switch-info">
+            <span class="switch-title-block">
+              <span class="switch-name" title="${displayTitle}">${displayTitle}</span>
+              <span class="switch-phone">${phone}</span>
+            </span>
+            <span class="switch-tags">${tags.join("")}</span>
+          </span>
           ${right}
         </button>`;
-    }).join("");
+    }).join(sep);
     flyout.innerHTML = `
       ${items}
-      <div class="switch-flyout-sep" aria-hidden="true"></div>
+      ${sep}
       <button type="button" class="switch-flyout-action" data-switch-apply>
         <img class="switch-action-icon" src="./assets/account-switch/icon-building.svg" alt="" />
         <span>申请企业认证</span>
@@ -9933,6 +11102,7 @@ body > main > .topbar {
         <span>登录更多账号</span>
       </button>`;
     flyout.hidden = false;
+    flyout.setAttribute("aria-hidden", "false");
     applyLanguage(currentLang);
 
     $$("[data-switch-space]", flyout).forEach((btn) => {
@@ -9973,10 +11143,12 @@ body > main > .topbar {
     const switchBtn = $("[data-action='switch']", menu);
     const flyout = $("[data-switch-flyout]", menu);
     clearAccountMenuCloseTimer();
-    menu.classList.add("has-switch-open");
     switchBtn?.classList.add("is-active");
     switchBtn?.setAttribute("aria-expanded", "true");
     renderSwitchFlyout(flyout, menu);
+    requestAnimationFrame(() => {
+      menu.classList.add("has-switch-open");
+    });
   }
 
   function closeSwitchFlyout(menu) {
@@ -9986,7 +11158,10 @@ body > main > .topbar {
     menu.classList.remove("has-switch-open");
     switchBtn?.classList.remove("is-active");
     switchBtn?.setAttribute("aria-expanded", "false");
-    if (flyout) flyout.hidden = true;
+    if (flyout) {
+      flyout.setAttribute("aria-hidden", "true");
+      flyout.hidden = true;
+    }
   }
 
   function renderAuth() {
@@ -9999,22 +11174,49 @@ body > main > .topbar {
       return;
     }
     const space = session.space;
-    const name = getDisplayName();
-    const avatar = getAvatarSrc();
+    const phone = String(session.phone || "");
     const isEnt = space.type === "enterprise";
+    const isCertified = !!space.certified && (space.status === "ok" || space.status === "invite");
+    const savedProfile = session.profiles?.[space.id];
+    const activeProfile = getActiveSpaceProfile();
+    const profileName = isEnt
+      ? (savedProfile?.displayName || space.title)
+      : (savedProfile?.displayName || getDisplayName() || (phone ? `用户${phone.slice(-4)}` : "用户"));
     const shortOrg = isEnt ? space.title.replace(/有限公司|股份有限公司/g, "").slice(0, 6) : "";
-    const label = isEnt ? `${name} · ${shortOrg}` : name;
-    const headOrg = isEnt ? space.title : "个人工作台";
+    const label = isEnt ? `${savedProfile?.displayName || getDisplayName()} · ${shortOrg}` : profileName;
+    const hasCustomEntAvatar = isEnt && !!savedProfile?.avatar;
+    const triggerAvatar = isEnt && !hasCustomEntAvatar
+      ? `<span class="account-trigger-letter" aria-hidden="true">${orgAvatar(space.title)}</span>`
+      : `<img class="account-trigger-avatar" src="${activeProfile.avatar}" alt="" />`;
+    const panelAvatar = isEnt && !hasCustomEntAvatar
+      ? `<span class="account-user-avatar is-org" aria-hidden="true">${orgAvatar(space.title)}</span>`
+      : `<img class="account-user-avatar" src="${activeProfile.avatar}" alt="" />`;
+    const certifiedBadge = isCertified
+      ? `<img class="account-user-badge" src="./assets/account-switch/icon-badge-check.svg" alt="" />`
+      : "";
     const menu = `
       <div class="account-menu" data-account-menu>
         <button type="button" class="account-trigger" aria-label="${label}" title="${label}" aria-haspopup="true" aria-expanded="false">
-          <img class="account-trigger-avatar" src="${avatar}" alt="" />
+          ${triggerAvatar}
         </button>
         <div class="account-panel" role="menu">
+          <div class="account-user">
+            <div class="account-user-inner">
+              ${panelAvatar}
+              <div class="account-user-text">
+                <div class="account-user-name-row">
+                  <div class="account-user-name">${profileName}</div>
+                  ${certifiedBadge}
+                </div>
+                <div class="account-user-phone">${phone}</div>
+              </div>
+            </div>
+          </div>
+          <div class="account-panel-sep" aria-hidden="true"></div>
           <div class="account-menu-item account-switch-wrap">
             <button type="button" data-action="switch" aria-haspopup="true" aria-expanded="false">
               <img class="account-item-icon" src="./assets/account-menu/icon-switch.svg" alt="" />
-              <span class="account-item-label">切换工作台</span>
+              <span class="account-item-label">切换账号</span>
               <span class="menu-chevron" aria-hidden="true">›</span>
             </button>
             <div class="account-switch-flyout" data-switch-flyout hidden></div>
@@ -10025,7 +11227,6 @@ body > main > .topbar {
               <span class="account-item-label">账号设置</span>
             </button>
           </div>
-          <div class="sep"></div>
           <div class="account-menu-item">
             <button type="button" data-action="support">
               <img class="account-item-icon" src="./assets/account-menu/icon-headset.svg" alt="" />
@@ -10044,7 +11245,7 @@ body > main > .topbar {
     if (mobileAuth) {
       mobileAuth.innerHTML = `
         <div style="padding:8px 12px;color:#6e6e76;font-size:12px">${label}</div>
-        <button type="button" class="nav-button-ghost" data-action="switch">切换工作台</button>
+        <button type="button" class="nav-button-ghost" data-action="switch">切换账号</button>
         <button type="button" class="nav-button-ghost" data-action="settings">账号设置</button>
         <button type="button" class="nav-button-ghost" data-action="support">联系客服</button>
         <button type="button" class="nav-button" data-action="logout">退出登录</button>`;
@@ -10125,15 +11326,17 @@ body > main > .topbar {
         closeAccountMenus();
         closeMenu();
         if (action === "logout") {
-          saveSession(null);
-          toast("已退出登录");
+          openOverlay(logoutOverlay);
           return;
         }
         if (action === "settings") {
           openSettings();
           return;
         }
-        if (action === "support") toast("客服通道（演示）");
+        if (action === "support") {
+          openOverlay(supportOverlay);
+          return;
+        }
       });
     });
   }
@@ -10190,6 +11393,8 @@ body > main > .topbar {
       toast("前往申请企业认证");
     });
   });
+  spacesEnterBtn?.addEventListener("click", () => confirmSelectedSpace());
+  spacesLoginBtn?.addEventListener("click", () => confirmSelectedSpace());
 
   $$("[data-close-overlays]").forEach((btn) => {
     btn.addEventListener("click", () => closeOverlays());
@@ -10212,6 +11417,25 @@ body > main > .topbar {
   settingsOverlay?.addEventListener("click", (e) => {
     if (e.target === settingsOverlay && settingsOverlayPointerStartedOnBackdrop) closeOverlays();
     settingsOverlayPointerStartedOnBackdrop = false;
+  });
+  logoutOverlay?.addEventListener("pointerdown", (e) => {
+    logoutOverlayPointerStartedOnBackdrop = e.target === logoutOverlay;
+  });
+  logoutOverlay?.addEventListener("click", (e) => {
+    if (e.target === logoutOverlay && logoutOverlayPointerStartedOnBackdrop) closeOverlays();
+    logoutOverlayPointerStartedOnBackdrop = false;
+  });
+  supportOverlay?.addEventListener("pointerdown", (e) => {
+    supportOverlayPointerStartedOnBackdrop = e.target === supportOverlay;
+  });
+  supportOverlay?.addEventListener("click", (e) => {
+    if (e.target === supportOverlay && supportOverlayPointerStartedOnBackdrop) closeOverlays();
+    supportOverlayPointerStartedOnBackdrop = false;
+  });
+  $("#logout-confirm")?.addEventListener("click", () => {
+    closeOverlays();
+    saveSession(null);
+    toast("已退出登录");
   });
   $("#settings-save")?.addEventListener("click", saveSettings);
   settingsAvatarPreview?.addEventListener("click", () => settingsUploadInput?.click());

@@ -694,7 +694,7 @@
   syncTopbarLine();
   window.addEventListener("scroll", syncTopbarLine, { passive: true });
 
-  // AI工作站 dropdown uses the same hover/focus motion pattern as the macOS menu.
+  // AI工作站: mouse hover-opens; click toggles while pointer stays; finger tap is one click.
   const dropdowns = $$("[data-nav-dropdown]");
   const navDropdownClosers = new WeakMap();
   function closeDropdown(dropdown) {
@@ -736,39 +736,42 @@
   dropdowns.forEach((dd) => {
     const btn = $(".nav-dropdown-trigger", dd);
     if (!btn) return;
-    const openFromHover = () => {
-      if (isTabletLayout()) return;
+    let lastTouchAt = 0;
+    const TOUCH_GUARD_MS = 1000;
+    const isTouchLike = (event) =>
+      event.pointerType === "touch" || Date.now() - lastTouchAt < TOUCH_GUARD_MS;
+    dd.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "touch") lastTouchAt = Date.now();
+    });
+    dd.addEventListener("pointerenter", (event) => {
+      if (isTouchLike(event)) return;
       closeDropdowns(dd);
       openDropdown(dd);
-    };
-    const closeFromHover = () => {
-      if (isTabletLayout()) return;
+    });
+    dd.addEventListener("pointerleave", (event) => {
+      if (isTouchLike(event)) return;
       closeDropdown(dd);
-    };
-    dd.addEventListener("pointerenter", openFromHover);
-    dd.addEventListener("pointerleave", closeFromHover);
+    });
     dd.addEventListener("focusin", () => {
-      if (isTabletLayout()) return;
+      if (Date.now() - lastTouchAt < TOUCH_GUARD_MS) return;
       closeDropdowns(dd);
       openDropdown(dd);
     });
     dd.addEventListener("focusout", (event) => {
-      if (isTabletLayout()) return;
+      if (Date.now() - lastTouchAt < TOUCH_GUARD_MS) return;
       if (!dd.contains(event.relatedTarget)) closeDropdown(dd);
     });
     btn.addEventListener("pointerdown", (event) => {
-      if (isTabletLayout()) return;
+      if (event.pointerType === "touch") return;
       event.preventDefault();
     });
     btn.addEventListener("click", (event) => {
       event.preventDefault();
-      if (isTabletLayout()) {
-        event.stopPropagation();
-        const open = dd.classList.contains("is-open");
-        closeDropdowns();
-        if (!open) openDropdown(dd);
-        return;
-      }
+      event.stopPropagation();
+      const open = dd.classList.contains("is-open");
+      closeDropdowns();
+      if (!open) openDropdown(dd);
+      else closeDropdown(dd);
       btn.blur();
     });
     $$(".nav-dropdown-item", dd).forEach((item) => {
@@ -778,7 +781,6 @@
     });
   });
   document.addEventListener("pointerdown", (event) => {
-    if (!isTabletLayout()) return;
     const target = event.target;
     if (!(target instanceof Node)) return;
     dropdowns.forEach((dd) => {
@@ -1132,12 +1134,43 @@
     });
   });
 
-  // macOS download dropdown: hover to open (desktop + tablet).
+  // Finger tap must not leave sticky :hover (mouse hover still applies).
+  function bindHoverResetOnTouch(els) {
+    els.forEach((el) => {
+      let lastTouchAt = 0;
+      const TOUCH_GUARD_MS = 1000;
+      const isTouchLike = (event) =>
+        event.pointerType === "touch" || Date.now() - lastTouchAt < TOUCH_GUARD_MS;
+      el.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch") lastTouchAt = Date.now();
+      });
+      const markHoverReset = (event) => {
+        if (!isTouchLike(event)) return;
+        el.classList.add("is-hover-reset");
+      };
+      el.addEventListener("pointerup", markHoverReset);
+      el.addEventListener("pointercancel", markHoverReset);
+      el.addEventListener("click", markHoverReset);
+      el.addEventListener("pointerenter", (event) => {
+        if (isTouchLike(event)) return;
+        el.classList.remove("is-hover-reset");
+      });
+    });
+  }
+  bindHoverResetOnTouch($$("a.download-button-windows, .lang-toggle, .nav-dropdown-trigger"));
+
+  // macOS download dropdown (all endpoints):
+  // mouse hover-opens; click toggles while pointer stays; finger tap is one click;
+  // outside pointerdown closes; option clicks keep existing download behavior.
   $$(".download-menu-wrap").forEach((wrap) => {
     const trigger = $(".download-button-mac", wrap);
     const menu = $(".download-dropdown-menu", wrap);
     if (!trigger || !menu) return;
     let closeTimer = null;
+    let lastTouchAt = 0;
+    const TOUCH_GUARD_MS = 1000;
+    const isTouchLike = (event) =>
+      event.pointerType === "touch" || Date.now() - lastTouchAt < TOUCH_GUARD_MS;
 
     const openMenu = () => {
       if (closeTimer) {
@@ -1162,18 +1195,32 @@
       }, 150);
     };
 
-    wrap.addEventListener("pointerenter", () => {
+    wrap.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "touch") lastTouchAt = Date.now();
+    });
+    wrap.addEventListener("pointerenter", (event) => {
+      if (isTouchLike(event)) return;
       openMenu();
     });
-    wrap.addEventListener("pointerleave", () => {
+    wrap.addEventListener("pointerleave", (event) => {
+      if (isTouchLike(event)) return;
       closeMenu();
     });
     trigger.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "touch") return;
       event.preventDefault();
     });
     trigger.addEventListener("click", (event) => {
       event.preventDefault();
+      event.stopPropagation();
+      if (menu.classList.contains("is-open")) closeMenu();
+      else openMenu();
       trigger.blur();
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (!(event.target instanceof Node)) return;
+      if (wrap.contains(event.target)) return;
+      closeMenu();
     });
     $$(".download-menu-item", menu).forEach((item) => {
       item.addEventListener("click", () => {
@@ -2301,56 +2348,74 @@
       menu.addEventListener("click", (e) => e.stopPropagation());
       const trigger = $(".account-trigger", menu);
       const switchWrap = $(".account-switch-wrap", menu);
+      let lastTouchAt = 0;
+      let lastSwitchTouchAt = 0;
+      const TOUCH_GUARD_MS = 1000;
+      const isTouchLike = (event, stamp) =>
+        event.pointerType === "touch" || Date.now() - stamp < TOUCH_GUARD_MS;
       const openAccountMenu = () => {
         clearAccountMenuCloseTimer();
         closeAccountMenus();
         menu.classList.add("is-open");
         trigger?.setAttribute("aria-expanded", "true");
       };
-      const scheduleAccountMenuClose = () => {
-        if (isTabletLayout()) return;
+      const scheduleAccountMenuClose = (event) => {
+        if (event && isTouchLike(event, lastTouchAt)) return;
         clearAccountMenuCloseTimer();
         accountMenuCloseTimer = setTimeout(() => {
           if (!menu.matches(":hover")) closeAccountMenus();
         }, 120);
       };
+      if (trigger) bindHoverResetOnTouch([trigger]);
+      menu.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch") lastTouchAt = Date.now();
+      });
+      menu.addEventListener("pointerenter", (event) => {
+        if (isTouchLike(event, lastTouchAt)) return;
+        openAccountMenu();
+      });
+      menu.addEventListener("pointerleave", scheduleAccountMenuClose);
+      trigger?.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch") return;
+        event.preventDefault();
+      });
       trigger?.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (isTabletLayout()) {
-          const open = menu.classList.contains("is-open");
-          closeAccountMenus();
-          if (!open) openAccountMenu();
-        }
+        const open = menu.classList.contains("is-open");
+        if (open) closeAccountMenus();
+        else openAccountMenu();
+        trigger.blur();
       });
-      menu.addEventListener("mouseenter", () => {
-        if (isTabletLayout()) return;
-        openAccountMenu();
+      switchWrap?.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch") lastSwitchTouchAt = Date.now();
       });
-      menu.addEventListener("mouseleave", scheduleAccountMenuClose);
-      switchWrap?.addEventListener("mouseenter", () => {
-        if (isTabletLayout()) return;
+      switchWrap?.addEventListener("pointerenter", (event) => {
+        if (isTouchLike(event, lastSwitchTouchAt)) return;
         openSwitchFlyout(menu);
       });
-      switchWrap?.addEventListener("mouseleave", () => {
-        if (isTabletLayout()) return;
+      switchWrap?.addEventListener("pointerleave", (event) => {
+        if (isTouchLike(event, lastSwitchTouchAt)) return;
         setTimeout(() => {
           if (!switchWrap.matches(":hover")) closeSwitchFlyout(menu);
         }, 60);
       });
       const switchBtn = $("[data-action='switch']", menu);
+      switchBtn?.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch") return;
+        event.preventDefault();
+      });
       switchBtn?.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (!isTabletLayout()) return;
         if (menu.classList.contains("has-switch-open")) closeSwitchFlyout(menu);
         else openSwitchFlyout(menu);
+        switchBtn.blur();
       });
     });
     if (!window.__accountMenuOutsideBound) {
       window.__accountMenuOutsideBound = true;
       document.addEventListener("pointerdown", (event) => {
-        if (!isTabletLayout()) return;
         if (!(event.target instanceof Node)) return;
         const openMenus = $$("[data-account-menu].is-open");
         if (!openMenus.length) return;

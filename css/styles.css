@@ -1388,13 +1388,10 @@ body {
 }
 .topbar nav > a.is-active,
 .nav-dropdown.is-open .nav-dropdown-trigger,
-.nav-dropdown:hover .nav-dropdown-trigger,
-.topbar nav > a:hover,
-.topbar nav .nav-dropdown-trigger:hover {
+.topbar nav > a:hover {
   color: var(--ink);
 }
-.nav-dropdown.is-open .nav-dropdown-trigger::after,
-.nav-dropdown:focus-within .nav-dropdown-trigger::after {
+.nav-dropdown.is-open .nav-dropdown-trigger::after {
   background: var(--blue);
 }
 .nav-button,
@@ -5242,7 +5239,7 @@ body > main > .topbar.is-scrolled {
   background: transparent;
   color: #666;
   appearance: none;
-  cursor: default;
+  cursor: pointer;
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
   line-height: 20px;
@@ -5252,14 +5249,12 @@ body > main > .topbar.is-scrolled {
   text-align: center;
 }
 
-.topbar .nav-dropdown:hover .nav-dropdown-trigger,
-.topbar .nav-dropdown:focus-within .nav-dropdown-trigger {
+.topbar .nav-dropdown.is-open .nav-dropdown-trigger {
   background: #f3f3f3;
   color: #000;
 }
 
-body > main > .topbar.is-scrolled .nav-dropdown:hover .nav-dropdown-trigger,
-body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigger {
+body > main > .topbar.is-scrolled .nav-dropdown.is-open .nav-dropdown-trigger {
   background: #f9f9f9;
 }
 
@@ -5503,6 +5498,13 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   font-weight: 500 !important;
 }
 
+body > main > .topbar .lang-toggle.is-hover-reset:not(:active):not(.is-pressed),
+body > main > .topbar .lang-toggle.is-hover-reset:hover:not(:active):not(.is-pressed),
+body > main > .topbar.is-scrolled .lang-toggle.is-hover-reset:not(:active):not(.is-pressed),
+body > main > .topbar.is-scrolled .lang-toggle.is-hover-reset:hover:not(:active):not(.is-pressed) {
+  background: transparent !important;
+}
+
 .topbar .auth-actions {
   width: auto !important;
   height: 36px !important;
@@ -5577,7 +5579,7 @@ body > main > .topbar.is-scrolled .nav-dropdown:focus-within .nav-dropdown-trigg
   transition: border-color 160ms ease;
 }
 
-.topbar .account-trigger:hover {
+.topbar .account-menu.is-open .account-trigger {
   border-color: rgba(0, 0, 0, .12);
 }
 
@@ -6956,10 +6958,19 @@ body > main > .topbar {
   transition: transform .18s ease, box-shadow .18s ease !important;
 }
 
-.hero-copy .download-button:hover,
-.download-section .download-button:hover,
-.download-menu-wrap:hover > .download-button-mac,
-.download-menu-wrap:focus-within > .download-button-mac {
+.hero-copy .download-button-windows:hover,
+.download-section .download-button-windows:hover {
+  transform: translateY(-2px) !important;
+}
+
+.hero-copy .download-button-windows.is-hover-reset,
+.hero-copy .download-button-windows.is-hover-reset:hover,
+.download-section .download-button-windows.is-hover-reset,
+.download-section .download-button-windows.is-hover-reset:hover {
+  transform: none !important;
+}
+
+.download-menu-wrap.is-open > .download-button-mac {
   transform: translateY(-2px) !important;
 }
 
@@ -6971,11 +6982,15 @@ body > main > .topbar {
   transform: translateX(2px);
 }
 
+.download-button-windows.is-hover-reset .download-arrow-icon,
+.download-button-windows.is-hover-reset:hover .download-arrow-icon {
+  transform: none !important;
+}
+
 .download-button-mac img:last-child {
   transition: transform .18s ease;
 }
 
-.download-menu-wrap:hover > .download-button-mac img:last-child,
 .download-menu-wrap.is-open > .download-button-mac img:last-child {
   transform: rotate(180deg);
 }
@@ -10170,6 +10185,7 @@ body > main > .topbar {
   .download-button-windows:hover {
     background: #000 !important;
     color: #fff !important;
+    transform: translateY(-2px) !important;
   }
 
   .hero-copy .secondary-button:hover,
@@ -10181,19 +10197,41 @@ body > main > .topbar {
   }
 
   .download-button-windows:hover .download-arrow-icon {
+    transform: translateX(2px) !important;
+  }
+
+  .hero-copy .download-button-windows.is-hover-reset,
+  .hero-copy .download-button-windows.is-hover-reset:hover,
+  .hero-copy .primary-button.is-hover-reset:hover,
+  .download-section .download-button-windows.is-hover-reset,
+  .download-section .download-button-windows.is-hover-reset:hover,
+  .download-button-windows.is-hover-reset,
+  .download-button-windows.is-hover-reset:hover {
     transform: none !important;
   }
 
-  /* Match desktop: hover opens flyout and lifts the mac download button */
+  .download-button-windows.is-hover-reset .download-arrow-icon,
+  .download-button-windows.is-hover-reset:hover .download-arrow-icon {
+    transform: none !important;
+  }
+
+  /* Download flyout: lift/chevron follow open state, not leftover :hover */
   .download-menu-wrap:hover > .download-button-mac,
   .download-menu-wrap:focus-within > .download-button-mac {
+    transform: none !important;
+  }
+
+  .download-menu-wrap.is-open > .download-button-mac {
     transform: translateY(-2px) !important;
     background: #fff !important;
     color: #000 !important;
     border-color: #e5e5e5 !important;
   }
 
-  .download-menu-wrap:hover > .download-button-mac img:last-child,
+  .download-menu-wrap:hover > .download-button-mac img:last-child {
+    transform: none !important;
+  }
+
   .download-menu-wrap.is-open > .download-button-mac img:last-child {
     transform: rotate(180deg) !important;
   }

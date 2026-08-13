@@ -1,0 +1,40 @@
+/* ===== Breakpoint contract (single source of truth) =====
+   Mobile:  0    – 767
+   Tablet:  768  – 1023
+   Desktop: 1024+
+     Desktop S:  1024 – 1279
+     Desktop M:  1280 – 1439
+     Desktop L:  1440 – 1599
+     Desktop XL: 1600+
+
+   Rules:
+   1. All @media layout queries MUST use these exact pixel values.
+   2. JS MUST read the same numbers from js/breakpoints.js (AgentsyunBP).
+   3. Do NOT invent parallel thresholds (e.g. 680) for “which layout tier”.
+   4. Component-internal sizes (card width, clamp ranges) may use other px;
+      they are not layout-tier decisions.
+
+   ===== CSS cascade contract =====
+   Load order (see index.html):
+     breakpoints → base → components → layout-desktop → layout-tablet → layout-mobile
+
+   Responsibilities:
+     - base/components: shared look & structure, NO layout-tier @media (1024/768/767).
+     - layout-desktop: ONLY inside min-width 1024 (and desktop sub-ranges).
+     - layout-tablet: ONLY 768–1023.
+     - layout-mobile: ONLY max-width 767.
+
+   Prefer higher specificity / correct media scoping over !important.
+   Keep !important only when overriding a component rule that already uses it.
+===== */
+
+:root {
+  --bp-mobile-max: 767px;
+  --bp-tablet-min: 768px;
+  --bp-tablet-max: 1023px;
+  --bp-desktop-min: 1024px;
+  --bp-desktop-m-min: 1280px;
+  --bp-desktop-l-min: 1440px;
+  --bp-desktop-xl-min: 1600px;
+  --layout-tier: desktop;
+}

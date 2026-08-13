@@ -1132,7 +1132,7 @@
     });
   });
 
-  // macOS download dropdown: hover on desktop, click on tablet.
+  // macOS download dropdown: hover to open (desktop + tablet).
   $$(".download-menu-wrap").forEach((wrap) => {
     const trigger = $(".download-button-mac", wrap);
     const menu = $(".download-dropdown-menu", wrap);
@@ -1163,32 +1163,17 @@
     };
 
     wrap.addEventListener("pointerenter", () => {
-      if (isTabletLayout()) return;
       openMenu();
     });
     wrap.addEventListener("pointerleave", () => {
-      if (isTabletLayout()) return;
       closeMenu();
     });
     trigger.addEventListener("pointerdown", (event) => {
-      if (isTabletLayout()) return;
       event.preventDefault();
     });
     trigger.addEventListener("click", (event) => {
       event.preventDefault();
-      if (isTabletLayout()) {
-        event.stopPropagation();
-        if (menu.classList.contains("is-open")) closeMenu();
-        else openMenu();
-        return;
-      }
       trigger.blur();
-    });
-    document.addEventListener("pointerdown", (event) => {
-      if (!isTabletLayout()) return;
-      if (!(event.target instanceof Node)) return;
-      if (wrap.contains(event.target)) return;
-      closeMenu();
     });
     $$(".download-menu-item", menu).forEach((item) => {
       item.addEventListener("click", () => {
@@ -1652,13 +1637,16 @@
     }
     tags.push('<span class="space-item-tag">企业</span>');
     if (space.role === "拥有" || space.role === "拥有者") {
-      tags.push(`<span class="space-item-tag">${space.role === "拥有者" ? "拥有" : space.role}</span>`);
+      const ownerLabel = !isMobileLayout() ? "所有者" : (space.role === "拥有者" ? "拥有" : space.role);
+      tags.push(`<span class="space-item-tag">${ownerLabel}</span>`);
     } else if (space.status === "pending") {
       tags.push('<span class="space-item-tag">审核中</span>');
     } else if (space.status === "rejected") {
       tags.push('<span class="space-item-tag">未通过</span>');
     } else if (space.status === "invite") {
       tags.push('<span class="space-item-tag">待加入</span>');
+    } else if (!isMobileLayout() && space.status === "ok") {
+      tags.push('<span class="space-item-tag">成员</span>');
     }
     return tags.join("");
   }

@@ -6406,7 +6406,7 @@ body > main > .topbar {
   margin: 0;
   padding: 0;
   overflow: visible;
-  background: #0f0f0f url("../assets/flow-section/frame-61.png") center / cover no-repeat fixed;
+  background: #0f0f0f;
   isolation: isolate;
   color: #f4efeb;
 }
@@ -6433,6 +6433,7 @@ body > main > .topbar {
   z-index: 1;
   height: calc(var(--flow-vh, 1vh) * 100);
   overflow: hidden;
+  background: #0f0f0f url("../assets/flow-section/frame-61.png") center / cover no-repeat;
 }
 .flow-section.is-flow-fixed .flow-sticky {
   position: fixed;
@@ -7142,14 +7143,24 @@ body > main > .topbar {
   width: 100%;
   height: 16px;
   position: relative;
+  flex: 0 0 16px;
+  box-sizing: border-box;
+  pointer-events: none;
 }
 
 .download-menu-divider img {
+  display: none;
+}
+
+.download-menu-divider::after {
+  content: "";
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
+  left: 24px;
+  right: 24px;
+  top: 50%;
+  height: 1px;
+  background: #f3f3f3;
+  transform: translateY(-50%);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -8569,6 +8580,599 @@ body > main > .topbar {
     padding-left: 64px !important;
     padding-right: 64px !important;
   }
+
+  #login-overlay .login-modal.is-spaces .spaces-close:hover,
+  #login-overlay .login-modal.is-spaces .spaces-apply:hover,
+  #login-overlay .login-modal.is-spaces .spaces-enter:hover,
+  #logout-overlay .logout-dialog-close:hover,
+  #logout-overlay .logout-dialog-cancel:hover {
+    background: #f9f9f9;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-close:active,
+  #login-overlay .login-modal.is-spaces .spaces-apply:active,
+  #login-overlay .login-modal.is-spaces .spaces-enter:active,
+  #logout-overlay .logout-dialog-close:active,
+  #logout-overlay .logout-dialog-cancel:active {
+    background: #f3f3f3;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-login:hover {
+    background: #333;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-login:active {
+    background: #000;
+  }
+
+  #logout-overlay .logout-dialog-confirm:hover {
+    background: #b54137;
+  }
+
+  #logout-overlay .logout-dialog-confirm:active {
+    background: #91342c;
+  }
+
+}
+
+
+/* ===== Tablet + Desktop overlays: login space picker + logout dialog ===== */
+@media (min-width: 768px) {
+  /* Login space picker: Figma 187:1479 */
+  #login-overlay .login-modal.is-spaces {
+    width: 480px;
+    max-width: calc(100vw - 64px);
+    height: auto;
+    max-height: calc(100svh - 64px);
+    padding: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05), 0 0 24px rgba(0, 0, 0, 0.05);
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  #login-overlay .login-modal.is-spaces .login-close-abs {
+    display: none;
+  }
+
+  #login-overlay .login-modal.is-spaces .login-step[data-step="spaces"] {
+    width: 100%;
+    height: auto;
+    max-height: calc(100svh - 64px);
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-heading {
+    width: 100%;
+    height: 56px;
+    min-height: 56px;
+    padding: 16px 16px 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    box-sizing: border-box;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-heading h2,
+  #login-overlay .login-modal.is-spaces #spaces-title {
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    color: #000;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-align: left;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-close {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 32px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #000;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-close svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2px;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-list {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: auto;
+    min-height: 0;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-wrap {
+    width: 100%;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    box-shadow: none;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item:disabled {
+    cursor: default;
+    opacity: 0.45;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-avatar {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-avatar.is-personal {
+    background: #f3f3f3;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-info {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-title-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-name,
+  #login-overlay .login-modal.is-spaces .space-item-phone {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-name,
+  #login-overlay .login-modal.is-spaces .space-item-name span {
+    color: #000;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-phone {
+    color: #666;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-tags {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-tag {
+    height: 16px;
+    padding: 0 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-radius: 999px;
+    background: #f3f3f3;
+    color: #666;
+    font-size: 10px;
+    line-height: 13px;
+    font-weight: 400;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-tag.is-certified {
+    background: rgba(33, 155, 90, 0.08);
+    color: #219b5a;
+    font-weight: 500;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-tag.is-certified img {
+    width: 12px;
+    height: 12px;
+    display: block;
+    flex: 0 0 12px;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-mark {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    display: block;
+    align-self: center;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-sep {
+    width: 100%;
+    height: 12px;
+    padding: 6px 24px;
+    box-sizing: border-box;
+  }
+
+  #login-overlay .login-modal.is-spaces .space-item-sep::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #f3f3f3;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-actions {
+    width: 100%;
+    padding: 16px 24px 24px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    box-sizing: border-box;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-apply {
+    height: 36px;
+    padding: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #000;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    white-space: nowrap;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-apply img {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    display: block;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-actions-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex: 0 0 auto;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-enter,
+  #login-overlay .login-modal.is-spaces .spaces-login {
+    height: 36px;
+    padding: 8px 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    white-space: nowrap;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-enter {
+    border: 0;
+    box-shadow: inset 0 0 0 1px #e5e5e5;
+    background: #fff;
+    color: #000;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-login {
+    border: 0;
+    background: #000;
+    color: #fff;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-enter:disabled,
+  #login-overlay .login-modal.is-spaces .spaces-login:disabled {
+    cursor: default;
+    opacity: 0.35;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-more-account {
+    display: none;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-close:hover,
+  #login-overlay .login-modal.is-spaces .spaces-apply:hover,
+  #login-overlay .login-modal.is-spaces .spaces-enter:hover,
+  #login-overlay .login-modal.is-spaces .space-item:hover:not(:disabled) {
+    background: #f9f9f9;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-enter:hover {
+    box-shadow: inset 0 0 0 1px #e5e5e5;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-close:active,
+  #login-overlay .login-modal.is-spaces .spaces-close:hover:active,
+  #login-overlay .login-modal.is-spaces .spaces-close.is-pressed,
+  #login-overlay .login-modal.is-spaces .spaces-apply:active,
+  #login-overlay .login-modal.is-spaces .spaces-apply:hover:active,
+  #login-overlay .login-modal.is-spaces .spaces-apply.is-pressed,
+  #login-overlay .login-modal.is-spaces .spaces-enter:active,
+  #login-overlay .login-modal.is-spaces .spaces-enter:hover:active,
+  #login-overlay .login-modal.is-spaces .spaces-enter.is-pressed,
+  #login-overlay .login-modal.is-spaces .space-item:active:not(:disabled),
+  #login-overlay .login-modal.is-spaces .space-item:hover:active:not(:disabled),
+  #login-overlay .login-modal.is-spaces .space-item.is-pressed:not(:disabled) {
+    background: #f3f3f3;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-enter:active,
+  #login-overlay .login-modal.is-spaces .spaces-enter:hover:active,
+  #login-overlay .login-modal.is-spaces .spaces-enter.is-pressed {
+    box-shadow: inset 0 0 0 1px #e5e5e5;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-login:hover {
+    background: #333;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-login:active,
+  #login-overlay .login-modal.is-spaces .spaces-login:hover:active {
+    background: #000;
+  }
+
+  /* Logout dialog: Figma 152:2050 */
+  #logout-overlay .logout-dialog {
+    width: 480px;
+    max-width: calc(100vw - 64px);
+    height: 184px;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05), 0 0 24px rgba(0, 0, 0, 0.05);
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #000;
+    box-sizing: border-box;
+  }
+
+  #logout-overlay .logout-dialog-heading {
+    width: 100%;
+    height: 56px;
+    min-height: 56px;
+    padding: 16px 16px 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    box-sizing: border-box;
+  }
+
+  #logout-overlay .logout-dialog-title {
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    color: #000;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-align: left;
+  }
+
+  #logout-overlay .logout-dialog-close {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 32px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #000;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  #logout-overlay .logout-dialog-close svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2px;
+  }
+
+  #logout-overlay .logout-dialog-body {
+    width: 100%;
+    padding: 16px 24px;
+    box-sizing: border-box;
+  }
+
+  #logout-overlay .logout-dialog-body p {
+    margin: 0;
+    color: #000;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+
+  #logout-overlay .logout-dialog-actions-wrap {
+    width: 100%;
+    padding: 16px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    box-sizing: border-box;
+  }
+
+  #logout-overlay .logout-dialog-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  #logout-overlay .logout-dialog-cancel,
+  #logout-overlay .logout-dialog-confirm {
+    height: 36px;
+    min-width: 64px;
+    padding: 8px 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    white-space: nowrap;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  #logout-overlay .logout-dialog-cancel {
+    background: #fff;
+    color: #000;
+    box-shadow: inset 0 0 0 1px #e5e5e5;
+  }
+
+  #logout-overlay .logout-dialog-confirm {
+    background: #d94e41;
+    color: #fff;
+  }
+
+  #logout-overlay .logout-dialog-close:hover,
+  #logout-overlay .logout-dialog-cancel:hover {
+    background: #f9f9f9;
+  }
+
+  #logout-overlay .logout-dialog-cancel:hover {
+    box-shadow: inset 0 0 0 1px #e5e5e5;
+  }
+
+  #logout-overlay .logout-dialog-close:active,
+  #logout-overlay .logout-dialog-close:hover:active,
+  #logout-overlay .logout-dialog-close.is-pressed,
+  #logout-overlay .logout-dialog-cancel:active,
+  #logout-overlay .logout-dialog-cancel:hover:active,
+  #logout-overlay .logout-dialog-cancel.is-pressed {
+    background: #f3f3f3;
+  }
+
+  #logout-overlay .logout-dialog-cancel:active,
+  #logout-overlay .logout-dialog-cancel:hover:active,
+  #logout-overlay .logout-dialog-cancel.is-pressed {
+    box-shadow: inset 0 0 0 1px #e5e5e5;
+  }
+
+  #logout-overlay .logout-dialog-confirm:hover {
+    background: #b54137;
+  }
+
+  #logout-overlay .logout-dialog-confirm:active,
+  #logout-overlay .logout-dialog-confirm:hover:active {
+    background: #91342c;
+  }
+
+  body > main > .topbar .lang-toggle:hover {
+    background: #f3f3f3 !important;
+  }
+
+  body > main > .topbar .lang-toggle:active,
+  body > main > .topbar .lang-toggle:hover:active,
+  body > main > .topbar .lang-toggle.is-pressed {
+    background: #eaeaea !important;
+  }
+
+  body > main > .topbar.is-scrolled .lang-toggle:hover {
+    background: #f9f9f9 !important;
+  }
+
+  body > main > .topbar.is-scrolled .lang-toggle:active,
+  body > main > .topbar.is-scrolled .lang-toggle:hover:active,
+  body > main > .topbar.is-scrolled .lang-toggle.is-pressed {
+    background: #f3f3f3 !important;
+  }
+
+  body > main > .topbar .nav-button-brand:hover {
+    background: #333 !important;
+    color: #fff !important;
+  }
+
+  body > main > .topbar .nav-button-brand:active,
+  body > main > .topbar .nav-button-brand:hover:active {
+    background: #000 !important;
+    color: #fff !important;
+  }
+
 }
 
 /* ===== Tablet Layout spacing + Hermes panel =====
@@ -9205,6 +9809,13 @@ body > main > .topbar {
     border-radius: 12px;
   }
 
+  .mobile-nav .tablet-menu-action:hover,
+  .mobile-nav .tablet-menu-product-sm:hover,
+  .mobile-nav .tablet-menu-action:focus-visible,
+  .mobile-nav .tablet-menu-product-sm:focus-visible {
+    background: #f9f9f9;
+  }
+
   .mobile-nav .tablet-menu-action:active,
   .mobile-nav .tablet-menu-product-sm:active,
   .mobile-nav .tablet-menu-action.is-pressed,
@@ -9271,6 +9882,11 @@ body > main > .topbar {
     text-align: left;
     cursor: pointer;
     box-sizing: border-box;
+  }
+
+  .mobile-nav .tablet-menu-login:hover,
+  .mobile-nav .tablet-menu-login:focus-visible {
+    background: #f9f9f9;
   }
 
   .mobile-nav .tablet-menu-login:active,
@@ -9494,6 +10110,15 @@ body > main > .topbar {
     margin-left: 1px;
   }
 
+  /* Switch-account footer: Figma 216:11463 — replace confirm buttons with 登录更多账号 */
+  #login-overlay.is-switch-account .login-modal.is-spaces .spaces-actions-right {
+    display: none;
+  }
+
+  #login-overlay.is-switch-account .login-modal.is-spaces .spaces-more-account {
+    display: inline-flex;
+  }
+
   /* Tablet: no hover feedback (touch). Keep :active press states. */
   button:hover,
   .primary-button:hover,
@@ -9505,8 +10130,6 @@ body > main > .topbar {
   .lang-toggle:hover,
   .menu-toggle:hover:not([aria-expanded="true"]),
   .download-button:hover,
-  .download-menu-wrap:hover > .download-button-mac,
-  .download-menu-wrap:focus-within > .download-button-mac,
   .hero-copy .primary-button:hover,
   .hero-copy .secondary-button:hover,
   .hero-copy .download-button:hover,
@@ -9527,7 +10150,6 @@ body > main > .topbar {
   .topbar .account-menu-item > button:hover,
   .topbar .account-switch-flyout .switch-item:hover,
   .topbar .account-switch-flyout .switch-flyout-action:hover,
-  .download-menu-item:hover,
   .mobile-nav .tablet-menu-row:hover,
   .mobile-nav .tablet-menu-row:focus-visible,
   .mobile-nav .tablet-menu-product:hover,
@@ -9552,36 +10174,32 @@ body > main > .topbar {
 
   .hero-copy .secondary-button:hover,
   .download-section .download-button-mac:hover,
-  .download-button-mac:hover,
-  .download-menu-wrap:hover > .download-button-mac,
-  .download-menu-wrap:focus-within > .download-button-mac {
+  .download-button-mac:hover {
     background: #fff !important;
     color: #000 !important;
     border-color: #e5e5e5 !important;
   }
 
-  .download-button-windows:hover .download-arrow-icon,
-  .download-menu-wrap:hover > .download-button-mac img:last-child {
+  .download-button-windows:hover .download-arrow-icon {
     transform: none !important;
   }
 
+  /* Match desktop: hover opens flyout and lifts the mac download button */
+  .download-menu-wrap:hover > .download-button-mac,
+  .download-menu-wrap:focus-within > .download-button-mac {
+    transform: translateY(-2px) !important;
+    background: #fff !important;
+    color: #000 !important;
+    border-color: #e5e5e5 !important;
+  }
+
+  .download-menu-wrap:hover > .download-button-mac img:last-child,
   .download-menu-wrap.is-open > .download-button-mac img:last-child {
     transform: rotate(180deg) !important;
   }
 
-  /* No button lift on tablet: keep flyout 4px below resting button (40 + 4) */
-  .download-dropdown-menu {
-    top: 44px !important;
-  }
-
-  .download-menu-bridge {
-    top: 40px !important;
-    height: 4px !important;
-  }
-
   .download-menu-item:hover span {
-    color: inherit !important;
-    background: transparent !important;
+    background: #f9f9f9 !important;
   }
 
   .mobile-nav .tablet-menu-row:hover,
@@ -9589,7 +10207,7 @@ body > main > .topbar {
   .mobile-nav .tablet-menu-action:hover,
   .mobile-nav .tablet-menu-product-sm:hover,
   .mobile-nav .tablet-menu-login:hover {
-    background: transparent !important;
+    background: #f9f9f9 !important;
   }
 
   .topbar .account-menu-item > button:hover {
@@ -9606,6 +10224,82 @@ body > main > .topbar {
   .spaces-apply:hover {
     opacity: 1 !important;
     filter: none !important;
+  }
+
+  /* Login space picker: keep hover/press fill on tablet */
+  #login-overlay .login-modal.is-spaces .spaces-close:hover,
+  #login-overlay .login-modal.is-spaces .spaces-apply:hover,
+  #login-overlay .login-modal.is-spaces .spaces-enter:hover,
+  #login-overlay .login-modal.is-spaces .space-item:hover:not(:disabled) {
+    background: #f9f9f9 !important;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-enter:hover,
+  #login-overlay .login-modal.is-spaces .spaces-enter:active,
+  #login-overlay .login-modal.is-spaces .spaces-enter:hover:active,
+  #login-overlay .login-modal.is-spaces .spaces-enter.is-pressed {
+    box-shadow: inset 0 0 0 1px #e5e5e5 !important;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-login:hover {
+    background: #333 !important;
+    color: #fff !important;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-login:active,
+  #login-overlay .login-modal.is-spaces .spaces-login:hover:active {
+    background: #000 !important;
+    color: #fff !important;
+  }
+
+  #login-overlay .login-modal.is-spaces .spaces-close:active,
+  #login-overlay .login-modal.is-spaces .spaces-close:hover:active,
+  #login-overlay .login-modal.is-spaces .spaces-close.is-pressed,
+  #login-overlay .login-modal.is-spaces .spaces-apply:active,
+  #login-overlay .login-modal.is-spaces .spaces-apply:hover:active,
+  #login-overlay .login-modal.is-spaces .spaces-apply.is-pressed,
+  #login-overlay .login-modal.is-spaces .spaces-enter:active,
+  #login-overlay .login-modal.is-spaces .spaces-enter:hover:active,
+  #login-overlay .login-modal.is-spaces .spaces-enter.is-pressed,
+  #login-overlay .login-modal.is-spaces .space-item:active:not(:disabled),
+  #login-overlay .login-modal.is-spaces .space-item:hover:active:not(:disabled),
+  #login-overlay .login-modal.is-spaces .space-item.is-pressed:not(:disabled) {
+    background: #f3f3f3 !important;
+  }
+
+  #logout-overlay .logout-dialog-close:hover,
+  #logout-overlay .logout-dialog-cancel:hover {
+    background: #f9f9f9 !important;
+  }
+
+  #logout-overlay .logout-dialog-cancel:hover {
+    box-shadow: inset 0 0 0 1px #e5e5e5 !important;
+  }
+
+  #logout-overlay .logout-dialog-close:active,
+  #logout-overlay .logout-dialog-close:hover:active,
+  #logout-overlay .logout-dialog-close.is-pressed,
+  #logout-overlay .logout-dialog-cancel:active,
+  #logout-overlay .logout-dialog-cancel:hover:active,
+  #logout-overlay .logout-dialog-cancel.is-pressed {
+    background: #f3f3f3 !important;
+  }
+
+  #logout-overlay .logout-dialog-cancel:active,
+  #logout-overlay .logout-dialog-cancel:hover:active,
+  #logout-overlay .logout-dialog-cancel.is-pressed {
+    box-shadow: inset 0 0 0 1px #e5e5e5 !important;
+  }
+
+  #logout-overlay .logout-dialog-confirm:hover {
+    background: #b54137 !important;
+    color: #fff !important;
+  }
+
+  #logout-overlay .logout-dialog-confirm:active,
+  #logout-overlay .logout-dialog-confirm:hover:active {
+    background: #91342c !important;
+    color: #fff !important;
   }
 
   /* Click / press background must win over neutralized :hover */
@@ -9636,7 +10330,6 @@ body > main > .topbar {
   .download-section .download-button-mac:hover:active,
   .download-button-mac:active,
   .download-button-mac:hover:active,
-  .download-menu-wrap.is-open > .download-button-mac,
   .login-close-abs:active,
   .login-close-abs:hover:active,
   .spaces-close:active,
@@ -9700,6 +10393,37 @@ body > main > .topbar {
   #logout-overlay .logout-dialog-cancel.is-pressed,
   #support-overlay .support-dialog-close.is-pressed {
     background: #f3f3f3 !important;
+  }
+
+  body > main > .topbar .lang-toggle:hover {
+    background: #f3f3f3 !important;
+  }
+
+  body > main > .topbar .lang-toggle:active,
+  body > main > .topbar .lang-toggle:hover:active,
+  body > main > .topbar .lang-toggle.is-pressed {
+    background: #eaeaea !important;
+  }
+
+  body > main > .topbar.is-scrolled .lang-toggle:hover {
+    background: #f9f9f9 !important;
+  }
+
+  body > main > .topbar.is-scrolled .lang-toggle:active,
+  body > main > .topbar.is-scrolled .lang-toggle:hover:active,
+  body > main > .topbar.is-scrolled .lang-toggle.is-pressed {
+    background: #f3f3f3 !important;
+  }
+
+  body > main > .topbar .nav-button-brand:hover {
+    background: #333 !important;
+    color: #fff !important;
+  }
+
+  body > main > .topbar .nav-button-brand:active,
+  body > main > .topbar .nav-button-brand:hover:active {
+    background: #000 !important;
+    color: #fff !important;
   }
 }
 

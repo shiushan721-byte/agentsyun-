@@ -133,6 +133,7 @@
     "添加": "Add",
     "语音输入": "Voice input",
     "你的AI智能体管家": "Your AI Agent Butler",
+    "帮你搞定电脑上的事": "Helps you get desktop work done",
     "你的 AI 智能体管家，帮你": "Your AI agent butler",
     "搞定电脑上的事": "gets desktop work done",
     "发号施令，坐等成果": "Give the command. Get the result.",
@@ -160,6 +161,7 @@
     "充值额度": "Top up credits",
     "设置": "Settings",
     "今天想做点什么？": "What would you like to do today?",
+    "输入消息，继续提问": "Enter a message to continue",
     "任务描述": "Task description",
     "默认权限": "Default permissions",
     "员工": "Staff",
@@ -511,7 +513,6 @@
   const compactTopbar = toggle?.closest(".topbar");
   let authCompressionFrame = 0;
   let menuCloseTimer = 0;
-  let compactMenuScrollY = 0;
 
   function updateAuthButtonCompression() {
     if (!compactTopbar) return;
@@ -522,9 +523,11 @@
       if (!isMobileLayout()) return;
       const logo = $(".logo", compactTopbar);
       const right = $(".topbar-right", compactTopbar);
-      const authButton = $(".nav-button-brand", compactTopbar);
       const langButton = $(".lang-toggle", compactTopbar);
-      if (!logo || !right || !authButton || !langButton) return;
+      if (!logo || !right || !langButton) return;
+      const authButton = $(".nav-button-brand", compactTopbar);
+      const authVisible = !!(authButton && authButton.offsetParent);
+      if (!authVisible) return;
       const minSide = 16;
       const minGap = 8;
       const contentWidth = compactTopbar.clientWidth - minSide * 2;
@@ -539,28 +542,13 @@
 
   function lockCompactMenuScroll() {
     if (!isMobileLayout()) return;
-    if (document.body.classList.contains("is-compact-menu-open")) return;
-    compactMenuScrollY = window.scrollY || window.pageYOffset || 0;
     document.documentElement.classList.add("is-compact-menu-open");
     document.body.classList.add("is-compact-menu-open");
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${compactMenuScrollY}px`;
-    document.body.style.left = "0";
-    document.body.style.right = "0";
-    document.body.style.width = "100%";
   }
 
   function unlockCompactMenuScroll() {
-    if (!document.body.classList.contains("is-compact-menu-open")) return;
-    const restoreY = compactMenuScrollY;
     document.documentElement.classList.remove("is-compact-menu-open");
     document.body.classList.remove("is-compact-menu-open");
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.left = "";
-    document.body.style.right = "";
-    document.body.style.width = "";
-    window.scrollTo(0, restoreY);
   }
 
   function resetTabletAccordion() {
@@ -1135,6 +1123,7 @@
   });
 
   // Finger tap must not leave sticky :hover (mouse hover still applies).
+  // Real mouse hover is marked with .is-mouse-hover so CSS fill does not rely on sticky :hover.
   function bindHoverResetOnTouch(els) {
     els.forEach((el) => {
       let lastTouchAt = 0;
@@ -1147,6 +1136,7 @@
       const markHoverReset = (event) => {
         if (!isTouchLike(event)) return;
         el.classList.add("is-hover-reset");
+        el.classList.remove("is-mouse-hover");
       };
       el.addEventListener("pointerup", markHoverReset);
       el.addEventListener("pointercancel", markHoverReset);
@@ -1154,10 +1144,14 @@
       el.addEventListener("pointerenter", (event) => {
         if (isTouchLike(event)) return;
         el.classList.remove("is-hover-reset");
+        el.classList.add("is-mouse-hover");
+      });
+      el.addEventListener("pointerleave", () => {
+        el.classList.remove("is-mouse-hover");
       });
     });
   }
-  bindHoverResetOnTouch($$("a.download-button-windows, .lang-toggle, .nav-dropdown-trigger"));
+  bindHoverResetOnTouch($$("a.download-button-windows, .lang-toggle, .nav-dropdown-trigger, #mobile-nav .tablet-menu-login, #mobile-nav .tablet-menu-action, #mobile-nav .tablet-menu-product-sm, #mobile-nav .tablet-menu-row"));
 
   // macOS download dropdown (all endpoints):
   // mouse hover-opens; click toggles while pointer stays; finger tap is one click;
@@ -1684,15 +1678,14 @@
     }
     tags.push('<span class="space-item-tag">企业</span>');
     if (space.role === "拥有" || space.role === "拥有者") {
-      const ownerLabel = !isMobileLayout() ? "所有者" : (space.role === "拥有者" ? "拥有" : space.role);
-      tags.push(`<span class="space-item-tag">${ownerLabel}</span>`);
+      tags.push('<span class="space-item-tag">所有者</span>');
     } else if (space.status === "pending") {
       tags.push('<span class="space-item-tag">审核中</span>');
     } else if (space.status === "rejected") {
       tags.push('<span class="space-item-tag">未通过</span>');
     } else if (space.status === "invite") {
       tags.push('<span class="space-item-tag">待加入</span>');
-    } else if (!isMobileLayout() && space.status === "ok") {
+    } else if (space.status === "ok") {
       tags.push('<span class="space-item-tag">成员</span>');
     }
     return tags.join("");
@@ -2235,10 +2228,14 @@
 
   function renderAuth() {
     const guest = `<button type="button" class="nav-button-brand" data-open-login>登录/注册</button>`;
+    const heroLoginBtns = $$(".hero-cta-login");
     if (!session?.phone || !session?.space) {
       if (authActions) authActions.innerHTML = guest;
       if (mobileAuth) mobileAuth.innerHTML = guest;
       renderTabletGuestMenu();
+      heroLoginBtns.forEach((btn) => {
+        btn.hidden = false;
+      });
       bindAuthButtons();
       applyLanguage(currentLang);
       return;
@@ -2329,7 +2326,11 @@
       space,
       isCertified,
     });
+    $$(".hero-cta-login").forEach((btn) => {
+      btn.hidden = true;
+    });
     bindAccountMenus();
+    bindAuthButtons();
     applyLanguage(currentLang);
   }
 
@@ -2339,6 +2340,13 @@
         e.preventDefault();
         closeMenu();
         openLogin("default");
+      };
+    });
+    $$("[data-open-support]").forEach((btn) => {
+      btn.onclick = (e) => {
+        e.preventDefault();
+        closeMenu();
+        openOverlay(supportOverlay);
       };
     });
   }

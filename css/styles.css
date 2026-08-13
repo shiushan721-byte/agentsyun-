@@ -6861,6 +6861,12 @@ body > main > .topbar {
   will-change: transform, opacity;
 }
 
+.hero-title-mobile,
+.hero-copy .hero-actions.hero-actions-mobile,
+.hz-dialog-prompt-mobile {
+  display: none !important;
+}
+
 @keyframes heroCopyEnter {
   from {
     opacity: 0;
@@ -8631,8 +8637,8 @@ body > main > .topbar {
 }
 
 
-/* ===== Tablet + Desktop overlays: login space picker + logout dialog ===== */
-@media (min-width: 768px) {
+/* ===== Shared overlays: login space picker + logout dialog (all endpoints) ===== */
+@media (min-width: 0) {
   /* Login space picker: Figma 187:1479 */
   #login-overlay .login-modal.is-spaces {
     width: 480px;
@@ -9157,6 +9163,18 @@ body > main > .topbar {
     background: #91342c;
   }
 
+  /* Switch-account footer: Figma 216:11463 */
+  #login-overlay.is-switch-account .login-modal.is-spaces .spaces-actions-right {
+    display: none;
+  }
+
+  #login-overlay.is-switch-account .login-modal.is-spaces .spaces-more-account {
+    display: inline-flex;
+  }
+}
+
+/* ===== Tablet + Desktop topbar control feedback ===== */
+@media (min-width: 768px) {
   body > main > .topbar .lang-toggle:hover {
     background: #f3f3f3 !important;
   }
@@ -10493,17 +10511,8 @@ body > main > .topbar {
 
   html.is-compact-menu-open,
   body.is-compact-menu-open {
-    width: 100% !important;
-    height: 100% !important;
     overflow: hidden !important;
     overscroll-behavior: none !important;
-    touch-action: none !important;
-  }
-
-  body.is-compact-menu-open {
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
   }
 
   body.is-compact-menu-open main > section,
@@ -10558,7 +10567,7 @@ body > main > .topbar {
 
   body > main > .topbar.topbar > .logo .logo-image {
     width: auto !important;
-    max-width: min(128px, calc(100vw - 188px)) !important;
+    max-width: min(160px, calc(100vw - 120px)) !important;
     height: 28px !important;
     display: block !important;
     object-fit: contain !important;
@@ -10581,6 +10590,10 @@ body > main > .topbar {
     overflow: visible !important;
   }
 
+  body > main > .topbar.topbar .auth-actions {
+    display: none !important;
+  }
+
   body > main > .topbar.topbar .lang-toggle,
   body > main > .topbar.topbar .nav-button-brand {
     width: auto !important;
@@ -10591,6 +10604,40 @@ body > main > .topbar {
     flex: 0 1 auto !important;
     white-space: nowrap !important;
     box-sizing: border-box !important;
+  }
+
+  /* Lang toggle: fill only on real mouse hover (.is-mouse-hover), not sticky :hover */
+  body > main > .topbar.topbar .lang-toggle:hover {
+    background: transparent !important;
+  }
+
+  body > main > .topbar.topbar .lang-toggle.is-mouse-hover {
+    background: #f3f3f3 !important;
+  }
+
+  body > main > .topbar.topbar .lang-toggle:active,
+  body > main > .topbar.topbar .lang-toggle:hover:active,
+  body > main > .topbar.topbar .lang-toggle.is-pressed {
+    background: #eaeaea !important;
+  }
+
+  body > main > .topbar.topbar.is-scrolled .lang-toggle.is-mouse-hover,
+  body > main > .topbar.topbar.is-menu-open .lang-toggle.is-mouse-hover {
+    background: #f9f9f9 !important;
+  }
+
+  body > main > .topbar.topbar.is-scrolled .lang-toggle:active,
+  body > main > .topbar.topbar.is-scrolled .lang-toggle:hover:active,
+  body > main > .topbar.topbar.is-scrolled .lang-toggle.is-pressed,
+  body > main > .topbar.topbar.is-menu-open .lang-toggle:active,
+  body > main > .topbar.topbar.is-menu-open .lang-toggle:hover:active,
+  body > main > .topbar.topbar.is-menu-open .lang-toggle.is-pressed {
+    background: #f3f3f3 !important;
+  }
+
+  body > main > .topbar.topbar .lang-toggle.is-hover-reset:not(:active):not(.is-pressed),
+  body > main > .topbar.topbar .lang-toggle.is-hover-reset:hover:not(:active):not(.is-pressed) {
+    background: transparent !important;
   }
 
   body > main > .topbar.topbar.is-auth-icon-only .nav-button-brand {
@@ -10645,6 +10692,16 @@ body > main > .topbar {
     border-radius: 18px !important;
     background: #fff !important;
     box-shadow: none !important;
+  }
+
+  body > main > .topbar.topbar .menu-toggle:active,
+  body > main > .topbar.topbar .menu-toggle:hover:active,
+  body > main > .topbar.topbar .menu-toggle.is-pressed,
+  body > main > .topbar.topbar .menu-toggle[aria-expanded="true"],
+  body > main > .topbar.topbar .menu-toggle[aria-expanded="true"]:hover,
+  body > main > .topbar.topbar .menu-toggle[aria-expanded="true"]:active {
+    background: #eaeaea !important;
+    border-color: #e5e5e5 !important;
   }
 
   body > main > .topbar.topbar .menu-toggle-icon {
@@ -10786,6 +10843,23 @@ body > main > .topbar {
     box-sizing: border-box !important;
   }
 
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-login:hover,
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-action:hover,
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-product-sm:hover,
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-row:hover {
+    background: #f9f9f9 !important;
+  }
+
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-login.is-hover-reset:not(:active):not(.is-pressed),
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-login.is-hover-reset:hover:not(:active):not(.is-pressed),
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-action.is-hover-reset:not(:active):not(.is-pressed),
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-action.is-hover-reset:hover:not(:active):not(.is-pressed),
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-product-sm.is-hover-reset:not(:active):not(.is-pressed),
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-product-sm.is-hover-reset:hover:not(:active):not(.is-pressed),
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-row.is-hover-reset:not(:active):not(.is-pressed),
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-row.is-hover-reset:hover:not(:active):not(.is-pressed) {
+    background: transparent !important;
+  }
   body > main > .topbar.topbar #mobile-nav .tablet-menu-login:active,
   body > main > .topbar.topbar #mobile-nav .tablet-menu-action:active,
   body > main > .topbar.topbar #mobile-nav .tablet-menu-product-sm:active,
@@ -10833,77 +10907,257 @@ body > main > .topbar {
     padding: 10px 12px !important;
     display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
+    gap: 12px !important;
     border-radius: 12px !important;
     box-sizing: border-box !important;
   }
 
-  body > main > .topbar.topbar #mobile-nav .tablet-menu-user-avatar,
-  body > main > .topbar.topbar #mobile-nav .tablet-menu-user-avatar.is-org {
-    width: 32px !important;
-    height: 32px !important;
-    flex: 0 0 32px !important;
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-user-avatar {
+    width: 44px !important;
+    height: 44px !important;
+    flex: 0 0 44px !important;
     border-radius: 999px !important;
-    object-fit: cover !important;
-  }
-
-  body > main > .hero.hero {
-    margin: 0 !important;
-    padding: var(--mobile-hero-top) var(--mobile-hero-side) 0 !important;
-    min-height: 0 !important;
-    height: auto !important;
     overflow: hidden !important;
   }
 
-  body > main > .hero .hero-copy {
+  body > main > .topbar.topbar #mobile-nav img.tablet-menu-user-avatar {
+    display: block !important;
+    object-fit: cover !important;
+  }
+
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-user-avatar.is-org {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #000 !important;
+    color: #fff !important;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    font-weight: 600 !important;
+  }
+
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-user-text {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    gap: 0 !important;
+  }
+
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-user-name-row {
     width: 100% !important;
-    max-width: 343px !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    text-align: center !important;
-    transform: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+    min-width: 0 !important;
   }
 
-  body > main > .hero .hero-copy h1 {
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-user-name {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    color: #000 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    font-weight: 400 !important;
+  }
+
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-user-badge {
+    width: 14px !important;
+    height: 14px !important;
+    flex: 0 0 14px !important;
+    display: block !important;
+    align-self: center !important;
+  }
+
+  body > main > .topbar.topbar #mobile-nav .tablet-menu-user-phone {
+    width: 100% !important;
     margin: 0 !important;
-    color: #000 !important;
-    font-size: 32px !important;
-    line-height: 40px !important;
-    font-weight: 500 !important;
-    letter-spacing: 0 !important;
-  }
-
-  body > main > .hero .hero-copy p {
-    margin: 16px auto 0 !important;
-    max-width: 343px !important;
-    color: #000 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    color: #666 !important;
     font-size: 14px !important;
     line-height: 20px !important;
     font-weight: 400 !important;
   }
 
-  body > main > .hero .hero-actions {
-    margin-top: 24px !important;
+  body > main > .hero.hero {
+    margin: 0 !important;
+    padding: 48px 16px 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: hidden !important;
+    background: #f9f9f9 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 32px !important;
+  }
+
+  body > main > .hero .hero-glow {
+    display: none !important;
+  }
+
+  body > main > .hero .hero-bottom-blur {
+    display: block !important;
+    position: absolute !important;
+    left: 50% !important;
+    bottom: -48px !important;
+    z-index: 4 !important;
+    width: 1920px !important;
+    height: 96px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(-50%) !important;
+  }
+
+  body > main > .hero .hero-bottom-blur img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+
+  body > main > .hero .hero-copy {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 16px !important;
+    text-align: center !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+
+  body > main > .hero .hero-title-desktop,
+  body > main > .hero .hero-actions.download-actions {
+    display: none !important;
+  }
+
+  body > main > .hero .hero-title-mobile {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    color: #000 !important;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif !important;
+    font-size: 32px !important;
+    line-height: 40px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+    text-align: center !important;
+  }
+
+  body > main > .hero .hero-copy > p {
+    margin: 16px 0 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    color: #666 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 400 !important;
+    text-align: center !important;
+  }
+
+  body > main > .hero .hero-actions.hero-actions-mobile {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    width: 100% !important;
+    height: 124px !important;
+    min-height: 124px !important;
+    margin: 0 !important;
+    padding: 32px 0 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  body > main > .hero .hero-actions-mobile .hero-cta {
+    width: 256px !important;
+    min-width: 256px !important;
+    max-width: 256px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    margin: 0 !important;
+    padding: 8px 24px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     gap: 8px !important;
+    border-radius: 999px !important;
+    box-shadow: none !important;
+    transform: none !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+  }
+
+  body > main > .hero .hero-actions-mobile .hero-cta-support {
+    background: #000 !important;
+    color: #fff !important;
+    border: 0 !important;
+  }
+
+  body > main > .hero .hero-actions-mobile .hero-cta-login {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #e5e5e5 !important;
+  }
+
+  body > main > .hero .hero-actions-mobile .hero-cta:active,
+  body > main > .hero .hero-actions-mobile .hero-cta.is-pressed {
+    transform: none !important;
+  }
+
+  body > main > .hero .hero-actions-mobile .hero-cta-support:active,
+  body > main > .hero .hero-actions-mobile .hero-cta-support.is-pressed {
+    background: #333 !important;
+  }
+
+  body > main > .hero .hero-actions-mobile .hero-cta-login:active,
+  body > main > .hero .hero-actions-mobile .hero-cta-login.is-pressed {
+    background: #f3f3f3 !important;
+  }
+
+  body > main > .hero .hero-actions-mobile .hero-action-icon {
+    width: 16px !important;
+    height: 16px !important;
+    flex: 0 0 16px !important;
+    display: block !important;
   }
 
   body > main > .hero .hero-meta {
     height: auto !important;
     min-height: 0 !important;
-    margin-top: 24px !important;
+    margin: 32px 0 0 !important;
+    padding: 0 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     flex-wrap: wrap !important;
-    gap: 8px 12px !important;
+    gap: 16px !important;
     overflow: visible !important;
+    width: 100% !important;
   }
 
   body > main > .hero .hero-meta span {
-    min-height: 20px !important;
+    min-height: 16px !important;
     display: inline-flex !important;
     align-items: center !important;
-    gap: 4px !important;
+    gap: 8px !important;
     color: #000 !important;
     font-size: 12px !important;
     line-height: 16px !important;
@@ -10911,7 +11165,8 @@ body > main > .topbar {
   }
 
   body > main > .hero .hero-meta img,
-  body > main > .hero .hero-meta svg {
+  body > main > .hero .hero-meta svg,
+  body > main > .hero .hero-meta-icon-img {
     width: 16px !important;
     height: 16px !important;
     flex: 0 0 16px !important;
@@ -10919,15 +11174,18 @@ body > main > .topbar {
 
   body > main > .hero .hero-showcase.hz-figma-showcase {
     position: relative !important;
-    width: calc(100vw - 32px) !important;
+    width: 100% !important;
     max-width: none !important;
-    height: 320px !important;
-    min-height: 320px !important;
-    margin: 48px auto -40px !important;
+    height: 360px !important;
+    min-height: 360px !important;
+    margin: 0 0 -40px !important;
     padding: 0 !important;
     overflow: hidden !important;
-    border-radius: 20px 20px 0 0 !important;
-    background: transparent !important;
+    border-radius: 16px !important;
+    background: #f3f3f3 !important;
+    box-shadow:
+      0 0 0 0.5px rgba(0, 0, 0, 0.1),
+      0 -20px 100px rgba(0, 0, 0, 0.08) !important;
   }
 
   body > main > .hero .hero-showcase.hz-figma-showcase::before {
@@ -10936,15 +11194,18 @@ body > main > .topbar {
 
   body > main > .hero .hz-figma-shell.app-window {
     position: absolute !important;
-    left: 50% !important;
+    left: 0 !important;
     top: 0 !important;
-    width: 720px !important;
+    width: 100% !important;
     max-width: none !important;
-    height: 360px !important;
-    min-height: 360px !important;
-    transform: translateX(-50%) !important;
-    border-radius: 20px 20px 0 0 !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    transform: none !important;
+    border: 0 !important;
+    border-radius: 16px !important;
     overflow: hidden !important;
+    background: #fff !important;
+    box-shadow: none !important;
   }
 
   body > main > .hero .hz-side-nav {
@@ -10954,12 +11215,77 @@ body > main > .topbar {
   body > main > .hero .hz-content {
     left: 0 !important;
     width: 100% !important;
+    height: 100% !important;
     border-left: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
   }
 
   body > main > .hero .hz-window-header-global {
     left: 0 !important;
+    right: 0 !important;
     width: 100% !important;
+  }
+
+  body > main > .hero .hz-empty-workspace {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 32px !important;
+    gap: 40px !important;
+    box-sizing: border-box !important;
+  }
+
+  body > main > .hero .hz-empty-workspace h2 {
+    font-size: 28px !important;
+    line-height: 40px !important;
+    font-weight: 400 !important;
+  }
+
+  body > main > .hero .hz-dialog-card {
+    border: 1px solid #e5e5e5 !important;
+    border-radius: 24px !important;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  body > main > .hero .hz-dialog-prompt-mobile {
+    display: block !important;
+    width: 100% !important;
+    min-height: 56px !important;
+    margin: 0 !important;
+    padding: 16px 16px 0 !important;
+    color: #b3b3b3 !important;
+    font-family: "PingFang SC", "MiSans", "Microsoft YaHei", sans-serif !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 400 !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+  }
+
+  body > main > .hero .hz-dialog-card textarea {
+    display: none !important;
+  }
+
+  body > main > .hero .hz-toolbar-group:not(.hz-toolbar-right) .hz-pill-button > span {
+    display: none !important;
+  }
+
+  body > main > .hero .hz-toolbar-group:not(.hz-toolbar-right) .hz-pill-button {
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 0 4px !important;
+    gap: 2px !important;
+  }
+
+  body > main > .hero .hz-model-button {
+    display: none !important;
+  }
+
+  body > main > .hero .hz-send-button {
+    width: 32px !important;
+    height: 32px !important;
+    flex: 0 0 32px !important;
+    background: #999 !important;
   }
 
   .proof,

@@ -93,6 +93,7 @@
     "企业版": "Enterprise",
     "登录注册": "Log in / Sign up",
     "登录/注册": "Log in / Sign up",
+    "前往工作台": "Go to Workspace",
     "点击登录": "Click to log in",
     "Agentsyun 首页": "Agentsyun home",
     "主导航": "Main navigation",
@@ -101,8 +102,10 @@
     "关闭": "Close",
     "登录": "Log in",
     "登 录": "Log in",
+    "微信登录": "Log in with WeChat",
     "输入手机号": "Enter phone number",
     "输入验证码": "Enter verification code",
+    "输入邀请码（非必填）": "Enter invite code (optional)",
     "发送验证码": "Send code",
     "后获取": "s later",
     "请输入手机号": "Enter phone number",
@@ -115,6 +118,7 @@
     "，未注册绑定的手机号验证成功后将自动注册": ". Unregistered phone numbers will be registered automatically after verification.",
     "让AI能力": "Make AI capability",
     "成为每个人的天赋": "everyone's native talent",
+    "让AI力量成为每个人的天赋": "Make AI power everyone's native talent",
     "江苏汇智智能数字科技有限公司": "Jiangsu Huizhi Intelligent Digital Technology Co., Ltd.",
     "请输入昵称": "Enter nickname",
     "验证码第1位": "Verification code digit 1",
@@ -551,6 +555,21 @@
     document.body.classList.remove("is-compact-menu-open");
   }
 
+  function setMobileLoginNavState(active) {
+    document.body.classList.toggle("is-mobile-login-page-open", !!active);
+    compactTopbar?.classList.toggle("is-login-page-open", !!active);
+    if (!toggle) return;
+    if (active) {
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "关闭登录页");
+      return;
+    }
+    if (mobileNav?.hidden) {
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "打开菜单");
+    }
+  }
+
   function resetTabletAccordion() {
     if (!mobileNav) return;
     const accordion = $("[data-tablet-accordion]", mobileNav);
@@ -623,6 +642,10 @@
     const menuWrap = toggle.closest(".menu-toggle-wrap");
     toggle.addEventListener("click", (event) => {
       event.stopPropagation();
+      if (document.body.classList.contains("is-mobile-login-page-open")) {
+        closeLogin();
+        return;
+      }
       if (!isCompactNavLayout()) {
         forceCloseMenu();
         return;
@@ -1469,7 +1492,8 @@
     closeOverlay(supportOverlay);
     resetLoginCountdown();
     spacePickerMode = "login";
-    loginOverlay?.classList.remove("is-switch-account");
+    loginOverlay?.classList.remove("is-switch-account", "is-spaces-step");
+    setMobileLoginNavState(false);
   }
   function closeLogin() {
     closeOverlays();
@@ -1501,6 +1525,8 @@
       step.classList.toggle("is-active", step.getAttribute("data-step") === name);
     });
     loginModal?.classList.toggle("is-spaces", name === "spaces");
+    loginOverlay?.classList.toggle("is-spaces-step", name === "spaces");
+    setMobileLoginNavState(name === "phone");
     if (name !== "spaces") loginModal?.classList.remove("is-entering");
   }
 
@@ -1619,7 +1645,7 @@
   function openLogin(intent = "default") {
     loginIntent = intent;
     spacePickerMode = "login";
-    loginOverlay?.classList.remove("is-switch-account");
+    loginOverlay?.classList.remove("is-switch-account", "is-spaces-step");
     pendingPhone = session?.phone || "";
     if (phoneInput && pendingPhone) phoneInput.value = pendingPhone;
     resetLoginCountdown();
@@ -1629,6 +1655,7 @@
     updateLoginInputs();
     showStep("phone");
     openOverlay(loginOverlay);
+    setMobileLoginNavState(true);
   }
 
   function openSpacePicker(phone, spaces, preferEnterprise) {
@@ -2226,16 +2253,24 @@
     topbarEl?.classList.remove("is-auth-logged");
   }
 
+  function renderHeroLoginCta(isLoggedIn) {
+    const labelText = isLoggedIn ? "前往工作台" : "登录/注册";
+    $$(".hero-cta-login").forEach((btn) => {
+      const label = $("span", btn);
+      btn.hidden = false;
+      btn.classList.toggle("is-workspace-link", isLoggedIn);
+      btn.setAttribute("aria-label", labelText);
+      if (label) label.textContent = labelText;
+    });
+  }
+
   function renderAuth() {
     const guest = `<button type="button" class="nav-button-brand" data-open-login>登录/注册</button>`;
-    const heroLoginBtns = $$(".hero-cta-login");
     if (!session?.phone || !session?.space) {
       if (authActions) authActions.innerHTML = guest;
       if (mobileAuth) mobileAuth.innerHTML = guest;
       renderTabletGuestMenu();
-      heroLoginBtns.forEach((btn) => {
-        btn.hidden = false;
-      });
+      renderHeroLoginCta(false);
       bindAuthButtons();
       applyLanguage(currentLang);
       return;
@@ -2326,9 +2361,7 @@
       space,
       isCertified,
     });
-    $$(".hero-cta-login").forEach((btn) => {
-      btn.hidden = true;
-    });
+    renderHeroLoginCta(true);
     bindAccountMenus();
     bindAuthButtons();
     applyLanguage(currentLang);
@@ -2339,6 +2372,10 @@
       btn.onclick = (e) => {
         e.preventDefault();
         closeMenu();
+        if (btn.classList.contains("hero-cta-login") && session?.phone && session?.space) {
+          enterSpace(session.space, !!session.rememberSpaceId);
+          return;
+        }
         openLogin("default");
       };
     });

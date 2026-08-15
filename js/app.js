@@ -989,7 +989,7 @@
 
   // Scroll-pinned horizontal capability cards
   const capabilitiesSection = $(".capabilities-section");
-  if (capabilitiesSection) {
+  if (capabilitiesSection && !capabilitiesSection.classList.contains("capabilities-bento")) {
     const title = $(".section-title", capabilitiesSection);
     const sourceList = $(".capability-list", capabilitiesSection);
     if (title && sourceList && !$(".capabilities-sticky", capabilitiesSection)) {

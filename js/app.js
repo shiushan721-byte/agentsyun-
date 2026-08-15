@@ -489,6 +489,8 @@
     if (spacesLoginLabel) spacesLoginLabel.textContent = translatePhrase("确认登录", currentLang);
     const spacesMoreLabel = document.querySelector("#spaces-more-account span");
     if (spacesMoreLabel) spacesMoreLabel.textContent = translatePhrase("登录更多账号", currentLang);
+    renderAvatarPresets();
+    if (draftAvatar) setDraftAvatar(draftAvatar);
     updateAuthButtonCompression();
   }
 
@@ -555,10 +557,43 @@
     document.body.classList.remove("is-compact-menu-open");
   }
 
+  let mobileLoginScrollY = 0;
+
+  function lockMobileLoginScroll() {
+    if (!isMobileLayout()) return;
+    if (document.body.classList.contains("is-mobile-login-scroll-locked")) return;
+    mobileLoginScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.documentElement.classList.add("is-mobile-login-scroll-locked");
+    document.body.classList.add("is-mobile-login-scroll-locked");
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${mobileLoginScrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+  }
+
+  function unlockMobileLoginScroll() {
+    const wasLocked = document.body.classList.contains("is-mobile-login-scroll-locked");
+    document.documentElement.classList.remove("is-mobile-login-scroll-locked");
+    document.body.classList.remove("is-mobile-login-scroll-locked");
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    if (wasLocked) window.scrollTo(0, mobileLoginScrollY);
+  }
+
   function setMobileLoginNavState(active) {
     document.body.classList.toggle("is-mobile-login-page-open", !!active);
     compactTopbar?.classList.toggle("is-login-page-open", !!active);
+    if (active) {
+      lockMobileLoginScroll();
+    } else {
+      unlockMobileLoginScroll();
+    }
     if (!toggle) return;
+    toggle.classList.toggle("is-login-close", !!active);
     if (active) {
       toggle.setAttribute("aria-expanded", "true");
       toggle.setAttribute("aria-label", "关闭登录页");
@@ -1174,7 +1209,7 @@
       });
     });
   }
-  bindHoverResetOnTouch($$("a.download-button-windows, .lang-toggle, .nav-dropdown-trigger, #mobile-nav .tablet-menu-login, #mobile-nav .tablet-menu-action, #mobile-nav .tablet-menu-product-sm, #mobile-nav .tablet-menu-row"));
+  bindHoverResetOnTouch($$("a.download-button-windows, .lang-toggle, .nav-dropdown-trigger, #mobile-nav .tablet-menu-login, #mobile-nav .tablet-menu-action, #mobile-nav .tablet-menu-product-sm, #mobile-nav .tablet-menu-row, #login-overlay .login-submit, #login-overlay .login-wechat-mobile"));
 
   // macOS download dropdown (all endpoints):
   // mouse hover-opens; click toggles while pointer stays; finger tap is one click;
@@ -1654,8 +1689,8 @@
     clearLoginError("code");
     updateLoginInputs();
     showStep("phone");
-    openOverlay(loginOverlay);
     setMobileLoginNavState(true);
+    openOverlay(loginOverlay);
   }
 
   function openSpacePicker(phone, spaces, preferEnterprise) {
@@ -1780,9 +1815,7 @@
       const avatarHtml = isPersonal
         ? `<span class="space-item-avatar is-personal"><img src="${avatarForPhone(phone)}" alt="" /></span>`
         : `<span class="space-item-avatar" aria-hidden="true">${orgAvatar(space.title)}</span>`;
-      const sep = index < ordered.length - 1
-        ? '<div class="space-item-sep" aria-hidden="true"></div>'
-        : "";
+      const sep = '<div class="space-item-sep" aria-hidden="true"></div>';
       return `
         <div class="space-item-wrap">
           <button type="button" class="space-item" data-space-id="${space.id}" ${disabled ? "disabled" : ""}>
@@ -2678,6 +2711,7 @@
   bindLanguageToggle();
   renderAuth();
   renderEnterpriseCta();
+  renderAvatarPresets();
   applyLanguage(currentLang);
 
   // Download / mailto buttons feedback

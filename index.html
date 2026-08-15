@@ -8,7 +8,7 @@
   <script src="js/preload.js"></script>
   <script src="js/breakpoints.js"></script>
   <link rel="stylesheet" href="css/breakpoints.css" />
-  <link rel="stylesheet" href="css/styles.css?v=mobile-asset-title-gap-20260814" />
+  <link rel="stylesheet" href="css/styles.css?v=mobile-settings-presets-20260815" />
 </head>
 <body>
 
@@ -193,18 +193,20 @@
       </div>
       <div class="space-list" id="space-list"></div>
       <div class="spaces-actions">
-        <button type="button" class="spaces-apply" data-action-apply>
-          <img src="./assets/space-picker/icon-building.svg" alt="" />
-          <span>申请企业认证</span>
-        </button>
-        <div class="spaces-actions-right">
-          <button type="button" class="spaces-enter" id="spaces-enter"><span>登录工作台</span></button>
-          <button type="button" class="spaces-login" id="spaces-login"><span>确认登录</span></button>
+        <button type="button" class="spaces-login" id="spaces-login"><span>确认登录</span></button>
+        <button type="button" class="spaces-enter" id="spaces-enter"><span>登录工作台</span></button>
+        <div class="spaces-action-row">
+          <button type="button" class="spaces-apply" data-action-apply>
+            <img src="./assets/space-picker/icon-building.svg" alt="" />
+            <span>申请企业认证</span>
+          </button>
         </div>
-        <button type="button" class="spaces-apply spaces-more-account" id="spaces-more-account">
-          <img src="./assets/account-switch/icon-plus.svg" alt="" />
-          <span>登录更多账号</span>
-        </button>
+        <div class="spaces-action-row">
+          <button type="button" class="spaces-apply spaces-more-account" id="spaces-more-account">
+            <img src="./assets/account-switch/icon-plus.svg" alt="" />
+            <span>登录更多账号</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

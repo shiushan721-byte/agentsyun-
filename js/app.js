@@ -188,6 +188,7 @@
     "从一句话": "From one sentence",
     "到一个结果": "to one result",
     "你给出指令，Hz-Hermes 自主完成全部执行链路": "Give an instruction. Hz-Hermes completes the execution chain.",
+    "你给出指令，Hz-Hermes 自主完成全部执行链路。": "Give an instruction. Hz-Hermes completes the execution chain.",
     "任务接收": "Task intake",
     "理解真实意图": "Understand intent",
     "任务拆解": "Task breakdown",
@@ -716,6 +717,7 @@
       updateAuthButtonCompression();
       // Leaving tablet always closes; leaving compact into desktop also closes.
       if (tier === "desktop" || lastLayoutTier === "tablet") forceCloseMenu();
+      if (tier === "desktop") closeSwitchAccountPickerForDesktop();
       lastLayoutTier = tier;
     });
     updateAuthButtonCompression();
@@ -1532,6 +1534,17 @@
   }
   function closeLogin() {
     closeOverlays();
+  }
+  function closeSwitchAccountPickerForDesktop() {
+    if (!isDesktopLayout()) return;
+    if (!loginOverlay?.classList.contains("is-switch-account")) return;
+    closeOverlay(loginOverlay);
+    spacePickerMode = "login";
+    loginOverlay.classList.remove("is-switch-account", "is-spaces-step");
+    loginModal?.classList.remove("is-spaces", "is-entering");
+    $$(".login-step").forEach((step) => {
+      step.classList.toggle("is-active", step.getAttribute("data-step") === "phone");
+    });
   }
   let accountMenuCloseTimer = null;
   function clearAccountMenuCloseTimer() {

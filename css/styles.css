@@ -14006,6 +14006,8 @@ body .download-support-button {
 .capabilities-section.capabilities-bento .capability-visual,
 .capabilities-section.capabilities-bento .capability-list article:nth-child(1) .capability-visual,
 .capabilities-section.capabilities-bento .capability-list article:nth-child(6) .capability-visual {
+  --cap-visual-width: 238px;
+  --cap-visual-height: 238px;
   position: absolute !important;
   inset: 32px 32px 136px !important;
   z-index: 1 !important;
@@ -14029,30 +14031,53 @@ body .download-support-button {
 }
 
 .capabilities-section.capabilities-bento .capability-list article:nth-child(1) .capability-visual {
-  background-image: url("../assets/capabilities/bento-visual-1.png") !important;
-  background-size: 270px 243px !important;
+  --cap-visual-width: 238px;
+  --cap-visual-height: 238px;
+  right: 20px !important;
+  left: 20px !important;
 }
 
 .capabilities-section.capabilities-bento .capability-list article:nth-child(2) .capability-visual {
-  background-image: url("../assets/capabilities/bento-visual-2.png") !important;
-  background-size: 238px 238px !important;
+  --cap-visual-width: 238px;
+  --cap-visual-height: 238px;
+  right: 20px !important;
+  left: 20px !important;
 }
 
 .capabilities-section.capabilities-bento .capability-list article:nth-child(3) .capability-visual {
-  background-image: url("../assets/capabilities/bento-visual-3.png") !important;
-  background-size: 238px 238px !important;
+  --cap-visual-width: 238px;
+  --cap-visual-height: 238px;
+  right: 20px !important;
+  left: 20px !important;
 }
 
 .capabilities-section.capabilities-bento .capability-list article:nth-child(4) .capability-visual {
+  --cap-visual-width: 262px;
+  --cap-visual-height: 238px;
   right: 20px !important;
   left: 20px !important;
-  background-image: url("../assets/capabilities/bento-visual-4.png") !important;
-  background-size: 262px 238px !important;
 }
 
 .capabilities-section.capabilities-bento .capability-list article:nth-child(5) .capability-visual {
-  background-image: url("../assets/capabilities/bento-visual-5.png") !important;
-  background-size: 238px 238px !important;
+  --cap-visual-width: 238px;
+  --cap-visual-height: 238px;
+  right: 20px !important;
+  left: 20px !important;
+}
+
+.capabilities-section.capabilities-bento .capability-visual-image {
+  width: auto !important;
+  height: auto !important;
+  inline-size: auto !important;
+  block-size: auto !important;
+  max-inline-size: min(var(--cap-visual-width), 100%) !important;
+  max-block-size: min(var(--cap-visual-height), 100%) !important;
+  max-width: min(var(--cap-visual-width), 100%) !important;
+  max-height: min(var(--cap-visual-height), 100%) !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  display: block !important;
+  flex: 0 1 auto !important;
 }
 
 .capabilities-section.capabilities-bento .capability-visual > svg,
@@ -14060,23 +14085,30 @@ body .download-support-button {
   display: none !important;
 }
 
-.capabilities-section.capabilities-bento .capability-list article:nth-child(6) .capability-visual {
-  inset: 96px 32px 156px 32px !important;
+.capabilities-section.capabilities-bento .capability-list article:nth-child(6) .cap-daily-visual {
+  inset: 32px 32px auto 32px !important;
+  height: 244px !important;
+  min-height: 244px !important;
+  max-height: 244px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   overflow: visible !important;
   border-radius: 0 !important;
 }
 
 .capabilities-section.capabilities-bento .cap-daily-brief {
-  position: absolute !important;
-  inset: 96px 32px 156px !important;
+  position: relative !important;
+  inset: auto !important;
   z-index: 1 !important;
-  width: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
   height: auto !important;
   display: flex !important;
   flex-direction: column !important;
   overflow: hidden !important;
   background: #fff !important;
-  border-radius: 16px 16px 0 0 !important;
+  border-radius: 16px 16px 32px 0 !important;
   box-shadow: none !important;
   color: #000 !important;
   box-sizing: border-box !important;
@@ -14156,7 +14188,7 @@ body .download-support-button {
 .capabilities-section.capabilities-bento .cap-daily-content {
   height: 95px !important;
   flex: 0 0 95px !important;
-  padding: 16px 24px !important;
+  padding: 16px 24px 24px !important;
   box-sizing: border-box !important;
 }
 
@@ -14259,16 +14291,30 @@ body .download-support-button {
     bottom: auto !important;
   }
 
-  .capabilities-section.capabilities-bento .capability-list article:nth-child(6) .capability-visual {
+  .capabilities-section.capabilities-bento .capability-list article:nth-child(6) .cap-daily-visual {
     inset: auto 32px 0 32px !important;
     height: 227px !important;
+    min-height: 227px !important;
+    max-height: 227px !important;
+    align-items: flex-end !important;
     overflow: visible !important;
     border-radius: 0 !important;
   }
 
-  .capabilities-section.capabilities-bento .capability-list article:nth-child(6) > .cap-daily-brief {
-    inset: auto 32px 0 !important;
+  .capabilities-section.capabilities-bento .capability-list article:nth-child(6) .cap-daily-brief {
+    inset: auto !important;
     height: 227px !important;
+    border-radius: 16px 16px 0 0 !important;
+  }
+
+  .capabilities-section.capabilities-bento .cap-daily-footer {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 1439px) {
+  .capabilities-section.capabilities-bento .cap-daily-footer {
+    display: none !important;
   }
 }
 
@@ -14363,11 +14409,27 @@ body .download-support-button {
     left: 24px !important;
   }
 
-  .capabilities-section.capabilities-bento .capability-list article:nth-child(6) .capability-visual {
-    inset: 96px 24px 180px !important;
+  .capabilities-section.capabilities-bento .capability-list article:nth-child(6) .cap-daily-visual {
+    top: 32px !important;
+    right: 24px !important;
+    bottom: auto !important;
+    left: 24px !important;
+    height: 244px !important;
+    min-height: 244px !important;
+    max-height: 244px !important;
   }
 
-  .capabilities-section.capabilities-bento .capability-list article:nth-child(6) > .cap-daily-brief {
-    inset: 96px 24px 180px !important;
+  .capabilities-section.capabilities-bento .capability-list article:nth-child(6) .cap-daily-brief {
+    inset: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .capabilities-section.capabilities-bento .cap-daily-content {
+    height: auto !important;
+    max-height: none !important;
+    flex: 0 1 auto !important;
+    overflow: visible !important;
   }
 }

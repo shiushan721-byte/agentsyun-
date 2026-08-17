@@ -405,6 +405,12 @@
     "认证审核中": "Verification pending",
     "进入企业版": "Enter enterprise",
     "用/skill-creator 创建一个技能，你先问我技能应该做什么吧。": "Use /skill-creator to create a skill. Ask me what the skill should do first.",
+    "每日简报": "Daily brief",
+    "每日收集10条最热门简报，发送到我的邮箱 📮xiaoyun@mail.com": "Collect 10 trending briefs daily and send them to my mailbox 📮xiaoyun@mail.com",
+    "默认目录": "Default folder",
+    "工作日09:00": "Weekdays 09:00",
+    "默认模型": "Default model",
+    "已设2项": "2 items set",
     "HZ HERMES 侧边导航": "HZ HERMES sidebar navigation",
     "Hz-Hermes 执行链路": "Hz-Hermes execution chain"
   };
@@ -429,6 +435,10 @@
     }
   };
   let currentLang = currentLangFromStorage();
+  const capabilityVisualImages = Array.from({ length: 5 }, (_, index) => ({
+    zh: `assets/capabilities/bento-visual-${index + 1}.png?v=20260817b`,
+    en: `assets/capabilities/bento-visual-en-${index + 1}.png?v=20260817`
+  }));
 
   function canonicalZh(value) {
     const trimmed = String(value || "").trim();
@@ -481,6 +491,19 @@
     $$("textarea").forEach((el) => {
       el.value = translatePhrase(el.value, currentLang);
     });
+    $$(".capabilities-bento .capability-visual-image").forEach((img, index) => {
+      const asset = capabilityVisualImages[index];
+      if (!asset) return;
+      img.setAttribute("src", currentLang === "en" ? asset.en : asset.zh);
+    });
+    const dailyTitle = $(".capabilities-bento .cap-daily-title");
+    if (dailyTitle) dailyTitle.textContent = currentLang === "en" ? "Daily brief" : "每日简报";
+    const dailyContent = $(".capabilities-bento .cap-daily-content p");
+    if (dailyContent) {
+      dailyContent.innerHTML = currentLang === "en"
+        ? 'Collect 10 trending briefs daily and send them to my mailbox <span>📮</span>xiaoyun@mail.com'
+        : '每日收集10条最热门简报，发送到我的邮箱 <span>📮</span>xiaoyun@mail.com';
+    }
     // Keep spaces-actions labels in sync even if stale EN copy is stuck in the DOM.
     const spacesApplyLabel = document.querySelector("#login-overlay .spaces-actions .spaces-apply:not(.spaces-more-account) span");
     if (spacesApplyLabel) spacesApplyLabel.textContent = translatePhrase("申请企业认证", currentLang);

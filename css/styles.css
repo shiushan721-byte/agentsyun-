@@ -7353,7 +7353,7 @@ body > main > .topbar {
 .login-modal {
   position: relative;
   width: min(640px, calc(100vw - 48px));
-  height: 440px;
+  height: 480px;
   max-height: calc(100svh - 64px);
   padding: 0;
   overflow: hidden;
@@ -7417,31 +7417,32 @@ body > main > .topbar {
 .login-step[data-step="phone"] {
   width: 100%;
   height: 100%;
+  flex-direction: column;
   align-items: stretch;
 }
 
 .login-cover {
   position: relative;
-  width: 220px;
-  min-width: 220px;
-  height: 100%;
-  padding: 40px 32px;
+  width: 100%;
+  height: 88px;
+  min-height: 88px;
+  padding: 0 32px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #f3f3f3;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background: #000;
   overflow: hidden;
 }
 
 .login-cover::before {
   content: "";
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 248px;
-  height: 440px;
-  transform: translate(-50%, -50%);
-  background: url("../assets/login/login-cover.png") center / cover no-repeat;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  background: url("../assets/login/login-cover-top.jpg?v=20260817") center / cover no-repeat;
 }
 
 .login-cover > * {
@@ -7459,41 +7460,52 @@ body > main > .topbar {
 .login-cover-copy {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 0;
 }
 
 .login-cover-copy strong {
   color: #fff;
   font-size: 12px;
   line-height: 16px;
-  font-weight: 500;
-}
-
-.login-cover-copy span {
-  color: rgba(255, 255, 255, .6);
-  font-size: 10px;
-  line-height: 13px;
   font-weight: 400;
+  text-align: right;
 }
 
 .login-panel {
   position: relative;
-  width: 420px;
-  height: 100%;
-  padding: 40px 48px;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background: #fff;
 }
 
-.login-content {
+.login-main {
   display: flex;
   flex: 1 1 auto;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
   min-height: 0;
+  width: 100%;
+  align-items: stretch;
+  justify-content: center;
+  background: #fff;
+}
+
+.login-content {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  min-height: 0;
+  padding: 32px 40px;
 }
 
 .login-modal h2 {
@@ -7564,6 +7576,12 @@ body > main > .topbar {
 }
 
 .login-input.is-error {
+  border-color: #ff5c4d;
+}
+
+.login-input.is-error:focus-within,
+.login-input.is-error:hover,
+.login-input.is-error:hover:focus-within {
   border-color: #ff5c4d;
 }
 
@@ -7681,8 +7699,15 @@ body > main > .topbar {
 .login-footer {
   display: flex;
   width: 100%;
-  flex-direction: column;
-  gap: 24px;
+  min-height: 72px;
+  padding: 16px 16px 24px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  border-top: 1px solid #f3f3f3;
+  background: #fcfcfc;
+  box-sizing: border-box;
 }
 
 .login-legal {
@@ -7707,9 +7732,182 @@ body > main > .topbar {
 }
 
 .login-mobile-title,
-.login-invite-mobile,
 .login-wechat-mobile {
   display: none;
+}
+
+.login-panel-divider {
+  width: 1px;
+  flex: 0 0 1px;
+  margin: 32px 0;
+  background: #f3f3f3;
+}
+
+.login-wechat {
+  width: 260px;
+  flex: 0 0 260px;
+  min-height: 0;
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+.login-qr {
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+  flex: 0 0 180px;
+}
+
+.login-qr img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.login-wechat p {
+  margin: -8px 0 0;
+  color: #666;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  #login-overlay:not(.is-spaces-step) .login-modal {
+    width: 640px;
+    height: auto;
+    min-height: 480px;
+    max-height: calc(100svh - 64px);
+    border-radius: 12px;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-close-abs {
+    display: none;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-step[data-step="phone"] {
+    width: 100%;
+    min-height: 480px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-cover {
+    width: 100%;
+    height: 88px;
+    min-height: 88px;
+    padding: 0 32px;
+    display: flex;
+    flex: 0 0 88px;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-cover::before {
+    content: "";
+    display: block;
+    background-image: url("../assets/login/login-cover-top.jpg?v=20260817");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-cover-logo {
+    width: 128px;
+    height: 26.597px;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-cover-copy strong {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-panel {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-main {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-content {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 32px 40px;
+    align-items: center;
+    gap: 24px;
+  }
+
+  #login-overlay:not(.is-spaces-step) #login-title,
+  #login-overlay:not(.is-spaces-step) .login-wechat h2 {
+    color: #000;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-field {
+    gap: 12px;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-input {
+    height: 40px;
+    padding: 10px 16px;
+    gap: 8px;
+    border-radius: 8px;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-submit {
+    height: 36px;
+    border-radius: 8px;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-footer {
+    min-height: 72px;
+    padding: 16px 16px 24px;
+    flex: 0 0 72px;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-panel-divider {
+    display: block;
+    width: 1px;
+    flex: 0 0 1px;
+    margin: 32px 0;
+    background: #f3f3f3;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-wechat {
+    display: flex;
+    width: 260px;
+    flex: 0 0 260px;
+    padding: 32px 40px;
+    align-items: center;
+    gap: 24px;
+  }
+
+  #login-overlay:not(.is-spaces-step) .login-qr {
+    width: 180px;
+    height: 180px;
+    flex: 0 0 180px;
+  }
 }
 
 .login-step[data-step="spaces"] {
@@ -10572,6 +10770,13 @@ body > main > .topbar {
     border-color: #000 !important;
   }
 
+  #login-overlay .login-input.is-error:not(.is-disabled),
+  #login-overlay .login-input.is-error:not(.is-disabled):focus-within,
+  #login-overlay .login-input.is-error:not(.is-disabled):hover,
+  #login-overlay .login-input.is-error:not(.is-disabled):hover:focus-within {
+    border-color: #ff5c4d !important;
+  }
+
   #login-overlay:not(.is-switch-account) .login-modal.is-spaces .spaces-actions {
     width: 100%;
     padding: 16px 24px 24px !important;
@@ -13049,7 +13254,7 @@ body .download-support-button {
     height: 132px !important;
     padding: 0 !important;
     display: block !important;
-    background: url("../assets/login/mobile-login-cover.png") center center / cover no-repeat !important;
+    background: url("../assets/login/login-cover-top.jpg?v=20260817") center center / cover no-repeat !important;
     overflow: hidden !important;
     pointer-events: none !important;
   }
@@ -13196,12 +13401,22 @@ body .download-support-button {
     -webkit-overflow-scrolling: touch !important;
   }
 
+  #login-overlay .login-main {
+    display: contents !important;
+  }
+
   #login-overlay .login-content {
     width: 100% !important;
     min-height: 0 !important;
     flex: 0 0 auto !important;
     align-items: stretch !important;
     gap: 32px !important;
+    padding: 0 !important;
+  }
+
+  #login-overlay .login-panel-divider,
+  #login-overlay .login-wechat {
+    display: none !important;
   }
 
   #login-overlay #login-title {
@@ -13272,6 +13487,12 @@ body .download-support-button {
   }
 
   #login-overlay .login-input.is-error {
+    border-color: #ff5c4d !important;
+  }
+
+  #login-overlay .login-input.is-error:focus-within,
+  #login-overlay .login-input.is-error:hover,
+  #login-overlay .login-input.is-error:hover:focus-within {
     border-color: #ff5c4d !important;
   }
 
@@ -13521,6 +13742,12 @@ body .download-support-button {
   #login-overlay .login-input:not(.is-disabled):focus-within,
   #login-overlay .login-input:not(.is-disabled):hover:focus-within {
     border-color: #000 !important;
+  }
+
+  #login-overlay .login-input.is-error:focus-within,
+  #login-overlay .login-input.is-error:hover,
+  #login-overlay .login-input.is-error:hover:focus-within {
+    border-color: #ff5c4d !important;
   }
 
   #login-overlay .login-input input {

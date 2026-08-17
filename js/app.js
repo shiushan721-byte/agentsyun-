@@ -102,6 +102,9 @@
     "关闭": "Close",
     "登录": "Log in",
     "登 录": "Log in",
+    "手机号登录": "Phone number login",
+    "微信扫码登录": "WeChat QR login",
+    "打开微信 扫码登录": "Open WeChat to scan and log in",
     "微信登录": "Log in with WeChat",
     "输入手机号": "Enter phone number",
     "输入验证码": "Enter verification code",
@@ -132,16 +135,15 @@
     "侧边导航": "Sidebar navigation",
     "主功能": "Primary features",
     "产品数据": "Product metrics",
-    "Hz-Hermes 能力资产": "Hz-Hermes capability assets",
+    "HzHermes 能力资产": "HzHermes capability assets",
     "发送演示任务": "Send demo task",
     "添加": "Add",
     "语音输入": "Voice input",
-    "你的AI智能体管家": "Your AI Agent Butler",
-    "帮你搞定电脑上的事": "Helps you get desktop work done",
-    "你的 AI 智能体管家，帮你": "Your AI agent butler",
-    "搞定电脑上的事": "gets desktop work done",
+    "你的 AI 智能体管家": "Your AI Agent Butler",
+    "你的 AI 智能体管家，发号": "Your AI agent butler",
+    "施令，坐等成果": "Give the command. Get the result.",
     "发号施令，坐等成果": "Give the command. Get the result.",
-    "Hz-Hermes 是你桌面上的 AI 助手——你告诉它做什么，它帮你完成。写报告、做数据、管客户、自动填表，你不用动手，它替你跑腿。": "Hz-Hermes is the AI assistant on your desktop. Tell it what to do and it gets the work done: reports, data, customer follow-up, forms, and everyday tasks.",
+    "HzHermes 是你桌面上的 AI 助手——你告诉它做什么，它帮你完成。写报告、做数据、管客户、自动填表，你不用动手，它替你跑腿。": "HzHermes is the AI assistant on your desktop. Tell it what to do and it gets the work done: reports, data, customer follow-up, forms, and everyday tasks.",
     "Windows 免费下载": "Free Windows Download",
     "macOS 免费下载": "Free macOS Download",
     "Windows 下载": "Windows Download",
@@ -171,11 +173,12 @@
     "员工": "Staff",
     "越用越聪明": "Smarter with use",
     "越跑越高效": "Faster with every run",
-    "平台渠道接入": "Platform integrations",
+    "行业解决方案": "Industry solutions",
+    "模型接入": "Model integrations",
     "预置技能包": "Built-in skill packs",
     "不是聊天机器人": "Not a chatbot",
     "是你的数字员工": "Your digital employee",
-    "Hz-Hermes 通过深度工程化封装，将配置、部署与技能管理等复杂环节整合优化。你只需要告诉它“做什么”，剩下的交给它。": "Hz-Hermes packages configuration, deployment, and skill management into a streamlined product. Tell it what to do, and hand off the rest.",
+    "HzHermes 通过深度工程化封装，将配置、部署与技能管理等复杂环节整合优化。你只需要告诉它“做什么”，剩下的交给它。": "HzHermes packages configuration, deployment, and skill management into a streamlined product. Tell it what to do, and hand off the rest.",
     "自主学习进化": "Self-learning evolution",
     "每次执行都自动学习，沉淀为可复用的技能，让团队经验持续变成可调用能力。": "Every run learns and turns team know-how into reusable skills.",
     "跨软件协作": "Cross-app collaboration",
@@ -187,8 +190,8 @@
     "从一句话到一个结果": "From one sentence to one result",
     "从一句话": "From one sentence",
     "到一个结果": "to one result",
-    "你给出指令，Hz-Hermes 自主完成全部执行链路": "Give an instruction. Hz-Hermes completes the execution chain.",
-    "你给出指令，Hz-Hermes 自主完成全部执行链路。": "Give an instruction. Hz-Hermes completes the execution chain.",
+    "你给出指令，HzHermes 自主完成全部执行链路": "Give an instruction. HzHermes completes the execution chain.",
+    "你给出指令，HzHermes 自主完成全部执行链路。": "Give an instruction. HzHermes completes the execution chain.",
     "任务接收": "Task intake",
     "理解真实意图": "Understand intent",
     "任务拆解": "Task breakdown",
@@ -219,7 +222,7 @@
     "跨应用协作": "Cross-app collaboration",
     "你下指令": "You give the command",
     "它跑腿": "it does the legwork",
-    "Hz-Hermes 能理解你的工作场景和需求，在你授权和控制下，协助完成电脑上的各类操作。": "Hz-Hermes understands your work context and helps complete desktop tasks under your authorization and control.",
+    "HzHermes 能理解你的工作场景和需求，在你授权和控制下，协助完成电脑上的各类操作。": "HzHermes understands your work context and helps complete desktop tasks under your authorization and control.",
     "你不需要自己打开软件、点击按钮或填写表格。告诉它要什么结果，它来执行过程；每一步清晰透明，可随时查看、暂停或调整。": "You no longer need to open apps, click buttons, or fill forms manually. Tell it the result you want; every step stays visible and adjustable.",
     "全程可控": "Fully controllable",
     "所有操作经你授权，每一步可查看、可撤回": "Every action is authorized by you, visible, and reversible",
@@ -252,9 +255,9 @@
     "分析品牌在豆包、Kimi、DeepSeek 等 AI 搜索中的可见度，生成优化策略与 AI 友好内容。": "Analyze brand visibility in AI search and generate optimization strategies and AI-friendly content.",
     "竞品监控与日报": "Competitor monitoring and daily reports",
     "每天自动搜集竞品动态与行业新闻，整理摘要报告并推送到企业群。": "Collect competitor and industry updates daily, summarize them, and push reports to company groups.",
-    "越用越聪明": "Smarter with use",
-    "越用越值钱": "more valuable over time",
-    "Hz-Hermes 不是用完即走的工具，而是能持续成长的数字员工。": "Hz-Hermes is not a one-off tool. It is a digital employee that keeps improving.",
+    "每次执行": "Every execution",
+    "都在进化": "keeps evolving",
+    "HzHermes 不是用完即走的工具，而是能持续成长的数字员工。": "HzHermes is not a one-off tool. It is a digital employee that keeps improving.",
     "模板化执行": "Templated execution",
     "标准化任务流程，同类任务秒级启动": "Standardize workflows and start similar tasks in seconds",
     "学习偏好": "Preference learning",
@@ -288,7 +291,7 @@
     "下载 macOS 版": "Download for macOS",
     "Linux 版即将上线 · 企业版可预约演示": "Linux coming soon · Enterprise demos available",
     "Linux版即将上线·企业版可预约演示": "Linux coming soon · Enterprise demos available",
-    "© 2026 汇智智能 · Hz-Hermes 出品": "© 2026 Huizhi Intelligence · Hz-Hermes",
+    "© 2026 汇智智能 · HzHermes 出品": "© 2026 Huizhi Intelligence · HzHermes",
     "技术文档": "Docs",
     "导航": "Navigation",
     "词元(Token)工场": "Token Factory",
@@ -375,7 +378,7 @@
     "该功能": "This feature",
     "前往下载体验": "Go to download",
     "切换到：": "Switched to: ",
-    "先输入你想让 Hz-Hermes 做的事": "Enter what you want Hz-Hermes to do first",
+    "先输入你想让 HzHermes 做的事": "Enter what you want HzHermes to do first",
     "任务已提交，演示界面开始执行…": "Task submitted. The demo is starting...",
     "正在执行": "Running",
     "正在打开邮件客户端…": "Opening mail client...",
@@ -412,7 +415,7 @@
     "默认模型": "Default model",
     "已设2项": "2 items set",
     "HZ HERMES 侧边导航": "HZ HERMES sidebar navigation",
-    "Hz-Hermes 执行链路": "Hz-Hermes execution chain"
+    "HzHermes 执行链路": "HzHermes execution chain"
   };
   const enToZh = Object.fromEntries(Object.entries(zhToEn).map(([zh, en]) => [en, zh]));
   // Legacy EN copy that may still sit in the DOM after dictionary updates.
@@ -879,7 +882,7 @@
     });
   });
 
-  // Active nav: Hz-Hermes is the default page
+  // Active nav: HzHermes is the default page
   const hermesLink = $('.topbar nav > a[data-nav="hermes"]');
   function syncActiveNav() {
     if (hermesLink) hermesLink.classList.add("is-active");
@@ -1182,7 +1185,7 @@
   function sendDemo() {
     const text = (input?.value || "").trim();
     if (!text) {
-      toast("先输入你想让 Hz-Hermes 做的事");
+      toast("先输入你想让 HzHermes 做的事");
       input?.focus();
       return;
     }
@@ -1642,6 +1645,18 @@
       if (text) text.textContent = "";
     }
     fieldEl?.classList.remove("is-error");
+  }
+
+  function refreshLoginErrorOnInput(target) {
+    if (target === "phone") {
+      if (!phoneError?.classList.contains("is-visible")) return;
+      const phone = (phoneInput?.value || "").trim();
+      if (phoneOk(phone)) clearLoginError("phone");
+      return;
+    }
+    if (!codeError?.classList.contains("is-visible")) return;
+    const code = (codeInput?.value || "").trim();
+    if (/^\d{6}$/.test(code)) clearLoginError("code");
   }
 
   function updateLoginInputs() {
@@ -2596,13 +2611,13 @@
   // Login form UX
   phoneInput?.addEventListener("input", () => {
     phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 11);
-    clearLoginError("phone");
     updateLoginInputs();
+    refreshLoginErrorOnInput("phone");
   });
   codeInput?.addEventListener("input", () => {
     codeInput.value = codeInput.value.replace(/\D/g, "").slice(0, 6);
-    clearLoginError("code");
     updateLoginInputs();
+    refreshLoginErrorOnInput("code");
   });
   sendCodeBtn?.addEventListener("click", () => {
     if (sendCodeBtn.disabled || codeLeft > 0) return;
